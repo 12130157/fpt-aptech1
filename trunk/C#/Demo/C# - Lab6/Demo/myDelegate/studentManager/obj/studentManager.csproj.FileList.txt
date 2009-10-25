@@ -1,0 +1,5 @@
+bin\Debug\studentManager.exe
+bin\Debug\studentManager.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\studentManager.exe
+obj\Debug\studentManager.pdb

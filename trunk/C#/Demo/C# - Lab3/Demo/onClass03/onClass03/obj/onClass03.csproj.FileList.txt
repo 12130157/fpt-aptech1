@@ -1,0 +1,5 @@
+bin\Debug\onClass03.exe
+bin\Debug\onClass03.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\onClass03.exe
+obj\Debug\onClass03.pdb
