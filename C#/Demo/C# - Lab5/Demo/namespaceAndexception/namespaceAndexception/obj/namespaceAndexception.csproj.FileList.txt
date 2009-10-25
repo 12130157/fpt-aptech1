@@ -1,0 +1,5 @@
+bin\Debug\namespaceAndexception.exe
+bin\Debug\namespaceAndexception.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\namespaceAndexception.exe
+obj\Debug\namespaceAndexception.pdb
