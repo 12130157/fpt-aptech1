@@ -1,0 +1,5 @@
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\Virtual\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\Virtual\bin\Debug\Virtual.exe
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\Virtual\bin\Debug\Virtual.pdb
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\Virtual\obj\Debug\Virtual.exe
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\Virtual\obj\Debug\Virtual.pdb

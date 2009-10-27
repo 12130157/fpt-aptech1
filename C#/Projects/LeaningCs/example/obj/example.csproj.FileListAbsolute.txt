@@ -1,0 +1,5 @@
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\example\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\example\bin\Debug\example.exe
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\example\bin\Debug\example.pdb
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\example\obj\Debug\example.exe
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\example\obj\Debug\example.pdb
