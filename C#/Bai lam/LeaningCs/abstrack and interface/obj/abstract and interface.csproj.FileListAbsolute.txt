@@ -1,0 +1,5 @@
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\abstrack and interface\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\abstrack and interface\bin\Debug\abstrack and interface.exe
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\abstrack and interface\bin\Debug\abstrack and interface.pdb
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\abstrack and interface\obj\Debug\abstrack and interface.exe
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\abstrack and interface\obj\Debug\abstrack and interface.pdb
