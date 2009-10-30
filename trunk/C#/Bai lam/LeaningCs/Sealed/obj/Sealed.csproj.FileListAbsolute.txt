@@ -1,0 +1,5 @@
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\Sealed\bin\Debug\Sealed.exe
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\Sealed\bin\Debug\Sealed.pdb
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\Sealed\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\Sealed\obj\Debug\Sealed.exe
+C:\Users\ThiepND\Documents\Visual Studio 2005\Projects\LeaningCs\Sealed\obj\Debug\Sealed.pdb
