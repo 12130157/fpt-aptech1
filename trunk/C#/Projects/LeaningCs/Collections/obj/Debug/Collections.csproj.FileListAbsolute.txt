@@ -1,0 +1,5 @@
+D:\FPT-Aptech\C#\Projects\LeaningCs\Collections\obj\Debug\ResolveAssemblyReference.cache
+D:\FPT-Aptech\C#\Projects\LeaningCs\Collections\bin\Debug\Collections.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\Collections\bin\Debug\Collections.pdb
+D:\FPT-Aptech\C#\Projects\LeaningCs\Collections\obj\Debug\Collections.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\Collections\obj\Debug\Collections.pdb

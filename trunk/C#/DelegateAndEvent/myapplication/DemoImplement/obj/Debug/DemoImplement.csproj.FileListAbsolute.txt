@@ -1,0 +1,5 @@
+D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\DemoImplement\bin\Debug\DemoImplement.exe
+D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\DemoImplement\bin\Debug\DemoImplement.pdb
+D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\DemoImplement\obj\Debug\ResolveAssemblyReference.cache
+D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\DemoImplement\obj\Debug\DemoImplement.exe
+D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\DemoImplement\obj\Debug\DemoImplement.pdb

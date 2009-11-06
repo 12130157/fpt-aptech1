@@ -1,0 +1,5 @@
+D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\DemoDelegate\obj\Debug\DemoDelegate.exe
+D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\DemoDelegate\obj\Debug\DemoDelegate.pdb
+D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\DemoDelegate\bin\Debug\DemoDelegate.exe
+D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\DemoDelegate\bin\Debug\DemoDelegate.pdb
+D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\DemoDelegate\obj\Debug\ResolveAssemblyReference.cache

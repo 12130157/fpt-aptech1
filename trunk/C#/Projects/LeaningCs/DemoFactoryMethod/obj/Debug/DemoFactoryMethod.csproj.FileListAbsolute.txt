@@ -1,0 +1,5 @@
+D:\FPT-Aptech\C#\Projects\LeaningCs\DemoFactoryMethod\obj\Debug\ResolveAssemblyReference.cache
+D:\FPT-Aptech\C#\Projects\LeaningCs\DemoFactoryMethod\bin\Debug\DemoFactoryMethod.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\DemoFactoryMethod\bin\Debug\DemoFactoryMethod.pdb
+D:\FPT-Aptech\C#\Projects\LeaningCs\DemoFactoryMethod\obj\Debug\DemoFactoryMethod.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\DemoFactoryMethod\obj\Debug\DemoFactoryMethod.pdb

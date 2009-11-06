@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="LeaningCs">
+</Property><Property Name="Solution File" Value="D:\FPT-Aptech\C#\Projects\LeaningCs\LeaningCs.sln">
+</Property><Property Name="User Options File" Value="D:\FPT-Aptech\C#\Projects\LeaningCs\LeaningCs.suo">
+</Property><Property Name="Date" Value="Friday, October 30, 2009">
+</Property><Property Name="Time" Value="22:51 PM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="LeaningCs.sln" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\LeaningCs.sln">
+</Event><Event ErrorLevel="0" Project="" Source="LeaningCs.suo" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\LeaningCs.suo">
+</Event><Event ErrorLevel="0" Project="example" Source="example\example.csproj" Description="Project file successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\example\example.csproj">
+</Event><Event ErrorLevel="0" Project="example" Source="example\Animal.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\example\Animal.cs">
+</Event><Event ErrorLevel="0" Project="example" Source="example\Canine.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\example\Canine.cs">
+</Event><Event ErrorLevel="0" Project="example" Source="example\ClassMain.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\example\ClassMain.cs">
+</Event><Event ErrorLevel="0" Project="example" Source="example\demo.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\example\demo.cs">
+</Event><Event ErrorLevel="0" Project="example" Source="example\Properties\AssemblyInfo.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\example\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="example" Source="example\example.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="example" Source="example\example.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Virtual" Source="Virtual\Virtual.csproj" Description="Project file successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\Virtual\Virtual.csproj">
+</Event><Event ErrorLevel="0" Project="Virtual" Source="Virtual\Animal.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\Virtual\Animal.cs">
+</Event><Event ErrorLevel="0" Project="Virtual" Source="Virtual\Cat.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\Virtual\Cat.cs">
+</Event><Event ErrorLevel="0" Project="Virtual" Source="Virtual\Properties\AssemblyInfo.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\Virtual\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="Virtual" Source="Virtual\Virtual.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Virtual" Source="Virtual\Virtual.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Sealed" Source="Sealed\Sealed.csproj" Description="Project file successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\Sealed\Sealed.csproj">
+</Event><Event ErrorLevel="0" Project="Sealed" Source="Sealed\excute.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\Sealed\excute.cs">
+</Event><Event ErrorLevel="0" Project="Sealed" Source="Sealed\produc.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\Sealed\produc.cs">
+</Event><Event ErrorLevel="0" Project="Sealed" Source="Sealed\Properties\AssemblyInfo.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\Sealed\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="Sealed" Source="Sealed\Sealed.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Sealed" Source="Sealed\Sealed.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="assegnment" Source="assegnment\assegnment.csproj" Description="Project file successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\assegnment\assegnment.csproj">
+</Event><Event ErrorLevel="0" Project="assegnment" Source="assegnment\MainClass.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\assegnment\MainClass.cs">
+</Event><Event ErrorLevel="0" Project="assegnment" Source="assegnment\Medicine.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\assegnment\Medicine.cs">
+</Event><Event ErrorLevel="0" Project="assegnment" Source="assegnment\Properties\AssemblyInfo.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\assegnment\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="assegnment" Source="assegnment\Sales.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\assegnment\Sales.cs">
+</Event><Event ErrorLevel="0" Project="assegnment" Source="assegnment\assegnment.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="assegnment" Source="assegnment\assegnment.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="abstract and interface" Source="abstrack and interface\abstract and interface.csproj" Description="Project file successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\abstrack and interface\abstract and interface.csproj">
+</Event><Event ErrorLevel="0" Project="abstract and interface" Source="abstrack and interface\bike.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\abstrack and interface\bike.cs">
+</Event><Event ErrorLevel="0" Project="abstract and interface" Source="abstrack and interface\Car.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\abstrack and interface\Car.cs">
+</Event><Event ErrorLevel="0" Project="abstract and interface" Source="abstrack and interface\Horse.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\abstrack and interface\Horse.cs">
+</Event><Event ErrorLevel="0" Project="abstract and interface" Source="abstrack and interface\Ihorse.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\abstrack and interface\Ihorse.cs">
+</Event><Event ErrorLevel="0" Project="abstract and interface" Source="abstrack and interface\Program.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\abstrack and interface\Program.cs">
+</Event><Event ErrorLevel="0" Project="abstract and interface" Source="abstrack and interface\Properties\AssemblyInfo.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\abstrack and interface\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="abstract and interface" Source="abstrack and interface\Race.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\abstrack and interface\Race.cs">
+</Event><Event ErrorLevel="0" Project="abstract and interface" Source="abstrack and interface\racer.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\Projects\LeaningCs\Backup\abstrack and interface\racer.cs">
+</Event><Event ErrorLevel="0" Project="abstract and interface" Source="abstrack and interface\abstract and interface.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="abstract and interface" Source="abstrack and interface\abstract and interface.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="LeaningCs.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="LeaningCs.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="example" Source="example\example.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Virtual" Source="Virtual\Virtual.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Sealed" Source="Sealed\Sealed.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="assegnment" Source="assegnment\assegnment.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="abstract and interface" Source="abstrack and interface\abstract and interface.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

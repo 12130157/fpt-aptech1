@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="myapplication">
+</Property><Property Name="Solution File" Value="D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\myapplication.sln">
+</Property><Property Name="User Options File" Value="D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\myapplication.suo">
+</Property><Property Name="Date" Value="Monday, November 02, 2009">
+</Property><Property Name="Time" Value="23:13 PM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="myapplication.sln" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\myapplication.sln">
+</Event><Event ErrorLevel="0" Project="" Source="myapplication.suo" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\myapplication.suo">
+</Event><Event ErrorLevel="0" Project="DemoImplement" Source="DemoImplement\DemoImplement.csproj" Description="Project file successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoImplement\DemoImplement.csproj">
+</Event><Event ErrorLevel="0" Project="DemoImplement" Source="DemoImplement\Animal.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoImplement\Animal.cs">
+</Event><Event ErrorLevel="0" Project="DemoImplement" Source="DemoImplement\Cat.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoImplement\Cat.cs">
+</Event><Event ErrorLevel="0" Project="DemoImplement" Source="DemoImplement\Chain.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoImplement\Chain.cs">
+</Event><Event ErrorLevel="0" Project="DemoImplement" Source="DemoImplement\Dog.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoImplement\Dog.cs">
+</Event><Event ErrorLevel="0" Project="DemoImplement" Source="DemoImplement\Food.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoImplement\Food.cs">
+</Event><Event ErrorLevel="0" Project="DemoImplement" Source="DemoImplement\Leg.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoImplement\Leg.cs">
+</Event><Event ErrorLevel="0" Project="DemoImplement" Source="DemoImplement\Mouse.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoImplement\Mouse.cs">
+</Event><Event ErrorLevel="0" Project="DemoImplement" Source="DemoImplement\Program.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoImplement\Program.cs">
+</Event><Event ErrorLevel="0" Project="DemoImplement" Source="DemoImplement\Properties\AssemblyInfo.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoImplement\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="DemoImplement" Source="DemoImplement\Runnable.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoImplement\Runnable.cs">
+</Event><Event ErrorLevel="0" Project="DemoImplement" Source="DemoImplement\DemoImplement.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="DemoImplement" Source="DemoImplement\DemoImplement.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="DemoDelegate" Source="DemoDelegate\DemoDelegate.csproj" Description="Project file successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoDelegate\DemoDelegate.csproj">
+</Event><Event ErrorLevel="0" Project="DemoDelegate" Source="DemoDelegate\Calculator.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoDelegate\Calculator.cs">
+</Event><Event ErrorLevel="0" Project="DemoDelegate" Source="DemoDelegate\Car.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoDelegate\Car.cs">
+</Event><Event ErrorLevel="0" Project="DemoDelegate" Source="DemoDelegate\EventInfo.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoDelegate\EventInfo.cs">
+</Event><Event ErrorLevel="0" Project="DemoDelegate" Source="DemoDelegate\Program.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoDelegate\Program.cs">
+</Event><Event ErrorLevel="0" Project="DemoDelegate" Source="DemoDelegate\Properties\AssemblyInfo.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\Backup\DemoDelegate\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="DemoDelegate" Source="DemoDelegate\DemoDelegate.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="DemoDelegate" Source="DemoDelegate\DemoDelegate.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="myapplication.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="myapplication.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="DemoImplement" Source="DemoImplement\DemoImplement.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="DemoDelegate" Source="DemoDelegate\DemoDelegate.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

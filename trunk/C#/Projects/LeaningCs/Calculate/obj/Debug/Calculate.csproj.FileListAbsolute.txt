@@ -1,0 +1,5 @@
+D:\FPT-Aptech\C#\Projects\LeaningCs\Calculate\obj\Debug\ResolveAssemblyReference.cache
+D:\FPT-Aptech\C#\Projects\LeaningCs\Calculate\bin\Debug\Calculate.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\Calculate\bin\Debug\Calculate.pdb
+D:\FPT-Aptech\C#\Projects\LeaningCs\Calculate\obj\Debug\Calculate.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\Calculate\obj\Debug\Calculate.pdb
