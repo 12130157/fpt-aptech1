@@ -1,0 +1,1708 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:42
+Translation Platform:Win32
+Number of Output files:18
+This File:Chapter10.html
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>9: Interpreter/ Multiple Languages</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview-head.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana" size = "-1">
+    [ <a href="README-HTML.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.html">Revision History</a> ]
+    [ <a href="Building-Code.html">Build the Code</a> ]
+    [ <a href="TIPatterns-Corrections.html">Report an Error</a> ] <br>
+    [ <a href="http://www.mindview.net/MailingList.html">Free Newsletter</a> ]
+    [ <a href="http://www.mindview.net/Training.html">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CPPServices/#ConsultingServices">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana">
+  Thinking in Patterns <font size="4">with Java</font>, Revision 0.6</FONT></H2>
+  <H3><FONT FACE="Verdana">&copy;2001 by Bruce Eckel</FONT></H3>
+  
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter09.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter11.html">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc524504141"></A><A NAME="Heading67"></A><FONT FACE = "Verdana"><H1 ALIGN="LEFT">
+9: Interpreter/<BR>Multiple Languages</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This chapter looks at the value of
+crossing language boundaries. It is often very advantageous to solve a problem
+using more than one programming language, rather than being arbitrarily stuck
+using a single language. As you&#8217;ll see in this chapter, a problem that is
+very difficult or tedious to solve in one language can often be solved quickly
+and easily in another. If you can combine the use of languages, you can create
+your product much more quickly and cheaply.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The most straightforward use of this idea
+is the <I>Interpreter</I> design pattern, which adds an interpreted language to
+your program to allow the end user to easily customize a solution. In Java, the
+easiest and most powerful way to do this is with
+<I>Jython</I></FONT><A NAME="fnB12" HREF="#fn12">[12]</A><FONT FACE="Georgia">,
+an implementation of the Python language in pure Java byte
+codes.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><I>Interpreter</I> solves a particular
+problem &#8211; that of creating a scripting language for the user. But
+sometimes it&#8217;s just easier and faster to temporarily step into another
+language to solve a particular aspect of your problem. You&#8217;re not creating
+an interpreter, you&#8217;re just writing some code in another language. Again,
+Jython is a good example of this, but CORBA also allows you to cross language
+boundaries.</FONT><A NAME="_Toc524504142"></A><BR></P></DIV>
+<A NAME="Heading68"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Interpreter motivation</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">If the application user needs greater run
+time flexibility, for example to create scripts describing the desired behavior
+of the system, you can use the <I>Interpreter</I> design pattern. Here, you
+create and embed a language interpreter into your program.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Remember that each design pattern allows
+one or more factors to change, so it&#8217;s important to first be aware of
+which factor is changing. Sometimes the end users of your application (rather
+than the programmers of that application) need complete flexibility in the way
+that they configure some aspect of the program. That is, they need to do some
+kind of simple programming. The interpreter pattern provides this flexibility by
+adding a language interpreter.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The problem is that developing your own
+language and building an interpreter is a time-consuming distraction from the
+process of developing your application. You must ask whether you want to finish
+writing your application or create a new language.  The best solution is to
+reuse code: embed an interpreter that&#8217;s already been built and debugged
+for you. The Python language can be freely embedded into your for-profit
+application without signing any license agreement, paying royalties, or dealing
+with strings of any kind. There are basically no restrictions at all when you're
+using Python.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Python is a language that is very easy to
+learn, very logical to read and write, supports functions and objects, has a
+large set of available libraries, and runs on virtually every platform. You can
+download Python and learn more about it by going to
+<I>www.Python.org</I>.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">For solving Java problems, we will look
+at a special version of Python called Jython. This is generated entirely in Java
+byte codes, so incorporating it into your application is quite simple,  and
+it&#8217;s as portable as Java is. It has an extremely clean interface with
+Java: Java can call Python classes, and Python can call Java classes.
+</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Python is designed with classes from the
+ground up and is a truly pure object oriented language (both C++ and Java
+violate purity in various ways). Python scales up so that you can create very
+big programs without losing control of the code.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To install Python, go to
+<A HREF="http://www.Python.org">www.Python.org</A> and follow the links and
+instructions. To install Jython, go to<I>
+</I><A HREF="http://jython.sourceforge.net">http://jython.sourceforge.net</A>. 
+The download is a <B>.class</B> file, which will run an installer when you
+execute it with Java.  You also need to add <B>jython.jar</B> to your CLASSPATH.
+You can find further installation instructions at
+<A HREF="http://www.bruceeckel.com/TIPatterns/Building-Code.html">http://www.bruceeckel.com/TIPatterns/Building-Code.html</A>.
+</FONT><A NAME="_Toc524504143"></A><BR></P></DIV>
+<A NAME="Heading69"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Python overview</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To get you started, here is a brief
+introduction for the experienced programmer (which is what you should be if
+you&#8217;re reading this book). You can refer to the full documentation at
+<I>www.Python.org</I> (especially the incredibly useful HTML page <I>A Python
+Quick Reference</I>),<I> </I>and also numerous books such as <I>Learning
+Python</I> by Mark Lutz and David Ascher (O&#8217;Reilly,
+1999).</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Python is often referred to as a
+scripting language, but scripting languages tend to be limiting, especially in
+the scope of the problems that they solve. Python, on the other hand, is a
+programming language that also supports scripting. It <I>is</I> marvelous for
+scripting, and you may find yourself replacing all your batch files, shell
+scripts, and simple programs with Python scripts. But it is far more than a
+scripting language.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Python is designed to be very clean to
+write and especially to read. You will find that it&#8217;s quite easy to read
+your own code long after you&#8217;ve written it, and also to read other
+people&#8217;s code. This is accomplished partially through clean, to-the-point
+syntax, but a major factor in code readability is indentation &#8211; scoping in
+Python is determined by indentation. For example:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c09:<font color=#0000ff>if</font>.py
+response = <font color=#004488>"yes"</font>
+<font color=#0000ff>if</font> response == <font color=#004488>"yes"</font>:
+  print <font color=#004488>"affirmative"</font>
+  val = 1
+print <font color=#004488>"continuing..."</font>
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The &#8216;<B>#</B>&#8217;
+denotes a comment that goes until the end of the line, just like C++ and Java
+&#8216;<B>//</B>&#8217; comments.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">First notice that the basic syntax of
+Python is C-ish; notice the <B>if</B> statement. But in a C <B>if</B>, you would
+be required to use parentheses around the conditional, whereas they are not
+necessary in Python (but it won&#8217;t complain if you use them
+anyway).</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The conditional clause ends with a colon,
+and this indicates that what follows will be a group of indented statements,
+which are the &#8220;then&#8221; part of the <B>if</B> statement. In this case,
+there is a &#8220;print&#8221; statement which sends the result to standard
+output, followed by an assignment to a variable named <B>val</B>. The subsequent
+statement is not indented so it is no longer part of the <B>if</B>. Indenting
+can nest to any level, just like curly braces in C++ or Java, but unlike those
+languages there is no option (and no argument) about where the braces are placed
+&#8211; the compiler forces everyone&#8217;s code to be formatted the same way,
+which is one of the main reasons for Python&#8217;s consistent
+readability.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Python normally has only one statement
+per line (you can put more by separating them with semicolons), thus no
+terminating semicolon is necessary.  Even from the brief example above you can
+see that the language is designed to be as simple as possible, and yet still
+very readable.</FONT><A NAME="_Toc524504144"></A><BR></P></DIV>
+<A NAME="Heading70"></A><FONT FACE = "Verdana"><H3 ALIGN="LEFT">
+Built-in containers</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">With languages like C++ and Java,
+containers are add-on libraries and not integral to the language. In Python, the
+essential nature of containers for programming is acknowledged by building them
+into the core of the language: both lists and associative arrays (a.k.a. maps,
+dictionaries, hash tables) are fundamental data types. This adds much to the
+elegance of the language.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In addition, the <B>for</B> statement
+automatically iterates through lists rather than just counting through a
+sequence of numbers. This makes a lot of sense when you think about it, since
+you&#8217;re almost always using a <B>for</B> loop to step through an array or a
+container. Python formalizes this by automatically making <B>for</B> use an
+iterator that works through a sequence. Here&#8217;s an
+example:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c09:list.py
+list = [ 1, 3, 5, 7, 9, 11 ]
+print list
+list.append(13)
+<font color=#0000ff>for</font> x in list:
+  print x
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The first line creates a list.
+You can print the list and it will look exactly as you put it in (in contrast,
+remember that I had to create a special <B>Arrays2</B> class in <I>Thinking in
+Java, 2<SUP>nd</SUP> Edition </I>in order to print arrays in Java). Lists are
+like Java containers &#8211; you can add new elements to them (here,
+<B>append(&#160;) </B>is used) and they will automatically resize themselves.
+The <B>for</B> statement creates an iterator <B>x</B> which takes on each value
+in the list.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can create a list of numbers with the
+<B>range(&#160;)</B> function, so if you really need to imitate C&#8217;s
+<B>for</B>, you can.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Notice that there aren&#8217;t any type
+declarations &#8211; the object names simply appear, and Python infers their
+type by the way that you use them. It&#8217;s as if Python is designed so that
+you only need to press the keys that absolutely must. You&#8217;ll find after
+you&#8217;ve worked with Python for a short while that you&#8217;ve been using
+up a lot of brain cycles parsing semicolons, curly braces, and all sorts of
+other extra verbiage that was demanded by your non-Python programming language
+but didn&#8217;t actually describe what your program was supposed to
+do.</FONT><A NAME="_Toc524504145"></A><BR></P></DIV>
+<A NAME="Heading71"></A><FONT FACE = "Verdana"><H3 ALIGN="LEFT">
+Functions</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To create a function in Python, you use
+the <B>def</B> keyword, followed by the function name and argument list, and a
+colon to begin the function body. Here is the first example turned into a
+function:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c09:myFunction.py
+def myFunction(response):
+  val = 0
+  <font color=#0000ff>if</font> response == <font color=#004488>"yes"</font>:
+    print <font color=#004488>"affirmative"</font>
+    val = 1
+  print <font color=#004488>"continuing..."</font>
+  <font color=#0000ff>return</font> val
+
+print myFunction(<font color=#004488>"no"</font>)
+print myFunction(<font color=#004488>"yes"</font>)
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Notice there is no type
+information in the function signature &#8211; all it specifies is the name of
+the function and the argument identifiers, but no argument types or return
+types. Python is a <I>weakly-typed</I> language, which means it puts the minimum
+possible requirements on typing. For example, you could pass and return
+different types from the same function:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c09:differentReturns.py
+def differentReturns(arg):
+  <font color=#0000ff>if</font> arg == 1:
+    <font color=#0000ff>return</font> <font color=#004488>"one"</font>
+  <font color=#0000ff>if</font> arg == <font color=#004488>"one"</font>:
+    <font color=#0000ff>return</font> 1
+
+print differentReturns(1)
+print differentReturns(<font color=#004488>"one"</font>)
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The only constraints on an
+object that is passed into the function are that the function can apply its
+operations to that object, but other than that, it doesn&#8217;t care. Here, the
+same function applies the &#8216;<B>+</B>&#8217; operator to integers and
+strings:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c09:sum.py
+def sum(arg1, arg2):
+  <font color=#0000ff>return</font> arg1 + arg2
+
+print sum(42, 47)
+print sum('spam ', <font color=#004488>"eggs"</font>)
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">When the operator
+&#8216;<B>+</B>&#8217; is used with strings, it means concatenation (yes, Python
+supports operator overloading, and it does a nice job of
+it).</FONT><A NAME="_Toc524504146"></A><BR></P></DIV>
+<A NAME="Heading72"></A><FONT FACE = "Verdana"><H3 ALIGN="LEFT">
+Strings</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The above example also shows a little bit
+about Python string handling,  which is the best of any language I&#8217;ve
+seen. You can use single or double quotes to represent strings, which is very
+nice because if you surround a string with double quotes, you can embed single
+quotes and vice versa:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c09:strings.py
+print <font color=#004488>"That isn't a horse"</font>
+print 'You are not a <font color=#004488>"Viking"</font>'
+print <font color=#004488>""</font>"You're just pounding two
+coconut halves together.<font color=#004488>""</font>"
+print '''<font color=#004488>"Oh no!"</font> He exclaimed.
+<font color=#004488>"It's the blemange!"</font>'''
+print r'c:\python\lib\utils'
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Note that Python was not named
+after the snake, but rather the Monty Python comedy troupe, and so examples are
+virtually required to include Python-esque references.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The triple-quote syntax quotes
+everything, including newlines. This makes it particularly useful for doing
+things like generating web pages (Python is an especially good CGI language),
+since you can just triple-quote the entire page that you want without any other
+editing.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The &#8216;<B>r</B>&#8217; right before a
+string means &#8220;raw,&#8221; which takes the backslashes literally so you
+don&#8217;t have to put in an extra backslash.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Substitution in strings is exceptionally
+easy, since Python uses C&#8217;s <B>printf(&#160;)</B> substitution syntax, but
+for any string at all. You simply follow the string with a
+&#8216;<B>%</B>&#8217; and the values to substitute:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c09:stringFormatting.py
+val = 47
+print <font color=#004488>"The number is %d"</font> % val
+val2 = 63.4
+s = <font color=#004488>"val: %d, val2: %f"</font> % (val, val2)
+print s
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As you can see in the second
+case, if you have more than one argument you surround them in parentheses (this
+forms a <I>tuple</I>, which is a list that cannot be modified).</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">All the formatting from
+<B>printf(&#160;)</B> is available, including control over the number of decimal
+places and alignment. Python also has very sophisticated regular
+expressions.</FONT><A NAME="_Toc524504147"></A><BR></P></DIV>
+<A NAME="Heading73"></A><FONT FACE = "Verdana"><H3 ALIGN="LEFT">
+Classes</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Like everything else in Python, the
+definition of a class uses a minimum of additional syntax. You use the
+<B>class</B> keyword, and inside the body you use <B>def</B> to create methods.
+Here&#8217;s a simple class:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c09:SimpleClass.py
+<font color=#0000ff>class</font> Simple:
+  def __init__(self, str):
+    print <font color=#004488>"Inside the Simple constructor"</font>
+    self.s = str
+  # Two methods:
+  def show(self):
+    print self.s
+  def showMsg(self, msg):
+    print msg + ':',
+    self.show() # Calling another method
+
+<font color=#0000ff>if</font> __name__ == <font color=#004488>"__main__"</font>:
+  # Create an object:
+  x = Simple(<font color=#004488>"constructor argument"</font>)
+  x.show()
+  x.showMsg(<font color=#004488>"A message"</font>)
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Both methods have
+&#8220;<B>self</B>&#8221;<B> </B>as their first argument. C++ and Java both have
+a hidden first argument in their class methods, which points to the object that
+the method was called for and can be accessed using the keyword <B>this</B>.
+Python methods also use a reference to the current object, but when you are
+<I>defining</I> a method you must explicitly specify the reference as the first
+argument. Traditionally, the reference is called <B>self</B> but you could use
+any identifier you want (if you do not use <B>self</B> you will probably confuse
+a lot of people, however). If you need to refer to fields in the object or other
+methods in the object, you must use <B>self</B> in the expression. However, when
+you call a method for an object as in <B>x.show(&#160;)</B>, you do not hand it
+the reference to the object &#8211; <I>that</I> is done for
+you.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here, the first method is special, as is
+any identifier that begins and ends with double underscores. In this case, it
+defines the constructor, which is automatically called when the object is
+created, just like in C++ and Java. However, at the bottom of the example you
+can see that the creation of an object looks just like a function call using the
+class name. Python&#8217;s spare syntax makes you realize that the <B>new</B>
+keyword isn&#8217;t really necessary in C++ or Java, either.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">All the code at the bottom is set off by
+an <B>if</B> clause, which checks to see if something called <B>__name__</B> is
+equivalent to <B>__main__</B>. Again, the double underscores indicate special
+names. The reason for the <B>if</B> is that any file can also be used as a
+library module within another program (modules are described shortly). In that
+case, you just want the classes defined, but you don&#8217;t want the code at
+the bottom of the file to be executed. This particular <B>if</B> statement is
+only true when you are running this file directly; that is, if you say on the
+command line:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>Python SimpleClass.py</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">However,
+if this file is imported as a module into another program, the <B>__main__</B>
+code is not executed.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Something that&#8217;s a little
+surprising at first is that you define fields inside methods, and not outside of
+the methods like C++ or Java (if you create fields using the C++/Java style,
+they implicitly become static fields). To create an object field, you just name
+it &#8211; using <B>self</B> &#8211; inside of one of the methods (usually in
+the constructor, but not always), and space is created when that method is run.
+This seems a little strange coming from C++ or Java where you must decide ahead
+of time how much space your object is going to occupy, but it turns out to be a
+very flexible way to program.</FONT><BR></P></DIV>
+<A NAME="Heading74"></A><FONT FACE = "Verdana"><H4 ALIGN="LEFT">
+Inheritance</H4></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Because Python is weakly typed, it
+doesn&#8217;t really care about interfaces &#8211; all it cares about is
+applying operations to objects (in fact, Java&#8217;s <B>interface</B> keyword
+would be wasted in Python). This means that inheritance in Python is different
+from inheritance in C++ or Java, where you often inherit simply to establish a
+common interface. In Python, the only reason you inherit is to inherit an
+implementation &#8211; to re-use the code in the base class. </FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">If you&#8217;re going to inherit from a
+class, you must tell Python to bring that class into your new file. Python
+controls its name spaces as aggressively as Java does, and in a similar fashion
+(albeit with Python&#8217;s penchant for simplicity). Every time you create a
+file, you implicitly create a module (which is like a package in Java) with the
+same name as that file. Thus, no <B>package</B> keyword is needed in Python.
+When you want to use a module, you just say <B>import</B> and give the name of
+the module. Python searches the PYTHONPATH in the same way that Java searches
+the CLASSPATH (but for some reason, Python doesn&#8217;t have the same kinds of
+pitfalls as Java does) and reads in the file. To refer to any of the functions
+or classes within a module, you give the module name, a period, and the function
+or class name. If you don&#8217;t want the trouble of qualifying the name, you
+can say </FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><B>from </B><I>module</I> <B>import</B>
+<I>name(s)</I></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Where &#8220;name(s)&#8221; can be a list
+of names separated by commas.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You inherit a class (or classes &#8211;
+Python supports multiple inheritance) by listing the name(s) of the class inside
+parentheses after the name of the inheriting class. Note that the <B>Simple</B>
+class, which resides in the file (and thus, module) named <B>SimpleClass</B> is
+brought into this new name space using an <B>import</B>
+statement:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c09:Simple2.py
+from SimpleClass <font color=#0000ff>import</font> Simple
+
+<font color=#0000ff>class</font> Simple2(Simple):
+  def __init__(self, str):
+    print <font color=#004488>"Inside Simple2 constructor"</font>
+    # You must explicitly call 
+    # the base-<font color=#0000ff>class</font> constructor:
+    Simple.__init__(self, str)
+  def display(self):
+    self.showMsg(<font color=#004488>"Called from display()"</font>)
+  # Overriding a base-<font color=#0000ff>class</font> method
+  def show(self):
+    print <font color=#004488>"Overridden show() method"</font>
+    # Calling a base-<font color=#0000ff>class</font> method from inside
+    # the overridden method:
+    Simple.show(self)
+
+<font color=#0000ff>class</font> Different:
+  def show(self):
+    print <font color=#004488>"Not derived from Simple"</font>
+
+<font color=#0000ff>if</font> __name__ == <font color=#004488>"__main__"</font>:
+  x = Simple2(<font color=#004488>"Simple2 constructor argument"</font>)
+  x.display()
+  x.show()
+  x.showMsg(<font color=#004488>"Inside main"</font>)
+  def f(obj): obj.show() # One-line definition
+  f(x)
+  f(Different())
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><B>Simple2</B> is inherited from
+<B>Simple</B>, and in the constructor, the base-class constructor is called. In
+<B>display(&#160;)</B>, <B>showMsg(&#160;)</B> can be called as a method of
+<B>self</B>, but when calling the base-class version of the method you are
+overriding, you must fully qualify the name and pass <B>self</B> in as the first
+argument, as shown in the base-class constructor call. This can also be seen in
+the overridden version of <B>show(&#160;)</B>.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In <B>__main__</B>, you will see (when
+you run the program) that the base-class constructor is called. You can also see
+that the <B>showMsg(&#160;)</B> method is available in the derived class, just
+as you would expect with inheritance.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The class <B>Different</B> also has a
+method named <B>show(&#160;)</B>, but this class is not derived from
+<B>Simple</B>. The <B>f(&#160;)</B> method defined in <B>__main__</B>
+demonstrates weak typing: all it cares about is that <B>show(&#160;)</B> can be
+applied to <B>obj</B>, and it doesn&#8217;t have any other type requirements.
+You can see that <B>f(&#160;)</B> can be applied equally to an object of a class
+derived from <B>Simple</B> and one that isn&#8217;t, without discrimination. If
+you&#8217;re a C++ programmer, you should see that the objective of the C++
+<B>template</B> feature is exactly this: to provide weak typing in a
+strongly-typed language. Thus, in Python you automatically get the equivalent of
+templates &#8211; without having to learn that particularly difficult syntax and
+semantics.</FONT><A NAME="_Toc524504148"></A><BR></P></DIV>
+<A NAME="Heading75"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Creating a language</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">It turns out to be remarkably simple to
+use Jython to create an interpreted language inside your application. Consider
+the greenhouse controller example from Chapter 8 of <I>Thinking in Java,
+2<SUP>nd</SUP> edition</I>. This is a situation where you want the end user
+&#8211; the person managing the greenhouse &#8211; to have configuration control
+over the system, and so a simple scripting language is the ideal
+solution.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To create the language, we&#8217;ll
+simply write a set of Python classes, and the constructor of each will add
+itself to a (static) master list. The common data and behavior will be factored
+into the base class <B>Event</B>. Each <B>Event</B> object will contain an
+<B>action</B> string (for simplicity &#8211; in reality, you&#8217;d have some
+sort of functionality) and a time when the event is supposed to run. The
+constructor initializes these fields, and then adds the new <B>Event</B> object
+to a static list called <B>events</B> (defining it in the class, but outside of
+any methods, is what makes it static):</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#:c09:GreenHouseLanguage.py
+
+<font color=#0000ff>class</font> Event:
+  events = [] # <font color=#0000ff>static</font>
+  def __init__(self, action, time):
+    self.action = action
+    self.time = time
+    Event.events.append(self)
+  # Used by sort(). This will cause
+  # comparisons to be based only on time:
+  def __cmp__ (self, other):
+    <font color=#0000ff>if</font> self.time &lt; other.time: <font color=#0000ff>return</font> -1
+    <font color=#0000ff>if</font> self.time &gt; other.time: <font color=#0000ff>return</font> 1
+    <font color=#0000ff>return</font> 0
+  def run(self):
+    print <font color=#004488>"%.2f: %s"</font> % (self.time, self.action)
+
+<font color=#0000ff>class</font> LightOn(Event):
+  def __init__(self, time):
+    Event.__init__(self, <font color=#004488>"Light on"</font>, time)
+
+<font color=#0000ff>class</font> LightOff(Event):
+  def __init__(self, time):
+    Event.__init__(self, <font color=#004488>"Light off"</font>, time)
+
+<font color=#0000ff>class</font> WaterOn(Event):
+  def __init__(self, time):
+    Event.__init__(self, <font color=#004488>"Water on"</font>, time)
+
+<font color=#0000ff>class</font> WaterOff(Event):
+  def __init__(self, time):
+    Event.__init__(self, <font color=#004488>"Water off"</font>, time)
+
+<font color=#0000ff>class</font> ThermostatNight(Event):
+  def __init__(self, time):
+    Event.__init__(self,<font color=#004488>"Thermostat night"</font>, time)
+
+<font color=#0000ff>class</font> ThermostatDay(Event):
+  def __init__(self, time):
+    Event.__init__(self, <font color=#004488>"Thermostat day"</font>, time)
+
+<font color=#0000ff>class</font> Bell(Event):
+  def __init__(self, time):
+    Event.__init__(self, <font color=#004488>"Ring bell"</font>, time)
+  
+def run():
+  Event.events.sort();
+  <font color=#0000ff>for</font> e in Event.events:
+    e.run()
+
+# To test, <font color=#0000ff>this</font> will be run when you say:
+# python GreenHouseLanguage.py
+<font color=#0000ff>if</font> __name__ == <font color=#004488>"__main__"</font>:
+  ThermostatNight(5.00)
+  LightOff(2.00)
+  WaterOn(3.30)
+  WaterOff(4.45)
+  LightOn(1.00)
+  ThermostatDay(6.00)
+  Bell(7.00)
+  run()
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The constructor of each derived
+class calls the base-class constructor, which adds the new object to the list.
+The <B>run(&#160;)</B> function sorts the list, which automatically uses the
+<B>__cmp__(&#160;)</B> method that was defined in <B>Event</B> to base
+comparisons on time only. In this example, it only prints out the list, but in
+the real system it would wait for the time of each event to come up and then run
+the event.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>__main__</B> section performs a
+simple test on the classes.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The above file is now a module that can
+be included in another Python program to define all the classes it contains. But
+instead of an ordinary Python program, let&#8217;s use Jython, inside of Java.
+This turns out to be remarkably simple: you import some Jython classes, create a
+<B>PythonInterpreter</B> object, and cause the Python files to be
+loaded:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c09:GreenHouseController.java</font>
+<font color=#0000ff>import</font> org.python.util.PythonInterpreter; 
+<font color=#0000ff>import</font> org.python.core.*; 
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> 
+GreenHouseController <font color=#0000ff>extends</font> UnitTest { 
+  PythonInterpreter interp = 
+    <font color=#0000ff>new</font> PythonInterpreter();
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test() <font color=#0000ff>throws</font> PyException  {
+    System.out.println(
+      <font color=#004488>"Loading GreenHouse Language"</font>);
+    interp.execfile(<font color=#004488>"GreenHouseLanguage.py"</font>);
+    System.out.println(
+      <font color=#004488>"Loading GreenHouse Script"</font>);
+    interp.execfile(<font color=#004488>"Schedule.ghs"</font>);
+    System.out.println(
+      <font color=#004488>"Executing GreenHouse Script"</font>);
+    interp.exec(<font color=#004488>"run()"</font>);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> 
+  main(String[] args) <font color=#0000ff>throws</font> PyException  {
+    <font color=#0000ff>new</font> GreenHouseController().test();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>PythonInterpreter</B>
+object is a complete Python interpreter that accepts commands from the Java
+program. One of these commands is <B>execfile(&#160;)</B>, which tells it to
+execute all the statements it finds in a particular file. By executing
+<B>GreenHouseLanguage.py</B>, all the classes from that file are loaded into our
+<B>PythonInterpreter</B> object, and so it now &#8220;holds&#8221; the
+greenhouse controller language. The <B>Schedule.ghs</B> file is the one created
+by the end user to control the greenhouse. Here&#8217;s an
+example:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//:! c09:Schedule.ghs</font>
+Bell(7.00)
+ThermostatDay(6.00)
+WaterOn(3.30)
+LightOn(1.00)
+ThermostatNight(5.00)
+LightOff(2.00)
+WaterOff(4.45)
+<font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This is the goal of the
+interpreter design pattern: to make the configuration of your program as simple
+as possible for the end user. With Jython you can achieve this with almost no
+effort at all.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">One of the other methods available to the
+<B>PythonInterpreter</B> is <B>exec(&#160;)</B>, which allows you to send a
+command to the interpreter. Here, the <B>run(&#160;)</B> function is called
+using <B>exec(&#160;)</B>. </FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Remember, to run this program you must go
+to <A HREF="http://jython.sourceforge.net">http://jython.sourceforge.net</A><I>
+</I>and download and install Jython (actually, you only need <B>jython.jar</B>
+in your CLASSPATH). Once that&#8217;s in place, it&#8217;s just like running any
+other Java program.</FONT><A NAME="_Toc524504149"></A><BR></P></DIV>
+<A NAME="Heading76"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Controlling the interpreter</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The prior example only creates and runs
+the interpreter using external scripts. In the rest of this chapter, we shall
+look at more sophisticated ways to interact with Jython. The simplest way to
+exercise more control over the <B>PythonInterpreter</B> object from within Java
+is to send data to the interpreter, and pull data back
+out.</FONT><A NAME="_Toc524504150"></A><BR></P></DIV>
+<A NAME="Heading77"></A><FONT FACE = "Verdana"><H3 ALIGN="LEFT">
+Putting data in</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To inject data into your Python program,
+the <B>PythonInterpreter</B> class has a deceptively simple method:
+<B>set(&#160;)</B>. However, <B>set(&#160;)</B> takes many different data types
+and performs conversions upon them.  The following example is a reasonably
+thorough exercise of the various <B>set(&#160;)</B> possibilities, along with
+comments that should give a fairly complete explanation:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c09:PythonInterpreterSetting.java</font>
+<font color=#009900>// Passing data from Java to python when using</font>
+<font color=#009900>// the PythonInterpreter object.</font>
+<font color=#0000ff>import</font> org.python.util.PythonInterpreter; 
+<font color=#0000ff>import</font> org.python.core.*; 
+<font color=#0000ff>import</font> java.util.*;
+<font color=#0000ff>import</font> com.bruceeckel.python.*;
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> 
+PythonInterpreterSetting <font color=#0000ff>extends</font> UnitTest {
+  PythonInterpreter interp = 
+    <font color=#0000ff>new</font> PythonInterpreter();
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test() <font color=#0000ff>throws</font> PyException  {
+    <font color=#009900>// It automatically converts Strings </font>
+    <font color=#009900>// into native Python strings:</font>
+    interp.set(<font color=#004488>"a"</font>, <font color=#004488>"This is a test"</font>);
+    interp.exec(<font color=#004488>"print a"</font>);
+    interp.exec(<font color=#004488>"print a[5:]"</font>); <font color=#009900>// A slice</font>
+    <font color=#009900>// It also knows what to do with arrays:</font>
+    String[] s = { <font color=#004488>"How"</font>, <font color=#004488>"Do"</font>, <font color=#004488>"You"</font>, <font color=#004488>"Do?"</font> };
+    interp.set(<font color=#004488>"b"</font>, s);
+    interp.exec(<font color=#004488>"for x in b: print x[0], x"</font>);
+    <font color=#009900>// set() only takes Objects, so it can't </font>
+    <font color=#009900>// figure out primitives. Instead,</font>
+    <font color=#009900>// you have to use wrappers:</font>
+    interp.set(<font color=#004488>"c"</font>, <font color=#0000ff>new</font> PyInteger(1));
+    interp.set(<font color=#004488>"d"</font>, <font color=#0000ff>new</font> PyFloat(2.2));
+    interp.exec(<font color=#004488>"print c + d"</font>);
+    <font color=#009900>// You can also use Java's object wrappers:</font>
+    interp.set(<font color=#004488>"c"</font>, <font color=#0000ff>new</font> Integer(9));
+    interp.set(<font color=#004488>"d"</font>, <font color=#0000ff>new</font> Float(3.14));
+    interp.exec(<font color=#004488>"print c + d"</font>);
+    <font color=#009900>// Define a Python function to print arrays:</font>
+    interp.exec(
+      <font color=#004488>"def prt(x): \n"</font> +
+      <font color=#004488>"  print x \n"</font> +
+      <font color=#004488>"  for i in x: \n"</font> +
+      <font color=#004488>"    print i, \n"</font> +
+      <font color=#004488>"  print x.__class__\n"</font>);
+    <font color=#009900>// Arrays are Objects, so it has no trouble </font>
+    <font color=#009900>// figuring out the types contained in arrays:</font>
+    Object[] types = {
+      <font color=#0000ff>new</font> <font color=#0000ff>boolean</font>[]{ <font color=#0000ff>true</font>, <font color=#0000ff>false</font>, <font color=#0000ff>false</font>, <font color=#0000ff>true</font> },
+      <font color=#0000ff>new</font> <font color=#0000ff>char</font>[]{ 'a', 'b', 'c', 'd' },
+      <font color=#0000ff>new</font> <font color=#0000ff>byte</font>[]{ 1, 2, 3, 4 },
+      <font color=#0000ff>new</font> <font color=#0000ff>int</font>[]{ 10, 20, 30, 40 },
+      <font color=#0000ff>new</font> <font color=#0000ff>long</font>[]{ 100, 200, 300, 400 },
+      <font color=#0000ff>new</font> <font color=#0000ff>float</font>[]{ 1.1f, 2.2f, 3.3f, 4.4f },
+      <font color=#0000ff>new</font> <font color=#0000ff>double</font>[]{ 1.1, 2.2, 3.3, 4.4 },
+    };
+    <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; types.length; i++) {
+      interp.set(<font color=#004488>"e"</font>, types[i]);
+      interp.exec(<font color=#004488>"prt(e)"</font>);
+    }
+    <font color=#009900>// It uses toString() to print Java objects:</font>
+    interp.set(<font color=#004488>"f"</font>, <font color=#0000ff>new</font> Date());
+    interp.exec(<font color=#004488>"print f"</font>);
+    <font color=#009900>// You can pass it a List </font>
+    <font color=#009900>// and index into it...</font>
+    List x = <font color=#0000ff>new</font> ArrayList();
+    <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; 10; i++)
+        x.add(<font color=#0000ff>new</font> Integer(i * 10));
+    interp.set(<font color=#004488>"g"</font>, x);
+    interp.exec(<font color=#004488>"print g"</font>);
+    interp.exec(<font color=#004488>"print g[1]"</font>);
+    <font color=#009900>// ... But it's not quite smart enough</font>
+    <font color=#009900>// to treat it as a Python array:</font>
+    interp.exec(<font color=#004488>"print g.__class__"</font>);
+    <font color=#009900>// interp.exec("print g[5:]); // Fails</font>
+    <font color=#009900>// If you want it to be a python array, you</font>
+    <font color=#009900>// must extract the Java array:</font>
+    System.out.println(<font color=#004488>"ArrayList to array:"</font>);
+    interp.set(<font color=#004488>"h"</font>, x.toArray());
+    interp.exec(<font color=#004488>"print h.__class__"</font>);
+    interp.exec(<font color=#004488>"print h[5:]"</font>);
+    <font color=#009900>// Passing in a Map:</font>
+    Map m = <font color=#0000ff>new</font> HashMap();
+    m.put(<font color=#0000ff>new</font> Integer(1), <font color=#0000ff>new</font> Character('a'));
+    m.put(<font color=#0000ff>new</font> Integer(3), <font color=#0000ff>new</font> Character('b'));
+    m.put(<font color=#0000ff>new</font> Integer(5), <font color=#0000ff>new</font> Character('c'));
+    m.put(<font color=#0000ff>new</font> Integer(7), <font color=#0000ff>new</font> Character('d'));
+    m.put(<font color=#0000ff>new</font> Integer(11), <font color=#0000ff>new</font> Character('e'));
+    System.out.println(<font color=#004488>"m: "</font> + m);
+    interp.set(<font color=#004488>"m"</font>, m);
+    interp.exec(<font color=#004488>"print m, m.__class__, "</font> + 
+      <font color=#004488>"m[1], m[1].__class__"</font>);
+    <font color=#009900>// Not a Python dictionary, so this fails:</font>
+    <font color=#009900>//! interp.exec("for x in m.keys():" +</font>
+    <font color=#009900>//!   "print x, m[x]");</font>
+    <font color=#009900>// To convert a Map to a Python dictionary,</font>
+    <font color=#009900>// use com.bruceeckel.python.PyUtil:</font>
+    interp.set(<font color=#004488>"m"</font>, PyUtil.toPyDictionary(m));
+    interp.exec(<font color=#004488>"print m, m.__class__, "</font> + 
+      <font color=#004488>"m[1], m[1].__class__"</font>);
+    interp.exec(<font color=#004488>"for x in m.keys():print x,m[x]"</font>);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> 
+  main(String[] args) <font color=#0000ff>throws</font> PyException  {
+    <font color=#0000ff>new</font> PythonInterpreterSetting().test();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As usual with Java, the
+distinction between real objects and primitive types causes trouble. In general,
+if you pass a regular object to <B>set(&#160;)</B>, it knows what to do with it,
+but if you want to pass in a primitive you must perform a conversion. One way to
+do this is to create a &#8220;Py&#8221; type, such as <B>PyInteger</B> or
+<B>PyFloat</B>. but it turns out you can also use Java&#8217;s own object
+wrappers like <B>Integer</B> and <B>Float</B>, which is probably going to be a
+lot easier to remember.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Early in the program you&#8217;ll see an
+<B>exec(&#160;)</B> containing the Python statement:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>print a[5:]</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The colon inside
+the indexing statement indicates a Python <I>slice</I>, which produces a range
+of elements from the original array. In this case, it produces an array
+containing the elements from number 5 until the end of the array. You could also
+say &#8216;<B>a[3:5]</B>&#8217; to produce elements 3 through 5, or
+&#8216;<B>a[:5]</B>&#8217; to produce the elements zero through 5. The reason a
+slice is used in this statement is to make sure that the Java <B>String</B> has
+really been converted to a Python string, which can also be treated as an array
+of characters.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can see that it&#8217;s possible,
+using <B>exec(&#160;)</B>, to create a Python function (although it&#8217;s a
+bit awkward). The <B>prt(&#160;)</B> function prints the whole array, and then
+(to make sure it&#8217;s a real Python array), iterates through each element of
+the array and prints it. Finally, it prints the class of the array, so we can
+see what conversion has taken place (Python not only has run-time type
+information, it also has the equivalent of Java reflection). The
+<B>prt(&#160;)</B> function is used to print arrays that come from each of the
+Java primitive types.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Although a Java <B>ArrayList</B> does
+pass into the interpreter using <B>set(&#160;)</B>, and you can index into it as
+if it were an array, trying to create a slice fails. To completely convert it
+into an array, one approach is to simply extract a Java array using
+<B>toArray(&#160;)</B>, and pass that in. The <B>set(&#160;)</B> method converts
+it to a <B>PyArray</B> &#8211; one of the classes provided with Jython &#8211;
+which can be treated as a Python array (you can also explicitly create a
+<B>PyArray</B>, but this seems unnecessary).</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Finally, a <B>Map</B> is created and
+passed directly into the interpreter. While it is possible to do simple things
+like index into the resulting object, it&#8217;s not a real Python dictionary so
+you can&#8217;t (for example) call the <B>keys(&#160;)</B> method. There is no
+straightforward way to convert a Java <B>Map</B> into a Python dictionary, and
+so I wrote a utility called <B>toPyDictionary(&#160;)</B> and made it a
+<B>static</B> method of <B>com.bruceeckel.python.PyUtil</B>. This also includes
+utilities to extract a Python array into a Java <B>List</B>, and a Python
+dictionary into a Java <B>Map</B>:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: com:bruceeckel:python:PyUtil.java</font>
+<font color=#009900>// PythonInterpreter utilities</font>
+<font color=#0000ff>package</font> com.bruceeckel.python;
+<font color=#0000ff>import</font> org.python.util.PythonInterpreter; 
+<font color=#0000ff>import</font> org.python.core.*; 
+<font color=#0000ff>import</font> java.util.*;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> PyUtil { 
+  <font color=#009900>/** Extract a Python tuple or array into a Java
+  List (which can be converted into other kinds 
+  of lists and sets inside Java). 
+  @param interp The Python interpreter object
+  @param pyName The id of the python list object
+  */</font>
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> List 
+  toList(PythonInterpreter interp, String pyName){
+    <font color=#0000ff>return</font> <font color=#0000ff>new</font> ArrayList(Arrays.asList(
+      (Object[])interp.get(
+        pyName, Object[].<font color=#0000ff>class</font>)));
+  }
+  <font color=#009900>/** Extract a Python dictionary into a Java Map
+  @param interp The Python interpreter object
+  @param pyName The id of the python dictionary
+  */</font>
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> Map 
+  toMap(PythonInterpreter interp, String pyName){
+    PyList pa = ((PyDictionary)interp.get(
+      pyName)).items();
+    Map map = <font color=#0000ff>new</font> HashMap();
+    <font color=#0000ff>while</font>(pa.__len__() != 0) {
+      PyTuple po = (PyTuple)pa.pop();
+      Object first = po.__finditem__(0)
+        .__tojava__(Object.<font color=#0000ff>class</font>);
+      Object second = po.__finditem__(1)
+        .__tojava__(Object.<font color=#0000ff>class</font>);
+      map.put(first, second);
+    }
+    <font color=#0000ff>return</font> map;
+  }
+  <font color=#009900>/** Turn a Java Map into a PyDictionary, 
+  suitable for placing into a PythonInterpreter
+  @param map The Java Map object
+  */</font>
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> PyDictionary 
+  toPyDictionary(Map map) {
+    Map m = <font color=#0000ff>new</font> HashMap();
+    Iterator it = map.entrySet().iterator();
+    <font color=#0000ff>while</font>(it.hasNext()) {
+      Map.Entry e = (Map.Entry)it.next();
+      m.put(Py.java2py(e.getKey()), 
+        Py.java2py(e.getValue()));
+    }
+    <font color=#009900>// PyDictionary constructor wants a Hashtable:</font>
+    <font color=#0000ff>return</font> <font color=#0000ff>new</font> PyDictionary(<font color=#0000ff>new</font> Hashtable(m));
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here is the (black-box) unit
+testing code:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: com:bruceeckel:python:Test.java</font>
+<font color=#0000ff>package</font> com.bruceeckel.python;
+<font color=#0000ff>import</font> org.python.util.PythonInterpreter; 
+<font color=#0000ff>import</font> java.util.*;
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> Test <font color=#0000ff>extends</font> UnitTest {
+  PythonInterpreter pi =
+    <font color=#0000ff>new</font> PythonInterpreter();
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test1() {
+    pi.exec(<font color=#004488>"tup=('fee','fi','fo','fum','fi')"</font>);
+    List lst = PyUtil.toList(pi, <font color=#004488>"tup"</font>);
+    System.out.println(lst);
+    System.out.println(<font color=#0000ff>new</font> HashSet(lst));
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test2() {
+    pi.exec(<font color=#004488>"ints=[1,3,5,7,9,11,13,17,19]"</font>);
+    List lst = PyUtil.toList(pi, <font color=#004488>"ints"</font>);
+    System.out.println(lst);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test3() {
+    pi.exec(<font color=#004488>"dict = { 1 : 'a', 3 : 'b', "</font> + 
+      <font color=#004488>"5 : 'c', 9 : 'd', 11 : 'e'}"</font>);
+    Map mp = PyUtil.toMap(pi, <font color=#004488>"dict"</font>);
+    System.out.println(mp);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test4() {
+    Map m = <font color=#0000ff>new</font> HashMap();
+    m.put(<font color=#004488>"twas"</font>, <font color=#0000ff>new</font> Integer(11));
+    m.put(<font color=#004488>"brillig"</font>, <font color=#0000ff>new</font> Integer(27));
+    m.put(<font color=#004488>"and"</font>, <font color=#0000ff>new</font> Integer(47));
+    m.put(<font color=#004488>"the"</font>, <font color=#0000ff>new</font> Integer(42));
+    m.put(<font color=#004488>"slithy"</font>, <font color=#0000ff>new</font> Integer(33));
+    m.put(<font color=#004488>"toves"</font>, <font color=#0000ff>new</font> Integer(55));
+    System.out.println(m);
+    pi.set(<font color=#004488>"m"</font>, PyUtil.toPyDictionary(m));
+    pi.exec(<font color=#004488>"print m"</font>);
+    pi.exec(<font color=#004488>"print m['slithy']"</font>);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String args[]) {
+    Test t = <font color=#0000ff>new</font> Test();
+    t.test1();
+    t.test2();
+    t.test3();
+    t.test4();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">We&#8217;ll see the use of
+the extraction tools in the next
+section.</FONT><A NAME="_Toc524504151"></A><BR></P></DIV>
+<A NAME="Heading78"></A><FONT FACE = "Verdana"><H3 ALIGN="LEFT">
+Getting data out</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">There are a number of different ways to
+extract data from the <B>PythonInterpreter</B>. If you simply call the
+<B>get(&#160;)</B> method, passing it the object identifier as a string, it
+returns a <B>PyObject</B> (part of the <B>org.python.core</B> support classes).
+It&#8217;s possible to &#8220;cast&#8221; it using the <B>__tojava__(&#160;)</B>
+method, but there are better alternatives:</FONT><BR></P></DIV>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">The convenience methods in
+the <B>Py</B> class, such as <B>py2int(&#160;)</B>, take a <B>PyObject</B> and
+convert it to a number of different
+types.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">An overloaded
+version of <B>get(&#160;)</B> takes the desired Java <B>Class</B> object as a
+second argument, and produces an object that has that run-time type (so you
+still need to perform a cast on the result in your Java
+code).</FONT></OL><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Using the second
+approach, getting an array from the <B>PythonInterpreter</B> is quite easy. This
+is especially useful because Python is exceptionally good at manipulating
+strings and files, and so you will commonly want to extract the results as an
+array of strings. For example, you can do a wildcard expansion of file names
+using Python&#8217;s <B>glob(&#160;)</B>, as shown further down in the following
+code:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c09:PythonInterpreterGetting.java</font>
+<font color=#009900>// Getting data from the PythonInterpreter object.</font>
+<font color=#0000ff>import</font> org.python.util.PythonInterpreter; 
+<font color=#0000ff>import</font> org.python.core.*; 
+<font color=#0000ff>import</font> java.util.*;
+<font color=#0000ff>import</font> com.bruceeckel.python.*;
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> 
+PythonInterpreterGetting <font color=#0000ff>extends</font> UnitTest{ 
+  PythonInterpreter interp = 
+    <font color=#0000ff>new</font> PythonInterpreter();
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test() <font color=#0000ff>throws</font> PyException  { 
+    interp.exec(<font color=#004488>"a = 100"</font>);
+    <font color=#009900>// If you just use the ordinary get(), </font>
+    <font color=#009900>// it returns a PyObject:</font>
+    PyObject a = interp.get(<font color=#004488>"a"</font>);
+    <font color=#009900>// There's not much you can do with a generic</font>
+    <font color=#009900>// PyObject, but you can print it out:</font>
+    System.out.println(<font color=#004488>"a = "</font> + a);
+    <font color=#009900>// If you know the type it's supposed to be,</font>
+    <font color=#009900>// you can "cast" it using __tojava__() to</font>
+    <font color=#009900>// that Java type and manipulate it in Java.</font>
+    <font color=#009900>// To use 'a' as an int, you must use</font>
+    <font color=#009900>// the Integer wrapper class:</font>
+    <font color=#0000ff>int</font> ai= ((Integer)a.__tojava__(Integer.<font color=#0000ff>class</font>))
+      .intValue();
+    <font color=#009900>// There are also convenience functions:</font>
+    ai = Py.py2int(a);
+    System.out.println(<font color=#004488>"ai + 47 = "</font> + (ai + 47));
+    <font color=#009900>// You can convert it to different types:</font>
+    <font color=#0000ff>float</font> af = Py.py2float(a);
+    System.out.println(<font color=#004488>"af + 47 = "</font> + (af + 47));
+    <font color=#009900>// If you try to cast it to an inappropriate</font>
+    <font color=#009900>// type you'll get a runtime exception:</font>
+    <font color=#009900>//! String as = (String)a.__tojava__(</font>
+    <font color=#009900>//!   String.class);</font>
+    
+    <font color=#009900>// If you know the type, a more useful method</font>
+    <font color=#009900>// is the overloaded get() that takes the </font>
+    <font color=#009900>// desired class as the 2nd argument:</font>
+    interp.exec(<font color=#004488>"x = 1 + 2"</font>);
+    <font color=#0000ff>int</font> x = ((Integer)interp
+      .get(<font color=#004488>"x"</font>, Integer.<font color=#0000ff>class</font>)).intValue();
+    System.out.println(<font color=#004488>"x = "</font> + x);
+    
+    <font color=#009900>// Since Python is so good at manipulating</font>
+    <font color=#009900>// strings and files, you will often need to</font>
+    <font color=#009900>// extract an array of Strings. Here, a file </font>
+    <font color=#009900>// is read as a Python array:</font>
+    interp.exec(<font color=#004488>"lines = "</font> + 
+      <font color=#004488>"open('PythonInterpreterGetting.java')"</font> +
+      <font color=#004488>".readlines()"</font>);
+    <font color=#009900>// Pull it in as a Java array of String:</font>
+    String[] lines = (String[])
+      interp.get(<font color=#004488>"lines"</font>, String[].<font color=#0000ff>class</font>);
+    <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; 10; i++)
+      System.out.print(lines[i]);
+    
+    <font color=#009900>// As an example of useful string tools,</font>
+    <font color=#009900>// global expansion of ambiguous file names</font>
+    <font color=#009900>// using glob is very useful, but it's not</font>
+    <font color=#009900>// part of the standard Jython package, so</font>
+    <font color=#009900>// you'll have to make sure that your</font>
+    <font color=#009900>// Python path is set to include these, or</font>
+    <font color=#009900>// that you deliver the necessary Python</font>
+    <font color=#009900>// files with your application.</font>
+    interp.exec(<font color=#004488>"from glob import glob"</font>);
+    interp.exec(<font color=#004488>"files = glob('*.java')"</font>);
+    String[] files = (String[])
+      interp.get(<font color=#004488>"files"</font>, String[].<font color=#0000ff>class</font>);
+    <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; files.length; i++)
+      System.out.println(files[i]);
+    
+    <font color=#009900>// You can extract tuples and arrays into </font>
+    <font color=#009900>// Java Lists with com.bruceeckel.PyUtil:</font>
+    interp.exec(
+      <font color=#004488>"tup = ('fee', 'fi', 'fo', 'fum', 'fi')"</font>);
+    List tup = PyUtil.toList(interp, <font color=#004488>"tup"</font>);
+    System.out.println(tup);
+    <font color=#009900>// It really is a list of String objects:</font>
+    System.out.println(tup.get(0).getClass());
+    <font color=#009900>// You can easily convert it to a Set:</font>
+    Set tups = <font color=#0000ff>new</font> HashSet(tup);
+    System.out.println(tups);
+    interp.exec(<font color=#004488>"ints=[1,3,5,7,9,11,13,17,19]"</font>);
+    List ints = PyUtil.toList(interp, <font color=#004488>"ints"</font>);
+    System.out.println(ints);
+    <font color=#009900>// It really is a List of Integer objects:</font>
+    System.out.println((ints.get(1)).getClass());
+    
+    <font color=#009900>// If you have a Python dictionary, it can</font>
+    <font color=#009900>// be extracted into a Java Map, again with</font>
+    <font color=#009900>// com.bruceeckel.PyUtil:</font>
+    interp.exec(<font color=#004488>"dict = { 1 : 'a', 3 : 'b',"</font> +
+      <font color=#004488>"5 : 'c', 9 : 'd', 11 : 'e' }"</font>);
+    Map map = PyUtil.toMap(interp, <font color=#004488>"dict"</font>);
+    System.out.println(<font color=#004488>"map: "</font> + map);
+    <font color=#009900>// It really is Java objects, not PyObjects:</font>
+    Iterator it = map.entrySet().iterator();
+    Map.Entry e = (Map.Entry)it.next();
+    System.out.println(e.getKey().getClass());
+    System.out.println(e.getValue().getClass());
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> 
+  main(String[] args) <font color=#0000ff>throws</font> PyException  {
+    <font color=#0000ff>new</font> PythonInterpreterGetting().test();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The last two examples show
+the extraction of Python tuples and lists into Java <B>List</B>s, and Python
+dictionaries into Java <B>Map</B>s. Both of these cases require more processing
+than is provided in the standard Jython library, so I have again created
+utilities in <B>com.bruceeckel.pyton.PyUtil</B>: <B>toList(&#160;)</B> to
+produce a <B>List</B> from a Python sequence, and <B>toMap(&#160;)</B> to
+produce a <B>Map</B> from a Python dictionary. The <B>PyUtil</B> methods make it
+easier to take important data structures back and forth between Java and
+Python.</FONT><A NAME="_Toc524504152"></A><BR></P></DIV>
+<A NAME="Heading79"></A><FONT FACE = "Verdana"><H3 ALIGN="LEFT">
+Multiple interpreters</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">It&#8217;s also worth noting that you can
+have multiple <B>PythonInterpreter</B> objects in a program, and each one has
+its own name space:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c09:MultipleJythons.java</font>
+<font color=#009900>// You can run multiple interpreters, each</font>
+<font color=#009900>// with its own name space.</font>
+<font color=#0000ff>import</font> org.python.util.PythonInterpreter; 
+<font color=#0000ff>import</font> org.python.core.*; 
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> MultipleJythons <font color=#0000ff>extends</font> UnitTest { 
+  PythonInterpreter 
+    interp1 =  <font color=#0000ff>new</font> PythonInterpreter(),
+    interp2 =  <font color=#0000ff>new</font> PythonInterpreter();
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test() <font color=#0000ff>throws</font> PyException { 
+    interp1.set(<font color=#004488>"a"</font>, <font color=#0000ff>new</font> PyInteger(42));
+    interp2.set(<font color=#004488>"a"</font>, <font color=#0000ff>new</font> PyInteger(47));
+    interp1.exec(<font color=#004488>"print a"</font>);
+    interp2.exec(<font color=#004488>"print a"</font>);
+    PyObject x1 = interp1.get(<font color=#004488>"a"</font>);
+    PyObject x2 = interp2.get(<font color=#004488>"a"</font>);
+    System.out.println(<font color=#004488>"a from interp1: "</font> + x1);
+    System.out.println(<font color=#004488>"a from interp2: "</font> + x2);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> 
+  main(String[] args) <font color=#0000ff>throws</font> PyException  {
+    <font color=#0000ff>new</font> MultipleJythons().test();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">When you run the program
+you&#8217;ll see that the value of <B>a</B> is distinct within each
+<B>PythonInterpreter</B>.</FONT><A NAME="_Toc524504153"></A><BR></P></DIV>
+<A NAME="Heading80"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Controlling Java from Jython</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Since you have the Java language at your
+disposal, and you can set and retrieve values in the interpreter, there&#8217;s
+a tremendous amount that you can accomplish with the above approach (controlling
+Python from Java).  But one of the amazing things about Jython is that it makes
+Java classes almost transparently available from within Jython. Basically, a
+Java class looks like a Python class. This is true for standard Java library
+classes as well as classes that you create yourself, as you can see
+here:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c09:JavaClassInPython.py
+#=M jython.bat JavaClassInPython.py
+# Using Java classes within Jython
+from java.util <font color=#0000ff>import</font> Date, HashSet, HashMap
+from c09.javaclass <font color=#0000ff>import</font> JavaClass
+from math <font color=#0000ff>import</font> sin
+
+d = Date() # Creating a Java Date object
+print d # Calls toString()
+
+# A <font color=#004488>"generator"</font> to easily create data:
+<font color=#0000ff>class</font> ValGen:
+  def __init__(self, maxVal):
+    self.val = range(maxVal)
+  # Called during '<font color=#0000ff>for</font>' iteration:
+  def __getitem__(self, i):
+    # Returns a tuple of two elements:
+    <font color=#0000ff>return</font> self.val[i], sin(self.val[i])
+
+# Java standard containers:
+map = HashMap()
+set = HashSet()
+
+<font color=#0000ff>for</font> x, y in ValGen(10):
+  map.put(x, y)
+  set.add(y)
+  set.add(y)
+
+print map
+print set
+
+# Iterating through a set:
+<font color=#0000ff>for</font> z in set:
+  print z, z.__class__
+
+print map[3] # Uses Python dictionary indexing
+<font color=#0000ff>for</font> x in map.keySet(): # keySet() is a Map method
+  print x, map[x]
+
+# Using a Java <font color=#0000ff>class</font> that you create yourself is
+# just as easy:
+jc = JavaClass()
+jc2 = JavaClass(<font color=#004488>"Created within Jython"</font>)
+print jc2.getVal()
+jc.setVal(<font color=#004488>"Using a Java class is trivial"</font>)
+print jc.getVal()
+print jc.getChars()
+jc.val = <font color=#004488>"Using bean properties"</font>
+print jc.val
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The &#8220;<B>=M</B>&#8221;
+comment is recognized by the makefile generator tool (that I created for this
+book) as a replacement makefile command. This will be used instead of the
+commands that the extraction tool would normally place in the
+makefile.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Note that the <B>import</B> statements
+map to the Java package structure exactly as you would expect. In the first
+example, a <B>Date(&#160;)</B> object is created as if it were a native Python
+class, and printing this object just calls
+<B>toString(&#160;)</B>.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><B>ValGen</B> implements the concept of a
+&#8220;generator&#8221; which is used a great deal in the C++ STL (<I>Standard
+Template Library</I>, part of the Standard C++ Library). A generator is an
+object that produces a new object every time its &#8220;generation method&#8221;
+is called, and it is quite convenient for filling containers. Here, I wanted to
+use it in a <B>for</B> iteration, and so I needed the generation method to be
+the one that is called by the iteration process. This is a special method called
+<B>__getitem__(&#160;)</B>, which is actually the overloaded operator for
+indexing, &#8216;<B>[ ]</B>&#8217;. A <B>for</B> loop calls this method every
+time it wants to move the iteration forward, and when the elements run out,
+<B>__getitem__(&#160;)</B> throws an out-of-bounds exception and that signals
+the end of the <B>for</B> loop (in other languages, you would never use an
+exception for ordinary control flow, but in Python it seems to work quite well).
+This exception happens automatically when <B>self.val[i]</B> runs out of
+elements, so the <B>__getitem__(&#160;)</B> code turns out to be simple. The
+only complexity is that <B>__getitem__(&#160;)</B> appears to return <I>two</I>
+objects instead of just one. What Python does is automatically package multiple
+return values into a tuple, so you still only end up returning a single object
+(in C++ or Java you would have to create your own data structure to accomplish
+this). In addition, in the <B>for</B> loop where <B>ValGen</B> is used, Python
+automatically &#8220;unpacks&#8221; the tuple so that you can have multiple
+iterators in the <B>for</B>. These are the kinds of syntax simplifications that
+make Python so endearing.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>map</B> and <B>set</B> objects are
+instances of Java&#8217;s <B>HashMap</B> and <B>HashSet</B>, again created as if
+those classes were just native Python components. In the <B>for</B> loop, the
+<B>put(&#160;)</B> and <B>add(&#160;)</B> methods work just like they do in
+Java. Also, indexing into a Java <B>Map</B> uses the same notation as for
+dictionaries, but note that to iterate through the keys in a <B>Map</B> you must
+use the <B>Map</B> method <B>keySet(&#160;)</B> rather than the Python
+dictionary method <B>keys(&#160;)</B>.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The final part of the example shows the
+use of a Java class that I created from scratch, to demonstrate how trivial it
+is. Notice also that Jython intuitively understands JavaBeans properties, since
+you can either use the <B>getVal(&#160;)</B> and <B>setVal(&#160;)</B> methods,
+or assign to and read from the equivalent <B>val</B> property. Also,
+<B>getChars(&#160;)</B> returns a <B>Character[]</B> in Java, and this becomes
+an array in Python.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The easiest way to use Java classes that
+you create for use inside a Python program is to put them inside a package.
+Although Jython can also import unpackaged java classes (<B>import
+JavaClass</B>), all such unpackaged java classes will be treated as if they were
+defined in different packages so they can only see each other&#8217;s public
+methods. </FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Java packages translate into Python
+modules, and Python must import a module in order to be able to use the Java
+class. Here is the Java code for <B>JavaClass</B>:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c09:javaclass:JavaClass.java</font>
+<font color=#0000ff>package</font> c09.javaclass;
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+<font color=#0000ff>import</font> com.bruceeckel.util.*;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> JavaClass {
+  <font color=#0000ff>private</font> String s = <font color=#004488>""</font>;
+  <font color=#0000ff>public</font> JavaClass() {
+    System.out.println(<font color=#004488>"JavaClass()"</font>);
+  }
+  <font color=#0000ff>public</font> JavaClass(String a) {
+    s = a;
+    System.out.println(<font color=#004488>"JavaClass(String)"</font>);
+  }
+  <font color=#0000ff>public</font> String getVal() {
+    System.out.println(<font color=#004488>"getVal()"</font>);
+    <font color=#0000ff>return</font> s;
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> setVal(String a) {
+    System.out.println(<font color=#004488>"setVal()"</font>);
+    s = a;
+  }
+  <font color=#0000ff>public</font> Character[] getChars() {
+    System.out.println(<font color=#004488>"getChars()"</font>);
+    Character[] r = <font color=#0000ff>new</font> Character[s.length()];
+    <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; s.length(); i++)
+      r[i] = <font color=#0000ff>new</font> Character(s.charAt(i));
+    <font color=#0000ff>return</font> r;
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>class</font> Test <font color=#0000ff>extends</font> UnitTest {
+    JavaClass 
+      x1 = <font color=#0000ff>new</font> JavaClass(),
+      x2 = <font color=#0000ff>new</font> JavaClass(<font color=#004488>"UnitTest"</font>);
+    <font color=#0000ff>public</font> <font color=#0000ff>void</font> test1() {
+      System.out.println(x2.getVal());
+      x1.setVal(<font color=#004488>"SpamEggsSausageAndSpam"</font>);
+      Arrays2.print(x1.getChars());
+    }
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String[] args) {
+    Test test = <font color=#0000ff>new</font> Test();
+    test.test1();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can see that this is
+just an ordinary Java class, without any awareness that it will be used in a
+Jython program. For this reason, one of the important uses of Jython is in
+testing Java
+code</FONT><A NAME="fnB13" HREF="#fn13">[13]</A><FONT FACE="Georgia">. Because
+Python is such a powerful, flexible, dynamic language it is an ideal tool for
+automated test frameworks, without making any changes to the Java code
+that&#8217;s being tested.</FONT><A NAME="_Toc524504154"></A><BR></P></DIV>
+<A NAME="Heading81"></A><FONT FACE = "Verdana"><H3 ALIGN="LEFT">
+Inner Classes</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Inner classes becomes attributes on the
+class object. Instances of <B>static</B> inner classes can be create by the
+usual call:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>com.foo.JavaClass.StaticInnerClass()</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Non-<B>static</B>
+inner classes must have an outer class instance supplied explicitly as the first
+argument:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>com.foo.JavaClass.InnerClass(com.foo.JavaClass())<A NAME=<font color=#004488>"_Toc524504155"</font>></A></PRE></FONT></BLOCKQUOTE><A NAME="Heading82"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Using Java libraries</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Jython wraps the Java libraries so that
+any of them can be used directly or via inheritance. In addition, Python
+shorthand simplifies coding.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As an example, consider the
+<B>HTMLButton.java</B> example from Chapter 9 of <I>Thinking in Java,
+2<SUP>nd</SUP> edition</I> (you presumably have already downloaded and installed
+the source code for that book from <I>www.BruceEckel.com</I>, since a number of
+examples in this book use libraries from that book). Here is its conversion to
+Jython:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c09:PythonSwing.py
+# The HTMLButton.java example from 
+# <font color=#004488>"Thinking in Java, 2nd edition,"</font> Chapter 13,
+# converted into Jython.
+# Don&#8217;t run <font color=#0000ff>this</font> as part of the automatic make:
+#=M @echo skipping PythonSwing.py
+from javax.swing <font color=#0000ff>import</font> JFrame, JButton, JLabel
+from java.awt <font color=#0000ff>import</font> FlowLayout
+
+frame = JFrame(<font color=#004488>"HTMLButton"</font>, visible=1,
+  defaultCloseOperation=JFrame.EXIT_ON_CLOSE)
+
+def kapow(e):
+  frame.contentPane.add(JLabel(<font color=#004488>"&lt;html&gt;"</font>+
+    <font color=#004488>"&lt;i&gt;&lt;font size=+4&gt;Kapow!"</font>))
+  # Force a re-layout to
+  # include the <font color=#0000ff>new</font> label:
+  frame.validate()
+
+button = JButton(<font color=#004488>"&lt;html&gt;&lt;b&gt;&lt;font size=+2&gt;"</font> +
+  <font color=#004488>"&lt;center&gt;Hello!&lt;br&gt;&lt;i&gt;Press me now!"</font>,
+  actionPerformed=kapow)
+frame.contentPane.layout = FlowLayout()
+frame.contentPane.add(button)
+frame.pack()
+frame.size=200, 500
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">If you compare the Java version
+of the program to the above Jython implementation, you&#8217;ll see that Jython
+is shorter and generally easier to understand. For example, in the Java version
+to set up the frame you had to make several calls: the constructor for
+<B>JFrame(&#160;)</B>, the <B>setVisible(&#160;)</B> method and the
+<B>setDefaultCloseOperation(&#160;)</B> method, whereas in the above code all
+three of these operations are performed with a single constructor
+call.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Also notice that the <B>JButton</B> is
+configured with an <B>actionListener(&#160;)</B> method inside the constructor,
+with the assignment to <B>kapow</B>. In addition, Jython&#8217;s JavaBean
+awareness means that a call to any method with a name that begins with
+&#8220;<B>set</B>&#8221; can be replaced with an assignment, as you can see
+above.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The only method that did not come over
+from Java is the <B>pack(&#160;)</B> method, which seems to be essential in
+order to force the layout to happen properly. It&#8217;s also important that the
+call to <B>pack(&#160;)</B> appear <I>before</I> the <B>size</B>
+setting.</FONT><A NAME="_Toc524504156"></A><BR></P></DIV>
+<A NAME="Heading83"></A><FONT FACE = "Verdana"><H3 ALIGN="LEFT">
+Inheriting from Java library classes</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can easily inherit from standard Java
+library classes in Jython. Here&#8217;s the <B>Dialogs.java</B> example from
+Chapter 13 of <I>Thinking in Java, 2<SUP>nd</SUP> edition</I>, converted into
+Jython:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c09:PythonDialogs.py
+# Dialogs.java from "Thinking in Java, 2nd 
+# edition," Chapter 13, converted into Jython.
+# Don&#8217;t run <font color=#0000ff>this</font> as part of the automatic make:
+#=M @echo skipping PythonDialogs.py
+from java.awt <font color=#0000ff>import</font> FlowLayout
+from javax.swing <font color=#0000ff>import</font> JFrame, JDialog, JLabel
+from javax.swing <font color=#0000ff>import</font> JButton
+
+<font color=#0000ff>class</font> MyDialog(JDialog):
+  def __init__(self, parent=None):
+    JDialog.__init__(self, 
+      title=<font color=#004488>"My dialog"</font>, modal=1)
+    self.contentPane.layout = FlowLayout()
+    self.contentPane.add(JLabel(<font color=#004488>"A dialog!"</font>))
+    self.contentPane.add(JButton(<font color=#004488>"OK"</font>, 
+      actionPerformed = 
+        lambda e, t=self: t.dispose()))
+    self.pack()
+
+frame = JFrame(<font color=#004488>"Dialogs"</font>, visible=1,
+  defaultCloseOperation=JFrame.EXIT_ON_CLOSE)
+dlg = MyDialog()
+frame.contentPane.add(
+  JButton(<font color=#004488>"Press here to get a Dialog Box"</font>, 
+    actionPerformed = lambda e: dlg.show()))
+frame.pack()
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><B>MyDialog</B> is inherited
+from <B>JDialog</B>, and you can see named arguments being used in the call to
+the base-class constructor.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In the creation of the &#8220;OK&#8221;
+<B>JButton</B>, note that the <B>actionPerformed</B> method is set right inside
+the constructor, and that the function is created using the Python <B>lambda</B>
+keyword. This creates a nameless function with the arguments appearing before
+the colon and the expression that generates the returned value after the colon.
+As you should know, the Java prototype for the <B>actionPerformed(&#160;)</B>
+method only contains a single argument, but the lambda expression indicates two.
+However, the second argument is provided with a default value, so the function
+<I>can</I> be called with only one argument. The reason for the second argument
+is seen in the default value, because this is a way to pass <B>self</B> into the
+lambda expression, so that it can be used to dispose of the
+dialog.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Compare this code with the version
+that&#8217;s published in <I>Thinking in Java, 2<SUP>nd</SUP> edition</I>.
+You&#8217;ll find that Python language features allow a much more succinct and
+direct implementation.</FONT><A NAME="_Toc524504157"></A><BR></P></DIV>
+<A NAME="Heading84"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Creating Java classes with Jython</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Although it does not directly relate to
+the original problem of this chapter (creating an interpreter), Jython has the
+additional ability to create Java classes directly from your Jython code. This
+can produce very useful results, as you are then able to treat the results as if
+they are native Java classes, albeit with Python power under the
+hood.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To produce Java classes from Python code,
+Jython comes with a compiler called <B>jythonc</B>.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The process of creating Python classes
+that will produce Java classes is a bit more complex than when calling Java
+classes from Python, because the methods in Java classes are strongly typed,
+while Python functions and methods are weakly typed. Thus, you must somehow tell
+<B>jythonc</B> that a Python method is intended to have a particular set of
+argument types and that its return value is a particular type. You accomplish
+this with the &#8220;@sig&#8221; string, which is placed right after the
+beginning of the Python method definition (this is the standard location for the
+Python documentation string). For example:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>  def returnArray(self):
+    <font color=#004488>"@sig public java.lang.String[] returnArray()"</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The
+Python definition doesn&#8217;t specify any return type, but the @sig string
+gives the full type information about what is being passed and returned. The
+<B>jythonc</B> compiler uses this information to generate the correct Java
+code.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">There&#8217;s one other set of rules you
+must follow in order to get a successful compilation: you must inherit from a
+Java class or interface in your Python class (you do not need to specify the
+<B>@sig</B> signature for methods defined in the superclass/interface). If you
+do not do this, you won&#8217;t get your desired methods &#8211; unfortunately,
+<B>jythonc</B> gives you no warnings or errors in this case, but you won&#8217;t
+get what you want. If you don&#8217;t see what&#8217;s missing, it can be very
+frustrating.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In addition, you must import the
+appropriate java class and give the correct package specification.  In the
+example below, <B>java</B> is imported so you must inherit from
+<B>java.lang.Object</B>,<B> </B>but you could also say <B>from java.lang import
+Object</B> and then you&#8217;d just inherit from <B>Object</B> without the
+package specification. Unfortunately, you don&#8217;t get any warnings or errors
+if you get this wrong, so you must be patient and keep trying.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here is an example of a Python class
+created to produce a Java class. This also introduces the
+&#8216;<B>=T</B>&#8217; directive for the makefile builder tool, which specifies
+a different target than the one that is normally used by the tool. In this case,
+the Python file is used to build a Java <B>.class</B> file, so the class file is
+the desired makefile target. To accomplish this, the default makefile command is
+replaced using the &#8216;<B>=M</B>&#8217; directive (notice how you can break
+across lines using &#8216;<B>\</B>&#8217;):</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>#: c09:PythonToJavaClass.py
+#=T python\java\test\PythonToJavaClass.<font color=#0000ff>class</font>
+#=M jythonc.bat --<font color=#0000ff>package</font> python.java.test \
+#=M PythonToJavaClass.py
+# A Python <font color=#0000ff>class</font> created to produce a Java <font color=#0000ff>class</font>
+from jarray <font color=#0000ff>import</font> array
+<font color=#0000ff>import</font> java
+
+<font color=#0000ff>class</font> PythonToJavaClass(java.lang.Object):
+  # The '@sig' signature string is used to create
+  # the proper signature in the resulting
+  # Java code:
+  def __init__(self):
+    <font color=#004488>"@sig public PythonToJavaClass()"</font>
+    print <font color=#004488>"Constructor for PythonToJavaClass"</font>
+
+  def simple(self):
+    <font color=#004488>"@sig public void simple()"</font>
+    print <font color=#004488>"simple()"</font>
+  
+  # Returning values to Java:
+  def returnString(self):
+    <font color=#004488>"@sig public java.lang.String returnString()"</font>
+    <font color=#0000ff>return</font> <font color=#004488>"howdy"</font>
+
+  # You must construct arrays to <font color=#0000ff>return</font> along 
+  # with the type of the array:
+  def returnArray(self):
+    <font color=#004488>"@sig public java.lang.String[] returnArray()"</font>
+    test = [ <font color=#004488>"fee"</font>, <font color=#004488>"fi"</font>, <font color=#004488>"fo"</font>, <font color=#004488>"fum"</font> ]
+    <font color=#0000ff>return</font> array(test, java.lang.String)
+    
+  def ints(self):
+    <font color=#004488>"@sig public java.lang.Integer[] ints()"</font>
+    test = [ 1, 3, 5, 7, 11, 13, 17, 19, 23 ]
+    <font color=#0000ff>return</font> array(test, java.lang.Integer)
+
+  def doubles(self):
+    <font color=#004488>"@sig public java.lang.Double[] doubles()"</font>
+    test = [ 1, 3, 5, 7, 11, 13, 17, 19, 23 ]
+    <font color=#0000ff>return</font> array(test, java.lang.Double)
+
+  # Passing arguments in from Java:
+  def argIn1(self, a):
+    <font color=#004488>"@sig public void argIn1(java.lang.String a)"</font>
+    print <font color=#004488>"a: %s"</font> % a
+    print <font color=#004488>"a.__class__"</font>, a.__class__
+
+  def argIn2(self, a):
+    <font color=#004488>"@sig public void argIn1(java.lang.Integer a)"</font>
+    print <font color=#004488>"a + 100: %d"</font> % (a + 100)
+    print <font color=#004488>"a.__class__"</font>, a.__class__
+
+  def argIn3(self, a):
+    <font color=#004488>"@sig public void argIn3(java.util.List a)"</font>
+    print <font color=#004488>"received List:"</font>, a, a.__class__
+    print <font color=#004488>"element type:"</font>, a[0].__class__
+    print <font color=#004488>"a[3] + a[5]:"</font>, a[5] + a[7]
+    #! print <font color=#004488>"a[2:5]:"</font>, a[2:5] # Doesn't work
+    
+  def argIn4(self, a):
+    "@sig <font color=#0000ff>public</font> <font color=#0000ff>void</font> \
+       argIn4(org.python.core.PyArray a)"
+    print <font color=#004488>"received type:"</font>, a.__class__
+    print <font color=#004488>"a: "</font>, a
+    print <font color=#004488>"element type:"</font>, a[0].__class__
+    print <font color=#004488>"a[3] + a[5]:"</font>, a[5] + a[7]
+    print <font color=#004488>"a[2:5]:"</font>, a[2:5] # A real Python array
+    
+  # A map must be passed in as a PyDictionary:
+  def argIn5(self, m):
+    "@sig <font color=#0000ff>public</font> <font color=#0000ff>void</font> \
+       argIn5(org.python.core.PyDictionary m)"
+    print <font color=#004488>"received Map: "</font>, m, m.__class__
+    print <font color=#004488>"m['3']:"</font>, m['3']
+    <font color=#0000ff>for</font> x in m.keys():
+      print x, m[x]
+#:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">First note that
+<B>PythonToJavaClass</B> is inherited from <B>java.lang.Object</B>; if you
+don&#8217;t do this you will quietly get a Java class without the right
+signatures. You are not required to inherit from <B>Object</B>; any other Java
+class will do.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This class is designed to demonstrate
+different  arguments and return values, to provide you with enough examples that
+you&#8217;ll be able to easily create your own signature strings. The first
+three of these are fairly self-explanatory, but note the full qualification of
+the Java name in the signature string.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In <B>returnArray(&#160;)</B>, a Python
+array must be returned as a Java array. To do this, the Jython
+<B>array(&#160;)</B> function (from the <B>jarray</B> module) must be used,
+along with the type of the class for the resulting array. Any time you need to
+return an array to Java, you must use <B>array(&#160;)</B>, as seen in the
+methods <B>ints(&#160;)</B> and <B>doubles(&#160;)</B>.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The last methods show how to pass
+arguments in from Java. Basic types happen automatically as long as you specify
+them in the <B>@sig</B> string, but you must use objects and you cannot pass in
+primitives (that is, primitives must be ensconced in wrapper objects, such as
+<B>Integer</B>).</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In <B>argIn3(&#160;)</B>, you can see
+that a Java <B>List</B> is transparently converted to something that behaves
+just like a Python array, but is not a true array because you cannot take a
+slice from it. If you want a true Python array, then you must create and pass a
+<B>PyArray</B> as in <B>argIn4(&#160;)</B>, where the slice is successful.
+Similarly, a Java <B>Map</B> must come in as a <B>PyDictionary</B> in order to
+be treated as a Python dictionary.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here is the Java program to exercise the
+Java classes produced by the above Python code. This also introduces the
+&#8216;<B>=D</B>&#8217; directive for the makefile builder tool, which specifies
+a dependency in addition to those detected by the tool. Here, you can&#8217;t
+compile <B>TestPythonToJavaClass.java</B> until <B>PythonToJavaClass.class</B>
+is available:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c09:TestPythonToJavaClass.java</font>
+<font color=#009900>//+D python\java\test\PythonToJavaClass.class</font>
+<font color=#0000ff>import</font> java.lang.reflect.*;
+<font color=#0000ff>import</font> java.util.*;
+<font color=#0000ff>import</font> org.python.core.*; 
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+<font color=#0000ff>import</font> com.bruceeckel.util.*;
+<font color=#0000ff>import</font> com.bruceeckel.python.*;
+<font color=#009900>// The package with the Python-generated classes:</font>
+<font color=#0000ff>import</font> python.java.test.*;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> 
+TestPythonToJavaClass <font color=#0000ff>extends</font> UnitTest {
+  PythonToJavaClass p2j = <font color=#0000ff>new</font> PythonToJavaClass();
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test1() {
+    p2j.simple();
+    System.out.println(p2j.returnString());
+    Arrays2.print(p2j.returnArray());
+    Arrays2.print(p2j.ints());
+    Arrays2.print(p2j.doubles());
+    p2j.argIn1(<font color=#004488>"Testing argIn1()"</font>);
+    p2j.argIn2(<font color=#0000ff>new</font> Integer(47));
+    ArrayList a = <font color=#0000ff>new</font> ArrayList();
+    <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; 10; i++)
+      a.add(<font color=#0000ff>new</font> Integer(i));
+    p2j.argIn3(a);
+    p2j.argIn4(
+      <font color=#0000ff>new</font> PyArray(Integer.<font color=#0000ff>class</font>, a.toArray()));
+    Map m = <font color=#0000ff>new</font> HashMap();
+    <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; 10; i++)
+      m.put(<font color=#004488>""</font> + i, <font color=#0000ff>new</font> Float(i));
+    p2j.argIn5(PyUtil.toPyDictionary(m));
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> dumpClassInfo() {
+    Arrays2.print(
+      p2j.getClass().getConstructors());
+    Method[] methods =
+      p2j.getClass().getMethods();
+    <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; methods.length; i++) {
+      String nm = methods[i].toString();
+      <font color=#0000ff>if</font>(nm.indexOf(<font color=#004488>"PythonToJavaClass"</font>) != -1)
+        System.out.println(nm);
+    }
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String[] args) {
+    TestPythonToJavaClass test =
+      <font color=#0000ff>new</font> TestPythonToJavaClass();
+    test.dumpClassInfo();
+    test.test1();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">For Python support,
+you&#8217;ll usually only need to import the classes in <B>org.python.core</B>.
+Everything else in the above example is fairly straightforward, as
+<B>PythonToJavaClass</B> appears, from the Java side, to be just another Java
+class. <B>dumpClassInfo(&#160;)</B> uses reflection to verify that the method
+signatures specified in <B>PythonToJavaClass.py</B> have come through
+properly.</FONT><A NAME="_Toc524504158"></A><BR></P></DIV>
+<A NAME="Heading85"></A><FONT FACE = "Verdana"><H3 ALIGN="LEFT">
+Building the Java classes from the Python code</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Part of the trick of creating Java
+classes from Python code is the @sig information in the method documentation
+strings. But there&#8217;s a second problem which stems from the fact that
+Python has no &#8220;package&#8221; keyword &#8211; the Python equivalent of
+packages (modules) are implicitly created based on the file name. However, to
+bring the resulting class files into the Java program, <B>jythonc</B> must be
+given information about how to create the Java package for the Python code. This
+is done on the <B>jythonc</B> command line using the <B>--package</B> flag,
+followed by the package name you wish to produce (including the separation dots,
+just as you would give the package name using the <B>package</B> keyword in a
+Java program). This will put the resulting <B>.class</B> files in the
+appropriate subdirectory off of the current directory. Then you only need to
+import the package in your Java program, as shown above (you&#8217;ll need
+&#8216;<B>.</B>&#8217; in your CLASSPATH in order to run it from the code
+directory).</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here are the <B>make </B>dependency rules
+that I used to build the above example (the backslashes at the ends of the lines
+are understood by <B>make </B>to be line continuations). These rules are encoded
+into the above Java and Python files using the comment syntax that&#8217;s
+understood by my makefile builder tool:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>TestPythonToJavaClass.<font color=#0000ff>class</font>: \
+        TestPythonToJavaClass.java \
+        python\java\test\PythonToJavaClass.<font color=#0000ff>class</font>
+    javac TestPythonToJavaClass.java
+  
+python\java\test\PythonToJavaClass.<font color=#0000ff>class</font>: \
+        PythonToJavaClass.py
+    jythonc.bat --<font color=#0000ff>package</font> python.java.test \
+    PythonToJavaClass.py</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The first
+target, <B>TestPythonToJavaClass.class</B>, depends on both
+<B>TestPythonToJavaClass.java</B> and the <B>PythonToJavaClass.class</B>, which
+is the Python code that&#8217;s converted to a class file. This latter, in turn,
+depends on the Python source code. Note that it&#8217;s important that the
+directory where the target lives be specified, so that the makefile will create
+the Java program with the minimum necessary amount of
+rebuilding.</FONT><A NAME="_Toc524504159"></A><BR></P></DIV>
+<A NAME="Heading86"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+The Java-Python Extension (JPE)</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">An alternative to Jython is the
+<I>Java-Python Extension</I> (JPE), which directly connects with your native
+C-Python implementation.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Jython runs entirely within the JavaVM,
+which produces two fundamental limitations: Jython cannot be called from
+CPython, and native Python extensions are not accessible from JPython. JPE is
+linked with the Python C libraries, so JPE can be called from C-Python, and
+native Python extensions can be called from Java through JPE.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">If you need to access the features on
+your native platform, JPE might be the easiest solution. You can find JPE at
+http://www.arakne.com/jpe.htm.</FONT><A NAME="_Toc524504160"></A><BR></P></DIV>
+<A NAME="Heading87"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Summary</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This chapter has arguably gone much
+deeper into Jython than required to use the interpreter design pattern. Indeed,
+once you decide that you need to use interpreter and that you&#8217;re not going
+to get lost inventing your own language, the solution of installing Jython is
+quite simple, and you can at least get started by following the
+<B>GreenHouseController</B> example.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Of course, that example is often too
+simple and you may need something more sophisticated, often requiring more
+interesting data to be passed back and forth. When I encountered the limited
+documentation, I felt it necessary to come up with a more thorough examination
+of Jython.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In the process, note that there could be
+another equally powerful design pattern lurking in here, which could perhaps be
+called <I>multiple languages</I>. This is based on the experience of having each
+language solve a certain class of problems better than the other; by combining
+languages you can solve problems much faster than with either language by
+itself. CORBA is another way to bridge across languages, and at the same time
+bridging between computers and operating systems. </FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To me, Python and Java present a very
+potent combination for program development because of Java&#8217;s architecture
+and tool set, and Python&#8217;s extremely rapid development (generally
+considered to be 5-10 times faster than C++ or Java). Python is usually slower,
+however, but even if you end up re-coding parts of your program for speed, the
+initial fast development will allow you to more quickly flesh out the system and
+uncover and solve the critical sections. And often, the execution speed of
+Python is not a problem &#8211; in those cases it&#8217;s an even bigger win. A
+number of commercial products already use Java and Jython, and because of the
+terrific productivity leverage I expect to see this happen more in the
+future.</FONT><A NAME="_Toc524504161"></A><BR></P></DIV>
+<A NAME="Heading88"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Exercises<A NAME="BBB"></A></H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+<B>GreenHouseLanguage.py</B> so that it checks the times for the events and runs
+those events at the appropriate
+times.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+<B>GreenHouseLanguage.py</B> so that it calls a function for <B>action</B>
+instead of just printing a
+string.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create a
+Swing application with a <B>JTextField</B> (where the user will enter commands)
+and a <B>JTextArea</B> (where the command results will be displayed). Connect to
+a <B>PythonInterpreter</B> object so that the output will be sent to the
+<B>JTextArea</B> (which should scroll). You&#8217;ll need to locate the
+<B>PythonInterpreter</B> command that redirects the output to a Java
+stream.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+<B>GreenHouseLanguage.py</B> to add a master controller class (instead of the
+static array inside <B>Event</B>) and provide a <B>run(&#160;)</B> method for
+each of the subclasses. Each <B>run(&#160;)</B> should create and use an object
+from the standard Java library during its execution. Modify
+<B>GreenHouseController.java</B> to use this new
+class.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify the
+resulting <B>GreenHouseLanguage.py</B> from exercise two to produce Java classes
+(add the @sig documentation strings to produce the correct Java signatures, and
+create a makefile to build the Java <B>.class</B> files). Write a Java program
+that uses these classes.</FONT></OL>
+<HR><DIV ALIGN="LEFT"><P><A NAME="fn12" HREF="#fnB12">[12]</A><FONT FACE="Georgia">
+</FONT><FONT FACE="Georgia">The original version of this was called
+<I>JPython</I>, but the project changed and the name was changed to emphasize
+the distinctness of the new version.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="fn13" HREF="#fnB13">[13]</A><FONT FACE="Georgia">
+</FONT><FONT FACE="Georgia">Changing the registry setting
+<B>python.security.respectJavaAccessibility = true</B> to <B>false</B> makes
+testing even more powerful because it allows the test script to use *all*
+methods, even protected and package-private.</FONT><BR></P></DIV>
+
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter09.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter11.html">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:09/08/2001</P></DIV>
+
+</BODY>
+
+</HTML>

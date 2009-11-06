@@ -1,0 +1,589 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:41
+Translation Platform:Win32
+Number of Output files:18
+This File:TIPatt07.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<TITLE>X: Decorators: dynamic type selection</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER"><IMG SRC="images/r2hGlyph.gif"></DIV><A NAME="_Toc476705902"></A><A NAME="_Toc524504114"></A><A NAME="Heading40"></A><H1 ALIGN="LEFT">
+X: Decorators: dynamic type selection</H1>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia" SIZE=4>The use of layered objects to
+dynamically and transparently add responsibilities to individual objects is
+referred to as the <I>decorator</I> pattern.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Used when subclassing creates too many
+(&amp; inflexible) classes</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">All decorators that wrap around the
+original object must have the same basic interface</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Dynamic proxy/surrogate?</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">This accounts for the odd inheritance
+structure</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Tradeoff: coding is more complicated when
+using decorators</FONT><A NAME="_Toc524504115"></A><BR></DIV>
+<A NAME="Heading41"></A><H2 ALIGN="LEFT">
+Basic decorator structure</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia"><IMG HEIGHT=251 WIDTH=483 SRC="TIPatt02.gif"></FONT><A NAME="_Toc524504116"></A><BR></DIV>
+<A NAME="Heading42"></A><H2 ALIGN="LEFT">
+A coffee example</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Consider going down to the local coffee
+shop, <I>BeanMeUp</I>, for a coffee.  There are typically many different drinks
+on offer -- espressos, lattes, teas, iced coffees, hot chocolate to name a few,
+as well as a number of extras (which cost extra too) such as whipped cream or an
+extra shot of espresso. You can also make certain changes to your drink at no
+extra cost, such as asking for decaf coffee instead of regular coffee.
+</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Quite clearly if we are going to model
+all these drinks and combinations, there will be sizeable class diagrams. So for
+clarity we will only consider a subset of the coffees: Espresso, Espresso Con
+Panna, Caf&eacute; Late, Cappuccino and Caf&eacute; Mocha. We'll include 2
+extras - whipped cream ("whipped") and an extra shot of espresso; and three
+changes - decaf, steamed milk ("wet") and foamed milk
+("dry").</FONT><A NAME="_Toc524504117"></A><BR></DIV>
+<A NAME="Heading43"></A><H2 ALIGN="LEFT">
+Class for each combination </H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">One solution is to create an individual
+class for every combination. Each class describes the drink and is responsible
+for the cost etc. The resulting menu is huge, and a part of the class diagram
+would look something like this:</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">
+<IMG HEIGHT=254 WIDTH=498 SRC="TIPatt03.gif"></FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Here is one of the combinations, a simple
+implementation of a Cappuccino:</FONT><BR></DIV>
+
+<PRE>class Cappuccino {
+  private float cost = 1;
+  private String description = "Cappucino";
+  public float getCost() {
+    return cost;
+  }
+  public String getDescription() {
+    return description;
+  }
+}</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">The key to using this method is to
+find the particular combination you want.  So, once you've found the drink you
+would like, here is how you would use it, as shown in the CoffeeShop class in
+the following code:</FONT><BR></DIV>
+
+<PRE>//: cX:decorator:nodecorators:CoffeeShop.java
+// Coffee example with no decorators
+package cX.decorator.nodecorators;
+import com.bruceeckel.test.UnitTest;
+
+class Espresso {}
+class DoubleEspresso {}
+class EspressoConPanna {}
+
+class Cappuccino {
+  private float cost = 1;
+  private String description = "Cappucino";
+  public float getCost() {
+    return cost;
+  }
+  public String getDescription() {
+    return description;
+  }
+}
+class CappuccinoDecaf {}
+class CappuccinoDecafWhipped {}
+class CappuccinoDry {}
+class CappuccinoDryWhipped {}
+class CappuccinoExtraEspresso {}
+class CappuccinoExtraEspressoWhipped {}
+class CappuccinoWhipped {}
+
+class CafeMocha {}
+class CafeMochaDecaf {}
+class CafeMochaDecafWhipped {
+  private float cost = 1.25f;
+  private String description =
+    "Cafe Mocha decaf whipped cream";
+  public float getCost() {
+    return cost;
+  }
+  public String getDescription() {
+    return description;
+  }
+}
+class CafeMochaExtraEspresso {}
+class CafeMochaExtraEspressoWhipped {}
+class CafeMochaWet {}
+class CafeMochaWetWhipped {}
+class CafeMochaWhipped {}
+
+class CafeLatte {}
+class CafeLatteDecaf {}
+class CafeLatteDecafWhipped {}
+class CafeLatteExtraEspresso {}
+class CafeLatteExtraEspressoWhipped {}
+class CafeLatteWet {}
+class CafeLatteWetWhipped {}
+class CafeLatteWhipped {}
+
+public class CoffeeShop extends UnitTest {
+  public void testCappuccino() {
+    // This just makes sure it will complete 
+    // without throwing an exception.
+    // Create a plain cappuccino
+    Cappuccino cappuccino = new Cappuccino();
+    System.out.println(cappuccino.getDescription()
+      + ": $" + cappuccino.getCost());
+  }
+  public void testCafeMocha() {
+    // This just makes sure it will complete 
+    // without throwing an exception.
+    // Create a decaf cafe mocha with whipped
+    // cream
+    CafeMochaDecafWhipped cafeMocha =
+      new CafeMochaDecafWhipped();
+    System.out.println(cafeMocha.getDescription()
+      + ": $" + cafeMocha.getCost());
+  }
+  public static void main(String[] args) {
+    CoffeeShop shop = new CoffeeShop();
+    shop.testCappuccino();
+    shop.testCafeMocha();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">And here is the
+corresponding output:</FONT><BR></DIV>
+
+<PRE>Cappucino: $1.0Cafe Mocha decaf whipped cream: $1.25</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">You
+can see that creating the particular combination you want is easy, since you are
+just creating an instance of a class. However, there are a number of problems
+with this approach. Firstly, the combinations are fixed statically so that any
+combination a customer may wish to order needs to be created up front. Secondly,
+the resulting menu is so huge that finding your particular combination is
+difficult and time consuming.</FONT><A NAME="_Toc524504118"></A><BR></DIV>
+<A NAME="Heading44"></A><H2 ALIGN="LEFT">
+The decorator approach</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Another approach would be to break the
+drinks down into the various components such as espresso and foamed milk, and
+then let the customer combine the components to describe a particular coffee.
+</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">In order to do this programmatically, we
+use the Decorator pattern.  A Decorator adds responsibility to a component by
+wrapping it, but the Decorator conforms to the interface of the component it
+encloses, so the wrapping is transparent. Decorators can also be nested without
+the loss of this transparency. </FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia"><IMG HEIGHT=179 WIDTH=500 SRC="TIPatt04.gif"></FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Methods invoked on the Decorator can in
+turn invoke methods in the component, and can of course perform processing
+before or after the invocation.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">So if we added <B>getTotalCost()</B> and
+<B>getDescription()</B> methods to the <B>DrinkComponent</B> interface, an
+Espresso looks like this:</FONT><BR></DIV>
+
+<PRE>class Espresso extends Decorator {
+  private float cost = 0.75f;
+  private String description = " espresso";
+  public Espresso(DrinkComponent component) {
+    super(component);
+  }
+  public float getTotalCost() {
+    return component.getTotalCost() + cost;
+  }
+  public String getDescription() {
+    return component.getDescription() +
+      description;
+  }
+}</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">You combine the components to
+create a drink as follows, as shown in the code below:</FONT><BR></DIV>
+
+<PRE>//: cX:decorator:alldecorators:CoffeeShop.java
+// Coffee example using decorators
+package cX.decorator.alldecorators;
+import com.bruceeckel.test.UnitTest;
+
+interface DrinkComponent {
+  String getDescription();
+  float getTotalCost();
+}
+
+class Mug implements DrinkComponent {
+  public String getDescription() {
+    return "mug";
+  }
+  public float getTotalCost() {
+    return 0;
+  }
+}
+
+abstract class Decorator implements DrinkComponent
+{
+  protected DrinkComponent component;
+  Decorator(DrinkComponent component) {
+    this.component = component;
+  }
+  public float getTotalCost() {
+    return component.getTotalCost();
+  }
+  public abstract String getDescription();
+}
+
+class Espresso extends Decorator {
+  private float cost = 0.75f;
+  private String description = " espresso";
+  public Espresso(DrinkComponent component) {
+    super(component);
+  }
+  public float getTotalCost() {
+    return component.getTotalCost() + cost;
+  }
+  public String getDescription() {
+    return component.getDescription() +
+      description;
+  }
+}
+
+class Decaf extends Decorator {
+  private String description = " decaf";
+  public Decaf(DrinkComponent component) {
+    super(component);
+  }
+  public String getDescription() {
+    return component.getDescription() +
+      description;
+  }
+}
+
+class FoamedMilk extends Decorator {
+  private float cost = 0.25f;
+  private String description = " foamed milk";
+  public FoamedMilk(DrinkComponent component) {
+    super(component);
+  }
+  public float getTotalCost() {
+    return component.getTotalCost() + cost;
+  }
+  public String getDescription() {
+    return component.getDescription() +
+      description;
+  }
+}
+
+class SteamedMilk extends Decorator {
+  private float cost = 0.25f;
+  private String description = " steamed milk";
+  public SteamedMilk(DrinkComponent component) {
+    super(component);
+  }
+  public float getTotalCost() {
+    return component.getTotalCost() + cost;
+  }
+  public String getDescription() {
+    return component.getDescription() +
+      description;
+  }
+}
+
+class Whipped extends Decorator {
+  private float cost = 0.25f;
+  private String description = " whipped cream";
+  public Whipped(DrinkComponent component) {
+    super(component);
+  }
+  public float getTotalCost() {
+    return component.getTotalCost() + cost;
+  }
+  public String getDescription() {
+    return component.getDescription() +
+      description;
+  }
+}
+
+class Chocolate extends Decorator {
+  private float cost = 0.25f;
+  private String description = " chocolate";
+  public Chocolate(DrinkComponent component) {
+    super(component);
+  }
+  public float getTotalCost() {
+    return component.getTotalCost() + cost;
+  }
+  public String getDescription() {
+    return component.getDescription() +
+      description;
+  }
+}
+
+public class CoffeeShop extends UnitTest {
+  public void testCappuccino() {
+    // This just makes sure it will complete 
+    // without throwing an exception.
+    // Create a plain cappucino
+    DrinkComponent cappuccino = new Espresso(
+      new FoamedMilk(new Mug()));
+    System.out.println(cappuccino.
+      getDescription().trim() + ": $" +
+      cappuccino.getTotalCost());
+  }
+  public void testCafeMocha() {
+    // This just makes sure it will complete 
+    // without throwing an exception.
+    // Create a decaf cafe mocha with whipped
+    // cream
+    DrinkComponent cafeMocha = new Espresso(
+      new SteamedMilk(new Chocolate(new Whipped(
+      new Decaf(new Mug())))));
+    System.out.println(cafeMocha.getDescription().
+      trim() + ": $" + cafeMocha.getTotalCost());
+  }
+  public static void main(String[] args) {
+    CoffeeShop shop = new CoffeeShop();
+    shop.testCappuccino();
+    shop.testCafeMocha();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">This approach would
+certainly provide the most flexibility and the smallest menu. You have a small
+number of components to choose from, but assembling the description of the
+coffee then becomes rather arduous. </FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">If you want to describe a plain
+cappuccino, you create it with</FONT><BR></DIV>
+
+<PRE>new Espresso(new FoamedMilk(new Mug()))</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">Creating
+a decaf Caf&eacute; Mocha with whipped cream requires an even longer
+description. </FONT><A NAME="_Toc524504119"></A><BR></DIV>
+<A NAME="Heading45"></A><H2 ALIGN="LEFT">
+Compromise</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The previous approach takes too long to
+describe a coffee. There will also be certain combinations that you will
+describe regularly, and it would be convenient to have a quick way of describing
+them.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The 3rd approach is a mixture of the
+first 2 approaches, and combines flexibility with ease of use. This compromise
+is achieved by creating a reasonably sized menu of basic selections, which would
+often work exactly as they are, but if you wanted to decorate them (whipped
+cream, decaf etc.) then you would use decorators to make the modifications. This
+is the type of menu you are presented with in most coffee
+shops.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia"><IMG HEIGHT=199 WIDTH=447 SRC="TIPatt05.gif"></FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Here is how to create a basic selection,
+as well as a decorated selection:</FONT><BR></DIV>
+
+<PRE>//: cX:decorator:compromise:CoffeeShop.java
+// Coffee example with a compromise of basic
+// combinations and decorators
+package cX.decorator.compromise;
+import com.bruceeckel.test.UnitTest;
+
+interface DrinkComponent {
+  float getTotalCost();
+  String getDescription();
+}
+
+class Espresso implements DrinkComponent {
+  private String description = "Espresso";
+  private float cost = 0.75f;
+  public float getTotalCost() {
+    return cost;
+  }
+  public String getDescription() {
+    return description;
+  }
+}
+
+class EspressoConPanna implements DrinkComponent {
+  private String description = "EspressoConPare";
+  private float cost = 1;
+  public float getTotalCost() {
+    return cost;
+  }
+  public String getDescription() {
+    return description;
+  }
+}
+
+class Cappuccino implements DrinkComponent {
+  private float cost = 1;
+  private String description = "Cappuccino";
+  public float getTotalCost() {
+    return cost;
+  }
+  public String getDescription() {
+    return description;
+  }
+}
+
+class CafeLatte implements DrinkComponent {
+  private float cost = 1;
+  private String description = "Cafe Late";
+  public float getTotalCost() {
+    return cost;
+  }
+  public String getDescription() {
+    return description;
+  }
+}
+
+class CafeMocha implements DrinkComponent {
+  private float cost = 1.25f;
+  private String description = "Cafe Mocha";
+  public float getTotalCost() {
+    return cost;
+  }
+  public String getDescription() {
+    return description;
+  }
+}
+
+abstract class Decorator implements DrinkComponent {
+  protected DrinkComponent component;
+  public Decorator(DrinkComponent component) {
+    this.component = component;
+  }
+  public float getTotalCost() {
+    return component.getTotalCost();
+  }
+  public String getDescription() {
+    return component.getDescription();
+  }
+}
+
+class ExtraEspresso extends Decorator {
+  private float cost = 0.75f;
+  public ExtraEspresso(DrinkComponent component) {
+    super(component);
+  }
+  public String getDescription() {
+    return component.getDescription() +
+      " extra espresso";
+  }
+  public float getTotalCost() {
+    return cost + component.getTotalCost();
+  }
+}
+
+class Whipped extends Decorator {
+  private float cost = 0.50f;
+  public Whipped(DrinkComponent component) {
+    super(component);
+  }
+  public float getTotalCost() {
+    return cost + component.getTotalCost();
+  }
+  public String getDescription() {
+    return component.getDescription() +
+      " whipped cream";
+  }
+}
+
+class Decaf extends Decorator{
+  public Decaf(DrinkComponent component) {
+    super(component);
+  }
+  public String getDescription() {
+    return component.getDescription() + " decaf";
+  }
+}
+
+class Dry extends Decorator {
+  public Dry(DrinkComponent component) {
+    super(component);
+  }
+  public String getDescription() {
+    return component.getDescription() +
+      " extra foamed milk";
+  }
+}
+
+class Wet extends Decorator {
+  public Wet(DrinkComponent component) {
+    super(component);
+  }
+  public String getDescription() {
+    return component.getDescription() +
+      " extra steamed milk";
+  }
+}
+
+public class CoffeeShop extends UnitTest {
+  public void testCappuccino() {
+    // This just makes sure it will complete 
+    // without throwing an exception.
+    // Create a plain cappucino
+    DrinkComponent cappuccino = new Cappuccino();
+    System.out.println(cappuccino.getDescription()
+      + ": $" + cappuccino.getTotalCost());
+  }
+  public void testCafeMocha() {
+    // This just makes sure it will complete 
+    // without throwing an exception.
+    // Create a decaf cafe mocha with whipped
+    // cream
+    DrinkComponent cafeMocha = new Whipped(
+      new Decaf(new CafeMocha()));
+    System.out.println(cafeMocha.getDescription()
+      + ": $" + cafeMocha.getTotalCost());
+  }
+  public static void main(String[] args) {
+    CoffeeShop shop = new CoffeeShop();
+    shop.testCappuccino();
+    shop.testCafeMocha();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">You can see that creating a
+basic selection is quick and easy, which makes sense since they will be
+described regularly.  Describing a decorated drink is more work than when using
+a class per combination, but clearly less work than when only using
+decorators.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The final result is not too many classes,
+but not too many decorators either. Most of the time it's possible to get away
+without using any decorators at all, so we have the benefits of both
+approaches.</FONT><A NAME="_Toc524504120"></A><BR></DIV>
+<A NAME="Heading46"></A><H2 ALIGN="LEFT">
+Other considerations</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">What happens if we decide to change the
+menu at a later stage, such as by adding a new type of drink? If we had used the
+class per combination approach, the effect of adding an extra such as syrup
+would be an exponential growth in the number of classes. However, the
+implications to the all decorator or compromise approaches are the same - one
+extra class is created. </FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">How about the effect of changing the cost
+of steamed milk and foamed milk, when the price of milk goes up? Having a class
+for each combination means that you need to change a method in each class, and
+thus maintain many classes. By using decorators, maintenance is reduced by
+defining the logic in one place. </FONT><A NAME="_Toc524504121"></A><BR></DIV>
+<A NAME="Heading47"></A><H2 ALIGN="LEFT">
+Exercises</H2>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Add a Syrup class to the
+decorator approach described above. Then create a Caf&eacute; Latte (you'll need
+to use steamed milk with an espresso) with
+syrup.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Repeat
+Exercise 1 for the compromise
+approach.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Implement
+the decorator pattern to create a Pizza restaurant, which has a set menu of
+choices as well as the option to design your own pizza.  Follow the compromise
+approach to create a menu consisting of a Margherita, Hawaiian, Regina, and
+Vegetarian pizzas, with toppings (decorators) of Garlic, Olives, Spinach,
+Avocado, Feta and Pepperdews. Create a Hawaiian pizza, as well as a Margherita
+decorated with Spinach, Feta, Pepperdews and
+Olives.</FONT></OL><DIV ALIGN="LEFT"><BR></DIV>
+<DIV ALIGN="CENTER"><IMG SRC="images/r2hGlyph.gif"><BR>
+<A HREF="mailto:chris@sunpack.com">chris@sunpack.com</A> Last Update:09/08/2001</DIV>
+
+</BODY>
+
+</HTML>

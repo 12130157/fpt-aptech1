@@ -1,0 +1,448 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:41
+Translation Platform:Win32
+Number of Output files:18
+This File:Chapter06.html
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>5: Factories: encapsulating object creation</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview-head.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana" size = "-1">
+    [ <a href="README-HTML.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.html">Revision History</a> ]
+    [ <a href="Building-Code.html">Build the Code</a> ]
+    [ <a href="TIPatterns-Corrections.html">Report an Error</a> ] <br>
+    [ <a href="http://www.mindview.net/MailingList.html">Free Newsletter</a> ]
+    [ <a href="http://www.mindview.net/Training.html">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CPPServices/#ConsultingServices">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana">
+  Thinking in Patterns <font size="4">with Java</font>, Revision 0.6</FONT></H2>
+  <H3><FONT FACE="Verdana">&copy;2001 by Bruce Eckel</FONT></H3>
+  
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter05.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter07.html">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc524504124"></A><A NAME="Heading50"></A><FONT FACE = "Verdana"><H1 ALIGN="LEFT">
+5: Factories: encapsulating object creation</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">When you discover that you need to add
+new types to a system, the most sensible first step is to use polymorphism to
+create a common interface to those new types. This separates the rest of the
+code in your system from the knowledge of the specific types that you are
+adding. New types may be added without disturbing existing code ... or so it
+seems. At first it would appear that the only place you need to change the code
+in such a design is the place where you inherit a new type, but this is not
+quite true. You must still create an object of your new type, and at the point
+of creation you must specify the exact constructor to use. Thus, if the code
+that creates objects is distributed throughout your application, you have the
+same problem when adding new types&#8212;you must still chase down all the
+points of your code where type matters. It happens to be the <I>creation</I> of
+the type that matters in this case rather than the <I>use</I> of the type (which
+is taken care of by polymorphism), but the effect is the same: adding a new type
+can cause problems.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The solution is to force the creation of
+objects to occur through a common <I>factory</I> rather than to allow the
+creational code to be spread throughout your system. If all the code in your
+program must go through this factory whenever it needs to create one of your
+objects, then all you must do when you add a new object is to modify the
+factory. </FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Since every object-oriented program
+creates objects, and since it&#8217;s very likely you will extend your program
+by adding new types, I suspect that factories may be the most universally useful
+kinds of design patterns.</FONT><A NAME="_Toc524504125"></A><BR></P></DIV>
+<A NAME="Heading51"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Simple Factory method</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As an example, let&#8217;s revisit the
+<B>Shape</B> system.  </FONT><FONT FACE="Georgia">One approach is to make the
+factory a <B>static</B> method of the base class:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c05:shapefact1:ShapeFactory1.java</font>
+<font color=#009900>// A simple static factory method.</font>
+<font color=#0000ff>package</font> c05.shapefact1;
+<font color=#0000ff>import</font> java.util.*;
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>abstract</font> <font color=#0000ff>class</font> Shape {
+  <font color=#0000ff>public</font> <font color=#0000ff>abstract</font> <font color=#0000ff>void</font> draw();
+  <font color=#0000ff>public</font> <font color=#0000ff>abstract</font> <font color=#0000ff>void</font> erase();
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> Shape factory(String type) {
+    <font color=#0000ff>if</font>(type.equals(<font color=#004488>"Circle"</font>)) <font color=#0000ff>return</font> <font color=#0000ff>new</font> Circle();
+    <font color=#0000ff>if</font>(type.equals(<font color=#004488>"Square"</font>)) <font color=#0000ff>return</font> <font color=#0000ff>new</font> Square();
+    <font color=#0000ff>throw</font> <font color=#0000ff>new</font> RuntimeException(
+      <font color=#004488>"Bad shape creation: "</font> + type);
+  }
+}
+
+<font color=#0000ff>class</font> Circle <font color=#0000ff>extends</font> Shape {
+  Circle() {} <font color=#009900>// Friendly constructor</font>
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> draw() { 
+    System.out.println(<font color=#004488>"Circle.draw"</font>); 
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> erase() { 
+    System.out.println(<font color=#004488>"Circle.erase"</font>); 
+  }
+}
+
+<font color=#0000ff>class</font> Square <font color=#0000ff>extends</font> Shape {
+  Square() {} <font color=#009900>// Friendly constructor</font>
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> draw() { 
+    System.out.println(<font color=#004488>"Square.draw"</font>); 
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> erase() { 
+    System.out.println(<font color=#004488>"Square.erase"</font>); 
+  }
+}
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> ShapeFactory1 <font color=#0000ff>extends</font> UnitTest {
+  String shlist[] = { <font color=#004488>"Circle"</font>, <font color=#004488>"Square"</font>, 
+    <font color=#004488>"Square"</font>, <font color=#004488>"Circle"</font>, <font color=#004488>"Circle"</font>, <font color=#004488>"Square"</font> };
+  List shapes = <font color=#0000ff>new</font> ArrayList();
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test() {
+    <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; shlist.length; i++)
+      shapes.add(Shape.factory(shlist[i]));
+    Iterator i = shapes.iterator();
+    <font color=#0000ff>while</font>(i.hasNext()) {
+      Shape s = (Shape)i.next();
+      s.draw();
+      s.erase();
+    }
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String args[]) {
+    <font color=#0000ff>new</font> ShapeFactory1().test();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>factory(&#160;)</B>
+takes an argument that allows it to determine what type of  <B>Shape</B> to
+create; it happens to be a <B>String</B> in this case but it could be any set of
+data. The <B>factory(&#160;)</B> is now the only other code in the system that
+needs to be changed when a new type of <B>Shape </B>is added (the initialization
+data for the objects will presumably come from somewhere outside the system, and
+not be a hard-coded array as in the above example).</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To encourage creation to only happen in
+the <B>factory(&#160;)</B>, the constructors for the specific types of
+<B>Shape</B> are made &#8220;friendly,&#8221; so <B>factory(&#160;)</B> has
+access to the constructors but they are not available outside the
+package.</FONT><A NAME="_Toc455024532"></A><A NAME="_Toc476705903"></A><A NAME="_Toc524504126"></A><BR></P></DIV>
+<A NAME="Heading52"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Polymorphic factories</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>static factory(&#160;)</B> method
+in the previous example forces all the creation operations to be focused in one
+spot, so that&#8217;s the only place you need to change the code. This is
+certainly a reasonable solution, as it throws a box around the process of
+creating objects. However, the <I>Design Patterns</I> book emphasizes that the
+reason for the <I>Factory Method</I> pattern is so that different types of
+factories can be subclassed from the basic factory (the above design is
+mentioned as a special case). However, the book does not provide an example, but
+instead just repeats the example used for the <I>Abstract Factory</I>
+(you&#8217;ll see an example of this in the next section). Here is
+<B>ShapeFactory1.java</B> modified so the factory methods are in a separate
+class as virtual functions. Notice also that the specific <B>Shape </B>classes
+are dynamically loaded on demand:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c05:shapefact2:ShapeFactory2.java</font>
+<font color=#009900>// Polymorphic factory methods.</font>
+<font color=#0000ff>package</font> c05.shapefact2;
+<font color=#0000ff>import</font> java.util.*;
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>interface</font> Shape {
+  <font color=#0000ff>void</font> draw();
+  <font color=#0000ff>void</font> erase();
+}
+
+<font color=#0000ff>abstract</font> <font color=#0000ff>class</font> ShapeFactory {
+  <font color=#0000ff>protected</font> <font color=#0000ff>abstract</font> Shape create();
+  <font color=#0000ff>private</font> <font color=#0000ff>static</font> Map factories = <font color=#0000ff>new</font> HashMap();
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> 
+  addFactory(String id, ShapeFactory f) {
+    factories.put(id, f);
+  }
+  <font color=#009900>// A Template Method:</font>
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>final</font> 
+  Shape createShape(String id) {
+    <font color=#0000ff>if</font>(!factories.containsKey(id)) {
+      <font color=#0000ff>try</font> {
+        <font color=#009900>// Load dynamically</font>
+        Class.forName(<font color=#004488>"c05.shapefact2."</font> + id);
+      } <font color=#0000ff>catch</font>(ClassNotFoundException e) {
+        <font color=#0000ff>throw</font> <font color=#0000ff>new</font> RuntimeException(
+          <font color=#004488>"Bad shape creation: "</font> + id);
+      }
+      <font color=#009900>// See if it was put in:</font>
+      <font color=#0000ff>if</font>(!factories.containsKey(id))
+        <font color=#0000ff>throw</font> <font color=#0000ff>new</font> RuntimeException(
+          <font color=#004488>"Bad shape creation: "</font> + id);
+    }
+    <font color=#0000ff>return</font> 
+      ((ShapeFactory)factories.get(id)).create();
+  }
+}
+
+<font color=#0000ff>class</font> Circle <font color=#0000ff>implements</font> Shape {
+  <font color=#0000ff>private</font> Circle() {}
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> draw() { 
+    System.out.println(<font color=#004488>"Circle.draw"</font>); 
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> erase() { 
+    System.out.println(<font color=#004488>"Circle.erase"</font>);
+  }
+  <font color=#0000ff>private</font> <font color=#0000ff>static</font> <font color=#0000ff>class</font> Factory 
+  <font color=#0000ff>extends</font> ShapeFactory {
+    <font color=#0000ff>protected</font> Shape create() { 
+      <font color=#0000ff>return</font> <font color=#0000ff>new</font> Circle(); 
+    }
+  }
+  <font color=#0000ff>static</font> {
+    ShapeFactory.addFactory(
+      <font color=#004488>"Circle"</font>, <font color=#0000ff>new</font> Factory());
+  }
+}
+
+<font color=#0000ff>class</font> Square <font color=#0000ff>implements</font> Shape {
+  <font color=#0000ff>private</font> Square() {} 
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> draw() { 
+    System.out.println(<font color=#004488>"Square.draw"</font>); 
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> erase() { 
+    System.out.println(<font color=#004488>"Square.erase"</font>); 
+  }
+  <font color=#0000ff>private</font> <font color=#0000ff>static</font> <font color=#0000ff>class</font> Factory 
+  <font color=#0000ff>extends</font> ShapeFactory {
+    <font color=#0000ff>protected</font> Shape create() { 
+      <font color=#0000ff>return</font> <font color=#0000ff>new</font> Square(); 
+    }
+  }
+  <font color=#0000ff>static</font> {
+    ShapeFactory.addFactory(
+      <font color=#004488>"Square"</font>, <font color=#0000ff>new</font> Factory());
+  }
+}
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> ShapeFactory2 <font color=#0000ff>extends</font> UnitTest {
+  String shlist[] = { <font color=#004488>"Circle"</font>, <font color=#004488>"Square"</font>, 
+    <font color=#004488>"Square"</font>, <font color=#004488>"Circle"</font>, <font color=#004488>"Circle"</font>, <font color=#004488>"Square"</font> };
+  List shapes = <font color=#0000ff>new</font> ArrayList();
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test() {
+    <font color=#009900>// This just makes sure it will complete </font>
+    <font color=#009900>// without throwing an exception.</font>
+    <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; shlist.length; i++)
+      shapes.add(
+        ShapeFactory.createShape(shlist[i]));
+    Iterator i = shapes.iterator();
+    <font color=#0000ff>while</font>(i.hasNext()) {
+      Shape s = (Shape)i.next();
+      s.draw();
+      s.erase();
+    }
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String args[]) {
+    <font color=#0000ff>new</font> ShapeFactory2().test();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Now the factory method
+appears in its own class, <B>ShapeFactory</B>, as the <B>create(&#160;)</B>
+method. This is a <B>protected</B> method which means it cannot be called
+directly, but it can be overridden. The subclasses of <B>Shape</B> must each
+create their own subclasses of <B>ShapeFactory</B> and override the
+<B>create(&#160;)</B> method to create an object of their own type. The actual
+creation of shapes is performed by calling
+<B>ShapeFactory.createShape(&#160;)</B>, which is a static method that uses the
+<B>Map</B> in <B>ShapeFactory</B> to find the appropriate factory object based
+on an identifier that you pass it. The factory is immediately used to create the
+shape object, but you could imagine a more complex problem where the appropriate
+factory object is returned and then used by the caller to create an object in a
+more sophisticated way. However, it seems that much of the time you don&#8217;t
+need the intricacies of the polymorphic factory method, and a single static
+method in the base class (as shown in <B>ShapeFactory1.java</B>) will work
+fine.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Notice that the <B>ShapeFactory</B> must
+be initialized by loading its <B>Map</B> with factory objects, which takes place
+in the static initialization clause of each of the <B>Shape</B> implementations.
+So to add a new type to this design you must inherit the type, create a factory,
+and add the static initialization clause to load the <B>Map</B>. This extra
+complexity again suggests the use of a <B>static</B> factory method if you
+don&#8217;t need to create individual factory
+objects.</FONT><A NAME="_Toc455024533"></A><A NAME="_Toc476705904"></A><A NAME="_Toc524504127"></A><BR></P></DIV>
+<A NAME="Heading53"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Abstract factories</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <I>Abstract Factory</I> pattern looks
+like the factory objects we&#8217;ve seen previously, with not one but several
+factory methods. Each of the factory methods creates a different kind of object.
+The idea is that at the point of creation of the factory object, you decide how
+all the objects created by that factory will be used. The example given in
+<I>Design Patterns</I> implements portability across various graphical user
+interfaces (GUIs): you create a factory object appropriate to the GUI that
+you&#8217;re working with, and from then on when you ask it for a menu, button,
+slider, etc. it will automatically create the appropriate version of that item
+for the GUI. Thus you&#8217;re able to isolate, in one place, the effect of
+changing from one GUI to another.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As another example suppose you are
+creating a general-purpose gaming environment and you want to be able to support
+different types of games. Here&#8217;s how it might look using an abstract
+factory:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c05:Games.java</font>
+<font color=#009900>// An example of the Abstract Factory pattern.</font>
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>interface</font> Obstacle {
+  <font color=#0000ff>void</font> action();
+}
+
+<font color=#0000ff>interface</font> Player {
+  <font color=#0000ff>void</font> interactWith(Obstacle o);
+}
+
+<font color=#0000ff>class</font> Kitty <font color=#0000ff>implements</font> Player {
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> interactWith(Obstacle ob) {
+    System.out.print(<font color=#004488>"Kitty has encountered a "</font>);
+    ob.action();
+  }
+}
+
+<font color=#0000ff>class</font> KungFuGuy <font color=#0000ff>implements</font> Player {
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> interactWith(Obstacle ob) {
+    System.out.print(<font color=#004488>"KungFuGuy now battles a "</font>);
+    ob.action();
+  }
+}
+
+<font color=#0000ff>class</font> Puzzle <font color=#0000ff>implements</font> Obstacle {
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> action() { 
+    System.out.println(<font color=#004488>"Puzzle"</font>); 
+  }
+}
+
+<font color=#0000ff>class</font> NastyWeapon <font color=#0000ff>implements</font> Obstacle {
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> action() { 
+    System.out.println(<font color=#004488>"NastyWeapon"</font>); 
+  }
+}
+
+<font color=#009900>// The Abstract Factory:</font>
+<font color=#0000ff>interface</font> GameElementFactory {
+  Player makePlayer();
+  Obstacle makeObstacle();
+}
+
+<font color=#009900>// Concrete factories:</font>
+<font color=#0000ff>class</font> KittiesAndPuzzles 
+<font color=#0000ff>implements</font> GameElementFactory {
+  <font color=#0000ff>public</font> Player makePlayer() { 
+    <font color=#0000ff>return</font> <font color=#0000ff>new</font> Kitty();
+  }
+  <font color=#0000ff>public</font> Obstacle makeObstacle() {
+    <font color=#0000ff>return</font> <font color=#0000ff>new</font> Puzzle();
+  }
+}
+
+<font color=#0000ff>class</font> KillAndDismember 
+<font color=#0000ff>implements</font> GameElementFactory {
+  <font color=#0000ff>public</font> Player makePlayer() { 
+    <font color=#0000ff>return</font> <font color=#0000ff>new</font> KungFuGuy();
+  }
+  <font color=#0000ff>public</font> Obstacle makeObstacle() {
+    <font color=#0000ff>return</font> <font color=#0000ff>new</font> NastyWeapon();
+  }
+}
+
+<font color=#0000ff>class</font> GameEnvironment {
+  <font color=#0000ff>private</font> GameElementFactory gef;
+  <font color=#0000ff>private</font> Player p;
+  <font color=#0000ff>private</font> Obstacle ob;
+  <font color=#0000ff>public</font> GameEnvironment(
+    GameElementFactory factory) {
+    gef = factory;
+    p = factory.makePlayer(); 
+    ob = factory.makeObstacle();
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> play() { p.interactWith(ob); }
+}
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> Games <font color=#0000ff>extends</font> UnitTest {
+  GameElementFactory
+    kp = <font color=#0000ff>new</font> KittiesAndPuzzles(),
+    kd = <font color=#0000ff>new</font> KillAndDismember();
+  GameEnvironment 
+    g1 = <font color=#0000ff>new</font> GameEnvironment(kp),
+    g2 = <font color=#0000ff>new</font> GameEnvironment(kd);
+  <font color=#009900>// These just ensure no exceptions are thrown:</font>
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test1() { g1.play(); }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test2() { g2.play(); }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String args[]) {
+    Games g = <font color=#0000ff>new</font> Games();
+    g.test1();
+    g.test2();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In this environment,
+<B>Player</B> objects interact with <B>Obstacle</B> objects, but there are
+different types of players and obstacles depending on what kind of game
+you&#8217;re playing. You determine the kind of game by choosing a particular
+<B>GameElementFactory</B>, and then the <B>GameEnvironment</B> controls the
+setup and play of the game. In this example, the setup and play is very simple,
+but those activities (the <I>initial conditions</I> and the <I>state change</I>)
+can determine much of the game&#8217;s outcome. Here, <B>GameEnvironment</B> is
+not designed to be inherited, although it could very possibly make sense to do
+that.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This also contains examples of <I>Double
+Dispatching</I> and the <I>Factory Method</I>, both of which will be explained
+later.</FONT><A NAME="_Toc524504128"></A><BR></P></DIV>
+<A NAME="Heading54"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Add a class Triangle to
+ShapeFactory1.java</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Add
+a class <B>Triangle</B> to
+<B>ShapeFactory2.java</B></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Add
+a new type of <B>GameEnvironment</B> called <B>GnomesAndFairies</B> to
+<B>GameEnvironment.java</B></FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+<B>ShapeFactory2.java</B> so that it uses an <I>Abstract Factory</I> to create
+different sets of shapes (for example, one particular type of factory object
+creates &#8220;thick shapes,&#8221; another creates &#8220;thin shapes,&#8221;
+but each factory object can create all the shapes: circles, squares, triangles
+etc.).</FONT></OL>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter05.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter07.html">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:09/08/2001</P></DIV>
+
+</BODY>
+
+</HTML>

@@ -1,0 +1,96 @@
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html">
+<TITLE>Thinking in Patterns with Java by Bruce Eckel: Revision History</TITLE>
+</HEAD>
+<BODY bgColor=white><FONT face=Verdana,Tahoma,Arial,Helvetica,Sans><blockquote>
+<h2>Revision history for <I>Thinking in Patterns with Java</I> by Bruce Eckel</h2>
+<h2>Revision 0.6</h2>
+<UL>
+<p>Full text, source code and additional information available at 
+<A HREF="http://www.BruceEckel.com/Books/TIPatterns/">www.BruceEckel.com</A>.
+<p>Submit errors and corrections at the book's 
+<a href="http://www.topica.com/lists/TIPatterns">discussion group</a>
+<p>To be informed of future releases of this document and other information about object-oriented books, documents, seminars and CDs, subscribe to my free newsletter. Just send any email to: 
+<A HREF="mailto:join-eckel-oo-programming@earth.lyris.net">
+join-eckel-oo-programming@earth.lyris.net</A>
+</UL>
+<HR SIZE="3" NOSHADE="NOSHADE">
+<!--------------------------------------------------------->
+<center><h2>Revision history</h2></center>
+
+<h4>Revision 0.6, August 23, 2001</h4>
+<ul>
+<li>Completely re-designed "Chain of Responsibility" example
+<li>Added new State Machine Framework and Vending Machine Example
+<li>Added Decorator "coffee" example
+<li>Added Jikes support to makefiles
+<li>Added "Preface" and "Introduction" material
+<li>Added "Design Principles" in Introduction
+</ul>
+
+<h4>Revision 0.5a, December 8, 2000</h4>
+<UL>
+<li>Cleaned up the enumeration type in c11:PaperScissorsRock.java
+<li>Made a number of user-suggested corrections
+<li>Modified JPython section to reflect the change to Jython
+</ul>
+
+<h4>Revision 0.5, September 30, 2000</h4>
+<UL>
+
+<li>Did a lot of work on the makefile generation tool (written in Python, not 
+yet available), including the addition of new types of comment directives, such 
+as =M, +M, =T and +D. These are described in Chapter 9 where they are used to 
+automatically created the makefiles that have more sophisticated dependencies. 
+Some small rewriting was done in that chapter to accomodate this.
+
+<li>Added a small amount in the Iterators chapter: the beginnings of a type-safe iterator.
+<li>Added Jeremy Meyer's rats & mazes code to Chapter 13 (Just a quick add; no rewriting)
+<li>Converted most tests to black-box tests
+<li>Other small code modifications to improve design/implementation
+</UL>
+
+<h4>Revision 0.4, August 8, 2000</h4>
+<UL>
+
+<li>Added <I>Interpreter</I> chapter, which focuses on the use of <b>JPython</b> 
+as the Interpreter pattern, with a fairly thorough exploration of 
+<b>JPython</b>.
+
+<li>Added "White-box & Black-box testing" section and examples to the test 
+chapter. Modified <b>RunUnitTests.java</b> so that it supports both black- and 
+white-box testing.
+
+<li>Added placeholder chapter for <I>Iterator</I>, with brief overview of what I plan to do.
+
+<li>Created discussion group for book at <a 
+href="http://www.topica.com/lists/TIPatterns">Topica</a>
+
+<li>Changed download so that it is combined book & code
+
+<li>Added page linked off of the head of each chapter that describes how to build the code
+
+<li>Changed makefiles to use GNU make, which is free at <a 
+href="http://www.gnu.org/software/make/make.html">www.gnu.org</a>. See the page 
+linked to the top of each chapter with the title <i>Build the Code</i> for more 
+details.
+
+</UL>
+
+<h4>Revision 0.3, May 2000</h4>
+<UL>
+<li>Added Unit Testing chapter 
+<li>Modified all code in book to use unit tests
+<li>Modified Python code extraction tool to add unit testing to makefiles, so the unit
+    tests are executed automatically as part of a <b>make</b>
+<li>Modified <b>TrashVisitor</b> to use <b>VisitorDecorator</b> approach
+<li>Redistributed exercises, added one or two new ones (taken from the seminar)
+</UL>
+<!-- <hr>
+<!---------------------------------------------------------
+<h2>To do:</h2>
+<LI>Test framework: Abort make when initialization throws exception
+<LI>Dynamic proxy example (re: Proxy class in JDK)
+<LI>Syntax highlighting for Python
+-->
+</UL>
+</blockquote></body></HTML>

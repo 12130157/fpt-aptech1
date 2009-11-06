@@ -1,0 +1,455 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:41
+Translation Platform:Win32
+Number of Output files:18
+This File:Chapter07.html
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>6: Function objects</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview-head.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana" size = "-1">
+    [ <a href="README-HTML.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.html">Revision History</a> ]
+    [ <a href="Building-Code.html">Build the Code</a> ]
+    [ <a href="TIPatterns-Corrections.html">Report an Error</a> ] <br>
+    [ <a href="http://www.mindview.net/MailingList.html">Free Newsletter</a> ]
+    [ <a href="http://www.mindview.net/Training.html">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CPPServices/#ConsultingServices">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana">
+  Thinking in Patterns <font size="4">with Java</font>, Revision 0.6</FONT></H2>
+  <H3><FONT FACE="Verdana">&copy;2001 by Bruce Eckel</FONT></H3>
+  
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter06.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter08.html">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc462393592"></A><A NAME="_Toc462393593"></A><A NAME="_Toc476705905"></A><A NAME="_Toc524504129"></A><A NAME="Heading55"></A><FONT FACE = "Verdana"><H1 ALIGN="LEFT">
+6: Function objects</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In <I>Advanced C++:Programming Styles And
+Idioms (Addison-Wesley, 1992)</I>, Jim Coplien coins the term <I>functor</I>
+which is an object whose sole purpose is to encapsulate a function (since
+&#8220;functor&#8221; has a meaning in mathematics, in this book I shall use the
+more explicit term <I>function object</I>). The point is to decouple the choice
+of function to be called from the site where that function is called.
+</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This term is mentioned but not used in
+<I>Design Patterns</I>. However, the theme of the function object is repeated in
+a number of patterns in that
+book.</FONT><A NAME="_Toc476705906"></A><A NAME="_Toc524504130"></A><BR></P></DIV>
+<A NAME="Heading56"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Command: choosing the operation at run-time</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This is the function object in its purest
+sense: a method that&#8217;s an
+object</FONT><A NAME="fnB10" HREF="#fn10">[10]</A><FONT FACE="Georgia">. By
+wrapping a method in an object, you can pass it to other methods or objects as a
+parameter, to tell them to perform this particular operation in the process of
+fulfilling your request.</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c06:CommandPattern.java</font>
+<font color=#0000ff>import</font> java.util.*;
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>interface</font> Command {
+  <font color=#0000ff>void</font> execute();
+}
+
+<font color=#0000ff>class</font> Hello <font color=#0000ff>implements</font> Command {
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> execute() {
+    System.out.print(<font color=#004488>"Hello "</font>);
+  }
+}
+
+<font color=#0000ff>class</font> World <font color=#0000ff>implements</font> Command {
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> execute() {
+    System.out.print(<font color=#004488>"World! "</font>);
+  }
+}
+
+<font color=#0000ff>class</font> IAm <font color=#0000ff>implements</font> Command {
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> execute() {
+    System.out.print(<font color=#004488>"I'm the command pattern!"</font>);
+  }
+}
+
+<font color=#009900>// An object that holds commands:</font>
+<font color=#0000ff>class</font> Macro {
+  <font color=#0000ff>private</font> List commands = <font color=#0000ff>new</font> ArrayList();
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> add(Command c) { commands.add(c); }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> run() {
+    Iterator it = commands.iterator();
+    <font color=#0000ff>while</font>(it.hasNext())
+      ((Command)it.next()).execute();
+  }
+}
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> CommandPattern <font color=#0000ff>extends</font> UnitTest {
+  Macro macro = <font color=#0000ff>new</font> Macro();
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test() {
+    macro.add(<font color=#0000ff>new</font> Hello());
+    macro.add(<font color=#0000ff>new</font> World());
+    macro.add(<font color=#0000ff>new</font> IAm());
+    macro.run();
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String args[]) {
+    <font color=#0000ff>new</font> CommandPattern().test();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The primary point of
+<I>Command</I> is to allow you to hand a desired action to a method or object.
+In the above example, this provides a way to queue a set of actions to be
+performed collectively. In this case, it allows you to dynamically create new
+behavior, something you can normally only do by writing new code but in the
+above example could be done by interpreting a script (see the <I>Interpreter</I>
+pattern if what you need to do gets very complex).</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Another example of <I>Command</I> is
+<B>c12:DirList.java</B>. The <B>DirFilter</B> class is the command object which
+contains its action in the method <B>accept(&#160;)</B> that is passed to the
+<B>list(&#160;)</B> method. The <B>list(&#160;)</B> method determines what to
+include in its result by calling <B>accept(&#160;)</B>.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><I>Design Patterns</I> says that
+&#8220;Commands are an object-oriented replacement for
+callbacks</FONT><A NAME="fnB11" HREF="#fn11">[11]</A><FONT FACE="Georgia">.&#8221;
+However, I think that the word &#8220;back&#8221; is an essential part of the
+concept of callbacks. That is, I think a callback actually reaches back to the
+creator of the callback. On the other hand, with a <I>Command</I> object you
+typically just create it and hand it to some method or object, and are not
+otherwise connected over time to the <I>Command</I> object. That&#8217;s my take
+on it, anyway. Later in this book, I combine a group of design patterns under
+the heading of
+&#8220;callbacks.&#8221;</FONT><A NAME="_Toc462393594"></A><A NAME="_Toc476705907"></A><A NAME="_Toc524504131"></A><BR></P></DIV>
+<A NAME="Heading57"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Strategy: choosing the algorithm at run-time</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><I>Strategy</I> appears to be a family of
+<I>Command</I> classes, all inherited from the same base. But if you look at
+<I>Command</I>, you&#8217;ll see that it has the same structure: a hierarchy of
+function objects. The difference is in the way this hierarchy is used. As seen
+in <B>c12:DirList.java</B>, you use <I>Command</I> to solve a particular
+problem&#8212;in that case, selecting files from a list. The &#8220;thing that
+stays the same&#8221; is the body of the method that&#8217;s being called, and
+the part that varies is isolated in the function object. I would hazard to say
+that <I>Command</I> provides flexibility while you&#8217;re writing the program,
+whereas <I>Strategy</I>&#8217;s flexibility is at run time. Nonetheless, it
+seems a rather fragile distinction.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><I>Strategy</I> also adds a
+&#8220;Context&#8221; which can be a surrogate class that controls the selection
+and use of the particular strategy object&#8212;just like <I>State</I>!
+Here&#8217;s what it looks like:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c06:strategy:StrategyPattern.java</font>
+<font color=#0000ff>package</font> c06.strategy;
+<font color=#0000ff>import</font> com.bruceeckel.util.*; <font color=#009900>// Arrays2.print()</font>
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#009900>// The strategy interface:</font>
+<font color=#0000ff>interface</font> FindMinima {
+  <font color=#009900>// Line is a sequence of points:</font>
+  <font color=#0000ff>double</font>[] algorithm(<font color=#0000ff>double</font>[] line);
+}
+
+<font color=#009900>// The various strategies:</font>
+<font color=#0000ff>class</font> LeastSquares <font color=#0000ff>implements</font> FindMinima {
+  <font color=#0000ff>public</font> <font color=#0000ff>double</font>[] algorithm(<font color=#0000ff>double</font>[] line) {
+    <font color=#0000ff>return</font> <font color=#0000ff>new</font> <font color=#0000ff>double</font>[] { 1.1, 2.2 }; <font color=#009900>// Dummy</font>
+  }
+}
+
+<font color=#0000ff>class</font> NewtonsMethod <font color=#0000ff>implements</font> FindMinima {
+  <font color=#0000ff>public</font> <font color=#0000ff>double</font>[] algorithm(<font color=#0000ff>double</font>[] line) {
+    <font color=#0000ff>return</font> <font color=#0000ff>new</font> <font color=#0000ff>double</font>[] { 3.3, 4.4 }; <font color=#009900>// Dummy</font>
+  }
+}
+
+<font color=#0000ff>class</font> Bisection <font color=#0000ff>implements</font> FindMinima {
+  <font color=#0000ff>public</font> <font color=#0000ff>double</font>[] algorithm(<font color=#0000ff>double</font>[] line) {
+    <font color=#0000ff>return</font> <font color=#0000ff>new</font> <font color=#0000ff>double</font>[] { 5.5, 6.6 }; <font color=#009900>// Dummy</font>
+  }
+}
+
+<font color=#0000ff>class</font> ConjugateGradient <font color=#0000ff>implements</font> FindMinima {
+  <font color=#0000ff>public</font> <font color=#0000ff>double</font>[] algorithm(<font color=#0000ff>double</font>[] line) {
+    <font color=#0000ff>return</font> <font color=#0000ff>new</font> <font color=#0000ff>double</font>[] { 3.3, 4.4 }; <font color=#009900>// Dummy</font>
+  }
+}
+
+<font color=#009900>// The "Context" controls the strategy:</font>
+<font color=#0000ff>class</font> MinimaSolver {
+  <font color=#0000ff>private</font> FindMinima strategy;
+  <font color=#0000ff>public</font> MinimaSolver(FindMinima strat) {
+    strategy = strat;
+  }
+  <font color=#0000ff>double</font>[] minima(<font color=#0000ff>double</font>[] line) {
+    <font color=#0000ff>return</font> strategy.algorithm(line);
+  }
+  <font color=#0000ff>void</font> changeAlgorithm(FindMinima newAlgorithm) {
+    strategy = newAlgorithm;
+  }
+}
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> StrategyPattern <font color=#0000ff>extends</font> UnitTest {
+  MinimaSolver solver = 
+    <font color=#0000ff>new</font> MinimaSolver(<font color=#0000ff>new</font> LeastSquares());
+  <font color=#0000ff>double</font>[] line = { 
+    1.0, 2.0, 1.0, 2.0, -1.0, 
+    3.0, 4.0, 5.0, 4.0 };
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test() {
+    Arrays2.print(solver.minima(line));
+    solver.changeAlgorithm(<font color=#0000ff>new</font> Bisection());
+    Arrays2.print(solver.minima(line));
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String args[]) {
+    <font color=#0000ff>new</font> StrategyPattern().test();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Note similarity with
+template method &#8211; TM claims distinction that it has more than one method
+to call, does things piecewise. However, it&#8217;s not unlikely that strategy
+object would have more than one method call; consider Shalloway&#8217;s order
+fulfullment system with country information in each strategy.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Strategy example from JDK: comparator
+objects.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="_Toc476705908"></A><A NAME="_Toc524504132"></A><BR></P></DIV>
+<A NAME="Heading58"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Chain of responsibility</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><I>Chain of Responsibility</I> might be
+thought of as a dynamic generalization of recursion using <I>Strategy
+</I>objects. You make a call, and each <I>Strategy</I> in a linked sequence
+tries to satisfy the call. The process ends when one of the strategies is
+successful or the chain ends. In recursion, one method calls itself over and
+over until a termination condition is reached; with <I>Chain of
+Responsibility</I>, a method calls itself, which (by moving down the chain of
+<I>Strategies</I>)<I> </I>calls a different implementation of the method, etc.,
+until a termination condition is reached. The termination condition is either
+the bottom of the chain is reached (in which case a default object is returned;
+you may or may not be able to provide a default result so you must be able to
+determine the success or failure of the chain) or one of the <I>Strategies</I>
+is successful.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Instead of calling a single method to
+satisfy a request, multiple methods in the chain have a chance to satisfy the
+request, so it has the flavor of an expert system. Since the chain is
+effectively a linked list, it can be dynamically created, so you could also
+think of it as a more general, dynamically-built <B>switch</B>
+statement.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In the GoF, there&#8217;s a fair amount
+of </FONT><FONT FACE="Georgia">discussion of the implementation details of the
+chain of responsibility as a linked list. However, when you look at the pattern
+it really shouldn&#8217;t matter how the chain is maintained; that&#8217;s an
+implementation detail. Since GoF was written before the Standard Template
+Library (STL) was incorporated into most C++ compilers, the reason for this is
+most likely (1) there was no list and thus they had to create one and (2) data
+structures are often taught as a fundamental skill in academia, and the idea
+that data structures should be standard tools available with the programming
+language may not have occurred to the GoF authors. I maintain that the
+implementation of <I>Chain of Responsibility</I> as a chain (specifically, a
+linked list) adds nothing to the solution and can just as easily be implemented
+using a standard Java <B>List</B>, as shown below. Furthermore, you&#8217;ll see
+that I&#8217;ve gone to some effort to separate the chain-management parts of
+the implementation from the various <I>Strategies</I>, so that the code can be
+more easily reused.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In <B>StrategyPattern.java</B>, above,
+what you probably want is to automatically find a solution. <I>Chain of
+Responsibility</I> provides a way to do this by chaining the <I>Strategy</I>
+objects together and providing a mechanism for them to automatically recurse
+through each one in the chain:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c06:ChainOfResponsibility.java</font>
+<font color=#0000ff>import</font> com.bruceeckel.util.*; <font color=#009900>// Arrays2.print()</font>
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+<font color=#0000ff>import</font> java.util.*;
+
+<font color=#009900>// Carry the information into the strategy:</font>
+<font color=#0000ff>interface</font> Messenger {}
+
+<font color=#009900>// The Result object carries the result data and</font>
+<font color=#009900>// whether the strategy was successful:</font>
+<font color=#0000ff>class</font> Result {
+  <font color=#0000ff>private</font> <font color=#0000ff>boolean</font> succeeded;
+  <font color=#0000ff>public</font> <font color=#0000ff>boolean</font> isSuccessful() { 
+    <font color=#0000ff>return</font> succeeded; 
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> setSuccessful(<font color=#0000ff>boolean</font> b) { 
+    succeeded = b; 
+  }
+}
+
+<font color=#0000ff>abstract</font> <font color=#0000ff>class</font> Strategy {
+  <font color=#0000ff>abstract</font> <font color=#0000ff>public</font> Result strategy(Messenger m);
+}
+
+<font color=#009900>// Manage the movement through the chain and</font>
+<font color=#009900>// find a successful result:</font>
+<font color=#0000ff>class</font> ChainLink {
+  <font color=#0000ff>private</font> List chain;
+  <font color=#0000ff>private</font> Strategy strat;
+  <font color=#0000ff>public</font> ChainLink(List chain, Strategy s) {
+    strat = s;
+    <font color=#0000ff>this</font>.chain = chain;
+    chain.add(<font color=#0000ff>this</font>);
+  }
+  <font color=#0000ff>public</font> ChainLink next() {
+    <font color=#009900>// Where this link is in the chain:</font>
+    <font color=#0000ff>int</font> location = chain.indexOf(<font color=#0000ff>this</font>);
+    <font color=#0000ff>if</font> (!end())
+      <font color=#0000ff>return</font> (ChainLink)chain.get(location + 1);
+    <font color=#009900>// Indicates a programming error (thus </font>
+    <font color=#009900>// doesn't need to be a checked exception):</font>
+    <font color=#0000ff>throw</font> <font color=#0000ff>new</font> RuntimeException(
+      <font color=#004488>"Tried to move past end of chain"</font>);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>boolean</font> end() {
+    <font color=#0000ff>int</font> location = chain.indexOf(<font color=#0000ff>this</font>);
+    <font color=#0000ff>return</font> location + 1 &gt;= chain.size();
+  }
+  <font color=#0000ff>public</font> Result strategy(Messenger m) {
+    Result r = strat.strategy(m);
+    <font color=#0000ff>if</font>(r.isSuccessful() || end()) <font color=#0000ff>return</font> r;
+    <font color=#0000ff>return</font> next().strategy(m);
+  }
+}
+
+<font color=#009900>// For this example, the Messenger</font>
+<font color=#009900>// and Result can be the same type:</font>
+<font color=#0000ff>class</font> LineData 
+<font color=#0000ff>extends</font> Result <font color=#0000ff>implements</font> Messenger {
+  <font color=#0000ff>public</font> <font color=#0000ff>double</font>[] data;
+  <font color=#0000ff>public</font> LineData(<font color=#0000ff>double</font>[] data) {
+    <font color=#0000ff>this</font>.data = data;
+  }
+}
+
+<font color=#0000ff>class</font> LeastSquares <font color=#0000ff>extends</font> Strategy {
+  <font color=#0000ff>public</font> Result strategy(Messenger m) {
+    System.out.println(
+     <font color=#004488>"Trying LeastSquares algorithm"</font>);
+    LineData ld = (LineData)m;
+    <font color=#009900>// [ Actual test/calculation here ]</font>
+    Result r = <font color=#0000ff>new</font> LineData(
+      <font color=#0000ff>new</font> <font color=#0000ff>double</font>[] { 1.1, 2.2 }); <font color=#009900>// Dummy data</font>
+    r.setSuccessful(<font color=#0000ff>false</font>);
+    <font color=#0000ff>return</font> r;
+  }
+}
+
+<font color=#0000ff>class</font> NewtonsMethod <font color=#0000ff>extends</font> Strategy {
+  <font color=#0000ff>public</font> Result strategy(Messenger m) {
+    System.out.println(
+      <font color=#004488>"Trying NewtonsMethod algorithm"</font>);
+    LineData ld = (LineData)m;
+    <font color=#009900>// [ Actual test/calculation here ]</font>
+    Result r = <font color=#0000ff>new</font> LineData(
+      <font color=#0000ff>new</font> <font color=#0000ff>double</font>[] { 3.3, 4.4 }); <font color=#009900>// Dummy data</font>
+    r.setSuccessful(<font color=#0000ff>false</font>);
+    <font color=#0000ff>return</font> r;
+  }
+}
+
+<font color=#0000ff>class</font> Bisection <font color=#0000ff>extends</font> Strategy {
+  <font color=#0000ff>public</font> Result strategy(Messenger m) {
+    System.out.println(
+      <font color=#004488>"Trying Bisection algorithm"</font>);
+    LineData ld = (LineData)m;
+    <font color=#009900>// [ Actual test/calculation here ]</font>
+    Result r = <font color=#0000ff>new</font> LineData(
+      <font color=#0000ff>new</font> <font color=#0000ff>double</font>[] { 5.5, 6.6 }); <font color=#009900>// Dummy data</font>
+    r.setSuccessful(<font color=#0000ff>true</font>);
+    <font color=#0000ff>return</font> r;
+  }
+}
+
+<font color=#0000ff>class</font> ConjugateGradient <font color=#0000ff>extends</font> Strategy {
+  <font color=#0000ff>public</font> Result strategy(Messenger m) {
+    System.out.println(
+      <font color=#004488>"Trying ConjugateGradient algorithm"</font>);
+    LineData ld = (LineData)m;
+    <font color=#009900>// [ Actual test/calculation here ]</font>
+    Result r = <font color=#0000ff>new</font> LineData(
+      <font color=#0000ff>new</font> <font color=#0000ff>double</font>[] { 5.5, 6.6 }); <font color=#009900>// Dummy data</font>
+    r.setSuccessful(<font color=#0000ff>true</font>);
+    <font color=#0000ff>return</font> r;
+  }
+}
+
+<font color=#0000ff>public</font> 
+<font color=#0000ff>class</font> ChainOfResponsibility <font color=#0000ff>extends</font> UnitTest {
+  List chain = <font color=#0000ff>new</font> ArrayList();
+  ChainLink[] solutions = {
+    <font color=#0000ff>new</font> ChainLink(chain, <font color=#0000ff>new</font> LeastSquares()),
+    <font color=#0000ff>new</font> ChainLink(chain, <font color=#0000ff>new</font> NewtonsMethod()),
+    <font color=#0000ff>new</font> ChainLink(chain, <font color=#0000ff>new</font> Bisection()),
+    <font color=#0000ff>new</font> ChainLink(chain, <font color=#0000ff>new</font> ConjugateGradient()),
+  };
+  LineData line = <font color=#0000ff>new</font> LineData(<font color=#0000ff>new</font> <font color=#0000ff>double</font>[]{ 
+    1.0, 2.0, 1.0, 2.0, -1.0, 
+    3.0, 4.0, 5.0, 4.0 
+  });
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test() {
+    Arrays2.print(
+      ((LineData)solutions[0]
+        .strategy(line)).data);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String args[]) {
+    <font color=#0000ff>new</font> ChainOfResponsibility().test();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc524504133"></A><BR></P></DIV>
+<A NAME="Heading59"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Use <I>Command</I> in
+Chapter 3, Exercise
+1.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Implement
+<I>Chain of Responsibility</I> to create an "expert system" that solves problems
+by successively trying one solution after another until one matches. You should
+be able to dynamically add solutions to the expert system. The test for solution
+should just be a string match, but when a solution fits, the expert system
+should return the appropriate type of <B>ProblemSolver</B> object. What other
+pattern/patterns show up<DIV ALIGN="LEFT"><P><A NAME="fn10" HREF="#fnB10">[10]</A><FONT FACE="Georgia">
+</FONT><FONT FACE="Georgia">In the Python language, all functions are already
+objects and so the <I>Command</I> pattern is often redundant.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="fn11" HREF="#fnB11">[11]</A><FONT FACE="Georgia">
+</FONT><FONT FACE="Georgia">Page 235.</FONT><BR></P></DIV>
+
+
+here?</FONT></OL><HR><DIV ALIGN="CENTER">
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter06.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter08.html">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:09/08/2001</P></DIV>
+
+</BODY>
+
+</HTML>

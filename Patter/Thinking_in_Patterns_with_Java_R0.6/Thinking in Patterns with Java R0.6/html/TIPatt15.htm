@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:44
+Translation Platform:Win32
+Number of Output files:18
+This File:TIPatt15.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<TITLE>11: Multiple dispatching</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER"><IMG SRC="images/r2hGlyph.gif"></DIV><A NAME="_Toc476705916"></A><A NAME="_Toc524504167"></A><A NAME="Heading94"></A><H1 ALIGN="LEFT">
+11: Multiple dispatching</H1>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">When dealing with multiple types which
+are interacting, a program can get particularly messy. For example, consider a
+system that parses and executes mathematical expressions. You want to be able to
+say <B>Number + Number</B>, <B>Number * Number</B>, etc., where <B>Number</B> is
+the base class for a family of numerical objects. But when you say <B>a + b</B>,
+and you don&#8217;t know the exact type of either <B>a</B> or <B>b</B>, so how
+can you get them to interact properly?</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The answer starts with something you
+probably don&#8217;t think about: Java performs only single dispatching. That
+is, if you are performing an operation on more than one object whose type is
+unknown, Java can invoke the dynamic binding mechanism on only one of those
+types. This doesn&#8217;t solve the problem, so you end up detecting some types
+manually and effectively producing your own dynamic binding
+behavior.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The solution is called
+<A NAME="Index33"></A><A NAME="Index34"></A><I>multiple dispatching</I>.
+Remember that polymorphism can occur only via member function calls, so if you
+want double dispatching to occur, there must be two member function calls: the
+first to determine the first unknown type, and the second to determine the
+second unknown type. With multiple dispatching, you must have a polymorphic
+method call to determine each of the types. Generally, you&#8217;ll set up a
+configuration such that a single member function call produces more than one
+dynamic member function call and thus determines more than one type in the
+process. To get this effect, you need to work with more than one polymorphic
+method call: you&#8217;ll need one call for each dispatch. The methods in the
+following example are called <B>compete(&#160;) </B>and <B>eval(&#160;)</B>, and
+are both members of the same type. (In this case there will be only two
+dispatches, which is referred to as
+<A NAME="Index35"></A><A NAME="Index36"></A><I>double dispatching</I>). If you
+are working with two different type hierarchies that are interacting, then
+you&#8217;ll have to have a polymorphic method call in each
+hierarchy.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Here&#8217;s an example of multiple
+dispatching:</FONT><BR></DIV>
+
+<PRE>//: c11:PaperScissorsRock.java
+// Demonstration of multiple dispatching.
+import java.util.*;
+import com.bruceeckel.test.*;
+
+// An enumeration type:
+class Outcome {
+  private int value;
+  private String name;
+  private Outcome(int val, String nm) { 
+    value = val;
+    name = nm;
+  }
+  public final static Outcome
+    WIN = new Outcome(0, "win"), 
+    LOSE = new Outcome(1, "lose"), 
+    DRAW = new Outcome(2, "draw");
+  public String toString() { return name; }
+  public boolean equals(Object o) {
+    return (o instanceof Outcome)
+      &amp;&amp; (value == ((Outcome)o).value);
+  }
+}
+
+interface Item {
+  Outcome compete(Item it);
+  Outcome eval(Paper p);
+  Outcome eval(Scissors s);
+  Outcome eval(Rock r);
+}
+
+class Paper implements Item {
+  public Outcome compete(Item it) {
+    return it.eval(this);
+  }
+  public Outcome eval(Paper p) {
+    return Outcome.DRAW;
+  }
+  public Outcome eval(Scissors s) {
+    return Outcome.WIN;
+  }
+  public Outcome eval(Rock r) {
+    return Outcome.LOSE;
+  }
+  public String toString() { return "Paper"; }
+}
+
+class Scissors implements Item {
+  public Outcome compete(Item it) {
+    return it.eval(this);
+  }
+  public Outcome eval(Paper p) {
+    return Outcome.LOSE;
+  }
+  public Outcome eval(Scissors s) {
+    return Outcome.DRAW;
+  }
+  public Outcome eval(Rock r) {
+    return Outcome.WIN;
+  }
+  public String toString() { return "Scissors"; }
+}
+
+class Rock implements Item {
+  public Outcome compete(Item it) {
+    return it.eval(this);
+  }
+  public Outcome eval(Paper p) {
+    return Outcome.WIN;
+  }
+  public Outcome eval(Scissors s) {
+    return Outcome.LOSE;
+  }
+  public Outcome eval(Rock r) {
+    return Outcome.DRAW;
+  }
+  public String toString() { return "Rock"; }
+}
+
+class ItemGenerator {
+  public static Item newItem() {
+    switch((int)(Math.random() * 3)) {
+      default:
+      case 0:
+        return new Scissors();
+      case 1:
+        return new Paper();
+      case 2:
+        return new Rock();
+    }
+  }
+}
+
+class Compete {
+  public static Outcome match(Item a, Item b) {
+    System.out.print(a + " &lt;--&gt; " + b + " : ");
+    return a.compete(b);
+  }
+}
+
+public class PaperScissorsRock extends UnitTest {
+  List 
+    items1 = new ArrayList(),
+    items2 = new ArrayList();
+  static int SIZE = 20;
+  public PaperScissorsRock() {
+    for(int i = 0; i &lt; SIZE; i++) {
+      items1.add(ItemGenerator.newItem());
+      items2.add(ItemGenerator.newItem());
+    }
+  }
+  public void test() {
+    for(int i = 0; i &lt; SIZE; i++)
+      System.out.println(
+        Compete.match(
+          (Item)items1.get(i), 
+          (Item)items2.get(i)));
+  }
+  public static void main(String args[]) {
+    new PaperScissorsRock().test();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><A NAME="_Toc462393597"></A><A NAME="_Toc476705917"></A><A NAME="_Toc524504168"></A><BR></DIV>
+<A NAME="Heading95"></A><H2 ALIGN="LEFT">
+Visitor, a type of multiple dispatching</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The assumption is that you have a primary
+class hierarchy that is fixed; perhaps it&#8217;s from another vendor and you
+can&#8217;t make changes to that hierarchy. However, you&#8217;d like to add new
+polymorphic methods to that hierarchy, which means that normally you&#8217;d
+have to add something to the base class interface. So the dilemma is that you
+need to add methods to the base class, but you can&#8217;t touch the base class.
+How do you get around this?</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The design pattern that solves this kind
+of problem is called a &#8220;visitor&#8221; (the final one in the <I>Design
+Patterns</I> book), and it builds on the double<I> </I>dispatching scheme shown
+in the last section.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The
+<A NAME="Index37"></A><A NAME="Index38"></A>visitor pattern allows you to extend
+the interface of the primary type by creating a separate class hierarchy of type
+<B>Visitor </B>to virtualize the operations performed upon the primary type. The
+objects of the primary type simply &#8220;accept&#8221; the visitor, then call
+the visitor&#8217;s dynamically<B>-</B>bound member function.</FONT><BR></DIV>
+
+<PRE>//: c11:BeeAndFlowers.java
+// Demonstration of "visitor" pattern.
+import java.util.*;
+import com.bruceeckel.test.*;
+
+interface Visitor {  
+  void visit(Gladiolus g);
+  void visit(Renuculus r);
+  void visit(Chrysanthemum c);
+}
+
+// The Flower hierarchy cannot be changed:
+interface Flower {  
+  void accept(Visitor v);
+}
+
+class Gladiolus implements Flower {  
+  public void accept(Visitor v) { v.visit(this);}
+}
+
+class Renuculus implements Flower {  
+  public void accept(Visitor v) { v.visit(this);}
+}
+
+class Chrysanthemum implements Flower {  
+  public void accept(Visitor v) { v.visit(this);}
+}
+
+// Add the ability to produce a string:
+class StringVal implements Visitor {
+  String s;  
+  public String toString() { return s; }
+  public void visit(Gladiolus g) { 
+    s = "Gladiolus"; 
+  }
+  public void visit(Renuculus r) { 
+    s = "Renuculus"; 
+  }
+  public void visit(Chrysanthemum c) { 
+    s = "Chrysanthemum"; 
+  }
+}
+
+// Add the ability to do "Bee" activities:
+class Bee implements Visitor {  
+  public void visit(Gladiolus g) {
+    System.out.println("Bee and Gladiolus");
+  }
+  public void visit(Renuculus r) {
+    System.out.println("Bee and Renuculus");
+  }
+  public void visit(Chrysanthemum c) {
+    System.out.println("Bee and Chrysanthemum");
+  }
+}
+
+class FlowerGenerator {
+  public static Flower newFlower() {
+    switch((int)(Math.random() * 3)) {
+      default:
+      case 0: return new Gladiolus();
+      case 1: return new Renuculus();
+      case 2: return new Chrysanthemum();
+    }
+  }
+}
+
+public class BeeAndFlowers extends UnitTest {
+  List flowers = new ArrayList();
+  public BeeAndFlowers() {
+    for(int i = 0; i &lt; 10; i++)
+      flowers.add(FlowerGenerator.newFlower());
+  }
+  public void test() {
+    // It's almost as if I had a function to
+    // produce a Flower string representation:
+    StringVal sval = new StringVal();
+    Iterator it = flowers.iterator();
+    while(it.hasNext()) {
+      ((Flower)it.next()).accept(sval);
+      System.out.println(sval);
+    }
+    // Perform "Bee" operation on all Flowers:
+    Bee bee = new Bee();
+    it = flowers.iterator();
+    while(it.hasNext())
+      ((Flower)it.next()).accept(bee);
+  }
+  public static void main(String args[]) {
+    new BeeAndFlowers().test();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><A NAME="_Toc524504169"></A><BR></DIV>
+<A NAME="Heading96"></A><H2 ALIGN="LEFT">
+Exercises</H2>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create a business-modeling
+environment with three types of <B>Inhabitant</B>: <B>Dwarf</B> (for engineers),
+<B>Elf</B> (for marketers) and <B>Troll</B> (for managers). Now create a class
+called <B>Project</B> that creates the different inhabitants and causes them to
+<B>interact(&#160;)</B> with each other using multiple
+dispatching.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+the above example to make the interactions more detailed. Each <B>Inhabitant</B>
+can randomly produce a <B>Weapon</B> using <B>getWeapon(&#160;)</B>: a
+<B>Dwarf</B> uses <B>Jargon</B> or <B>Play</B>, an <B>Elf</B> uses
+<B>InventFeature</B> or <B>SellImaginaryProduct</B>, and a <B>Troll</B> uses
+<B>Edict</B> and <B>Schedule</B>. You must decide which weapons
+&#8220;win&#8221; and &#8220;lose&#8221; in each interaction (as in
+<B>PaperScissorsRock.java</B>). Add a <B>battle(&#160;)</B> member function to
+<B>Project</B> that takes two <B>Inhabitant</B>s and matches them against each
+other. Now create a <B>meeting(&#160;)</B> member function for <B>Project</B>
+that creates groups of <B>Dwarf</B>, <B>Elf</B> and <B>Manager</B> and battles
+the groups against each other until only members of one group are left standing.
+These are the
+&#8220;winners.&#8221;</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+<B>PaperScissorsRock.java</B> to replace the double dispatching with a table
+lookup. The easiest way to do this is to create a <B>Map </B>of <B>Map</B>s,
+with the key of each <B>Map </B>the class of each object. Then you can do the
+lookup by
+saying:</FONT><BR><FONT FACE="Georgia">(<B>(Map)map.get(o1.getClass())).get(o2.getClass())</B></FONT><BR><FONT FACE="Georgia">Notice
+how much easier it is to reconfigure the system. When is it more appropriate to
+use this approach vs. hard-coding the dynamic dispatches? Can you create a
+system that has the syntactic simplicity of use of the dynamic dispatch but uses
+a table
+lookup?</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+Exercise 2 to use the table lookup technique described in Exercise
+3.</FONT></OL><DIV ALIGN="LEFT"><BR></DIV>
+<DIV ALIGN="CENTER"><IMG SRC="images/r2hGlyph.gif"><BR>
+<A HREF="mailto:chris@sunpack.com">chris@sunpack.com</A> Last Update:09/08/2001</DIV>
+
+</BODY>
+
+</HTML>

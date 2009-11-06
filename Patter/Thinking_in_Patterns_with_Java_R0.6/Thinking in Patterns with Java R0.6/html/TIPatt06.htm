@@ -1,0 +1,1132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:40
+Translation Platform:Win32
+Number of Output files:18
+This File:TIPatt06.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<TITLE>4:Fronting for an implementation</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER"><IMG SRC="images/r2hGlyph.gif"></DIV><A NAME="_Toc476705898"></A><A NAME="_Toc524504100"></A><A NAME="Heading26"></A><H1 ALIGN="LEFT">
+4:Fronting for an implementation</H1>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Both <I>Proxy</I> and <I>State</I>
+provide a surrogate class that you use in your code; the real class that does
+the work is hidden behind this surrogate class. When you call a method in the
+surrogate, it simply turns around and calls the method in the implementing
+class. These two patterns are so similar that the <I>Proxy</I> is simply a
+special case of <I>State</I>. One is tempted to just lump the two together into
+a pattern called <I>Surrogate</I>, but the term &#8220;proxy&#8221; has a
+long-standing and specialized meaning, which probably explains the reason for
+the two different patterns.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The basic idea is simple: from a base
+class, the surrogate is derived along with the class or classes that provide the
+actual implementation: </FONT><BR></DIV>
+<DIV ALIGN="CENTER"><FONT FACE="Georgia"><IMG HEIGHT=183 WIDTH=446 SRC="TIPatt00.gif"></FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">When a surrogate object is created, it is
+given an implementation to which to send all of the method
+calls.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Structurally, the difference between
+<I>Proxy</I> and <I>State</I> is simple: a <I>Proxy</I> has only one
+implementation, while <I>State</I> has more than one. The application of the
+patterns is considered (in <I>Design Patterns</I>) to be distinct: <I>Proxy</I>
+is used to control access to its implementation, while <I>State</I> allows you
+to change the implementation dynamically. However, if you expand your notion of
+&#8220;controlling access to implementation&#8221; then the two fit neatly
+together.</FONT><A NAME="_Toc476705899"></A><A NAME="_Toc524504101"></A><BR></DIV>
+<A NAME="Heading27"></A><H2 ALIGN="LEFT">
+Proxy</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">If we implement <I>Proxy</I> by following
+the above diagram, it looks like this:</FONT><BR></DIV>
+
+<PRE>//: c04:ProxyDemo.java
+// Simple demonstration of the Proxy pattern.
+import com.bruceeckel.test.*;
+
+interface ProxyBase {
+  void f();
+  void g();
+  void h();
+}
+
+class Proxy implements ProxyBase {
+  private ProxyBase implementation;
+  public Proxy() { 
+    implementation = new Implementation(); 
+  }
+  // Pass method calls to the implementation:
+  public void f() { implementation.f(); }
+  public void g() { implementation.g(); }
+  public void h() { implementation.h(); }
+}
+
+class Implementation implements ProxyBase {
+  public void f() { 
+    System.out.println("Implementation.f()"); 
+  }
+  public void g() { 
+    System.out.println("Implementation.g()"); 
+  }
+  public void h() { 
+    System.out.println("Implementation.h()"); 
+  }
+}
+
+public class ProxyDemo extends UnitTest {
+  Proxy p = new Proxy();
+  public void test() {
+    // This just makes sure it will complete 
+    // without throwing an exception.
+    p.f();
+    p.g();
+    p.h();
+  }
+  public static void main(String args[]) {
+    new ProxyDemo().test();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">Of course, it isn&#8217;t
+necessary that <B>Implementation</B> have the same interface as <B>Proxy</B>; as
+long as <B>Proxy</B> is somehow &#8220;speaking for&#8221; the class that it is
+referring method calls to then the basic idea is satisfied (note that this
+statement is at odds with the definition for Proxy in GoF). However, it is
+convenient to have a common interface so that <B>Implementation</B> is forced to
+fulfill all the methods that <B>Proxy</B> needs to
+call.</FONT><A NAME="_Toc476705900"></A><A NAME="_Toc524504102"></A><BR></DIV>
+<A NAME="Heading28"></A><H2 ALIGN="LEFT">
+State</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The <I>State</I> pattern adds more
+implementations to <I>Proxy</I>, along with a way to switch from one
+implementation to another during the lifetime of the surrogate:</FONT><BR></DIV>
+
+<PRE>//: c04:StateDemo.java
+// Simple demonstration of the State pattern.
+import com.bruceeckel.test.*;
+
+interface StateBase {
+  void f();
+  void g();
+  void h();
+}
+
+class State_d implements StateBase {
+  private StateBase implementation;
+  public State_d(StateBase imp) { 
+    implementation = imp; 
+  }
+  public void changeImp(StateBase newImp) {
+    implementation = newImp;
+  }
+  // Pass method calls to the implementation:
+  public void f() { implementation.f(); }
+  public void g() { implementation.g(); }
+  public void h() { implementation.h(); }
+}
+
+class Implementation1 implements StateBase {
+  public void f() { 
+    System.out.println("Implementation1.f()"); 
+  }
+  public void g() { 
+    System.out.println("Implementation1.g()"); 
+  }
+  public void h() { 
+    System.out.println("Implementation1.h()"); 
+  }
+}
+
+class Implementation2 implements StateBase {
+  public void f() { 
+    System.out.println("Implementation2.f()"); 
+  }
+  public void g() { 
+    System.out.println("Implementation2.g()"); 
+  }
+  public void h() { 
+    System.out.println("Implementation2.h()"); 
+  }
+}
+
+public class StateDemo extends UnitTest {
+  static void run(State_d b) {
+    b.f();
+    b.g();
+    b.h();
+  }
+  State_d b = new State_d(new Implementation1());
+  public void test() {
+    // This just makes sure it will complete 
+    // without throwing an exception.
+    run(b);
+    b.changeImp(new Implementation2());
+    run(b);
+  }
+  public static void main(String args[]) {
+    new StateDemo().test();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">In <B>main(&#160;)</B>, you
+can see that the first implementation is used for a bit, then the second
+implementation is swapped in and that is used.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The difference between <I>Proxy</I> and
+<I>State</I> is in the problems that are solved. The common uses for
+<I>Proxy</I> as described in <I>Design Patterns</I> are:</FONT><BR></DIV>
+<OL>
+<LI><FONT FACE="Verdana"><B>	</B></FONT><FONT FACE="Georgia"><B>Remote
+proxy</B>. This proxies for an object in a different address space. A remote
+proxy is created for you automatically by the RMI compiler <B>rmic</B> as it
+creates stubs and
+skeletons.</FONT><LI><FONT FACE="Verdana"><B>	</B></FONT><FONT FACE="Georgia"><B>Virtual
+proxy</B>. This provides &#8220;lazy initialization&#8221; to create expensive
+objects on
+demand.</FONT><LI><FONT FACE="Verdana"><B>	</B></FONT><FONT FACE="Georgia"><B>Protection
+proxy</B>. Used when you don&#8217;t want the client programmer to have full
+access to the proxied
+object.</FONT><LI><FONT FACE="Verdana"><B>	</B></FONT><FONT FACE="Georgia"><B>Smart
+reference</B>. To add additional actions when the proxied object is accessed.
+For example, or to keep track of the number of references that are held for a
+particular object, in order to implement the <I>copy-on-write</I> idiom and
+prevent object aliasing. A simpler example is keeping track of the number of
+calls to a particular
+method.</FONT></OL><DIV ALIGN="LEFT"><FONT FACE="Georgia">You could look at a
+Java reference as a kind of protection proxy, since it controls access to the
+actual object on the heap (and ensures, for example, that you don&#8217;t use a
+<B>null </B>reference).</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">[[ Rewrite this: In <I>Design
+Patterns</I>, <I>Proxy</I> and <I>State</I> are not seen as related to each
+other because the two are given (what I consider arbitrarily) different
+structures. <I>State</I>, in particular, uses a separate implementation
+hierarchy but this seems to me to be unnecessary unless you have decided that
+the implementation is not under your control (certainly a possibility, but if
+you own all the code there seems to be no reason not to benefit from the
+elegance and helpfulness of the single base class). In addition, <I>Proxy</I>
+need not use the same base class for its implementation, as long as the proxy
+object is controlling access to the object it &#8220;fronting&#8221; for.
+Regardless of the specifics, in both <I>Proxy </I>and <I>State</I> a surrogate
+is passing method calls through to an implementation
+object.]]]</FONT><A NAME="_Toc476705901"></A><A NAME="_Toc524504103"></A><BR></DIV>
+<A NAME="Heading29"></A><H2 ALIGN="LEFT">
+StateMachine</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">While <I>State</I> has a way to allow the
+client programmer to change the implementation, <I>StateMachine</I> imposes a
+structure to automatically change the implementation from one object to the
+next. The current implementation represents the state that a system is in, and
+the system behaves differently from one state to the next (because it uses
+<I>State</I>). Basically, this is a &#8220;state machine&#8221; using
+objects.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The code that moves the system from one
+state to the next is often a <I>Template Method</I>, as seen in the following
+framework for a basic state machine. We start by defining a tagging interface
+for input objects:</FONT><BR></DIV>
+
+<PRE>//: c04:statemachine:Input.java
+// Inputs to a state machine
+package c04.statemachine;
+
+public interface Input {} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">Each
+state can be <B>run(&#160;)</B> to perform its behavior, and (in this design)
+you can also pass it an <B>Input</B> object so it can tell you what new state to
+move to based on that <B>Input</B>. The key distinction between this design and
+the next is that here, each <B>State</B> object decides what other states it can
+move to, based on the <B>Input</B>, whereas in the subsequent design all of the
+state transitions are held in a single table. Another way to put it is that
+here, each <B>State</B> object has its own little <B>State</B> table, and in the
+subsequent design there is a single master state transition table for the whole
+system.</FONT><BR></DIV>
+
+<PRE>//: c04:statemachine:State.java
+// A State has an operation, and can be moved
+// into the next State given an Input:
+package c04.statemachine;
+
+public interface State {
+  void run();
+  State next(Input i);
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">The <B>StateMachine</B>
+keeps track of the current state, which is initialized by the constructor. The
+<B>runAll(&#160;)</B> method takes an <B>Iterator</B> to a list of <B>Input</B>
+objects (an <B>Iterator</B> is used here for convenience and simplicity; the
+important issue is that the input information comes from somewhere). This method
+not only moves to the next state, but it also calls <B>run(&#160;)</B> for each
+state object &#8211; thus you can see it&#8217;s an expansion of the idea of the
+<B>State</B> pattern, since <B>run(&#160;)</B> does something different
+depending on the state that the system is in.</FONT><BR></DIV>
+
+<PRE>//: c04:statemachine:StateMachine.java
+// This state machine takes an Iterator of Inputs
+// to move from State to State using a template
+// method.
+package c04.statemachine;
+import java.util.*;
+
+public abstract class StateMachine {
+  private State currentState;
+  public StateMachine(State initialState) {
+    currentState = initialState;
+    currentState.run();
+  }
+  // Template method:
+  public final void 
+  runAll(Iterator inputs) {
+    while(inputs.hasNext()) {
+      Input i = (Input)inputs.next();
+      System.out.println(i);
+      currentState = currentState.next(i);
+      currentState.run();
+    }
+  }
+}  ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">I&#8217;ve also treated
+<B>runAll(&#160;)</B> as a template method. This is typical, but certainly not
+required &#8211; you could concievably want to override it, but typically the
+behavior change will occur in <B>State</B>&#8217;s <B>run(&#160;)</B>
+instead.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">At this point the basic framework for
+this style of <I>StateMachine</I> (where each state decides the next states) is
+complete. As an example, I&#8217;ll use a fancy mousetrap that can move through
+several states in the process of trapping a
+mouse</FONT><A NAME="fnB9" HREF="#fn9">[9]</A><FONT FACE="Georgia">. The mouse
+classes and information are stored in the <B>mouse</B> package, including a
+class representing all the possible moves that a mouse can make, which will be
+the inputs to the state machine:</FONT><BR></DIV>
+
+<PRE>//: c04:mouse:MouseAction.java
+// This state machine takes an Iterator of Inputs
+// to move from State to State using a template
+// method.
+package c04.mouse;
+import c04.statemachine.*;
+
+public class MouseAction implements Input {
+  private String action;
+  public MouseAction(String a) { action = a; }
+  public String toString() { return action; }
+  public int hashCode() { 
+    return action.hashCode();
+  }
+  public boolean equals(Object o) {
+    return (o instanceof MouseAction)
+      &amp;&amp; action.equals(((MouseAction)o).action);
+  }
+  public static MouseAction
+    appears = new MouseAction("mouse appears"),
+    runsAway = new MouseAction("mouse runs away"),
+    enters = new MouseAction("mouse enters trap"),
+    escapes = new MouseAction("mouse escapes"),
+    trapped = new MouseAction("mouse trapped"),
+    removed = new MouseAction("mouse removed");
+} ///:~
+</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">You&#8217;ll note that
+<B>hashCode(&#160;)</B> and <B>equals(&#160;)</B> have been overriden so that
+<B>MouseAction</B> objects can be used as keys in a <B>HashMap</B>, but in the
+first version of the mousetrap we won&#8217;t do this. Also, each possible move
+by a mouse is enumerated as a <B>static MouseAction</B> object.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">For creating test code, a sequence of
+mouse inputs is provided from a text file:</FONT><BR></DIV>
+
+<PRE>//:! c04:mouse:MouseMoves.txt
+mouse appears
+mouse runs away
+mouse appears
+mouse enters trap
+mouse escapes
+mouse appears
+mouse enters trap
+mouse trapped
+mouse removed
+mouse appears
+mouse runs away
+mouse appears
+mouse enters trap
+mouse trapped
+mouse removed
+///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">To read this file in a generic
+fashion, here is a general-purpose tool called
+<B>StringList</B>:</FONT><BR></DIV>
+
+<PRE>//: com:bruceeckel:util:StringList.java
+// General-purpose tool that reads a file of text
+// lines into a List, one line per list.
+package com.bruceeckel.util;
+import java.io.*;
+import java.util.*;
+
+public class StringList extends ArrayList {
+  public StringList(String textFile) {
+    try {
+      BufferedReader inputs = 
+        new BufferedReader (
+          new FileReader(textFile));
+      String line;
+      while((line = inputs.readLine()) != null)
+        add(line.trim());
+    } catch (IOException e) {
+      e.printStackTrace(System.err);
+    }
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">This <B>StringList</B> only
+holds <B>Object</B>s, just as an <B>ArrayList</B> does, so we need an adapter to
+turn the <B>String</B>s into <B>MouseAction</B>s:</FONT><BR></DIV>
+
+<PRE>//: c04:mouse:MouseMoveList.java
+// A transformer to produce a
+// List of MouseAction objects.
+package c04.mouse;
+import java.util.*;
+import com.bruceeckel.util.*;
+
+public class MouseMoveList extends ArrayList {
+  public MouseMoveList(Iterator sit) {
+    while(sit.hasNext())
+      add(new MouseAction((String)sit.next()));
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">The <B>MouseMoveList</B>
+looks a bit like a decorator, and acts a bit like an adapter. However, an
+adapter changes one interface to another, and a decorator adds functionality or
+data. <B>MouseMoveList</B> changes the contents of the container, so it might be
+thought of as a <I>Transformer</I>.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">With these tools in place, it&#8217;s now
+possible to create the first version of the mousetrap program. Each <B>State</B>
+subclass defines it&#8217;s <B>run(&#160;)</B> behavior, and also establishes
+its next state with an <B>if-else</B> clause:</FONT><BR></DIV>
+
+<PRE>//: c04:mousetrap1:MouseTrapTest.java
+// State Machine pattern using 'if' statements
+// to determine the next state.
+package c04.mousetrap1;
+import c04.mouse.*;
+import c04.statemachine.*;
+import com.bruceeckel.util.*;
+import java.util.*;
+import java.io.*;
+import com.bruceeckel.test.*;
+
+// A different subclass for each state:
+
+class Waiting implements State {
+  public void run() { 
+    System.out.println(
+      "Waiting: Broadcasting cheese smell");
+  }
+  public State next(Input i) {
+    MouseAction ma = (MouseAction)i;
+    if(ma.equals(MouseAction.appears))
+      return MouseTrap.luring;
+    return MouseTrap.waiting;
+  }
+}
+
+class Luring implements State {
+  public void run() {
+    System.out.println(
+      "Luring: Presenting Cheese, door open");
+  }
+  public State next(Input i) {
+    MouseAction ma = (MouseAction)i;
+    if(ma.equals(MouseAction.runsAway))
+      return MouseTrap.waiting;
+    if(ma.equals(MouseAction.enters))
+      return MouseTrap.trapping;
+    return MouseTrap.luring;
+  }
+}
+
+class Trapping implements State {
+  public void run() {
+    System.out.println("Trapping: Closing door");
+  }
+  public State next(Input i) {
+    MouseAction ma = (MouseAction)i;
+    if(ma.equals(MouseAction.escapes))
+      return MouseTrap.waiting;
+    if(ma.equals(MouseAction.trapped))
+      return MouseTrap.holding;
+    return MouseTrap.trapping;
+  }
+}
+
+class Holding implements State {
+  public void run() {
+    System.out.println("Holding: Mouse caught");
+  }
+  public State next(Input i) {
+    MouseAction ma = (MouseAction)i;
+    if(ma.equals(MouseAction.removed))
+      return MouseTrap.waiting;
+    return MouseTrap.holding;
+  }
+}
+
+class MouseTrap extends StateMachine {
+  public static State 
+    waiting = new Waiting(),
+    luring = new Luring(),
+    trapping = new Trapping(),
+    holding = new Holding();
+  public MouseTrap() {
+    super(waiting); // Initial state
+  }
+}
+
+public class MouseTrapTest extends UnitTest {
+  MouseTrap trap = new MouseTrap();
+  MouseMoveList moves = 
+    new MouseMoveList(
+      new StringList("../mouse/MouseMoves.txt")
+        .iterator());
+  public void test() {
+    trap.runAll(moves.iterator());
+  }
+  public static void main(String args[]) {
+    new MouseTrapTest().test();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">The <B>StateMachine</B>
+class simply defines all the possible states as static objects, and also sets up
+the initial state. The <B>UnitTest</B> creates a <B>MouseTrap</B> and then tests
+it with all the inputs from a <B>MouseMoveList</B>.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">While the</FONT><FONT FACE="Georgia"> use
+of <B>if-else</B> statements inside the <B>next(&#160;)</B> methods is perfectly
+reasonable, managing a large number of these could become difficult. Another
+approach is to create tables inside each <B>State</B> object defining the
+various next states based on the input.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Initially, this seems like it ought to be
+quite simple. You should be able to define a <B>static</B> table in each
+<B>State</B> subclass that defines the transitions in terms of the other
+<B>State</B> objects. However, it turns out that this approach generates cyclic
+initialization dependencies. To solve the problem, I&#8217;ve had to delay the
+initialization of the tables until the first time that the <B>next(&#160;)</B>
+method is called for a particular <B>State</B> object. Initially, the
+<B>next(&#160;)</B> methods can appear a little strange because of
+this.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The <B>StateT</B> class is an
+implementation of <B>State</B> (so that the same <B>StateMachine</B> class can
+be used from the previous example) that adds a <B>Map</B> and a method to
+initialize the map from a two-dimensional array. The <B>next(&#160;)</B> method
+has a base-class implementation which must be called from the overridden derived
+class <B>next(&#160;)</B> methods after they test for a <B>null Map</B> (and
+initialize it if it&#8217;s <B>null</B>):</FONT><BR></DIV>
+
+<PRE>//: c04:mousetrap2:MouseTrap2Test.java
+// A better mousetrap using tables
+package c04.mousetrap2;
+import c04.mouse.*;
+import c04.statemachine.*;
+import java.util.*;
+import java.io.*;
+import com.bruceeckel.util.*;
+import com.bruceeckel.test.*;
+
+abstract class StateT implements State {
+  protected Map transitions = null;
+  protected void init(Object[][] states) {
+    transitions = new HashMap();
+    for(int i = 0; i &lt; states.length; i++)
+      transitions.put(states[i][0], states[i][1]);
+  }
+  public abstract void run();
+  public State next(Input i) {
+    if(transitions.containsKey(i))
+      return (State)transitions.get(i);
+    else
+      throw new RuntimeException(
+        "Input not supported for current state");
+  }
+}
+
+class MouseTrap extends StateMachine {
+  public static State
+    waiting = new Waiting(),
+    luring = new Luring(),
+    trapping = new Trapping(),
+    holding = new Holding();
+  public MouseTrap() {
+    super(waiting); // Initial state
+  }
+}
+
+class Waiting extends StateT {
+  public void run() { 
+    System.out.println(
+      "Waiting: Broadcasting cheese smell");
+  }
+  public State next(Input i) {
+    // Delayed initialization:
+    if(transitions == null)
+      init(new Object[][] { 
+        { MouseAction.appears, MouseTrap.luring },
+      });
+    return super.next(i);
+  }
+}
+
+class Luring extends StateT {
+  public void run() {
+    System.out.println(
+      "Luring: Presenting Cheese, door open");
+  }
+  public State next(Input i) {
+    if(transitions == null)
+      init(new Object[][] { 
+        { MouseAction.enters, MouseTrap.trapping },
+        { MouseAction.runsAway, MouseTrap.waiting },
+      });
+    return super.next(i);
+  }
+}
+
+class Trapping extends StateT {
+  public void run() {
+    System.out.println("Trapping: Closing door");
+  }
+  public State next(Input i) {
+    if(transitions == null)
+      init(new Object[][] { 
+        { MouseAction.escapes, MouseTrap.waiting },
+        { MouseAction.trapped, MouseTrap.holding },
+      });
+    return super.next(i);
+  }
+}
+
+class Holding extends StateT {
+  public void run() {
+    System.out.println("Holding: Mouse caught");
+  }
+  public State next(Input i) {
+    if(transitions == null)
+      init(new Object[][] { 
+        { MouseAction.removed, MouseTrap.waiting },
+      });
+    return super.next(i);
+  }
+}
+
+public class MouseTrap2Test extends UnitTest {
+  MouseTrap trap = new MouseTrap();
+  MouseMoveList moves = 
+    new MouseMoveList(
+      new StringList("../mouse/MouseMoves.txt")
+        .iterator());
+  public void test() {
+    trap.runAll(moves.iterator());
+  }
+  public static void main(String args[]) {
+    new MouseTrap2Test().test();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">The rest of the code is
+identical &#8211; the difference is in the <B>next(&#160;)</B> methods and the
+<B>StateT</B> class.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">If you have to create and maintain a lot
+of <B>State</B> classes, this approach is an improvement, since it&#8217;s
+easier to quickly read and understand the state transitions from looking at the
+table.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><A NAME="_Toc524504104"></A><BR></DIV>
+<A NAME="Heading30"></A><H2 ALIGN="LEFT">
+Table-Driven State Machine<A NAME="AAA"></A></H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The advantage of the previous design is
+that all the information about a state, including the state transition
+information, is located within the state class itself. This is generally a good
+design principle.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">However, in a pure state machine, the
+machine can be completely represented by a single state-transition table. This
+has the advantage of locating all the information about the state machine in a
+single place, which means that you can more easily create and maintain the table
+based on a classic state-transition diagram.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The classic state-transition diagram uses
+a circle to represent each state, and lines from the state pointing to all
+states that state can transition into. Each transition line is annotated with
+conditions for transition and an action during transition. Here&#8217;s what it
+looks like:</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">(Simple State Machine
+Diagram)</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Goals:</FONT><BR></DIV>
+<UL>
+<LI><FONT FACE="Georgia">translation of state
+diagram</FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia">Vector of
+change: the state diagram
+representation</FONT><LI><FONT FACE="Georgia">implementation</FONT><LI><FONT FACE="Georgia">excess
+of states (you could represent every single change with a new
+state)</FONT><LI><FONT FACE="Georgia">and
+flexibility</FONT></UL><DIV ALIGN="LEFT"><FONT FACE="Georgia">Observations:</FONT><BR></DIV>
+<UL>
+<LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia">States are trivial &#8211;
+no information or functions/data, just an
+identity</FONT><LI><FONT FACE="Georgia">like the State
+pattern!</FONT><LI><FONT FACE="Georgia">machine governs the move from state to
+state</FONT><LI><FONT FACE="Georgia">to
+flyweight</FONT><LI><FONT FACE="Georgia">state may move to many
+others</FONT><LI><FONT FACE="Georgia">&amp; action functions must also be
+external to states</FONT><LI><FONT FACE="Georgia">description in a single table
+containing all variations, for ease of
+configuration</FONT></UL><DIV ALIGN="LEFT"><FONT FACE="Georgia">Example:</FONT><BR></DIV>
+<UL>
+<LI><FONT FACE="Georgia">Machine &amp; Table-Driven
+Code</FONT><LI><FONT FACE="Georgia">a vending
+machine</FONT><LI><FONT FACE="Georgia">several other
+patterns</FONT><LI><FONT FACE="Georgia">common state-machine code from specific
+application (like template method)</FONT><LI><FONT FACE="Georgia">input causes a
+seek for appropriate solution (like chain of
+responsibility)</FONT><LI><FONT FACE="Georgia">and transitions are encapsulated
+in function objects (objects that hold
+functions)</FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia">Java
+constraint: methods are not first-class
+objects</FONT></UL><DIV ALIGN="LEFT"><FONT FACE="Georgia"><IMG HEIGHT=398 WIDTH=545 SRC="TIPatt01.gif"></FONT><A NAME="_Toc524504105"></A><BR></DIV>
+<A NAME="Heading31"></A><H3 ALIGN="LEFT">
+The State class</H3>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The <B>State</B> class is distinctly
+different from before, since it is really just a placeholder with a name. Thus
+it is not inherited from previous <B>State</B> classes:</FONT><BR></DIV>
+
+<PRE>//: c04:statemachine2:State.java
+package c04.statemachine2;
+public class State {
+  private String name;
+  public State(String nm) { name = nm; }
+  public String toString() { return name; }
+} ///:~</PRE><DIV ALIGN="LEFT"><A NAME="_Toc524504106"></A><BR></DIV>
+<A NAME="Heading32"></A><H3 ALIGN="LEFT">
+Conditions for transition</H3>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">In the state transition diagram, an input
+is tested to see if it meets the condition necessary to transfer to the state
+under question. As before, the <B>Input</B> is just a tagging
+interface:</FONT><BR></DIV>
+
+<PRE>//: c04:statemachine2:Input.java
+// Inputs to a state machine
+package c04.statemachine2;
+
+public interface Input {} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">The
+<B>Condition</B> evaluates the <B>Input</B> to decide whether this row in the
+table is the correct transition:</FONT><BR></DIV>
+
+<PRE>//: c04:statemachine2:Condition.java
+// Condition function object for state machine
+package c04.statemachine2;
+
+public interface Condition {
+  boolean condition(Input i);
+} ///:~</PRE><DIV ALIGN="LEFT"><A NAME="_Toc524504107"></A><BR></DIV>
+<A NAME="Heading33"></A><H3 ALIGN="LEFT">
+Transition actions</H3>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">If the <B>Condition</B> returns
+<B>true</B>, then the transition to a new state is made, and as that transition
+is made some kind of action occurs (in the previous state machine design, this
+was the <B>run(&#160;)</B> method):</FONT><BR></DIV>
+
+<PRE>//: c04:statemachine2:Transition.java
+// Transition function object for state machine
+package c04.statemachine2;
+
+public interface Transition {
+  void transition(Input i);
+} ///:~<A NAME="_Toc524504108"></A></PRE><A NAME="Heading34"></A><H3 ALIGN="LEFT">
+The table</H3>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">With these classes in place, we can set
+up a 3-dimensional table where </FONT><FONT FACE="Georgia">each row completely
+describes a state. The first element in the row is the current state, and the
+rest of the elements are each a row indicating what the <I>type </I>of the input
+can be, the condition that must be satisfied in order for this state change to
+be the correct one, the action that happens during transition, and the new state
+to move into. Note that the <B>Input</B> object is not just used for its type,
+it is also a <I>Messenger</I> object that carries information to the
+<B>Condition</B> and <B>Transition</B> objects:</FONT><BR></DIV>
+
+<PRE>{ {CurrentState},
+  {Input, Condition(Input), Transition(Input), Next},
+  {Input, Condition(Input), Transition(Input), Next},
+  {Input, Condition(Input), Transition(Input), Next},
+   ...
+}</PRE><DIV ALIGN="LEFT"><BR></DIV>
+
+<PRE></PRE><DIV ALIGN="LEFT"><A NAME="_Toc524504109"></A><BR></DIV>
+<A NAME="Heading35"></A><H3 ALIGN="LEFT">
+The basic machine</H3>
+
+<PRE>//: c04:statemachine2:StateMachine.java
+// A table-driven state machine
+package c04.statemachine2;
+import java.util.*;
+
+public class StateMachine {
+  private State state;
+  private Map map = new HashMap();
+  public StateMachine(State initial) {
+    state = initial;
+  }
+  public void buildTable(Object[][][] table) {
+    for(int i = 0; i &lt; table.length; i++) {
+      Object[][] row = table[i];
+      Object currentState = row[0][0];
+      List transitions = new ArrayList();
+      for(int j = 1; j &lt; row.length; j++)
+        transitions.add(row[j]);
+      map.put(currentState, transitions);
+    }
+  }
+  public void nextState(Input input) {
+    Iterator it=((List)map.get(state)).iterator();
+    while(it.hasNext()) {
+      Object[] tran = (Object[])it.next();
+      if(input == tran[0] || 
+         input.getClass() == tran[0]) {
+        if(tran[1] != null) {
+          Condition c = (Condition)tran[1];
+          if(!c.condition(input))
+            continue; // Failed test
+        }
+        if(tran[2] != null)
+          ((Transition)tran[2]).transition(input);
+        state = (State)tran[3];
+        return;
+      }
+    }
+    throw new RuntimeException(
+      "Input not supported for current state");
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><A NAME="_Toc524504110"></A><BR></DIV>
+<A NAME="Heading36"></A><H3 ALIGN="LEFT">
+Simple vending machine</H3>
+
+<PRE>//: c04:vendingmachine:VendingMachine.java
+// Demonstrates use of StateMachine.java
+package c04.vendingmachine;
+import c04.statemachine2.*;
+
+final class VM extends State {
+  private VM(String nm) { super(nm); }
+  public final static VM
+    quiescent = new VM("Quiesecent"),
+    collecting = new VM("Collecting"),
+    selecting = new VM("Selecting"),
+    unavailable = new VM("Unavailable"),
+    wantMore = new VM("Want More?"),
+    noChange = new VM("Use Exact Change Only"),
+    makesChange = new VM("Machine makes change");
+}
+final class HasChange implements Input {
+  private String name;
+  private HasChange(String nm) { name = nm; }
+  public String toString() { return name; }
+  public final static HasChange
+    yes = new HasChange("Has change"),
+    no = new HasChange("Cannot make change");
+}
+class ChangeAvailable extends StateMachine {
+  public ChangeAvailable() {
+    super(VM.makesChange);
+    buildTable(new Object[][][]{
+      { {VM.makesChange}, // Current state
+        // Input, test, transition, next state:
+        {HasChange.no, null, null, VM.noChange}},
+      { {VM.noChange}, // Current state
+        // Input, test, transition, next state:
+        {HasChange.yes, null, 
+         null, VM.makesChange}},
+    });
+  }
+}
+final class Money implements Input {
+  private String name;
+  private int value;
+  private Money(String nm, int val) {
+    name = nm;
+    value = val;
+  }
+  public String toString() { return name; }
+  public int getValue() { return value; }
+  public final static Money
+    quarter = new Money("Quarter", 25),
+    dollar = new Money("Dollar", 100);
+}
+final class Quit implements Input {
+  private Quit() {}
+  public String toString() { return "Quit"; }
+  public final static Quit quit = new Quit();
+}
+final class FirstDigit implements Input {
+  private String name;
+  private int value;
+  private FirstDigit(String nm, int val) {
+    name = nm;
+    value = val;
+  }
+  public String toString() { return name; }
+  public int getValue() { return value; }
+  public final static FirstDigit
+    A = new FirstDigit("A", 0),
+    B = new FirstDigit("B", 1),
+    C = new FirstDigit("C", 2),
+    D = new FirstDigit("D", 3);
+}
+final class SecondDigit implements Input {
+  private String name;
+  private int value;
+  private SecondDigit(String nm, int val) {
+    name = nm;
+    value = val;
+  }
+  public String toString() { return name; }
+  public int getValue() { return value; }
+  public final static SecondDigit
+    one = new SecondDigit("one", 0),
+    two = new SecondDigit("two", 1),
+    three = new SecondDigit("three", 2),
+    four = new SecondDigit("four", 3);
+}
+class ItemSlot {
+  int price;
+  int quantity;
+  static int counter = 0;
+  String id = Integer.toString(counter++);
+  public ItemSlot(int prc, int quant) {
+    price = prc;
+    quantity = quant;
+  }
+  public String toString() { return id; }
+  public int getPrice() { return price; }
+  public int getQuantity() { return quantity; }
+  public void decrQuantity() { quantity--; }
+}
+public class VendingMachine extends StateMachine{
+  StateMachine changeAvailable = 
+    new ChangeAvailable();
+  int amount = 0;
+  FirstDigit first = null;
+  ItemSlot[][] items = new ItemSlot[4][4];
+  Condition notEnough = new Condition() {
+    public boolean condition(Input input) {
+      int i1 = first.getValue();
+      int i2 = ((SecondDigit)input).getValue();
+      return items[i1][i2].getPrice() &gt; amount;
+    }
+  };
+  Condition itemAvailable = new Condition() {
+    public boolean condition(Input input) {
+      int i1 = first.getValue();
+      int i2 = ((SecondDigit)input).getValue();
+      return items[i1][i2].getQuantity() &gt; 0;
+    }
+  };
+  Condition itemNotAvailable = new Condition() {
+    public boolean condition(Input input) {
+      return !itemAvailable.condition(input);
+      //int i1 = first.getValue();
+      //int i2 = ((SecondDigit)input).getValue();
+      //return items[i1][i2].getQuantity() == 0;
+    }
+  };
+  Transition clearSelection = new Transition() {
+    public void transition(Input input) {
+      int i1 = first.getValue();
+      int i2 = ((SecondDigit)input).getValue();
+      ItemSlot is = items[i1][i2];
+      System.out.println(
+        "Clearing selection: item " + is +
+        " costs " + is.getPrice() +
+        " and has quantity " + is.getQuantity());
+      first = null;
+    }
+  };
+  Transition dispense = new Transition() {
+    public void transition(Input input) {
+      int i1 = first.getValue();
+      int i2 = ((SecondDigit)input).getValue();
+      ItemSlot is = items[i1][i2];
+      System.out.println("Dispensing item " + 
+        is + " costs " + is.getPrice() +
+        " and has quantity " + is.getQuantity());
+      items[i1][i2].decrQuantity();
+      System.out.println("New Quantity " + 
+        is.getQuantity());
+      amount -= is.getPrice();
+      System.out.println("Amount remaining " + 
+        amount);
+    }
+  };
+  Transition showTotal = new Transition() {
+    public void transition(Input input) {
+      amount += ((Money)input).getValue();
+      System.out.println("Total amount = " + 
+        amount);
+    }
+  };
+  Transition returnChange = new Transition() {
+    public void transition(Input input) {
+      System.out.println("Returning " + amount);
+      amount = 0;
+    }
+  };
+  Transition showDigit = new Transition() {
+    public void transition(Input input) {
+      first = (FirstDigit)input;
+      System.out.println("First Digit= "+ first);
+    }
+  };
+  public VendingMachine() {
+    super(VM.quiescent); // Initial state
+    for(int i = 0; i &lt; items.length; i++)
+      for(int j = 0; j &lt; items[i].length; j++)
+        items[i][j] = new ItemSlot((j+1)*25, 5);
+    items[3][0] = new ItemSlot(25, 0);
+    buildTable(new Object[][][]{
+      { {VM.quiescent}, // Current state
+        // Input, test, transition, next state:
+        {Money.class, null, 
+         showTotal, VM.collecting}},
+      { {VM.collecting}, // Current state
+        // Input, test, transition, next state:
+        {Quit.quit, null, 
+         returnChange, VM.quiescent},
+        {Money.class, null, 
+         showTotal, VM.collecting},
+        {FirstDigit.class, null, 
+         showDigit, VM.selecting}},
+      { {VM.selecting}, // Current state
+        // Input, test, transition, next state:
+        {Quit.quit, null, 
+         returnChange, VM.quiescent},
+        {SecondDigit.class, notEnough, 
+         clearSelection, VM.collecting},
+        {SecondDigit.class, itemNotAvailable, 
+         clearSelection, VM.unavailable},
+        {SecondDigit.class, itemAvailable, 
+         dispense, VM.wantMore}},
+      { {VM.unavailable}, // Current state
+        // Input, test, transition, next state:
+        {Quit.quit, null, 
+         returnChange, VM.quiescent},
+        {FirstDigit.class, null, 
+         showDigit, VM.selecting}},
+      { {VM.wantMore}, // Current state
+        // Input, test, transition, next state:
+        {Quit.quit, null, 
+         returnChange, VM.quiescent},
+        {FirstDigit.class, null, 
+         showDigit, VM.selecting}},
+    });
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><A NAME="_Toc524504111"></A><BR></DIV>
+<A NAME="Heading37"></A><H3 ALIGN="LEFT">
+Testing the machine</H3>
+
+<PRE>//: c04:vendingmachine:VendingMachineTest.java
+// Demonstrates use of StateMachine.java
+package c04.vendingmachine;
+import c04.statemachine2.*;
+import com.bruceeckel.test.*;
+
+public class VendingMachineTest extends UnitTest{
+  VendingMachine vm = new VendingMachine();
+  Input[] inputs = {
+    Money.quarter,
+    Money.quarter,
+    Money.dollar,
+    FirstDigit.A,
+    SecondDigit.two,
+    FirstDigit.A,
+    SecondDigit.two,
+    FirstDigit.C,
+    SecondDigit.three,
+    FirstDigit.D,
+    SecondDigit.one,
+    Quit.quit,
+  };
+  public void test() {
+    for(int i = 0; i &lt; inputs.length; i++)
+      vm.nextState(inputs[i]);
+  }
+  public static void main(String[] args) {
+    new VendingMachineTest().test();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><A NAME="_Toc524504112"></A><BR></DIV>
+<A NAME="Heading38"></A><H2 ALIGN="LEFT">
+Tools</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Another approach, as your state machine
+gets bigger, is to use an automation tool whereby you configure a table and let
+the tool generate the state machine code for you. This can be created yourself
+using a language like Python, but there are also free, open-source tools such as
+<I>Libero</I>, at <A HREF="http://www.imatix.com">http://www.imatix.com</A>.
+</FONT><A NAME="_Toc524504113"></A><BR></DIV>
+<A NAME="Heading39"></A><H2 ALIGN="LEFT">
+Exercises</H2>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create an example of the
+&#8220;virtual
+proxy.&#8221;</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create
+an example of the &#8220;Smart reference&#8221; proxy where you keep count of
+the number of method calls to a particular
+object.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create a
+program similar to certain DBMS systems that only allow a certain number of
+connections at any time. To implement this, use a singleton-like system that
+controls the number of &#8220;connection&#8221; objects that it creates. When a
+user is finished with a connection, the system must be informed so that it can
+check that connection back in to be reused. To guarantee this, provide a proxy
+object instead of a reference to the actual connection, and design the proxy so
+that it will cause the connection to be released back to the
+system.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Using the
+<I>State</I>,<I> </I>make a class called <B>UnpredictablePerson</B> which
+changes the kind of response to its <B>hello(&#160;)</B> method depending on
+what kind of <B>Mood</B> it&#8217;s in. Add an additional kind of <B>Mood</B>
+called
+<B>Prozac</B>.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create
+a simple copy-on write
+implementation.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Apply
+<B>TransitionTable.java</B> to the &#8220;Washer&#8221;
+problem.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create a
+<I>StateMachine</I> system whereby the current state along with input
+information determines the next state that the system will be in. To do this,
+each state must store a reference back to the proxy object (the state
+controller) so that it can request the state change. Use a <B>HashMap</B> to
+create a table of states, where the key is a <B>String</B> naming the new state
+and the value is the new state object. Inside each state subclass override a
+method <B>nextState(&#160;)</B> that has its own state-transition table. The
+input to <B>nextState(&#160;)</B> should be a single word that comes from a text
+file containing one word per
+line.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify the
+previous exercise so that the state machine can be configured by
+creating/modifying a single multi-dimensional
+array.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify the
+&#8220;mood&#8221; exercise from the previous session so that it becomes a state
+machine using
+StateMachine.java</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create
+an elevator state machine system using
+StateMachine.java</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create
+a heating/air-conditioning system using
+StateMachine.java</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">A
+<I>generator</I> is an object that produces other objects, just like a factory,
+except that the generator function doesn&#8217;t require any arguments. Create a
+<B>MouseMoveGenerator</B> which produces correct <B>MouseMove</B> actions as
+outputs each time the generator function is called (that is, the mouse must move
+in the proper sequence, thus the possible moves are based on the previous move
+&#8211; it&#8217;s another state machine). Add a method <B>iterator( ) </B>to
+produce an iterator, but this method should take an <B>int</B> argument that
+specifies the number of moves to produce before <B>hasNext( )</B> returns
+<B>false</B>.</FONT></OL><DIV ALIGN="LEFT"><BR></DIV>
+<HR><DIV ALIGN="LEFT"><A NAME="fn9" HREF="#fnB9">[9]</A><FONT FACE="Georgia"> No
+mice were harmed in the creation of this example.</FONT><BR></DIV>
+
+<DIV ALIGN="CENTER"><IMG SRC="images/r2hGlyph.gif"><BR>
+<A HREF="mailto:chris@sunpack.com">chris@sunpack.com</A> Last Update:09/08/2001</DIV>
+
+</BODY>
+
+</HTML>

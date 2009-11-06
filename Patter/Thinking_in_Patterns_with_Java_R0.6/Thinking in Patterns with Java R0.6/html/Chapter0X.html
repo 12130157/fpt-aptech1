@@ -1,0 +1,623 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:41
+Translation Platform:Win32
+Number of Output files:18
+This File:Chapter0X.html
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>X: Decorators: dynamic type selection</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview-head.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana" size = "-1">
+    [ <a href="README-HTML.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.html">Revision History</a> ]
+    [ <a href="Building-Code.html">Build the Code</a> ]
+    [ <a href="TIPatterns-Corrections.html">Report an Error</a> ] <br>
+    [ <a href="http://www.mindview.net/MailingList.html">Free Newsletter</a> ]
+    [ <a href="http://www.mindview.net/Training.html">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CPPServices/#ConsultingServices">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana">
+  Thinking in Patterns <font size="4">with Java</font>, Revision 0.6</FONT></H2>
+  <H3><FONT FACE="Verdana">&copy;2001 by Bruce Eckel</FONT></H3>
+  
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter04.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter05.html">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc476705902"></A><A NAME="_Toc524504114"></A><A NAME="Heading40"></A><FONT FACE = "Verdana"><H1 ALIGN="LEFT">
+X: Decorators: dynamic type selection</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia" SIZE=4>The use of layered objects to
+dynamically and transparently add responsibilities to individual objects is
+referred to as the <I>decorator</I> pattern.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Used when subclassing creates too many
+(&amp; inflexible) classes</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">All decorators that wrap around the
+original object must have the same basic interface</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Dynamic proxy/surrogate?</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This accounts for the odd inheritance
+structure</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Tradeoff: coding is more complicated when
+using decorators</FONT><A NAME="_Toc524504115"></A><BR></P></DIV>
+<A NAME="Heading41"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Basic decorator structure</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><IMG SRC="TIPatt02.gif"></FONT><A NAME="_Toc524504116"></A><BR></P></DIV>
+<A NAME="Heading42"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+A coffee example</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Consider going down to the local coffee
+shop, <I>BeanMeUp</I>, for a coffee.  There are typically many different drinks
+on offer -- espressos, lattes, teas, iced coffees, hot chocolate to name a few,
+as well as a number of extras (which cost extra too) such as whipped cream or an
+extra shot of espresso. You can also make certain changes to your drink at no
+extra cost, such as asking for decaf coffee instead of regular coffee.
+</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Quite clearly if we are going to model
+all these drinks and combinations, there will be sizeable class diagrams. So for
+clarity we will only consider a subset of the coffees: Espresso, Espresso Con
+Panna, Caf&eacute; Late, Cappuccino and Caf&eacute; Mocha. We'll include 2
+extras - whipped cream ("whipped") and an extra shot of espresso; and three
+changes - decaf, steamed milk ("wet") and foamed milk
+("dry").</FONT><A NAME="_Toc524504117"></A><BR></P></DIV>
+<A NAME="Heading43"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Class for each combination </H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">One solution is to create an individual
+class for every combination. Each class describes the drink and is responsible
+for the cost etc. The resulting menu is huge, and a part of the class diagram
+would look something like this:</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">
+<IMG SRC="TIPatt03.gif"></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here is one of the combinations, a simple
+implementation of a Cappuccino:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>class</font> Cappuccino {
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 1;
+  <font color=#0000ff>private</font> String description = <font color=#004488>"Cappucino"</font>;
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getCost() {
+    <font color=#0000ff>return</font> cost;
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> description;
+  }
+}</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The key to using this method is to
+find the particular combination you want.  So, once you've found the drink you
+would like, here is how you would use it, as shown in the CoffeeShop class in
+the following code:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: cX:decorator:nodecorators:CoffeeShop.java</font>
+<font color=#009900>// Coffee example with no decorators</font>
+<font color=#0000ff>package</font> cX.decorator.nodecorators;
+<font color=#0000ff>import</font> com.bruceeckel.test.UnitTest;
+
+<font color=#0000ff>class</font> Espresso {}
+<font color=#0000ff>class</font> DoubleEspresso {}
+<font color=#0000ff>class</font> EspressoConPanna {}
+
+<font color=#0000ff>class</font> Cappuccino {
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 1;
+  <font color=#0000ff>private</font> String description = <font color=#004488>"Cappucino"</font>;
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getCost() {
+    <font color=#0000ff>return</font> cost;
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> description;
+  }
+}
+<font color=#0000ff>class</font> CappuccinoDecaf {}
+<font color=#0000ff>class</font> CappuccinoDecafWhipped {}
+<font color=#0000ff>class</font> CappuccinoDry {}
+<font color=#0000ff>class</font> CappuccinoDryWhipped {}
+<font color=#0000ff>class</font> CappuccinoExtraEspresso {}
+<font color=#0000ff>class</font> CappuccinoExtraEspressoWhipped {}
+<font color=#0000ff>class</font> CappuccinoWhipped {}
+
+<font color=#0000ff>class</font> CafeMocha {}
+<font color=#0000ff>class</font> CafeMochaDecaf {}
+<font color=#0000ff>class</font> CafeMochaDecafWhipped {
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 1.25f;
+  <font color=#0000ff>private</font> String description =
+    <font color=#004488>"Cafe Mocha decaf whipped cream"</font>;
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getCost() {
+    <font color=#0000ff>return</font> cost;
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> description;
+  }
+}
+<font color=#0000ff>class</font> CafeMochaExtraEspresso {}
+<font color=#0000ff>class</font> CafeMochaExtraEspressoWhipped {}
+<font color=#0000ff>class</font> CafeMochaWet {}
+<font color=#0000ff>class</font> CafeMochaWetWhipped {}
+<font color=#0000ff>class</font> CafeMochaWhipped {}
+
+<font color=#0000ff>class</font> CafeLatte {}
+<font color=#0000ff>class</font> CafeLatteDecaf {}
+<font color=#0000ff>class</font> CafeLatteDecafWhipped {}
+<font color=#0000ff>class</font> CafeLatteExtraEspresso {}
+<font color=#0000ff>class</font> CafeLatteExtraEspressoWhipped {}
+<font color=#0000ff>class</font> CafeLatteWet {}
+<font color=#0000ff>class</font> CafeLatteWetWhipped {}
+<font color=#0000ff>class</font> CafeLatteWhipped {}
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> CoffeeShop <font color=#0000ff>extends</font> UnitTest {
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> testCappuccino() {
+    <font color=#009900>// This just makes sure it will complete </font>
+    <font color=#009900>// without throwing an exception.</font>
+    <font color=#009900>// Create a plain cappuccino</font>
+    Cappuccino cappuccino = <font color=#0000ff>new</font> Cappuccino();
+    System.out.println(cappuccino.getDescription()
+      + <font color=#004488>": $"</font> + cappuccino.getCost());
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> testCafeMocha() {
+    <font color=#009900>// This just makes sure it will complete </font>
+    <font color=#009900>// without throwing an exception.</font>
+    <font color=#009900>// Create a decaf cafe mocha with whipped</font>
+    <font color=#009900>// cream</font>
+    CafeMochaDecafWhipped cafeMocha =
+      <font color=#0000ff>new</font> CafeMochaDecafWhipped();
+    System.out.println(cafeMocha.getDescription()
+      + <font color=#004488>": $"</font> + cafeMocha.getCost());
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String[] args) {
+    CoffeeShop shop = <font color=#0000ff>new</font> CoffeeShop();
+    shop.testCappuccino();
+    shop.testCafeMocha();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">And here is the
+corresponding output:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>Cappucino: $1.0Cafe Mocha decaf whipped cream: $1.25</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You
+can see that creating the particular combination you want is easy, since you are
+just creating an instance of a class. However, there are a number of problems
+with this approach. Firstly, the combinations are fixed statically so that any
+combination a customer may wish to order needs to be created up front. Secondly,
+the resulting menu is so huge that finding your particular combination is
+difficult and time consuming.</FONT><A NAME="_Toc524504118"></A><BR></P></DIV>
+<A NAME="Heading44"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+The decorator approach</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Another approach would be to break the
+drinks down into the various components such as espresso and foamed milk, and
+then let the customer combine the components to describe a particular coffee.
+</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In order to do this programmatically, we
+use the Decorator pattern.  A Decorator adds responsibility to a component by
+wrapping it, but the Decorator conforms to the interface of the component it
+encloses, so the wrapping is transparent. Decorators can also be nested without
+the loss of this transparency. </FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><IMG SRC="TIPatt04.gif"></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Methods invoked on the Decorator can in
+turn invoke methods in the component, and can of course perform processing
+before or after the invocation.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">So if we added <B>getTotalCost()</B> and
+<B>getDescription()</B> methods to the <B>DrinkComponent</B> interface, an
+Espresso looks like this:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>class</font> Espresso <font color=#0000ff>extends</font> Decorator {
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 0.75f;
+  <font color=#0000ff>private</font> String description = <font color=#004488>" espresso"</font>;
+  <font color=#0000ff>public</font> Espresso(DrinkComponent component) {
+    <font color=#0000ff>super</font>(component);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> component.getTotalCost() + cost;
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> component.getDescription() +
+      description;
+  }
+}</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You combine the components to
+create a drink as follows, as shown in the code below:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: cX:decorator:alldecorators:CoffeeShop.java</font>
+<font color=#009900>// Coffee example using decorators</font>
+<font color=#0000ff>package</font> cX.decorator.alldecorators;
+<font color=#0000ff>import</font> com.bruceeckel.test.UnitTest;
+
+<font color=#0000ff>interface</font> DrinkComponent {
+  String getDescription();
+  <font color=#0000ff>float</font> getTotalCost();
+}
+
+<font color=#0000ff>class</font> Mug <font color=#0000ff>implements</font> DrinkComponent {
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> <font color=#004488>"mug"</font>;
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> 0;
+  }
+}
+
+<font color=#0000ff>abstract</font> <font color=#0000ff>class</font> Decorator <font color=#0000ff>implements</font> DrinkComponent
+{
+  <font color=#0000ff>protected</font> DrinkComponent component;
+  Decorator(DrinkComponent component) {
+    <font color=#0000ff>this</font>.component = component;
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> component.getTotalCost();
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>abstract</font> String getDescription();
+}
+
+<font color=#0000ff>class</font> Espresso <font color=#0000ff>extends</font> Decorator {
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 0.75f;
+  <font color=#0000ff>private</font> String description = <font color=#004488>" espresso"</font>;
+  <font color=#0000ff>public</font> Espresso(DrinkComponent component) {
+    <font color=#0000ff>super</font>(component);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> component.getTotalCost() + cost;
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> component.getDescription() +
+      description;
+  }
+}
+
+<font color=#0000ff>class</font> Decaf <font color=#0000ff>extends</font> Decorator {
+  <font color=#0000ff>private</font> String description = <font color=#004488>" decaf"</font>;
+  <font color=#0000ff>public</font> Decaf(DrinkComponent component) {
+    <font color=#0000ff>super</font>(component);
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> component.getDescription() +
+      description;
+  }
+}
+
+<font color=#0000ff>class</font> FoamedMilk <font color=#0000ff>extends</font> Decorator {
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 0.25f;
+  <font color=#0000ff>private</font> String description = <font color=#004488>" foamed milk"</font>;
+  <font color=#0000ff>public</font> FoamedMilk(DrinkComponent component) {
+    <font color=#0000ff>super</font>(component);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> component.getTotalCost() + cost;
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> component.getDescription() +
+      description;
+  }
+}
+
+<font color=#0000ff>class</font> SteamedMilk <font color=#0000ff>extends</font> Decorator {
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 0.25f;
+  <font color=#0000ff>private</font> String description = <font color=#004488>" steamed milk"</font>;
+  <font color=#0000ff>public</font> SteamedMilk(DrinkComponent component) {
+    <font color=#0000ff>super</font>(component);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> component.getTotalCost() + cost;
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> component.getDescription() +
+      description;
+  }
+}
+
+<font color=#0000ff>class</font> Whipped <font color=#0000ff>extends</font> Decorator {
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 0.25f;
+  <font color=#0000ff>private</font> String description = <font color=#004488>" whipped cream"</font>;
+  <font color=#0000ff>public</font> Whipped(DrinkComponent component) {
+    <font color=#0000ff>super</font>(component);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> component.getTotalCost() + cost;
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> component.getDescription() +
+      description;
+  }
+}
+
+<font color=#0000ff>class</font> Chocolate <font color=#0000ff>extends</font> Decorator {
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 0.25f;
+  <font color=#0000ff>private</font> String description = <font color=#004488>" chocolate"</font>;
+  <font color=#0000ff>public</font> Chocolate(DrinkComponent component) {
+    <font color=#0000ff>super</font>(component);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> component.getTotalCost() + cost;
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> component.getDescription() +
+      description;
+  }
+}
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> CoffeeShop <font color=#0000ff>extends</font> UnitTest {
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> testCappuccino() {
+    <font color=#009900>// This just makes sure it will complete </font>
+    <font color=#009900>// without throwing an exception.</font>
+    <font color=#009900>// Create a plain cappucino</font>
+    DrinkComponent cappuccino = <font color=#0000ff>new</font> Espresso(
+      <font color=#0000ff>new</font> FoamedMilk(<font color=#0000ff>new</font> Mug()));
+    System.out.println(cappuccino.
+      getDescription().trim() + <font color=#004488>": $"</font> +
+      cappuccino.getTotalCost());
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> testCafeMocha() {
+    <font color=#009900>// This just makes sure it will complete </font>
+    <font color=#009900>// without throwing an exception.</font>
+    <font color=#009900>// Create a decaf cafe mocha with whipped</font>
+    <font color=#009900>// cream</font>
+    DrinkComponent cafeMocha = <font color=#0000ff>new</font> Espresso(
+      <font color=#0000ff>new</font> SteamedMilk(<font color=#0000ff>new</font> Chocolate(<font color=#0000ff>new</font> Whipped(
+      <font color=#0000ff>new</font> Decaf(<font color=#0000ff>new</font> Mug())))));
+    System.out.println(cafeMocha.getDescription().
+      trim() + <font color=#004488>": $"</font> + cafeMocha.getTotalCost());
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String[] args) {
+    CoffeeShop shop = <font color=#0000ff>new</font> CoffeeShop();
+    shop.testCappuccino();
+    shop.testCafeMocha();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This approach would
+certainly provide the most flexibility and the smallest menu. You have a small
+number of components to choose from, but assembling the description of the
+coffee then becomes rather arduous. </FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">If you want to describe a plain
+cappuccino, you create it with</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#0000ff>new</font> Espresso(<font color=#0000ff>new</font> FoamedMilk(<font color=#0000ff>new</font> Mug()))</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Creating
+a decaf Caf&eacute; Mocha with whipped cream requires an even longer
+description. </FONT><A NAME="_Toc524504119"></A><BR></P></DIV>
+<A NAME="Heading45"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Compromise</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The previous approach takes too long to
+describe a coffee. There will also be certain combinations that you will
+describe regularly, and it would be convenient to have a quick way of describing
+them.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The 3rd approach is a mixture of the
+first 2 approaches, and combines flexibility with ease of use. This compromise
+is achieved by creating a reasonably sized menu of basic selections, which would
+often work exactly as they are, but if you wanted to decorate them (whipped
+cream, decaf etc.) then you would use decorators to make the modifications. This
+is the type of menu you are presented with in most coffee
+shops.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><IMG SRC="TIPatt05.gif"></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here is how to create a basic selection,
+as well as a decorated selection:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: cX:decorator:compromise:CoffeeShop.java</font>
+<font color=#009900>// Coffee example with a compromise of basic</font>
+<font color=#009900>// combinations and decorators</font>
+<font color=#0000ff>package</font> cX.decorator.compromise;
+<font color=#0000ff>import</font> com.bruceeckel.test.UnitTest;
+
+<font color=#0000ff>interface</font> DrinkComponent {
+  <font color=#0000ff>float</font> getTotalCost();
+  String getDescription();
+}
+
+<font color=#0000ff>class</font> Espresso <font color=#0000ff>implements</font> DrinkComponent {
+  <font color=#0000ff>private</font> String description = <font color=#004488>"Espresso"</font>;
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 0.75f;
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> cost;
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> description;
+  }
+}
+
+<font color=#0000ff>class</font> EspressoConPanna <font color=#0000ff>implements</font> DrinkComponent {
+  <font color=#0000ff>private</font> String description = <font color=#004488>"EspressoConPare"</font>;
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 1;
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> cost;
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> description;
+  }
+}
+
+<font color=#0000ff>class</font> Cappuccino <font color=#0000ff>implements</font> DrinkComponent {
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 1;
+  <font color=#0000ff>private</font> String description = <font color=#004488>"Cappuccino"</font>;
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> cost;
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> description;
+  }
+}
+
+<font color=#0000ff>class</font> CafeLatte <font color=#0000ff>implements</font> DrinkComponent {
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 1;
+  <font color=#0000ff>private</font> String description = <font color=#004488>"Cafe Late"</font>;
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> cost;
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> description;
+  }
+}
+
+<font color=#0000ff>class</font> CafeMocha <font color=#0000ff>implements</font> DrinkComponent {
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 1.25f;
+  <font color=#0000ff>private</font> String description = <font color=#004488>"Cafe Mocha"</font>;
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> cost;
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> description;
+  }
+}
+
+<font color=#0000ff>abstract</font> <font color=#0000ff>class</font> Decorator <font color=#0000ff>implements</font> DrinkComponent {
+  <font color=#0000ff>protected</font> DrinkComponent component;
+  <font color=#0000ff>public</font> Decorator(DrinkComponent component) {
+    <font color=#0000ff>this</font>.component = component;
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> component.getTotalCost();
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> component.getDescription();
+  }
+}
+
+<font color=#0000ff>class</font> ExtraEspresso <font color=#0000ff>extends</font> Decorator {
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 0.75f;
+  <font color=#0000ff>public</font> ExtraEspresso(DrinkComponent component) {
+    <font color=#0000ff>super</font>(component);
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> component.getDescription() +
+      <font color=#004488>" extra espresso"</font>;
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> cost + component.getTotalCost();
+  }
+}
+
+<font color=#0000ff>class</font> Whipped <font color=#0000ff>extends</font> Decorator {
+  <font color=#0000ff>private</font> <font color=#0000ff>float</font> cost = 0.50f;
+  <font color=#0000ff>public</font> Whipped(DrinkComponent component) {
+    <font color=#0000ff>super</font>(component);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>float</font> getTotalCost() {
+    <font color=#0000ff>return</font> cost + component.getTotalCost();
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> component.getDescription() +
+      <font color=#004488>" whipped cream"</font>;
+  }
+}
+
+<font color=#0000ff>class</font> Decaf <font color=#0000ff>extends</font> Decorator{
+  <font color=#0000ff>public</font> Decaf(DrinkComponent component) {
+    <font color=#0000ff>super</font>(component);
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> component.getDescription() + <font color=#004488>" decaf"</font>;
+  }
+}
+
+<font color=#0000ff>class</font> Dry <font color=#0000ff>extends</font> Decorator {
+  <font color=#0000ff>public</font> Dry(DrinkComponent component) {
+    <font color=#0000ff>super</font>(component);
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> component.getDescription() +
+      <font color=#004488>" extra foamed milk"</font>;
+  }
+}
+
+<font color=#0000ff>class</font> Wet <font color=#0000ff>extends</font> Decorator {
+  <font color=#0000ff>public</font> Wet(DrinkComponent component) {
+    <font color=#0000ff>super</font>(component);
+  }
+  <font color=#0000ff>public</font> String getDescription() {
+    <font color=#0000ff>return</font> component.getDescription() +
+      <font color=#004488>" extra steamed milk"</font>;
+  }
+}
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> CoffeeShop <font color=#0000ff>extends</font> UnitTest {
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> testCappuccino() {
+    <font color=#009900>// This just makes sure it will complete </font>
+    <font color=#009900>// without throwing an exception.</font>
+    <font color=#009900>// Create a plain cappucino</font>
+    DrinkComponent cappuccino = <font color=#0000ff>new</font> Cappuccino();
+    System.out.println(cappuccino.getDescription()
+      + <font color=#004488>": $"</font> + cappuccino.getTotalCost());
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> testCafeMocha() {
+    <font color=#009900>// This just makes sure it will complete </font>
+    <font color=#009900>// without throwing an exception.</font>
+    <font color=#009900>// Create a decaf cafe mocha with whipped</font>
+    <font color=#009900>// cream</font>
+    DrinkComponent cafeMocha = <font color=#0000ff>new</font> Whipped(
+      <font color=#0000ff>new</font> Decaf(<font color=#0000ff>new</font> CafeMocha()));
+    System.out.println(cafeMocha.getDescription()
+      + <font color=#004488>": $"</font> + cafeMocha.getTotalCost());
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String[] args) {
+    CoffeeShop shop = <font color=#0000ff>new</font> CoffeeShop();
+    shop.testCappuccino();
+    shop.testCafeMocha();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can see that creating a
+basic selection is quick and easy, which makes sense since they will be
+described regularly.  Describing a decorated drink is more work than when using
+a class per combination, but clearly less work than when only using
+decorators.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The final result is not too many classes,
+but not too many decorators either. Most of the time it's possible to get away
+without using any decorators at all, so we have the benefits of both
+approaches.</FONT><A NAME="_Toc524504120"></A><BR></P></DIV>
+<A NAME="Heading46"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Other considerations</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">What happens if we decide to change the
+menu at a later stage, such as by adding a new type of drink? If we had used the
+class per combination approach, the effect of adding an extra such as syrup
+would be an exponential growth in the number of classes. However, the
+implications to the all decorator or compromise approaches are the same - one
+extra class is created. </FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">How about the effect of changing the cost
+of steamed milk and foamed milk, when the price of milk goes up? Having a class
+for each combination means that you need to change a method in each class, and
+thus maintain many classes. By using decorators, maintenance is reduced by
+defining the logic in one place. </FONT><A NAME="_Toc524504121"></A><BR></P></DIV>
+<A NAME="Heading47"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Add a Syrup class to the
+decorator approach described above. Then create a Caf&eacute; Latte (you'll need
+to use steamed milk with an espresso) with
+syrup.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Repeat
+Exercise 1 for the compromise
+approach.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Implement
+the decorator pattern to create a Pizza restaurant, which has a set menu of
+choices as well as the option to design your own pizza.  Follow the compromise
+approach to create a menu consisting of a Margherita, Hawaiian, Regina, and
+Vegetarian pizzas, with toppings (decorators) of Garlic, Olives, Spinach,
+Avocado, Feta and Pepperdews. Create a Hawaiian pizza, as well as a Margherita
+decorated with Spinach, Feta, Pepperdews and
+Olives.</FONT></OL>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter04.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter05.html">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:09/08/2001</P></DIV>
+
+</BODY>
+
+</HTML>

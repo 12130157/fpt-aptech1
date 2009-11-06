@@ -1,0 +1,421 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:41
+Translation Platform:Win32
+Number of Output files:18
+This File:TIPatt10.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<TITLE>6: Function objects</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER"><IMG SRC="images/r2hGlyph.gif"></DIV><A NAME="_Toc462393592"></A><A NAME="_Toc462393593"></A><A NAME="_Toc476705905"></A><A NAME="_Toc524504129"></A><A NAME="Heading55"></A><H1 ALIGN="LEFT">
+6: Function objects</H1>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">In <I>Advanced C++:Programming Styles And
+Idioms (Addison-Wesley, 1992)</I>, Jim Coplien coins the term <I>functor</I>
+which is an object whose sole purpose is to encapsulate a function (since
+&#8220;functor&#8221; has a meaning in mathematics, in this book I shall use the
+more explicit term <I>function object</I>). The point is to decouple the choice
+of function to be called from the site where that function is called.
+</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">This term is mentioned but not used in
+<I>Design Patterns</I>. However, the theme of the function object is repeated in
+a number of patterns in that
+book.</FONT><A NAME="_Toc476705906"></A><A NAME="_Toc524504130"></A><BR></DIV>
+<A NAME="Heading56"></A><H2 ALIGN="LEFT">
+Command: choosing the operation at run-time</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">This is the function object in its purest
+sense: a method that&#8217;s an
+object</FONT><A NAME="fnB10" HREF="#fn10">[10]</A><FONT FACE="Georgia">. By
+wrapping a method in an object, you can pass it to other methods or objects as a
+parameter, to tell them to perform this particular operation in the process of
+fulfilling your request.</FONT><BR></DIV>
+
+<PRE>//: c06:CommandPattern.java
+import java.util.*;
+import com.bruceeckel.test.*;
+
+interface Command {
+  void execute();
+}
+
+class Hello implements Command {
+  public void execute() {
+    System.out.print("Hello ");
+  }
+}
+
+class World implements Command {
+  public void execute() {
+    System.out.print("World! ");
+  }
+}
+
+class IAm implements Command {
+  public void execute() {
+    System.out.print("I'm the command pattern!");
+  }
+}
+
+// An object that holds commands:
+class Macro {
+  private List commands = new ArrayList();
+  public void add(Command c) { commands.add(c); }
+  public void run() {
+    Iterator it = commands.iterator();
+    while(it.hasNext())
+      ((Command)it.next()).execute();
+  }
+}
+
+public class CommandPattern extends UnitTest {
+  Macro macro = new Macro();
+  public void test() {
+    macro.add(new Hello());
+    macro.add(new World());
+    macro.add(new IAm());
+    macro.run();
+  }
+  public static void main(String args[]) {
+    new CommandPattern().test();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">The primary point of
+<I>Command</I> is to allow you to hand a desired action to a method or object.
+In the above example, this provides a way to queue a set of actions to be
+performed collectively. In this case, it allows you to dynamically create new
+behavior, something you can normally only do by writing new code but in the
+above example could be done by interpreting a script (see the <I>Interpreter</I>
+pattern if what you need to do gets very complex).</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Another example of <I>Command</I> is
+<B>c12:DirList.java</B>. The <B>DirFilter</B> class is the command object which
+contains its action in the method <B>accept(&#160;)</B> that is passed to the
+<B>list(&#160;)</B> method. The <B>list(&#160;)</B> method determines what to
+include in its result by calling <B>accept(&#160;)</B>.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia"><I>Design Patterns</I> says that
+&#8220;Commands are an object-oriented replacement for
+callbacks</FONT><A NAME="fnB11" HREF="#fn11">[11]</A><FONT FACE="Georgia">.&#8221;
+However, I think that the word &#8220;back&#8221; is an essential part of the
+concept of callbacks. That is, I think a callback actually reaches back to the
+creator of the callback. On the other hand, with a <I>Command</I> object you
+typically just create it and hand it to some method or object, and are not
+otherwise connected over time to the <I>Command</I> object. That&#8217;s my take
+on it, anyway. Later in this book, I combine a group of design patterns under
+the heading of
+&#8220;callbacks.&#8221;</FONT><A NAME="_Toc462393594"></A><A NAME="_Toc476705907"></A><A NAME="_Toc524504131"></A><BR></DIV>
+<A NAME="Heading57"></A><H2 ALIGN="LEFT">
+Strategy: choosing the algorithm at run-time</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia"><I>Strategy</I> appears to be a family of
+<I>Command</I> classes, all inherited from the same base. But if you look at
+<I>Command</I>, you&#8217;ll see that it has the same structure: a hierarchy of
+function objects. The difference is in the way this hierarchy is used. As seen
+in <B>c12:DirList.java</B>, you use <I>Command</I> to solve a particular
+problem&#8212;in that case, selecting files from a list. The &#8220;thing that
+stays the same&#8221; is the body of the method that&#8217;s being called, and
+the part that varies is isolated in the function object. I would hazard to say
+that <I>Command</I> provides flexibility while you&#8217;re writing the program,
+whereas <I>Strategy</I>&#8217;s flexibility is at run time. Nonetheless, it
+seems a rather fragile distinction.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia"><I>Strategy</I> also adds a
+&#8220;Context&#8221; which can be a surrogate class that controls the selection
+and use of the particular strategy object&#8212;just like <I>State</I>!
+Here&#8217;s what it looks like:</FONT><BR></DIV>
+
+<PRE>//: c06:strategy:StrategyPattern.java
+package c06.strategy;
+import com.bruceeckel.util.*; // Arrays2.print()
+import com.bruceeckel.test.*;
+
+// The strategy interface:
+interface FindMinima {
+  // Line is a sequence of points:
+  double[] algorithm(double[] line);
+}
+
+// The various strategies:
+class LeastSquares implements FindMinima {
+  public double[] algorithm(double[] line) {
+    return new double[] { 1.1, 2.2 }; // Dummy
+  }
+}
+
+class NewtonsMethod implements FindMinima {
+  public double[] algorithm(double[] line) {
+    return new double[] { 3.3, 4.4 }; // Dummy
+  }
+}
+
+class Bisection implements FindMinima {
+  public double[] algorithm(double[] line) {
+    return new double[] { 5.5, 6.6 }; // Dummy
+  }
+}
+
+class ConjugateGradient implements FindMinima {
+  public double[] algorithm(double[] line) {
+    return new double[] { 3.3, 4.4 }; // Dummy
+  }
+}
+
+// The "Context" controls the strategy:
+class MinimaSolver {
+  private FindMinima strategy;
+  public MinimaSolver(FindMinima strat) {
+    strategy = strat;
+  }
+  double[] minima(double[] line) {
+    return strategy.algorithm(line);
+  }
+  void changeAlgorithm(FindMinima newAlgorithm) {
+    strategy = newAlgorithm;
+  }
+}
+
+public class StrategyPattern extends UnitTest {
+  MinimaSolver solver = 
+    new MinimaSolver(new LeastSquares());
+  double[] line = { 
+    1.0, 2.0, 1.0, 2.0, -1.0, 
+    3.0, 4.0, 5.0, 4.0 };
+  public void test() {
+    Arrays2.print(solver.minima(line));
+    solver.changeAlgorithm(new Bisection());
+    Arrays2.print(solver.minima(line));
+  }
+  public static void main(String args[]) {
+    new StrategyPattern().test();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">Note similarity with
+template method &#8211; TM claims distinction that it has more than one method
+to call, does things piecewise. However, it&#8217;s not unlikely that strategy
+object would have more than one method call; consider Shalloway&#8217;s order
+fulfullment system with country information in each strategy.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Strategy example from JDK: comparator
+objects.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><A NAME="_Toc476705908"></A><A NAME="_Toc524504132"></A><BR></DIV>
+<A NAME="Heading58"></A><H2 ALIGN="LEFT">
+Chain of responsibility</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia"><I>Chain of Responsibility</I> might be
+thought of as a dynamic generalization of recursion using <I>Strategy
+</I>objects. You make a call, and each <I>Strategy</I> in a linked sequence
+tries to satisfy the call. The process ends when one of the strategies is
+successful or the chain ends. In recursion, one method calls itself over and
+over until a termination condition is reached; with <I>Chain of
+Responsibility</I>, a method calls itself, which (by moving down the chain of
+<I>Strategies</I>)<I> </I>calls a different implementation of the method, etc.,
+until a termination condition is reached. The termination condition is either
+the bottom of the chain is reached (in which case a default object is returned;
+you may or may not be able to provide a default result so you must be able to
+determine the success or failure of the chain) or one of the <I>Strategies</I>
+is successful.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Instead of calling a single method to
+satisfy a request, multiple methods in the chain have a chance to satisfy the
+request, so it has the flavor of an expert system. Since the chain is
+effectively a linked list, it can be dynamically created, so you could also
+think of it as a more general, dynamically-built <B>switch</B>
+statement.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">In the GoF, there&#8217;s a fair amount
+of </FONT><FONT FACE="Georgia">discussion of the implementation details of the
+chain of responsibility as a linked list. However, when you look at the pattern
+it really shouldn&#8217;t matter how the chain is maintained; that&#8217;s an
+implementation detail. Since GoF was written before the Standard Template
+Library (STL) was incorporated into most C++ compilers, the reason for this is
+most likely (1) there was no list and thus they had to create one and (2) data
+structures are often taught as a fundamental skill in academia, and the idea
+that data structures should be standard tools available with the programming
+language may not have occurred to the GoF authors. I maintain that the
+implementation of <I>Chain of Responsibility</I> as a chain (specifically, a
+linked list) adds nothing to the solution and can just as easily be implemented
+using a standard Java <B>List</B>, as shown below. Furthermore, you&#8217;ll see
+that I&#8217;ve gone to some effort to separate the chain-management parts of
+the implementation from the various <I>Strategies</I>, so that the code can be
+more easily reused.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">In <B>StrategyPattern.java</B>, above,
+what you probably want is to automatically find a solution. <I>Chain of
+Responsibility</I> provides a way to do this by chaining the <I>Strategy</I>
+objects together and providing a mechanism for them to automatically recurse
+through each one in the chain:</FONT><BR></DIV>
+
+<PRE>//: c06:ChainOfResponsibility.java
+import com.bruceeckel.util.*; // Arrays2.print()
+import com.bruceeckel.test.*;
+import java.util.*;
+
+// Carry the information into the strategy:
+interface Messenger {}
+
+// The Result object carries the result data and
+// whether the strategy was successful:
+class Result {
+  private boolean succeeded;
+  public boolean isSuccessful() { 
+    return succeeded; 
+  }
+  public void setSuccessful(boolean b) { 
+    succeeded = b; 
+  }
+}
+
+abstract class Strategy {
+  abstract public Result strategy(Messenger m);
+}
+
+// Manage the movement through the chain and
+// find a successful result:
+class ChainLink {
+  private List chain;
+  private Strategy strat;
+  public ChainLink(List chain, Strategy s) {
+    strat = s;
+    this.chain = chain;
+    chain.add(this);
+  }
+  public ChainLink next() {
+    // Where this link is in the chain:
+    int location = chain.indexOf(this);
+    if (!end())
+      return (ChainLink)chain.get(location + 1);
+    // Indicates a programming error (thus 
+    // doesn't need to be a checked exception):
+    throw new RuntimeException(
+      "Tried to move past end of chain");
+  }
+  public boolean end() {
+    int location = chain.indexOf(this);
+    return location + 1 &gt;= chain.size();
+  }
+  public Result strategy(Messenger m) {
+    Result r = strat.strategy(m);
+    if(r.isSuccessful() || end()) return r;
+    return next().strategy(m);
+  }
+}
+
+// For this example, the Messenger
+// and Result can be the same type:
+class LineData 
+extends Result implements Messenger {
+  public double[] data;
+  public LineData(double[] data) {
+    this.data = data;
+  }
+}
+
+class LeastSquares extends Strategy {
+  public Result strategy(Messenger m) {
+    System.out.println(
+     "Trying LeastSquares algorithm");
+    LineData ld = (LineData)m;
+    // [ Actual test/calculation here ]
+    Result r = new LineData(
+      new double[] { 1.1, 2.2 }); // Dummy data
+    r.setSuccessful(false);
+    return r;
+  }
+}
+
+class NewtonsMethod extends Strategy {
+  public Result strategy(Messenger m) {
+    System.out.println(
+      "Trying NewtonsMethod algorithm");
+    LineData ld = (LineData)m;
+    // [ Actual test/calculation here ]
+    Result r = new LineData(
+      new double[] { 3.3, 4.4 }); // Dummy data
+    r.setSuccessful(false);
+    return r;
+  }
+}
+
+class Bisection extends Strategy {
+  public Result strategy(Messenger m) {
+    System.out.println(
+      "Trying Bisection algorithm");
+    LineData ld = (LineData)m;
+    // [ Actual test/calculation here ]
+    Result r = new LineData(
+      new double[] { 5.5, 6.6 }); // Dummy data
+    r.setSuccessful(true);
+    return r;
+  }
+}
+
+class ConjugateGradient extends Strategy {
+  public Result strategy(Messenger m) {
+    System.out.println(
+      "Trying ConjugateGradient algorithm");
+    LineData ld = (LineData)m;
+    // [ Actual test/calculation here ]
+    Result r = new LineData(
+      new double[] { 5.5, 6.6 }); // Dummy data
+    r.setSuccessful(true);
+    return r;
+  }
+}
+
+public 
+class ChainOfResponsibility extends UnitTest {
+  List chain = new ArrayList();
+  ChainLink[] solutions = {
+    new ChainLink(chain, new LeastSquares()),
+    new ChainLink(chain, new NewtonsMethod()),
+    new ChainLink(chain, new Bisection()),
+    new ChainLink(chain, new ConjugateGradient()),
+  };
+  LineData line = new LineData(new double[]{ 
+    1.0, 2.0, 1.0, 2.0, -1.0, 
+    3.0, 4.0, 5.0, 4.0 
+  });
+  public void test() {
+    Arrays2.print(
+      ((LineData)solutions[0]
+        .strategy(line)).data);
+  }
+  public static void main(String args[]) {
+    new ChainOfResponsibility().test();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><A NAME="_Toc524504133"></A><BR></DIV>
+<A NAME="Heading59"></A><H2 ALIGN="LEFT">
+Exercises</H2>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Use <I>Command</I> in
+Chapter 3, Exercise
+1.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Implement
+<I>Chain of Responsibility</I> to create an "expert system" that solves problems
+by successively trying one solution after another until one matches. You should
+be able to dynamically add solutions to the expert system. The test for solution
+should just be a string match, but when a solution fits, the expert system
+should return the appropriate type of <B>ProblemSolver</B> object. What other
+pattern/patterns show up<DIV ALIGN="LEFT"><A NAME="fn10" HREF="#fnB10">[10]</A><FONT FACE="Georgia">
+</FONT><FONT FACE="Georgia">In the Python language, all functions are already
+objects and so the <I>Command</I> pattern is often redundant.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><A NAME="fn11" HREF="#fnB11">[11]</A><FONT FACE="Georgia">
+</FONT><FONT FACE="Georgia">Page 235.</FONT><BR></DIV>
+
+
+here?</FONT></OL><HR><DIV ALIGN="CENTER"><IMG SRC="images/r2hGlyph.gif"><BR>
+<A HREF="mailto:chris@sunpack.com">chris@sunpack.com</A> Last Update:09/08/2001</DIV>
+
+</BODY>
+
+</HTML>
