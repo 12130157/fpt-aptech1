@@ -1,0 +1,5 @@
+D:\FPT-Aptech\C#\Projects\LeaningCs\EvenAndDelegates\bin\Debug\EvenAndDelegates.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\EvenAndDelegates\bin\Debug\EvenAndDelegates.pdb
+D:\FPT-Aptech\C#\Projects\LeaningCs\EvenAndDelegates\obj\Debug\ResolveAssemblyReference.cache
+D:\FPT-Aptech\C#\Projects\LeaningCs\EvenAndDelegates\obj\Debug\EvenAndDelegates.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\EvenAndDelegates\obj\Debug\EvenAndDelegates.pdb

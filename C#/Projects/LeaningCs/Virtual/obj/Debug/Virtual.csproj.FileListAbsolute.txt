@@ -1,0 +1,5 @@
+D:\FPT-Aptech\C#\Projects\LeaningCs\Virtual\bin\Debug\Virtual.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\Virtual\bin\Debug\Virtual.pdb
+D:\FPT-Aptech\C#\Projects\LeaningCs\Virtual\obj\Debug\ResolveAssemblyReference.cache
+D:\FPT-Aptech\C#\Projects\LeaningCs\Virtual\obj\Debug\Virtual.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\Virtual\obj\Debug\Virtual.pdb

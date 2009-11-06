@@ -1,0 +1,5 @@
+D:\FPT-Aptech\C#\Projects\LeaningCs\Sealed\bin\Debug\Sealed.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\Sealed\bin\Debug\Sealed.pdb
+D:\FPT-Aptech\C#\Projects\LeaningCs\Sealed\obj\Debug\ResolveAssemblyReference.cache
+D:\FPT-Aptech\C#\Projects\LeaningCs\Sealed\obj\Debug\Sealed.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\Sealed\obj\Debug\Sealed.pdb

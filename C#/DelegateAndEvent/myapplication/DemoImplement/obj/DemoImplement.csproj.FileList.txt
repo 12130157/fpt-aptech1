@@ -1,0 +1,5 @@
+bin\Debug\DemoImplement.exe
+bin\Debug\DemoImplement.pdb
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\DemoImplement.exe
+obj\Debug\DemoImplement.pdb

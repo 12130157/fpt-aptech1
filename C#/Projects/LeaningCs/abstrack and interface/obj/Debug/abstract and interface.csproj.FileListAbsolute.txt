@@ -1,0 +1,5 @@
+D:\FPT-Aptech\C#\Projects\LeaningCs\abstrack and interface\obj\Debug\abstrack and interface.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\abstrack and interface\obj\Debug\abstrack and interface.pdb
+D:\FPT-Aptech\C#\Projects\LeaningCs\abstrack and interface\bin\Debug\abstrack and interface.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\abstrack and interface\bin\Debug\abstrack and interface.pdb
+D:\FPT-Aptech\C#\Projects\LeaningCs\abstrack and interface\obj\Debug\ResolveAssemblyReference.cache
