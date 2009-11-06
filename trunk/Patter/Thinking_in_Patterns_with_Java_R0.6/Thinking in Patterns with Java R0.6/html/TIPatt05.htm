@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:40
+Translation Platform:Win32
+Number of Output files:18
+This File:TIPatt05.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<TITLE>3: Building application frameworks</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER"><IMG SRC="images/r2hGlyph.gif"></DIV><A NAME="_Toc375545413"></A><A NAME="_Toc455024531"></A><A NAME="_Toc476705896"></A><DIV ALIGN="LEFT"><A NAME="_Toc524504097"></A><BR></DIV>
+<A NAME="Heading23"></A><H1 ALIGN="LEFT">
+3: Building application frameworks</H1>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">An application framework allows you to
+inherit from a class or set of classes and create a new application, reusing
+most of the code in the existing classes and overriding one or more methods in
+order to customize the application to your needs. A fundamental concept in the
+application framework is the <I>Template Method</I> which is typically hidden
+beneath the covers and drives the application by calling the various methods in
+the base class (some of which you have overridden in order to create the
+application).</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">For example, whenever you create an
+applet you&#8217;re using an application framework: you inherit from
+<B>JApplet</B> and then override <B>init(&#160;)</B>. The applet mechanism
+(which is a <I>Template Method</I>)<I> </I>does the rest by drawing the screen,
+handling the event loop, resizing,
+etc.</FONT><A NAME="_Toc476705897"></A><A NAME="_Toc524504098"></A><BR></DIV>
+<A NAME="Heading24"></A><H2 ALIGN="LEFT">
+Template method</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">An important characteristic of the
+<I>Template Method</I> is that it is defined in the base class and cannot be
+changed. It&#8217;s sometimes a <B>private</B> method but it&#8217;s virtually
+always <B>final</B>. It calls other base-class methods (the ones you override)
+in order to do its job, but it is usually called only as part of an
+initialization process (and thus the client programmer isn&#8217;t necessarily
+able to call it directly).</FONT><BR></DIV>
+
+<PRE>//: c03:TemplateMethod.java
+// Simple demonstration of Template Method.
+import com.bruceeckel.test.*;
+
+abstract class ApplicationFramework {
+  public ApplicationFramework() {
+    templateMethod(); // Dangerous!
+  }
+  abstract void customize1();
+  abstract void customize2();
+  // "private" means automatically "final":
+  private void templateMethod() {
+    for(int i = 0; i &lt; 5; i++) {
+      customize1();
+      customize2();
+    }
+  }
+}
+
+// Create a new "application":
+class MyApp extends ApplicationFramework {
+  void customize1() { 
+    System.out.print("Hello ");
+  }
+  void customize2() { 
+    System.out.println("World!");
+  }
+}
+
+public class TemplateMethod extends UnitTest {
+  MyApp app = new MyApp();
+  public void test() {
+    // The MyApp constructor does all the work.
+    // This just makes sure it will complete 
+    // without throwing an exception.
+  }
+  public static void main(String args[]) {
+    new TemplateMethod().test();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">The base-class constructor
+is responsible for performing the necessary initialization and then starting the
+&#8220;engine&#8221; (the template method) that runs the application (in a GUI
+application, this &#8220;engine&#8221; would be the main event loop). The client
+programmer simply provides definitions for <B>customize1(&#160;)</B> and
+<B>customize2(&#160;)</B> and the &#8220;application&#8221; is ready to
+run.</FONT><A NAME="_Toc524504099"></A><BR></DIV>
+<A NAME="Heading25"></A><H2 ALIGN="LEFT">
+Exercises</H2>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create a framework that
+takes a list of file names on the command line. It opens each file except the
+last for reading, and the last for writing. The framework will process each
+input file using an undetermined policy and write the output to the last file.
+Inherit to customize this framework to create two separate
+applications:</FONT><BR><FONT FACE="Georgia">1) Converts all the letters in each
+file to uppercase.</FONT><BR><FONT FACE="Georgia">2) Searches the files for
+words given in the first file.</FONT></OL><DIV ALIGN="LEFT"><BR></DIV>
+<DIV ALIGN="CENTER"><IMG SRC="images/r2hGlyph.gif"><BR>
+<A HREF="mailto:chris@sunpack.com">chris@sunpack.com</A> Last Update:09/08/2001</DIV>
+
+</BODY>
+
+</HTML>

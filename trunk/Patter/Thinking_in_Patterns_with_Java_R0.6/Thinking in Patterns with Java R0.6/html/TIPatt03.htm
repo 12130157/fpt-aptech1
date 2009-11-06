@@ -1,0 +1,392 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:39
+Translation Platform:Win32
+Number of Output files:18
+This File:TIPatt03.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<TITLE>1: The pattern concept</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER"><IMG SRC="images/r2hGlyph.gif"></DIV><A NAME="_Toc524504080"></A><A NAME="Heading6"></A><H1 ALIGN="LEFT">
+1: The pattern concept</H1>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia" SIZE=4>&#8220;Design patterns help you
+learn from others' successes instead of your own
+failures</FONT><A NAME="fnB2" HREF="#fn2">[2]</A><FONT FACE="Georgia" SIZE=4>.&#8221;
+</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Probably the most important step forward
+in object-oriented design is the &#8220;design patterns&#8221; movement,
+chronicled in <A NAME="Index1"></A><A NAME="Index2"></A><I>Design Patterns
+(ibid)</I></FONT><A NAME="fnB3" HREF="#fn3">[3]</A><FONT FACE="Georgia">. That
+book shows 23 different solutions to particular classes of problems. In this
+book, the basic concepts of design patterns will be introduced along with
+examples. This should whet your appetite to read <I>Design Patterns</I> by
+Gamma, et. al., a source of what has now become an essential, almost mandatory,
+vocabulary for OOP programmers.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The latter part of this book contains an
+example of the design evolution process, starting with an initial solution and
+moving through the logic and process of evolving the solution to more
+appropriate designs. The program shown (a trash sorting simulation) has evolved
+over time, and you can look at that evolution as a prototype for the way your
+own design can start as an adequate solution to a particular problem and evolve
+into a flexible approach to a class of
+problems.</FONT><A NAME="_Toc524504081"></A><BR></DIV>
+<A NAME="Heading7"></A><H2 ALIGN="LEFT">
+What is a pattern?</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Initially, you can think of a pattern as
+an especially clever and insightful way of solving a particular class of
+problems. That is, it looks like a lot of people have worked out all the angles
+of a problem and have come up with the most general, flexible solution for it.
+The problem could be one you have seen and solved before, but your solution
+probably didn&#8217;t have the kind of completeness you&#8217;ll see embodied in
+a pattern.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Although they&#8217;re called
+&#8220;design patterns,&#8221; they really aren&#8217;t tied to the realm of
+design. A pattern seems to stand apart from the traditional way of thinking
+about analysis, design, and implementation. Instead, a pattern embodies a
+complete idea within a program, and thus it can sometimes appear at the analysis
+phase or high-level design phase. This is interesting because a pattern has a
+direct implementation in code and so you might not expect it to show up before
+low-level design or implementation (and in fact you might not realize that you
+need a particular pattern until you get to those phases).</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The basic concept of a pattern can also
+be seen as the basic concept of program design: adding a layer of
+<A NAME="Index3"></A><A NAME="Index4"></A>abstraction. Whenever you abstract
+something you&#8217;re isolating particular details, and one of the most
+compelling motivations behind this is to <I>separate things that change from
+things that stay the same</I>. Another way to put this is that once you find
+some part of your program that&#8217;s likely to change for one reason or
+another, you&#8217;ll want to keep those changes from propagating other changes
+throughout your code. Not only does this make the code much cheaper to maintain,
+but it also turns out that it is usually simpler to understand (which results in
+lowered costs).</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Often, the most difficult part of
+developing an elegant and cheap-to-maintain design is in discovering what I call
+&#8220;the <A NAME="Index5"></A><A NAME="Index6"></A><A NAME="Index7"></A>vector
+of change.&#8221; (Here, &#8220;vector&#8221; refers to the maximum gradient and
+not a container class.) This means finding the most important thing that changes
+in your system, or put another way, discovering where your greatest cost is.
+Once you discover the vector of change, you have the focal point around which to
+structure your design.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">So the goal of design patterns is to
+isolate changes in your code. If you look at it this way, you&#8217;ve been
+seeing some design patterns already in this book. For example,
+<A NAME="Index8"></A>inheritance can be thought of as a design pattern (albeit
+one implemented by the compiler). It allows you to express differences in
+behavior (that&#8217;s the thing that changes) in objects that all have the same
+interface (that&#8217;s what stays the same). <A NAME="Index9"></A>Composition
+can also be considered a pattern, since it allows you to
+change&#8212;dynamically or statically&#8212;the objects that implement your
+class, and thus the way that class works.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">You&#8217;ve also already seen another
+pattern that appears in <I>Design Patterns</I>: the
+<A NAME="Index10"></A><I>iterator</I> (Java 1.0<A NAME="Index11"></A> and 1.1
+capriciously calls it the <B>Enumeration</B>; Java 2<A NAME="Index12"></A>
+containers use &#8220;iterator&#8221;). This hides the particular implementation
+of the container as you&#8217;re stepping through and selecting the elements one
+by one. The iterator allows you to write generic code that performs an operation
+on all of the elements in a sequence without regard to the way that sequence is
+built. Thus your generic code can be used with any container that can produce an
+iterator.</FONT><A NAME="_Toc524504082"></A><BR></DIV>
+<A NAME="Heading8"></A><H2 ALIGN="LEFT">
+Pattern taxonomy</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">One of the events that&#8217;s occurred
+with the rise of design patterns is what could be thought of as the
+&#8220;pollution&#8221; of the term &#8211; people have begun to use the term to
+mean just about anything synonymous with &#8220;good.&#8221; After some
+pondering, I&#8217;ve come up with a sort of hierarchy describing a succession
+of different types of categories:</FONT><BR></DIV>
+<OL>
+<LI><FONT FACE="Georgia"><B></B>how we write code in a particular language to do
+this particular type of thing. This could be something as common as the way that
+you code the process of stepping through an array in C (and not running off the
+end).</FONT><LI><FONT FACE="Georgia"><B>Design</B>: the solution that we came up
+with to solve this particular problem. This might be a clever design, but it
+makes no attempt to be general.</FONT><LI><FONT FACE="Georgia"><B>Design</B>: a
+way to solve this <I>kind</I> of problem. A design that has become more general,
+typically through reuse.</FONT><LI><FONT FACE="Georgia"><B>Pattern</B>: how to
+solve an entire class of similar problem. This usually only appears after
+applying a standard design a number of times, and then seeing a common pattern
+throughout these
+applications.</FONT></OL><DIV ALIGN="LEFT"><FONT FACE="Georgia">I feel this
+helps put things in perspective, and to show where something might fit. However,
+it doesn&#8217;t say that one is better than another. It doesn&#8217;t make
+sense to try to take every problem solution and generalize it to a design
+pattern &#8211; it&#8217;s not a good use of your time, and you can&#8217;t
+force the discovery of patterns that way; they tend to be subtle and appear over
+time.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">One could also argue for the inclusion of
+<I>Analysis Pattern</I> and <I>Architectural Pattern</I> in this
+taxonomy.</FONT><A NAME="_Toc476705894"></A><A NAME="_Toc524504083"></A><BR></DIV>
+<A NAME="Heading9"></A><H2 ALIGN="LEFT">
+Design Structures</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">One of the struggles that I&#8217;ve had
+with design patterns is their classification &#8211; I&#8217;ve often found the
+GoF approach to be too obscure, and not always very helpful. Certainly, the
+<I>Creational</I> patterns are fairly straightforward: how are you going to
+create your objects? This is a question you normally need to ask, and the name
+brings you right to that group of patterns. But I find <I>Structural</I> and
+<I>Behavioral</I> to be far less useful distinctions. I have not been able to
+look at a problem and say &#8220;clearly, you need a structural pattern
+here,&#8221; so that classification doesn&#8217;t lead me to a solution
+(I&#8217;ll readily admit that I may be missing something
+here).</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">I&#8217;ve labored for awhile with this
+problem, first noting that the underlying structure of some of the GoF patterns
+are similar to each other, and trying to develop relationships based on that
+similarity. While this was an interesting experiment, I don&#8217;t think it
+produced much of use in the end because the point is to solve problems, so a
+helpful approach will look at the problem to solve and try to find relationships
+between the problem and potential solutions.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">To that end, I&#8217;ve begun to try to
+collect basic design structures, and to try to see if there&#8217;s a way to
+relate those structures to the various design patterns that appear in well
+thought-out systems. Currently, I&#8217;m just trying to make a list, but
+eventually I hope to make steps towards connecting these structures with
+patterns (or I may come up with a different approach altogether &#8211; this is
+still in it&#8217;s formative stages).</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Here</FONT><A NAME="fnB4" HREF="#fn4">[4]</A><FONT FACE="Georgia">
+is the present list of candidates, only some of which will make it to the final
+list. Feel free to suggest others, or possibly relationships with
+patterns.</FONT><BR></DIV>
+
+<PRE>&#8226;	Encapsulation: self containment and embodying a model of usage</PRE><UL>
+<LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Gathering</B></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Localization</B></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Separation</B></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Hiding</B></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Guarding</B></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Connector</B></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Barrier/fence</B></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Variation
+in
+behavior</B></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Notification</B></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Transaction</B></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Mirror</B>:
+&#8220;the ability to keep a parallel universe(s) in step with the golden
+world&#8221;</FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Shadow</B>
+&#8220;follows your movement and does something different in a different
+medium&#8221; (May be a variation on
+Proxy).</FONT><A NAME="_Toc524504084"></A></UL><A NAME="Heading10"></A><H2 ALIGN="LEFT">
+Design principles</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">When I put out a call for ideas in my
+newsletter</FONT><A NAME="fnB5" HREF="#fn5">[5]</A><FONT FACE="Georgia">, a
+number of suggestions came back which turned out to be very useful, but
+different than the above classification, and I realized that a list of design
+principles is at least as important as design structures, but for a different
+reason: these allow you to ask questions about your proposed design, to apply
+tests for quality.</FONT><BR></DIV>
+<UL>
+<LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Principle of least
+astonishment</B> (don&#8217;t be
+astonishing).</FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Make
+common things easy, and rare things
+possible</B></FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Law
+of Demeter</B>: &#8220;don&#8217;t talk to strangers:&#8221; an object should
+only reference itself, its attributes, and the arguments of its
+methods.</FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Subtraction</B>:
+a design is finished when you cannot take anything else
+away.</FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Simplicity
+before
+generality</B></FONT><A NAME="fnB6" HREF="#fn6">[6]</A><FONT FACE="Georgia">. (A
+variation of <I>Occam&#8217;s Razor</I>, which says &#8220;the simplest solution
+is the best&#8221;). A common problem we find in frameworks is that they are
+designed to be general purpose without reference to actual systems. This leads
+to a dizzying array of options that are often unused, misused or just not
+useful. However, most developers work on specific systems, and the quest for
+generality does not always serve them well. The best route to generality is
+through understanding well-defined specific examples. So, this principle acts as
+the tie breaker between otherwise equally viable design alternatives. Of course,
+it is entirely possible that the simpler solution is the more general
+one.</FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Reflexivity</B>
+(my suggested term). One abstraction per class, one class per abstraction. Might
+also be called
+<B>Isomorphism</B>.</FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Independence</B>
+or <B>Orthogonality</B>. Express independent ideas independently. This
+complements Separation, Encapsulation and Variation, and is part of the
+Low-Coupling-High-Cohesion
+message.</FONT><LI><FONT FACE="Symbol">	</FONT><FONT FACE="Georgia"><B>Once and
+once only</B>: Avoid duplication of logic and structure where the duplication is
+not accidental, ie where both pieces of code express the same intent for the
+same reason.</FONT></UL><DIV ALIGN="LEFT"><FONT FACE="Georgia">In the process of
+brainstorming this idea, I hope to come up with a small handful of fundamental
+ideas that can be held in your head while you analyze a problem. However, other
+ideas that come from this list may end up being useful as a checklist while
+walking through and analyzing your
+design.</FONT><A NAME="_Toc524504085"></A><BR></DIV>
+<A NAME="Heading11"></A><H2 ALIGN="LEFT">
+The Singleton</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Possibly the simplest design pattern is
+the <A NAME="Index13"></A><I>singleton</I>, which is a way to provide one and
+only one object of a particular type. This is used in the Java libraries, but
+here&#8217;s a more direct example:</FONT><BR></DIV>
+
+<PRE>//: c01:SingletonPattern.java
+// The Singleton design pattern: you can
+// never instantiate more than one.
+
+// Since this isn't inherited from a Cloneable
+// base class and cloneability isn't added,
+// making it final prevents cloneability from
+// being added through inheritance:
+final class Singleton {
+  private static Singleton s = new Singleton(47);
+  private int i;
+  private Singleton(int x) { i = x; }
+  public static Singleton getReference() { 
+    return s; 
+  }
+  public int getValue() { return i; }
+  public void setValue(int x) { i = x; }
+}
+
+public class SingletonPattern {
+  public static void main(String[] args) {
+    Singleton s = Singleton.getReference();
+    System.out.println(s.getValue());
+    Singleton s2 = Singleton.getReference();
+    s2.setValue(9);
+    System.out.println(s.getValue());
+    try {
+      // Can't do this: compile-time error.
+      // Singleton s3 = (Singleton)s2.clone();
+    } catch(Exception e) {
+      e.printStackTrace(System.err);
+    }
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">The key to creating a
+singleton is to prevent the client programmer from having any way to create an
+object except the ways you provide. You must make all
+<A NAME="Index14"></A><A NAME="Index15"></A>constructors <B>private</B>, and you
+must<B> </B>create at least one constructor to prevent the compiler from
+<A NAME="Index16"></A><A NAME="Index17"></A>synthesizing a default constructor
+for you (which it will create as &#8220;friendly&#8221;).</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">At this point, you decide how
+you&#8217;re going to create your object. Here, it&#8217;s created statically,
+but you can also wait until the client programmer asks for one and create it on
+demand. In any case, the object should be stored privately. You provide access
+through <B>public</B> methods. Here, <B>getReference(&#160;)</B> produces the
+reference to the <B>Singleton</B> object. The rest of the interface
+(<B>getValue(&#160;)</B> and <B>setValue(&#160;)</B>) is the regular class
+interface.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Java also allows the creation of objects
+through cloning. In this example, making the class <B>final</B> prevents
+cloning. Since <B>Singleton</B> is inherited directly from <B>Object</B>, the
+<B>clone(&#160;)</B> method remains <B>protected</B> so it cannot be used (doing
+so produces a compile-time error). However, if you&#8217;re inheriting from a
+class hierarchy that has already overridden <B>clone(&#160;)</B> as
+<B>public</B> and implemented <B>Cloneable</B>, the way to prevent cloning is to
+override <B>clone(&#160;)</B> and throw a <B>CloneNotSupportedException</B> as
+described in Appendix A. (You could also override <B>clone(&#160;)</B> and
+simply return <B>this</B>, but that would be deceiving since the client
+programmer would think they were cloning the object, but would instead still be
+dealing with the original.)</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Note that you aren&#8217;t restricted to
+creating only one object. This is also a technique to create a limited pool of
+objects. In that situation, however, you can be confronted with the problem of
+sharing objects in the pool. If this is an issue, you can create a solution
+involving a check-out and check-in of the shared
+objects.</FONT><A NAME="_Toc476705895"></A><A NAME="_Toc524504086"></A><BR></DIV>
+<A NAME="Heading12"></A><H2 ALIGN="LEFT">
+Classifying patterns</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">The <I>Design Patterns</I> book discusses
+23 different patterns, classified under three purposes (all of which revolve
+around the particular aspect that can vary). The three purposes are:
+<A NAME="Index18"></A><A NAME="Index19"></A><A NAME="Index20"></A><A NAME="Index21"></A><A NAME="Index22"></A><A NAME="Index23"></A></FONT><BR></DIV>
+<OL>
+<LI><FONT FACE="Verdana"><B>	</B></FONT><FONT FACE="Georgia"><B>Creational</B>:
+how an object can be created. This often involves isolating the details of
+object creation so your code isn&#8217;t dependent on what types of objects
+there are and thus doesn&#8217;t have to be changed when you add a new type of
+object. The aforementioned <I>Singleton</I> is classified as a creational
+pattern, and later in this book you&#8217;ll see examples of <I>Factory
+Method</I> and
+<I>Prototype</I>.</FONT><LI><FONT FACE="Verdana"><B>	</B></FONT><FONT FACE="Georgia"><B>Structural</B>:
+designing objects to satisfy particular project constraints. These work with the
+way objects are connected with other objects to ensure that changes in the
+system don&#8217;t require changes to those
+connections.</FONT><LI><FONT FACE="Verdana"><B>	</B></FONT><FONT FACE="Georgia"><B>Behavioral</B>:
+objects that handle particular types of actions within a program. These
+encapsulate processes that you want to perform, such as interpreting a language,
+fulfilling a request, moving through a sequence (as in an iterator), or
+implementing an algorithm. This book contains examples of the <I>Observer</I>
+and the <I>Visitor</I>
+patterns.</FONT></OL><DIV ALIGN="LEFT"><FONT FACE="Georgia">The <I>Design
+Patterns</I> book has a section on each of its 23 patterns along with one or
+more examples for each, typically in C++ but sometimes in Smalltalk.
+(You&#8217;ll find that this doesn&#8217;t matter too much since you can easily
+translate the concepts from either language into Java.) This book will not
+repeat all the patterns shown in <I>Design Patterns</I> since that book stands
+on its own and should be studied separately. Instead, this book will give some
+examples that should provide you with a decent feel for what patterns are about
+and why they are so important.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">After years of looking at these things,
+it began to occur to me that the patterns themselves use basic principles of
+organization, other than (and more fundamental than) those described in
+<I>Design Patterns</I>. These principles are based on the structure of the
+implementations, which is where I have seen great similarities between patterns
+(more than those expressed in <I>Design Patterns</I>). Although we generally try
+to avoid implementation in favor of interface,<I> </I>I have found that
+it&#8217;s often easier to think about, and especially to learn about, the
+patterns in terms of these structural principles. This book will attempt to
+present the patterns based on their structure instead of the categories
+presented in <I>Design
+Patterns</I>.</FONT><A NAME="_Toc524504087"></A><BR></DIV>
+<A NAME="Heading13"></A><H2 ALIGN="LEFT">
+The development challenge</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Issues of development, the UML process,
+Extreme Programming. </FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Is evaluation valuable? The Capability
+Immaturity Model:</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Wiki Page:
+<A HREF="http://c2.com/cgi-bin/wiki?CapabilityImMaturityModel">http://c2.com/cgi-bin/wiki?CapabilityImMaturityModel</A></FONT><BR><FONT FACE="Georgia">Article:
+<A HREF="http://www.embedded.com/98/9807br.htm">http://www.embedded.com/98/9807br.htm</A></FONT><FONT FACE="Georgia" COLOR="Blue"><U>
+</U></FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia"><I>Pair programming</I>
+research:</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia"><A HREF="http://collaboration.csc.ncsu.edu/laurie/">http://collaboration.csc.ncsu.edu/laurie/</A>
+</FONT><A NAME="_Toc524504088"></A><BR></DIV>
+<A NAME="Heading14"></A><H2 ALIGN="LEFT">
+Exercises</H2>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia"><B>SingletonPattern.java</B>
+always creates an object, even if it&#8217;s never used. Modify this program to
+use <I>lazy initialization</I>, so the singleton object is only created the
+first time that it is
+needed.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Using
+<B>SingletonPattern.java</B> as a starting point, create a class that manages a
+fixed number of its own objects. Assume the objects are database connections and
+you only have a license to use a fixed quantity of these at any one
+time.</FONT></OL><DIV ALIGN="LEFT"><BR></DIV>
+<HR><DIV ALIGN="LEFT"><A NAME="fn2" HREF="#fnB2">[2]</A><FONT FACE="Georgia"> From
+Mark Johnson.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><A NAME="fn3" HREF="#fnB3">[3]</A><FONT FACE="Georgia">
+</FONT><FONT FACE="Georgia">But be warned: the examples are in
+C++.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><A NAME="fn4" HREF="#fnB4">[4]</A><FONT FACE="Georgia"> This
+list includes suggestions by Kevlin Henney, David Scott, and
+others.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><A NAME="fn5" HREF="#fnB5">[5]</A><FONT FACE="Georgia"> A free
+email publication. See www.BruceEckel.com to subscribe.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><A NAME="fn6" HREF="#fnB6">[6]</A><FONT FACE="Georgia"> From
+an email from Kevlin Henney.</FONT><BR></DIV>
+
+<DIV ALIGN="CENTER"><IMG SRC="images/r2hGlyph.gif"><BR>
+<A HREF="mailto:chris@sunpack.com">chris@sunpack.com</A> Last Update:09/08/2001</DIV>
+
+</BODY>
+
+</HTML>

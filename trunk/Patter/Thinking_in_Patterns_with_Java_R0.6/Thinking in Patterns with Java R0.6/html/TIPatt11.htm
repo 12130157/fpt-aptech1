@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:42
+Translation Platform:Win32
+Number of Output files:18
+This File:TIPatt11.htm
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<TITLE>7: Changing the interface</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER"><IMG SRC="images/r2hGlyph.gif"></DIV><A NAME="_Toc476705909"></A><DIV ALIGN="LEFT"><A NAME="_Toc524504134"></A><BR></DIV>
+<A NAME="Heading60"></A><H1 ALIGN="LEFT">
+7: Changing the interface</H1>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Sometimes the problem that you&#8217;re
+solving is as simple as &#8220;I don&#8217;t have the interface that I
+want.&#8221; Two of the patterns in <I>Design Patterns</I> solve this problem:
+<I>Adapter</I> takes one type and produces an interface to some other type.
+<I>Fa&ccedil;ade</I> creates an interface to a set of classes, simply to provide
+a more comfortable way to deal with a library or bundle of
+resources.</FONT><A NAME="_Toc476705910"></A><A NAME="_Toc524504135"></A><BR></DIV>
+<A NAME="Heading61"></A><H2 ALIGN="LEFT">
+Adapter</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">When you&#8217;ve got <I>this</I>, and
+you need <I>that</I>, <I>Adapter</I> solves the problem. The only requirement is
+to produce a <I>that</I>, and there are a number of ways you can accomplish this
+adaptation.</FONT><BR></DIV>
+
+<PRE>//: c07:Adapter.java
+// Variations on the Adapter pattern.
+import com.bruceeckel.test.*;
+
+class WhatIHave {
+  public void g() {}
+  public void h() {}
+}
+
+interface WhatIWant {
+  void f();
+}
+
+class ProxyAdapter implements WhatIWant {
+  WhatIHave whatIHave;
+  public ProxyAdapter(WhatIHave wih) {
+    whatIHave = wih;
+  }
+  public void f() {
+    // Implement behavior using 
+    // methods in WhatIHave:
+    whatIHave.g();
+    whatIHave.h();
+  }
+}
+  
+class WhatIUse {
+  public void op(WhatIWant wiw) {
+    wiw.f();
+  }
+}
+
+// Approach 2: build adapter use into op():
+class WhatIUse2 extends WhatIUse {
+  public void op(WhatIHave wih) {
+    new ProxyAdapter(wih).f();
+  }
+}
+
+// Approach 3: build adapter into WhatIHave:
+class WhatIHave2 extends WhatIHave 
+implements WhatIWant {
+  public void f() {
+    g();
+    h();
+  }
+}
+
+// Approach 4: use an inner class:
+class WhatIHave3 extends WhatIHave {
+  private class InnerAdapter implements WhatIWant{
+    public void f() {
+      g();
+      h();
+    }
+  }
+  public WhatIWant whatIWant() { 
+    return new InnerAdapter(); 
+  }
+}
+
+public class Adapter extends UnitTest {
+  WhatIUse whatIUse = new WhatIUse();
+  WhatIHave whatIHave = new WhatIHave();
+  WhatIWant adapt= new ProxyAdapter(whatIHave);
+  WhatIUse2 whatIUse2 = new WhatIUse2();
+  WhatIHave2 whatIHave2 = new WhatIHave2();
+  WhatIHave3 whatIHave3 = new WhatIHave3();
+  public void test() {
+    whatIUse.op(adapt);
+    // Approach 2:
+    whatIUse2.op(whatIHave);
+    // Approach 3:
+    whatIUse.op(whatIHave2);
+    // Approach 4:
+    whatIUse.op(whatIHave3.whatIWant());
+  }
+  public static void main(String args[]) {
+    new Adapter().test();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">I&#8217;m taking liberties
+with the term &#8220;proxy&#8221; here, because in <I>Design Patterns</I> they
+assert that a proxy must have an identical interface with the object that it is
+a surrogate for. However, if you have the two words together: &#8220;proxy
+adapter,&#8221; it is perhaps more
+reasonable.</FONT><A NAME="_Toc476705911"></A><A NAME="_Toc524504136"></A><BR></DIV>
+<A NAME="Heading62"></A><H2 ALIGN="LEFT">
+Fa&ccedil;ade</H2>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">A general principle that I apply when
+I&#8217;m casting about trying to mold requirements into a first-cut object is
+&#8220;If something is ugly, hide it inside an object.&#8221; This is basically
+what <I>Fa&ccedil;ade</I> accomplishes. If you have a rather confusing
+collection of classes and interactions that the client programmer doesn&#8217;t
+really need to see, then you can create an interface that is useful for the
+client programmer and that only presents what&#8217;s
+necessary.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">Fa&ccedil;ade is often implemented as
+singleton abstract factory. Of course, you can easily get this effect by
+creating a class containing <B>static</B> factory methods:</FONT><BR></DIV>
+
+<PRE>//: c07:Facade.java
+import com.bruceeckel.test.*;
+
+class A { public A(int x) {} }
+class B { public B(long x) {} }
+class C { public C(double x) {} }
+
+// Other classes that aren't exposed by the
+// facade go here ...
+
+public class Facade extends UnitTest {
+  static A makeA(int x) { return new A(x); }
+  static B makeB(long x) { return new B(x); }
+  static C makeC(double x) { return new C(x); }
+  // The client programmer gets the objects
+  // by calling the static methods:
+  A a = Facade.makeA(1);
+  B b = Facade.makeB(1);
+  C c = Facade.makeC(1.0);
+  public void test() {}
+  public static void main(String args[]) {
+    new Facade().test();
+  }
+} ///:~</PRE><DIV ALIGN="LEFT"><FONT FACE="Georgia">The example given in
+<I>Design Patterns</I> isn&#8217;t really a <I>Fa&ccedil;ade</I> but just a
+class that uses the other classes.</FONT><A NAME="_Toc524504137"></A><BR></DIV>
+<A NAME="Heading63"></A><H3 ALIGN="LEFT">
+Package as a variation of Fa&ccedil;ade</H3>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">To me, the <I>Fa&ccedil;ade</I> has a
+rather &#8220;procedural&#8221; (non-object-oriented) feel to it: you are just
+calling some functions to give you objects. And how different is it, really,
+from <I>Abstract Factory</I>? The point of <I>Fa&ccedil;ade</I> is to hide part
+of a library of classes (and their interactions) from the client programmer, to
+make the interface to that group of classes more digestible and easier to
+understand.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">However, this is precisely what the
+packaging features in Java accomplish: outside of the library, you can only
+create and use <B>public</B> classes; all the non-<B>public</B> classes are only
+accessible within the package. It&#8217;s as if <I>Fa&ccedil;ade</I> is a
+built-in feature of Java.</FONT><BR></DIV>
+<DIV ALIGN="LEFT"><FONT FACE="Georgia">To be fair, <I>Design Patterns</I> is
+written primarily for a C++ audience. Although C++ has namespaces to prevent
+clashes of globals and class names, this does not provide the class hiding
+mechanism that you get with non-<B>public</B> classes in Java. The majority of
+the time I think that Java packages will solve the <I>Fa&ccedil;ade
+</I>problem.</FONT><A NAME="_Toc524504138"></A><BR></DIV>
+<A NAME="Heading64"></A><H2 ALIGN="LEFT">
+Exercises</H2>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">The <B>java.util.Map</B>
+has no way to automatically load a two-dimensional array of objects into a
+<B>Map</B> as key-value pairs. Create an adapter class that does
+this.</FONT><LI></OL><DIV ALIGN="LEFT"><BR></DIV>
+<DIV ALIGN="CENTER"><IMG SRC="images/r2hGlyph.gif"><BR>
+<A HREF="mailto:chris@sunpack.com">chris@sunpack.com</A> Last Update:09/08/2001</DIV>
+
+</BODY>
+
+</HTML>

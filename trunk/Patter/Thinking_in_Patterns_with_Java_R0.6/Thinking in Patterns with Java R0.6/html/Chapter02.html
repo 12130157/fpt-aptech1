@@ -1,0 +1,570 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:40
+Translation Platform:Win32
+Number of Output files:18
+This File:Chapter02.html
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>2: Unit Testing</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview-head.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana" size = "-1">
+    [ <a href="README-HTML.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.html">Revision History</a> ]
+    [ <a href="Building-Code.html">Build the Code</a> ]
+    [ <a href="TIPatterns-Corrections.html">Report an Error</a> ] <br>
+    [ <a href="http://www.mindview.net/MailingList.html">Free Newsletter</a> ]
+    [ <a href="http://www.mindview.net/Training.html">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CPPServices/#ConsultingServices">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana">
+  Thinking in Patterns <font size="4">with Java</font>, Revision 0.6</FONT></H2>
+  <H3><FONT FACE="Verdana">&copy;2001 by Bruce Eckel</FONT></H3>
+  
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter01.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter03.html">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc524504089"></A><A NAME="Heading15"></A><FONT FACE = "Verdana"><H1 ALIGN="LEFT">
+2: Unit Testing</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia" SIZE=4>One of the important recent
+realizations is the dramatic value of unit testing.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This is the process of building
+integrated tests into all the code that you create, and running those tests
+every time you do a build. It&#8217;s as if you are extending the compiler,
+telling it more about what your program is supposed to do. That way, the build
+process can check for more than just syntax errors, since you teach it how to
+check for semantic errors as well.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">C-style programming languages, and C++ in
+particular, have typically valued performance over programming safety. The
+reason that developing programs in Java is so much faster than in C++ (roughly
+twice as fast, by most accounts) is because of Java&#8217;s safety net: features
+like better type checking, enforced exceptions and garbage collection. By
+integrating unit testing into your build process, you are extending this safety
+net, and the result is that you can develop faster. You can also be bolder in
+the changes that you make, and more easily refactor your code when you discover
+design or implementation flaws, and in general produce a better product,
+faster.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Unit testing is not generally considered
+a design pattern; in fact, it might be considered a &#8220;development
+pattern,&#8221; but perhaps there are enough &#8220;pattern&#8221; phrases in
+the world already. Its effect on development is so significant that it will be
+used throughout this book, and thus will be introduced here.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">My own experience with unit testing began
+when I realized that every program in a book must be automatically extracted and
+organized into a source tree, along with appropriate makefiles (or some
+equivalent technology) so that you could just type <B>make</B> to build the
+whole tree. The effect of this process on the code quality of the book was so
+immediate and dramatic that it soon became (in my mind) a requisite for any
+programming book&#8212;how can you trust code that you didn&#8217;t compile? I
+also discovered that if I wanted to make sweeping changes, I could do so using
+search-and-replace throughout the book, and also bashing the code around at
+will. I knew that if I introduced a flaw, the code extractor and the makefiles
+would flush it out.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As programs became more complex, however,
+I also found that there was a serious hole in my system. Being able to
+successfully compile programs is clearly an important first step, and for a
+published book it seemed a fairly revolutionary one&#8212;usually due to the
+pressures of publishing, it&#8217;s quite typical to randomly open a programming
+book and discover a coding flaw. However, I kept getting messages from readers
+reporting semantic problems in my code (in <I>Thinking in Java</I>). These
+problems could only be discovered by running the code. Naturally, I understood
+this and had taken some early faltering steps towards implementing a system that
+would perform automatic execution tests, but I had succumbed to the pressures of
+publishing, all the while knowing that there was definitely something wrong with
+my process and that it would come back to bite me in the form of embarrassing
+bug reports (in the open source world, embarrassment is one of the prime
+motivating factors towards increasing the quality of one&#8217;s
+code!).</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The other problem was that I was lacking
+a structure for the testing system. Eventually, I started hearing about unit
+testing and JUnit</FONT><A NAME="fnB7" HREF="#fn7">[7]</A><FONT FACE="Georgia">,
+which provided a basis for a testing structure. However, even though JUnit is
+intended to make the creation of test code easy, I wanted to see if I could make
+it even easier, applying the Extreme Programming principle of &#8220;do the
+simplest thing that could possibly work&#8221; as a starting point, and then
+evolving the system as usage demands (In addition, I wanted to try to reduce the
+amount of test code, in an attempt to fit more functionality in less code for
+screen presentations). This chapter is the
+result.</FONT><A NAME="_Toc524504090"></A><BR></P></DIV>
+<A NAME="Heading16"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Write tests first</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As I mentioned, one of the problems that
+I encountered&#8212;that most people encounter, it turns out&#8212;was
+submitting to the pressures of publishing and as a result letting tests fall by
+the wayside. This is easy to do if you forge ahead and write your program code
+because there&#8217;s a little voice that tells you that, after all,
+you&#8217;ve got it working now, and wouldn&#8217;t it be more
+interesting/useful/expedient to just go on and write that other part (we can
+always go back and write the tests later). As a result, the tests take on less
+importance, as they often do in a development project.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The answer to this problem, which I first
+found described in <I>Extreme Programming Explained</I>, is to write the tests
+<I>before</I> you write the code. This may seem to artificially force testing to
+the forefront of the development process, but what it actually does is to give
+testing enough additional value to make it essential. If you write the tests
+first, you:</FONT><BR></P></DIV>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Describe what the code is
+supposed to do, not with some external graphical tool but with code that
+actually lays the specification down in concrete, verifiable
+terms.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Provide an
+example of how the code should be used; again, this is a working, tested
+example, normally showing all the important method calls, rather than just an
+academic description of a
+library.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Provide a
+way to verify when the code is finished (when all the tests run
+correctly).</FONT></OL><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Thus, if you write
+the tests first then testing becomes a development tool, not just a verification
+step that can be skipped if you happen to feel comfortable about the code that
+you just wrote (a comfort, I have found, that is usually
+wrong).</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can find convincing arguments in
+<I>Extreme Programming Explained</I>, as &#8220;write tests first&#8221; is a
+fundamental principle of XP. If you aren&#8217;t convinced you need to adopt any
+of the changes suggested by XP, note that according to Software Engineering
+Institute (SEI) studies, nearly 70% of software organizations are stuck in the
+first two levels of SEI's scale of sophistication: chaos, and slightly better
+than chaos. If you change nothing else, add automated
+testing.</FONT><A NAME="_Toc524504091"></A><BR></P></DIV>
+<A NAME="Heading17"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+A very simple framework</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">As mentioned, a primary goal of this code
+is to make the writing of unit testing code very simple, even simpler than with
+JUnit. As further needs are discovered <I>during the use</I> of this system,
+then that functionality can be added, but to start with the framework will just
+provide a way to easily create and run tests, and report failure if something
+breaks (success will produce no results other than normal output that may occur
+during the running of the test). My intended use of this framework is in
+makefiles, and <B>make</B> aborts if there is a non-zero return value from the
+execution of a command. The build process will consist of compilation of the
+programs and execution of unit tests, and if <B>make</B> gets all the way
+through successfully then the system will be validated, otherwise it will abort
+at the place of failure. The error messages will report the test that failed but
+not much else, so that you can provide whatever granularity that you need by
+writing as many tests as you want, each one covering as much or as little as you
+find necessary.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In some sense, this framework provides an
+alternative place for all those &#8220;print&#8221; statements I&#8217;ve
+written and later erased over the years.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To create a set of tests, you start by
+making a <B>static </B> inner class inside the class you wish to test (your test
+code may also test other classes; it&#8217;s up to you). This test code is
+distinguished by inheriting from <B>UnitTest</B>:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: com:bruceeckel:test:UnitTest.java</font>
+<font color=#009900>// The basic unit testing class</font>
+<font color=#0000ff>package</font> com.bruceeckel.test;
+<font color=#0000ff>import</font> java.util.*;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> UnitTest {
+  <font color=#0000ff>static</font> String testID;
+  <font color=#0000ff>static</font> List errors = <font color=#0000ff>new</font> ArrayList();
+  <font color=#009900>// Override cleanup() if test object </font>
+  <font color=#009900>// creation allocates non-memory </font>
+  <font color=#009900>// resources that must be cleaned up:</font>
+  <font color=#0000ff>protected</font> <font color=#0000ff>void</font> cleanup() {}
+  <font color=#009900>// Verify the truth of a condition:</font>
+  <font color=#0000ff>protected</font> <font color=#0000ff>final</font> <font color=#0000ff>void</font> affirm(<font color=#0000ff>boolean</font> condition){
+    <font color=#0000ff>if</font>(!condition)
+      errors.add(<font color=#004488>"failed: "</font> + testID);
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The only testing method [[
+So far ]] is
+<B>affirm(&#160;)</B></FONT><A NAME="fnB8" HREF="#fn8">[8]</A><FONT FACE="Georgia">,
+which is <B>protected</B> so that it can be used from the inheriting class. All
+this method does is verify that something is <B>true</B>. If not, it adds an
+error to the list, reporting that the current test (established by the <B>static
+testID</B>, which is set by the test-running program that you shall see shortly)
+has failed. Although this is not a lot of information&#8212;you might also wish
+to have the line number, which could be extracted from an exception&#8212;it may
+be enough for most situations.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Unlike JUnit (which uses
+<B>setUp(&#160;)</B> and <B>tearDown(&#160;)</B> methods), test objects will be
+built using ordinary Java construction. You define the test objects by creating
+them as ordinary class members of the test class, and a new test class object
+will be created for each test method (thus preventing any problems that might
+occur from side effects between tests). Occasionally, the creation of a test
+object will allocate non-memory resources, in which case you must override
+<B>cleanup(&#160;)</B> to release those
+resources.</FONT><A NAME="_Toc524504092"></A><BR></P></DIV>
+<A NAME="Heading18"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Writing tests</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Writing tests becomes very simple.
+Here&#8217;s an example that creates the necessary <B>static</B> inner class and
+performs trivial tests:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c02:TestDemo.java</font>
+<font color=#009900>// Creating a test</font>
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> TestDemo {
+  <font color=#0000ff>private</font> <font color=#0000ff>static</font> <font color=#0000ff>int</font> objCounter = 0;
+  <font color=#0000ff>private</font> <font color=#0000ff>int</font> id = ++objCounter;
+  <font color=#0000ff>public</font> TestDemo(String s) {
+    System.out.println(s + <font color=#004488>": count = "</font> + id);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> close() {
+    System.out.println(<font color=#004488>"Cleaning up: "</font> + id);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>boolean</font> someCondition() { <font color=#0000ff>return</font> <font color=#0000ff>true</font>; }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>class</font> Test <font color=#0000ff>extends</font> UnitTest {
+    TestDemo test1 = <font color=#0000ff>new</font> TestDemo(<font color=#004488>"test1"</font>);
+    TestDemo test2 = <font color=#0000ff>new</font> TestDemo(<font color=#004488>"test2"</font>);
+    <font color=#0000ff>public</font> <font color=#0000ff>void</font> cleanup() { 
+      test2.close();
+      test1.close();
+    }
+    <font color=#0000ff>public</font> <font color=#0000ff>void</font> testA() { 
+      System.out.println(<font color=#004488>"TestDemo.testA"</font>); 
+      affirm(test1.someCondition());
+    }
+    <font color=#0000ff>public</font> <font color=#0000ff>void</font> testB() { 
+      System.out.println(<font color=#004488>"TestDemo.testB"</font>);
+      affirm(test2.someCondition());
+      affirm(TestDemo.objCounter != 0);
+    }
+    <font color=#009900>// Causes the build to halt:</font>
+    <font color=#009900>//! public void test3() { affirm(false); }</font>
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The <B>test3(&#160;)</B> 
+method is commented out because, as you&#8217;ll see, it causes the automatic
+build of this book&#8217;s source-code tree to stop.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can name your inner class anything
+you&#8217;d like; the only important factor is that it <B>extends UnitTest</B>.
+You can also include any necessary support code in other methods. Only <B>public
+</B>methods that take no arguments and return <B>void</B> will be treated as
+tests (the names of these methods are also not constrained).</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The above test class creates two
+instances of <B>TestDemo</B>. The <B>TestDemo </B>constructor prints something,
+so that we can see it being called. You could also define a default constructor
+(the only kind that is used by the test framework), although none is necessary
+here. The <B>TestDemo</B> class has a <B>close(&#160;)</B> method which suggests
+it is used as part of object cleanup, so this is called in the overridden
+<B>cleanup(&#160;)</B> method in <B>Test</B>.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The testing methods use the
+<B>affirm(&#160;)</B> method to validate expressions, and if there is a failure
+the information is stored and printed after all the tests are run.  Of course,
+the <B>affirm(&#160;)</B> arguments are usually more complicated than this;
+you&#8217;ll see more examples throughout the rest of this
+book.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Notice that in <B>testB(&#160;)</B>, the
+<B>private</B> field <B>objCounter</B> is accessible to the testing
+code&#8212;this is because <B>Test</B> has the permissions of an inner
+class.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can see that writing test code
+requires very little extra effort, and no knowledge other than that used for
+writing ordinary classes.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To run the tests, you use
+<B>RunUnitTests.java</B> (which will be introduced shortly). The command for the
+above code looks like this:</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><B>java com.bruceeckel.test.RunUnitTests
+TestDemo</B></FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">It produces the following
+output:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>test1: count = 1
+test2: count = 2
+TestDemo.testA
+Cleaning up: 2
+Cleaning up: 1
+test1: count = 3
+test2: count = 4
+TestDemo.testB
+Cleaning up: 4
+Cleaning up: 3</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">All the output is
+noise as far as the success or failure of the unit testing is concerned. Only if
+one or more of the unit tests fail does the program returns a non-zero value to
+terminate the <B>make</B> process after the error messages are produced. Thus,
+you can choose to produce output or not, as it suits your needs, and the test
+class becomes a good place to put any printing code you might need&#8212;if you
+do this, you tend to keep such code around rather than putting it in and
+stripping it out as is typically done with tracing code.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">If you need to add a test to a class
+derived from one that already has a test class, it&#8217;s no problem, as you
+can see here:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c02:TestDemo2.java</font>
+<font color=#009900>// Inheriting from a class that </font>
+<font color=#009900>// already has a test is no problem.</font>
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> TestDemo2 <font color=#0000ff>extends</font> TestDemo {
+  <font color=#0000ff>public</font> TestDemo2(String s) { <font color=#0000ff>super</font>(s); }
+  <font color=#009900>// You can even use the same name </font>
+  <font color=#009900>// as the test class in the base class:</font>
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>class</font> Test <font color=#0000ff>extends</font> UnitTest {
+    <font color=#0000ff>public</font> <font color=#0000ff>void</font> testA() {
+      System.out.println(<font color=#004488>"TestDemo2.testA"</font>);
+      affirm(1 + 1 == 2);
+    }
+    <font color=#0000ff>public</font> <font color=#0000ff>void</font> testB() {
+      System.out.println(<font color=#004488>"TestDemo2.testB"</font>); 
+      affirm(2 * 2 == 4);
+    }
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Even the name of the inner
+class can be the same. In the above code, all the assertions are always true so
+the tests will never fail.</FONT><A NAME="_Toc524504093"></A><BR></P></DIV>
+<A NAME="Heading19"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+White-box &amp; black-box tests</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The unit test examples so far are what
+are traditionally called <I>white-box</I> <I>tests</I>. This means that the test
+code has complete access to the internals of the class that&#8217;s being tested
+(so it might be more appropriately called &#8220;transparent box&#8221;
+testing). White-box testing happens automatically when you make the unit test
+class as an inner class of the class being tested, since inner classes
+automatically have access to all their outer class elements, even those that are
+<B>private</B>.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">A possibly more common form of testing is
+<I>black-box testing</I>, which refers to treating the class under test as an
+impenetrable box. You can&#8217;t see the internals; you can only access the
+<B>public</B> portions of the class. Thus, black-box testing corresponds more
+closely to functional testing, to verify the methods that the client programmer
+is going to use. In addition, black-box testing provides a minimal instruction
+sheet to the client programmer &#8211; in the absence of all other
+documentation, the black-box tests at least demonstrate how to make basic calls
+to the <B>public</B> class methods.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To perform black-box tests using the
+unit-testing framework presented in this book, all you need to do is create your
+test class as a global class instead of an inner class. All the other rules are
+the same (for example, the unit test class must be <B>public</B>, and derived
+from <B>UnitTest</B>).</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">There&#8217;s one other caveat, which
+will also provide a little review of Java packages. If you want to be completely
+rigorous, you must put your black-box test class in a separate directory than
+the class it tests, otherwise it will have package access to the elements of the
+class being tested. That is, you&#8217;ll be able to access <B>protected</B> and
+<B>friendly</B> elements of the class being tested. Here&#8217;s an
+example:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c02:Testable.java</font>
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> Testable {
+  <font color=#0000ff>private</font> <font color=#0000ff>void</font> f1() {}
+  <font color=#0000ff>void</font> f2() {} <font color=#009900>// "Friendly": package access</font>
+  <font color=#0000ff>protected</font> <font color=#0000ff>void</font> f3() {} <font color=#009900>// Also package access</font>
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> f4() {}
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Normally, the only method
+that should be directly accessible to the client programmer is
+<B>f4(&#160;)</B>. However, if you put your black-box test in the same
+directory, it automatically becomes part of the same package (in this case, the
+default package since none is specified) and then has inappropriate
+access:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c02:TooMuchAccess.java</font>
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> TooMuchAccess <font color=#0000ff>extends</font> UnitTest {
+  Testable tst = <font color=#0000ff>new</font> Testable();
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test1() {
+    tst.f2(); <font color=#009900>// Oops!</font>
+    tst.f3(); <font color=#009900>// Oops!</font>
+    tst.f4(); <font color=#009900>// OK</font>
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">You can solve the problem by
+moving <B>TooMuchAccess.java</B> into its own subdirectory, thereby putting it
+in its own default package (thus a different package from <B>Testable.java</B>).
+Of course, when you do this, then <B>Testable</B> must be in its own package, so
+that it can be imported (note that it is also possible to import a
+&#8220;package-less&#8221; class by giving the class name in the <B>import</B>
+statement and ensuring that the class is in your CLASSPATH):</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c02:testable:Testable.java</font>
+<font color=#0000ff>package</font> c02.testable;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> Testable {
+  <font color=#0000ff>private</font> <font color=#0000ff>void</font> f1() {}
+  <font color=#0000ff>void</font> f2() {} <font color=#009900>// "Friendly": package access</font>
+  <font color=#0000ff>protected</font> <font color=#0000ff>void</font> f3() {} <font color=#009900>// Also package access</font>
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> f4() {}
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here&#8217;s the black-box
+test in its own package, showing how only public methods may be
+called:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c02:test:BlackBoxTest.java</font>
+<font color=#0000ff>import</font> c02.testable.*;
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> BlackBoxTest <font color=#0000ff>extends</font> UnitTest {
+  Testable tst = <font color=#0000ff>new</font> Testable();
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test1() {
+    <font color=#009900>//! tst.f2(); // Nope!</font>
+    <font color=#009900>//! tst.f3(); // Nope!</font>
+    tst.f4(); <font color=#009900>// Only public methods available</font>
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Note that the above program
+is indeed very similar to the one that the client programmer would write to use
+your class, including the imports and available methods. So it does make a good
+programming example. Of course, it&#8217;s easier from a coding standpoint to
+just make an inner class, and unless you&#8217;re ardent about the need for
+specific black-box testing you may just want to go ahead and use the inner
+classes (with the knowledge that if you need to you can later extract the inner
+classes into separate black-box test classes, without too much
+effort).</FONT><A NAME="_Toc524504094"></A><BR></P></DIV>
+<A NAME="Heading20"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Running tests</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The program that runs the tests makes
+significant use of reflection so that writing the tests can be simple for the
+client programmer.</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: com:bruceeckel:test:RunUnitTests.java</font>
+<font color=#009900>// Discovering the unit test</font>
+<font color=#009900>// class and running each test.</font>
+<font color=#0000ff>package</font> com.bruceeckel.test;
+<font color=#0000ff>import</font> java.lang.reflect.*;
+<font color=#0000ff>import</font> java.util.Iterator;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> RunUnitTests {
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> 
+  require(<font color=#0000ff>boolean</font> requirement, String errmsg) {
+    <font color=#0000ff>if</font>(!requirement) {
+      System.err.println(errmsg);
+      System.exit(1);
+    }
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String[] args) {
+    require(args.length == 1,
+      <font color=#004488>"Usage: RunUnitTests qualified-class"</font>);
+    <font color=#0000ff>try</font> {
+      Class c = Class.forName(args[0]);
+      <font color=#009900>// Only finds the inner classes </font>
+      <font color=#009900>// declared in the current class:</font>
+      Class[] classes = c.getDeclaredClasses();
+      Class ut = <font color=#0000ff>null</font>;
+      <font color=#0000ff>for</font>(<font color=#0000ff>int</font> j = 0; j &lt; classes.length; j++) {
+        <font color=#009900>// Skip inner classes that are </font>
+        <font color=#009900>// not derived from UnitTest:</font>
+        <font color=#0000ff>if</font>(!UnitTest.<font color=#0000ff>class</font>.
+            isAssignableFrom(classes[j]))
+              <font color=#0000ff>continue</font>;
+        ut = classes[j];
+        <font color=#0000ff>break</font>; <font color=#009900>// Finds the first test class only</font>
+      }
+      <font color=#009900>// If it found an inner class, </font>
+      <font color=#009900>// that class must be static:</font>
+      <font color=#0000ff>if</font>(ut != <font color=#0000ff>null</font>)
+        require(
+          Modifier.isStatic(ut.getModifiers()),
+          <font color=#004488>"inner UnitTest class must be static"</font>);
+      <font color=#009900>// If it couldn't find the inner class, </font>
+      <font color=#009900>// maybe it's a regular class (for black-</font>
+      <font color=#009900>// box testing:</font>
+      <font color=#0000ff>if</font>(ut == <font color=#0000ff>null</font>)
+        <font color=#0000ff>if</font>(UnitTest.<font color=#0000ff>class</font>.isAssignableFrom(c))
+          ut = c;
+      require(ut != <font color=#0000ff>null</font>, 
+        <font color=#004488>"No UnitTest class found"</font>);
+      require(
+        Modifier.isPublic(ut.getModifiers()),
+        <font color=#004488>"UnitTest class must be public"</font>);
+      Method[] methods = ut.getDeclaredMethods();
+      <font color=#0000ff>for</font>(<font color=#0000ff>int</font> k = 0; k &lt; methods.length; k++) {
+        Method m = methods[k];
+        <font color=#009900>// Ignore overridden UnitTest methods:</font>
+        <font color=#0000ff>if</font>(m.getName().equals(<font color=#004488>"cleanup"</font>)) 
+          <font color=#0000ff>continue</font>;
+        <font color=#009900>// Only public methods with no </font>
+        <font color=#009900>// arguments and void return </font>
+        <font color=#009900>// types will be used as test code:</font>
+        <font color=#0000ff>if</font>(m.getParameterTypes().length == 0 &amp;&amp;
+           m.getReturnType() == <font color=#0000ff>void</font>.<font color=#0000ff>class</font> &amp;&amp;
+           Modifier.isPublic(m.getModifiers())) {
+             <font color=#009900>// The name of the test is </font>
+             <font color=#009900>// used in error messages:</font>
+             UnitTest.testID = m.getName();
+             <font color=#009900>// A new instance of the </font>
+             <font color=#009900>// test object is created and </font>
+             <font color=#009900>// cleaned up for each test:</font>
+             Object test = ut.newInstance();
+             m.invoke(test, <font color=#0000ff>new</font> Object[0]);
+             ((UnitTest)test).cleanup();
+        }
+      }
+    } <font color=#0000ff>catch</font>(Exception e) {
+      e.printStackTrace(System.err);
+      <font color=#009900>// Any exception will return a nonzero </font>
+      <font color=#009900>// value to the console, so that </font>
+      <font color=#009900>// 'make' will abort:</font>
+      System.err.println(<font color=#004488>"Aborting make"</font>);
+      System.exit(1);
+    }
+    <font color=#009900>// After all tests in this class are run,</font>
+    <font color=#009900>// display any results. If there were errors,</font>
+    <font color=#009900>// abort 'make' by returning a nonzero value.</font>
+    <font color=#0000ff>if</font>(UnitTest.errors.size() != 0) {
+      Iterator it = UnitTest.errors.iterator();
+      <font color=#0000ff>while</font>(it.hasNext())
+        System.err.println(it.next());
+      System.exit(1);
+    }
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc524504095"></A><BR></P></DIV>
+<A NAME="Heading21"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Automatically executing tests</H2></FONT>
+<DIV ALIGN="LEFT"><P><A NAME="_Toc524504096"></A><BR></P></DIV>
+<A NAME="Heading22"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Install this book&#8217;s
+source code tree and ensure that you have a <B>make</B> utility installed on
+your system (Gnu <B>make</B> is freely available on the internet at various
+locations). In <B>TestDemo.java</B>, un-comment <B>test3(&#160;)</B>, then type
+<B>make</B> and observe the
+results.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+TestDemo.java by adding a new test that throws an exception. Type <B>make</B>
+and observe the
+results.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify your
+solutions to the exercises in Chapter 1 by adding unit tests. Write makefiles
+that incorporate the unit tests.</FONT></OL>
+<HR><DIV ALIGN="LEFT"><P><A NAME="fn7" HREF="#fnB7">[7]</A><FONT FACE="Georgia">
+</FONT><FONT FACE="Georgia">http://www.junit.org</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="fn8" HREF="#fnB8">[8]</A><FONT FACE="Georgia"> I had
+originally called this <B>assert()</B>, but that word became reserved in JDK 1.4
+when assertions were added to the language.</FONT><BR></P></DIV>
+
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter01.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter03.html">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:09/08/2001</P></DIV>
+
+</BODY>
+
+</HTML>

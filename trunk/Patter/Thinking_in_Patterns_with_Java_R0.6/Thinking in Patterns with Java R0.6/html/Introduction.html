@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:39
+Translation Platform:Win32
+Number of Output files:18
+This File:Introduction.html
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>Introduction</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview-head.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana" size = "-1">
+    [ <a href="README-HTML.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.html">Revision History</a> ]
+    [ <a href="Building-Code.html">Build the Code</a> ]
+    [ <a href="TIPatterns-Corrections.html">Report an Error</a> ] <br>
+    [ <a href="http://www.mindview.net/MailingList.html">Free Newsletter</a> ]
+    [ <a href="http://www.mindview.net/Training.html">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CPPServices/#ConsultingServices">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana">
+  Thinking in Patterns <font size="4">with Java</font>, Revision 0.6</FONT></H2>
+  <H3><FONT FACE="Verdana">&copy;2001 by Bruce Eckel</FONT></H3>
+  
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Preface.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter01.html">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc524504077"></A><A NAME="Heading2"></A><FONT FACE = "Verdana"><H1 ALIGN="LEFT">
+Introduction</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia" SIZE=4>This is a book about design that I
+have been working on for years, basically ever since I first started trying to
+read <I>Design Patterns</I> (Gamma, Helm, Johnson &amp; Vlissides,
+Addison-Wesley, 1995), commonly referred to as the <I>Gang of
+Four</I></FONT><A NAME="fnB1" HREF="#fn1">[1]</A><FONT FACE="Georgia" SIZE=4> or
+just GoF).</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">There is a chapter on design patterns in
+the first edition of <I>Thinking in C++</I>, which has evolved in Volume 2 of
+the second edition of <I>Thinking in C++</I>, and you&#8217;ll also find a
+chapter on patterns in the first edition of <I>Thinking in Java</I> (I took it
+out of the second edition because that book was getting too big, and also
+because I had decided to write this book).</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">This is not an introductory book. I am
+assuming that you have worked your way through <I>Thinking in Java</I> or an
+equivalent text before coming to this book.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In addition, I assume you have more than
+just a grasp of the syntax of Java. You should have a good understanding of
+objects and what they&#8217;re about, including polymorphism. Again, these are
+topics covered in <I>Thinking in Java</I>.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">On the other hand, by going through this
+book you&#8217;re going to learn a <I>lot</I> about object-oriented programming
+by seeing objects used in many different situations. If your knowledge of
+objects is rudimentary, it will get much stronger in the process of
+understanding the designs in this
+book.</FONT><A NAME="_Toc524504078"></A><BR></P></DIV>
+<A NAME="Heading3"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+The Y2K syndrome</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In a book that has &#8220;problem-solving
+techniques&#8221; in its subtitle, it&#8217;s worth mentioning one of the
+biggest pitfalls in programming: premature optimization. Every time I bring this
+concept forward, virtually everyone agrees to it. Also, everyone seems to
+reserve in their own mind a special case &#8220;except for this thing that I
+happen to know is a particular problem.&#8221;</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The reason I call this the Y2K syndrome
+has to do with that special knowledge. Computers are a mystery to most people,
+so when someone announced that those silly computer programmers had forgotten to
+put in enough digits to hold dates past the year 1999, then suddenly everyone
+became a computer expert &#8211; &#8220;these things aren&#8217;t so difficult
+after all, if I can see such an obvious problem.&#8221; For example, my
+background was originally in computer engineering, and I started out by
+programming embedded systems. As a result, I know that many embedded systems
+have no idea what the date or time is, and even if they do that data often
+isn&#8217;t used in any important calculations. And yet I was told in no
+uncertain terms that all the embedded systems were going to crash on January 1,
+2000. As far as I can tell the only memory that was lost on that particular date
+was that of the people who were predicting doom &#8211; it&#8217;s as if they
+had never said any of that stuff.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The point is that it&#8217;s very easy to
+fall into a habit of thinking that the particular algorithm or piece of code
+that you happen to partly or thoroughly understand is naturally going to be the
+bottleneck in your system, simply because you can imagine what&#8217;s going on
+in that piece of code and so you think that it must somehow be much less
+efficient than all the other pieces of code that you don&#8217;t know about. But
+unless you&#8217;ve run actual tests, typically with a profiler, you can&#8217;t
+really know what&#8217;s going on. And even if you are right, that a piece of
+code is very inefficient, remember that most programs spend something like 90%
+of their time in less than 10% of the code in the program, so unless the piece
+of code you&#8217;re thinking about happens to fall into that 10% it isn&#8217;t
+going to be important.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">I believe it was Edsger Dijkstra who said
+&#8220;premature optimization is the root of all
+evil.&#8221;</FONT><A NAME="_Toc524504079"></A><BR></P></DIV>
+<A NAME="Heading4"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Context and composition</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">One of the terms you will see used over
+and over in design patterns literature is <I>context</I>. In fact, one common
+definition of a design pattern is &#8220;a solution to a problem in a
+context.&#8221; The GoF patterns often have a &#8220;context object&#8221; that
+the client programmer interacts with. At one point it occurred to me that such
+objects seemed to dominate the landscape of many patterns, and so I began asking
+what they were about.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The context object often acts as a little
+fa&ccedil;ade to hide the complexity of the rest of the pattern, and in addition
+it will often be the controller that manages the operation of the pattern.
+Initially, it seemed to me that these were not really essential to the
+implementation, use and understanding of the pattern. However, I remembered one
+of the more dramatic statements made in the GoF: &#8220;prefer composition to
+inheritance.&#8221; The context object allows you to use the pattern in a
+composition, and that may be it&#8217;s primary value.</FONT><BR></P></DIV>
+<A NAME="Heading5"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+A word about checked exceptions</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">1) The great value of exceptions is the
+unification of error reporting: a standard mechanism by which to report errors,
+rather than the popourri of ignorable approaches that we had in C (and thus,
+C++, which only adds exceptions to the mix, and doesn't make it the exclusive
+approach). The big advantage Java has over C++ is that exceptions are the only
+way to report errors.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">2) "Ignorable" in the previous paragraph
+is the other issue. The theory is that if the compiler forces the programmer to
+either handle the exception or pass it on in an exception specification, then
+the programmer's attention will always be brought back to the possibility of
+errors and they will thus properly take care of them. I think the problem is
+that this is an untested assumption we're making as language designers that
+falls into the field of psychology. My theory is that when someone is trying to
+do something and you are constantly prodding them with annoyances, they will use
+the quickest device available to make those annoyances go away so they can get
+their thing done, perhaps assuming they'll go back and take out the device
+later. I discovered I had done this in the first edition of Thinking in
+Java:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>...
+} <font color=#0000ff>catch</font> (SomeKindOfException e) {}</PRE></FONT></BLOCKQUOTE>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">And then more or less forgot it until the
+rewrite. How many people thought this was a good example and followed it? Martin
+Fowler began seeing the same kind of code, and realized people were stubbing out
+exceptions and then they were disappearing. The overhead of checked exceptions
+was having the opposite effect of what was intended, something that can happen
+when you experiment (and I now believe that checked exceptions were an
+experiment based on what someone thought was a good idea, and which I believed
+was a good idea until recently).</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">When I started using Python, all the
+exceptions appeared, none were accidentally "disappeared." If you *want* to
+catch an exception, you can, but you aren't forced to write reams of code all
+the time just to be passing the exceptions around. They go up to where you want
+to catch them, or they go all the way out if you forget (and thus they remind
+you) but they don't vanish, which is the worst of all possible cases. I now
+believe that checked exceptions encourage people to make them vanish. Plus they
+make much less readable code.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">In the end, I think we must realize the
+experimental nature of exceptions and look at them carefully before assuming
+that everything about exceptions in Java are good. I believe that having a
+single mechanism for handling errors is excellent, and I believe that using a
+separate channel (the exception handling mechanism) for moving the exceptions
+around is good. But I do remember one of the early arguments for exception
+handling in C++ was that it would allow the programmer to separate the sections
+of code where you just wanted to get work done from the sections where you
+handled errors, and it seems to me that checked exceptions do not do this;
+instead, they tend to intrude (a lot) into your "normal working code" and thus
+are a step backwards. My experience with Python exceptions supports this, and
+unless I get turned around on this issue I intend to put a lot more
+<B>RuntimeException</B>s into my Java code.</FONT><BR></P></DIV>
+
+<HR><DIV ALIGN="LEFT"><P><A NAME="fn1" HREF="#fnB1">[1]</A><FONT FACE="Georgia"> This
+is a tongue-in-cheek reference to an event in China after the death of Mao-Tze
+Tung, when four persons including Mao&#8217;s widow made a power play, and were
+demonized by the Chinese Communist Party under that name.</FONT><BR></P></DIV>
+
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Preface.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter01.html">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:09/08/2001</P></DIV>
+
+</BODY>
+
+</HTML>

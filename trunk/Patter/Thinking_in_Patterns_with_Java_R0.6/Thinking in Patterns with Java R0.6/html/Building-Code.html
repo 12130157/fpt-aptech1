@@ -1,0 +1,155 @@
+<HTML><HEAD>
+<TITLE>Building the Code for Thinking in Patterns with Java by Bruce Eckel</TITLE>
+</HEAD>
+<BODY bgColor=white><FONT FACE="Verdana,Tahoma,Arial,Helvetica,Sans"><blockquote>
+<center><H2>How to build the code for <br><I>Thinking in Patterns with Java</I> 
+<br>by Bruce Eckel</h2></center>
+<HR NOSHADE="NOSHADE">
+<OL>
+
+<LI>Download and unzip the code from 
+<a href="http://www.mindview.net/DownloadSites/">Thinking in Java, 2nd edition</a> into a directory that will be referred to as <font size="+2"><b><code>code</code></b></font>. (Some of 
+the libraries from this book are used in the <I>Thinking in Patterns</I> 
+code).<br><br>
+
+<LI>Add the <font size="+2"><b><code>code</code></b></font> directory for the 
+<i>Thinking in Java, 2nd edition</i> source code listings (that you unzipped in step 1) to 
+your Java CLASSPATH. Note that in order to successfully compile all of the <i>Thinking in Java</I> files requires the installation of additional Javasoft libraries and a C++ compiler. However this is not necessary in order to compile the <I>Thinking in Patterns</I> code. <I>Thinking in Patterns</I> uses some of the basic Java libraries from <I>Thinking in Java</I> so you must have that code available.<br><br>
+
+<UL><li type=square> You must also include '<b>.</b>' in your CLASSPATH, 
+otherwise Java will not look in the current directory.
+</ul><br>
+
+<LI>Download and unzip the book <i>Thinking in Patterns</i>, which includes the 
+code, from 
+<a href="http://www.mindview.net/Books/TIPatterns/">Mindview</a>.<br><br>
+
+<LI>Add the <font size="+2"><b><code>code</code></b></font> directory for the 
+<i>Thinking in Patterns</i> source code listings (that you unzipped in step 3) to 
+your Java CLASSPATH.<br><br>
+
+<LI>Download and install the Java 2 SDK (JDK 1.3 or higher) from 
+<a href="http://java.sun.com/j2se/">Sun</a>.<br><br>
+
+<LI>Download and install Python (the latest version should work fine) from 
+<a href="http://www.python.org/">www.python.org</a>. Add the Python 
+directory to your PATH.<br><br>
+
+<LI>Create a new environment variable (in your AUTOEXEC.BAT under Windows, in 
+your <b>.cshrc</b> under Linux) called PYTHONPATH, and add the python home 
+directory to this path. <i>Make sure you leave no spaces around the '=' sign 
+when creating this path.</i> For example, here's my PYTHONPATH:<br>
+<code><big><b> set 
+PYTHONPATH=.;c:\PROGRA~1\Python;c:\PROGRA~1\Python\PIL;C:\ProgTools\Python;C:\PR
+OGRA~1\Python\HTMLgen;C:\Progtools\Jython;c:\aaa\Python; </b></big></code><br><br>
+
+<LI>Download and install <a href="http://jython.sourceforge.net/">Jython from 
+sourceforge.net</a>. This is necessary to compile the <I>Interpreter/Multiple 
+Languages</I> chapter. The installer is built into the <b>.class</b> file, so 
+all you need to do is run that file with Java.<br><br>
+
+<ul type=square>
+
+<li>However, When installing Jython, you must explicitly specify the path to the 
+java executable that's in your <b>JDK</b>. If you just say <code><big><b>java 
+Jython-20</b></big></code>, then you will end up using the default java, which 
+will be in the JRE if that's installed, and you won't get the right results, in 
+particular for jythonc. For my machine, I used the command:<br> 
+
+<code><big><b>C:\ProgTools\java\bin\java.exe&nbsp;Jython-20</b></big></code><br> 
+
+to install Jython, and you'll need to give a 
+similar command, depending on where your <b>java.exe</b> is located.<br><br>
+
+<LI>Add <b>Jython.jar</b> (which was produced by the previous step) to your 
+CLASSPATH. Add the Jython install directory to your PATH.<br><br>
+
+</ul>
+
+<LI>Download and install <b>Gnu make</b> from 
+<a href="ftp://ftp.simtel.net/pub/simtelnet/gnu/djgpp/v2gnu/mak3791b.zip"> Simtel 
+for DOS/Windows</a>. You can find general information about <b>make</b> and 
+places to download it for other machines at the <a 
+href="http://www.gnu.org/software/make/make.html"><b>Gnu make</b> page</a>. Note 
+that Linux automatically installs <b>Gnu make</b>. Windows NT may require some 
+fooling around in order to get <b>Gnu make</b> to run, but I have seen it work 
+(you may be able to find specific notes by searching the Internet; try 
+<a href="http://www.google.com">Google</a>).<br><br>
+
+<UL><LI type=square>Here are some notes from Xandy Johnson at FGM, Inc., who 
+solved the Windows NT problem, albeit with the use of Cygwin: <i>The main thing 
+is to use <a href="http://www.cygwin.com/">Cygwin</a>.  The really important part of this is that Cygwin
+get you a real shell, which none of the Windows command processors (i.e. 
+COMMAND.COM on DOS/3.1/95/98/Me and cmd.exe on NT/2000) are.  I invoke 'make' from a Cygwin bash prompt, which should work with nothing additional 
+beyond installing Cygwin.  If you want to be able to invoke make from a DOS 
+Command Prompt, you need to do a couple of additional things: (1) add the Cygwin 
+'bin' directory (e.g. C:\cygwin\bin) to your PATH, and (2) set the environment 
+variable MAKE_MODE=unix.  Setting MAKE_MODE=unix will cause make to use /bin/sh 
+as the shell, rather than cmd.exe, which is, as I said before, one of the 
+crucial differences in Cygwin.</i><br><br>
+
+<LI type=square>To get Jython to work under Cygwin, here's what I had to do 
+(note that I first installed Jython on Win98, then later installed Cygwin. 
+Perhaps there's a way to install it <i>under</i> Cygwin that would not require 
+this). Copy the batch files jython.bat and jythonc.bat to cygwin's 
+/usr/local/bin, since that's already in the path (and an empty directory, on 
+mine, anyway). Then change their names to jython and jythonc. No '.bat' (Unix is 
+literal about names, and doesn't infer the extension, as is assumed in the 
+makefile). Now the jython shell script must be Unixified (there's probably some 
+other way to do this in Cygwin, but at least I got it to work). Remove all the 
+rem statements, and change the direction of the slashes, and when you're done 
+you should get something like this for jython (it's what I used):<code><br><br>
+#! /bin/sh<br>
+D:/jdk1.3/bin/java.exe "-Dpython.home=D:/jdk1.3/Jython" -classpath "D:/jdk1.3/Jython/jython.jar;%CLASSPATH%" org.python.util.jython $1 $2 $3 $4 $5 $6 $7 $8 $9
+</code><br><br>
+
+You should then be able to type "jython" at a Cygwin prompt, and get the >>> 
+sign for interactive python.<br>
+
+Your jythonc will end up looking like:<code><br><br>
+#! /bin/sh<br>
+jython D:/jdk1.3/Jython/Tools/jythonc/jythonc.py $1 $2 $3 $4 $5 $6 $7 $8 $9
+</code><br><br>
+
+<LI type=square>Finn Bock writes: <i>I managed to get gnu make to work on my 
+win2k by adding this to c09/makefile just before the "all:" 
+target:</i><code><br><br>
+
+ifeq ($(OS),Windows_NT)<br>
+COMSPEC=$(SYSTEMROOT)\system32\cmd.exe<br>
+endif</code><br><br>
+
+<i>The default shell set by Gnu make seems to be COMMAND.COM, and as
+Xandy explained, that shell (on w2k) is too simple minded for the task.
+But CMD.EXE is sufficiently powerful for the commands in your
+makefiles. With the patch to c09/makefile, I could run "make" from a
+cmd.exe prompt.</i><br><br>
+
+</UL>
+
+<LI>Move to the <font size="+2"><b><code>code</code></b></font> directory for 
+<I>Thinking in Patterns</I>. To a command prompt, type<br> <font size="+2"><b><code>make javac</code></b></font><br> if you are using the Sun JDK compiler 
+or <br> <font size="+2"><b><code>make jikes</code></b></font><br> if you are 
+using the IBM Jikes compiler (much faster, better error messages).<br><br>
+
+<LI>All the code should compile without <b>make</b> aborting. In addition, all 
+the Unit Tests will be run to verify that the programs behave properly.<br><br> 
+Note that some of the needed utilities in the <I>Thinking in Java</I> 
+directories may or may not automatically compile during this process &#151; if they 
+do not, <b>make</b> will abort, and you will need to go to the appropriate 
+<I>Thinking in Java</I> directories and type 
+<font size="+2"><b><code>make</code></b></font>.
+
+</OL>
+
+<HR NOSHADE="NOSHADE">
+
+<P><CENTER>
+  <TABLE BORDER="1" CELLPADDING="4" CELLSPACING="1" WIDTH="50" BGCOLOR="#FF0000"> 
+   <tr><td><A HREF="http://www.mindview.net">
+    <Font COLOR="BLACK">Home</FONT></A></td></tr>
+  </TABLE></CENTER>
+
+</BLOCKQUOTE></FONT></BODY></HTML>
+
+

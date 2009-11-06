@@ -1,0 +1,377 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:44
+Translation Platform:Win32
+Number of Output files:18
+This File:Chapter12.html
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>11: Multiple dispatching</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview-head.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana" size = "-1">
+    [ <a href="README-HTML.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.html">Revision History</a> ]
+    [ <a href="Building-Code.html">Build the Code</a> ]
+    [ <a href="TIPatterns-Corrections.html">Report an Error</a> ] <br>
+    [ <a href="http://www.mindview.net/MailingList.html">Free Newsletter</a> ]
+    [ <a href="http://www.mindview.net/Training.html">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CPPServices/#ConsultingServices">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana">
+  Thinking in Patterns <font size="4">with Java</font>, Revision 0.6</FONT></H2>
+  <H3><FONT FACE="Verdana">&copy;2001 by Bruce Eckel</FONT></H3>
+  
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter11.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter13.html">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc476705916"></A><A NAME="_Toc524504167"></A><A NAME="Heading94"></A><FONT FACE = "Verdana"><H1 ALIGN="LEFT">
+11: Multiple dispatching</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">When dealing with multiple types which
+are interacting, a program can get particularly messy. For example, consider a
+system that parses and executes mathematical expressions. You want to be able to
+say <B>Number + Number</B>, <B>Number * Number</B>, etc., where <B>Number</B> is
+the base class for a family of numerical objects. But when you say <B>a + b</B>,
+and you don&#8217;t know the exact type of either <B>a</B> or <B>b</B>, so how
+can you get them to interact properly?</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The answer starts with something you
+probably don&#8217;t think about: Java performs only single dispatching. That
+is, if you are performing an operation on more than one object whose type is
+unknown, Java can invoke the dynamic binding mechanism on only one of those
+types. This doesn&#8217;t solve the problem, so you end up detecting some types
+manually and effectively producing your own dynamic binding
+behavior.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The solution is called
+<A NAME="Index33"></A><A NAME="Index34"></A><I>multiple dispatching</I>.
+Remember that polymorphism can occur only via member function calls, so if you
+want double dispatching to occur, there must be two member function calls: the
+first to determine the first unknown type, and the second to determine the
+second unknown type. With multiple dispatching, you must have a polymorphic
+method call to determine each of the types. Generally, you&#8217;ll set up a
+configuration such that a single member function call produces more than one
+dynamic member function call and thus determines more than one type in the
+process. To get this effect, you need to work with more than one polymorphic
+method call: you&#8217;ll need one call for each dispatch. The methods in the
+following example are called <B>compete(&#160;) </B>and <B>eval(&#160;)</B>, and
+are both members of the same type. (In this case there will be only two
+dispatches, which is referred to as
+<A NAME="Index35"></A><A NAME="Index36"></A><I>double dispatching</I>). If you
+are working with two different type hierarchies that are interacting, then
+you&#8217;ll have to have a polymorphic method call in each
+hierarchy.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Here&#8217;s an example of multiple
+dispatching:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c11:PaperScissorsRock.java</font>
+<font color=#009900>// Demonstration of multiple dispatching.</font>
+<font color=#0000ff>import</font> java.util.*;
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#009900>// An enumeration type:</font>
+<font color=#0000ff>class</font> Outcome {
+  <font color=#0000ff>private</font> <font color=#0000ff>int</font> value;
+  <font color=#0000ff>private</font> String name;
+  <font color=#0000ff>private</font> Outcome(<font color=#0000ff>int</font> val, String nm) { 
+    value = val;
+    name = nm;
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>final</font> <font color=#0000ff>static</font> Outcome
+    WIN = <font color=#0000ff>new</font> Outcome(0, <font color=#004488>"win"</font>), 
+    LOSE = <font color=#0000ff>new</font> Outcome(1, <font color=#004488>"lose"</font>), 
+    DRAW = <font color=#0000ff>new</font> Outcome(2, <font color=#004488>"draw"</font>);
+  <font color=#0000ff>public</font> String toString() { <font color=#0000ff>return</font> name; }
+  <font color=#0000ff>public</font> <font color=#0000ff>boolean</font> equals(Object o) {
+    <font color=#0000ff>return</font> (o <font color=#0000ff>instanceof</font> Outcome)
+      &amp;&amp; (value == ((Outcome)o).value);
+  }
+}
+
+<font color=#0000ff>interface</font> Item {
+  Outcome compete(Item it);
+  Outcome eval(Paper p);
+  Outcome eval(Scissors s);
+  Outcome eval(Rock r);
+}
+
+<font color=#0000ff>class</font> Paper <font color=#0000ff>implements</font> Item {
+  <font color=#0000ff>public</font> Outcome compete(Item it) {
+    <font color=#0000ff>return</font> it.eval(<font color=#0000ff>this</font>);
+  }
+  <font color=#0000ff>public</font> Outcome eval(Paper p) {
+    <font color=#0000ff>return</font> Outcome.DRAW;
+  }
+  <font color=#0000ff>public</font> Outcome eval(Scissors s) {
+    <font color=#0000ff>return</font> Outcome.WIN;
+  }
+  <font color=#0000ff>public</font> Outcome eval(Rock r) {
+    <font color=#0000ff>return</font> Outcome.LOSE;
+  }
+  <font color=#0000ff>public</font> String toString() { <font color=#0000ff>return</font> <font color=#004488>"Paper"</font>; }
+}
+
+<font color=#0000ff>class</font> Scissors <font color=#0000ff>implements</font> Item {
+  <font color=#0000ff>public</font> Outcome compete(Item it) {
+    <font color=#0000ff>return</font> it.eval(<font color=#0000ff>this</font>);
+  }
+  <font color=#0000ff>public</font> Outcome eval(Paper p) {
+    <font color=#0000ff>return</font> Outcome.LOSE;
+  }
+  <font color=#0000ff>public</font> Outcome eval(Scissors s) {
+    <font color=#0000ff>return</font> Outcome.DRAW;
+  }
+  <font color=#0000ff>public</font> Outcome eval(Rock r) {
+    <font color=#0000ff>return</font> Outcome.WIN;
+  }
+  <font color=#0000ff>public</font> String toString() { <font color=#0000ff>return</font> <font color=#004488>"Scissors"</font>; }
+}
+
+<font color=#0000ff>class</font> Rock <font color=#0000ff>implements</font> Item {
+  <font color=#0000ff>public</font> Outcome compete(Item it) {
+    <font color=#0000ff>return</font> it.eval(<font color=#0000ff>this</font>);
+  }
+  <font color=#0000ff>public</font> Outcome eval(Paper p) {
+    <font color=#0000ff>return</font> Outcome.WIN;
+  }
+  <font color=#0000ff>public</font> Outcome eval(Scissors s) {
+    <font color=#0000ff>return</font> Outcome.LOSE;
+  }
+  <font color=#0000ff>public</font> Outcome eval(Rock r) {
+    <font color=#0000ff>return</font> Outcome.DRAW;
+  }
+  <font color=#0000ff>public</font> String toString() { <font color=#0000ff>return</font> <font color=#004488>"Rock"</font>; }
+}
+
+<font color=#0000ff>class</font> ItemGenerator {
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> Item newItem() {
+    <font color=#0000ff>switch</font>((<font color=#0000ff>int</font>)(Math.random() * 3)) {
+      <font color=#0000ff>default</font>:
+      <font color=#0000ff>case</font> 0:
+        <font color=#0000ff>return</font> <font color=#0000ff>new</font> Scissors();
+      <font color=#0000ff>case</font> 1:
+        <font color=#0000ff>return</font> <font color=#0000ff>new</font> Paper();
+      <font color=#0000ff>case</font> 2:
+        <font color=#0000ff>return</font> <font color=#0000ff>new</font> Rock();
+    }
+  }
+}
+
+<font color=#0000ff>class</font> Compete {
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> Outcome match(Item a, Item b) {
+    System.out.print(a + <font color=#004488>" &lt;--&gt; "</font> + b + <font color=#004488>" : "</font>);
+    <font color=#0000ff>return</font> a.compete(b);
+  }
+}
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> PaperScissorsRock <font color=#0000ff>extends</font> UnitTest {
+  List 
+    items1 = <font color=#0000ff>new</font> ArrayList(),
+    items2 = <font color=#0000ff>new</font> ArrayList();
+  <font color=#0000ff>static</font> <font color=#0000ff>int</font> SIZE = 20;
+  <font color=#0000ff>public</font> PaperScissorsRock() {
+    <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; SIZE; i++) {
+      items1.add(ItemGenerator.newItem());
+      items2.add(ItemGenerator.newItem());
+    }
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test() {
+    <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; SIZE; i++)
+      System.out.println(
+        Compete.match(
+          (Item)items1.get(i), 
+          (Item)items2.get(i)));
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String args[]) {
+    <font color=#0000ff>new</font> PaperScissorsRock().test();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc462393597"></A><A NAME="_Toc476705917"></A><A NAME="_Toc524504168"></A><BR></P></DIV>
+<A NAME="Heading95"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Visitor, a type of multiple dispatching</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The assumption is that you have a primary
+class hierarchy that is fixed; perhaps it&#8217;s from another vendor and you
+can&#8217;t make changes to that hierarchy. However, you&#8217;d like to add new
+polymorphic methods to that hierarchy, which means that normally you&#8217;d
+have to add something to the base class interface. So the dilemma is that you
+need to add methods to the base class, but you can&#8217;t touch the base class.
+How do you get around this?</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The design pattern that solves this kind
+of problem is called a &#8220;visitor&#8221; (the final one in the <I>Design
+Patterns</I> book), and it builds on the double<I> </I>dispatching scheme shown
+in the last section.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The
+<A NAME="Index37"></A><A NAME="Index38"></A>visitor pattern allows you to extend
+the interface of the primary type by creating a separate class hierarchy of type
+<B>Visitor </B>to virtualize the operations performed upon the primary type. The
+objects of the primary type simply &#8220;accept&#8221; the visitor, then call
+the visitor&#8217;s dynamically<B>-</B>bound member function.</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c11:BeeAndFlowers.java</font>
+<font color=#009900>// Demonstration of "visitor" pattern.</font>
+<font color=#0000ff>import</font> java.util.*;
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>interface</font> Visitor {  
+  <font color=#0000ff>void</font> visit(Gladiolus g);
+  <font color=#0000ff>void</font> visit(Renuculus r);
+  <font color=#0000ff>void</font> visit(Chrysanthemum c);
+}
+
+<font color=#009900>// The Flower hierarchy cannot be changed:</font>
+<font color=#0000ff>interface</font> Flower {  
+  <font color=#0000ff>void</font> accept(Visitor v);
+}
+
+<font color=#0000ff>class</font> Gladiolus <font color=#0000ff>implements</font> Flower {  
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> accept(Visitor v) { v.visit(<font color=#0000ff>this</font>);}
+}
+
+<font color=#0000ff>class</font> Renuculus <font color=#0000ff>implements</font> Flower {  
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> accept(Visitor v) { v.visit(<font color=#0000ff>this</font>);}
+}
+
+<font color=#0000ff>class</font> Chrysanthemum <font color=#0000ff>implements</font> Flower {  
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> accept(Visitor v) { v.visit(<font color=#0000ff>this</font>);}
+}
+
+<font color=#009900>// Add the ability to produce a string:</font>
+<font color=#0000ff>class</font> StringVal <font color=#0000ff>implements</font> Visitor {
+  String s;  
+  <font color=#0000ff>public</font> String toString() { <font color=#0000ff>return</font> s; }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> visit(Gladiolus g) { 
+    s = <font color=#004488>"Gladiolus"</font>; 
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> visit(Renuculus r) { 
+    s = <font color=#004488>"Renuculus"</font>; 
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> visit(Chrysanthemum c) { 
+    s = <font color=#004488>"Chrysanthemum"</font>; 
+  }
+}
+
+<font color=#009900>// Add the ability to do "Bee" activities:</font>
+<font color=#0000ff>class</font> Bee <font color=#0000ff>implements</font> Visitor {  
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> visit(Gladiolus g) {
+    System.out.println(<font color=#004488>"Bee and Gladiolus"</font>);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> visit(Renuculus r) {
+    System.out.println(<font color=#004488>"Bee and Renuculus"</font>);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> visit(Chrysanthemum c) {
+    System.out.println(<font color=#004488>"Bee and Chrysanthemum"</font>);
+  }
+}
+
+<font color=#0000ff>class</font> FlowerGenerator {
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> Flower newFlower() {
+    <font color=#0000ff>switch</font>((<font color=#0000ff>int</font>)(Math.random() * 3)) {
+      <font color=#0000ff>default</font>:
+      <font color=#0000ff>case</font> 0: <font color=#0000ff>return</font> <font color=#0000ff>new</font> Gladiolus();
+      <font color=#0000ff>case</font> 1: <font color=#0000ff>return</font> <font color=#0000ff>new</font> Renuculus();
+      <font color=#0000ff>case</font> 2: <font color=#0000ff>return</font> <font color=#0000ff>new</font> Chrysanthemum();
+    }
+  }
+}
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> BeeAndFlowers <font color=#0000ff>extends</font> UnitTest {
+  List flowers = <font color=#0000ff>new</font> ArrayList();
+  <font color=#0000ff>public</font> BeeAndFlowers() {
+    <font color=#0000ff>for</font>(<font color=#0000ff>int</font> i = 0; i &lt; 10; i++)
+      flowers.add(FlowerGenerator.newFlower());
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test() {
+    <font color=#009900>// It's almost as if I had a function to</font>
+    <font color=#009900>// produce a Flower string representation:</font>
+    StringVal sval = <font color=#0000ff>new</font> StringVal();
+    Iterator it = flowers.iterator();
+    <font color=#0000ff>while</font>(it.hasNext()) {
+      ((Flower)it.next()).accept(sval);
+      System.out.println(sval);
+    }
+    <font color=#009900>// Perform "Bee" operation on all Flowers:</font>
+    Bee bee = <font color=#0000ff>new</font> Bee();
+    it = flowers.iterator();
+    <font color=#0000ff>while</font>(it.hasNext())
+      ((Flower)it.next()).accept(bee);
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String args[]) {
+    <font color=#0000ff>new</font> BeeAndFlowers().test();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc524504169"></A><BR></P></DIV>
+<A NAME="Heading96"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Create a business-modeling
+environment with three types of <B>Inhabitant</B>: <B>Dwarf</B> (for engineers),
+<B>Elf</B> (for marketers) and <B>Troll</B> (for managers). Now create a class
+called <B>Project</B> that creates the different inhabitants and causes them to
+<B>interact(&#160;)</B> with each other using multiple
+dispatching.</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+the above example to make the interactions more detailed. Each <B>Inhabitant</B>
+can randomly produce a <B>Weapon</B> using <B>getWeapon(&#160;)</B>: a
+<B>Dwarf</B> uses <B>Jargon</B> or <B>Play</B>, an <B>Elf</B> uses
+<B>InventFeature</B> or <B>SellImaginaryProduct</B>, and a <B>Troll</B> uses
+<B>Edict</B> and <B>Schedule</B>. You must decide which weapons
+&#8220;win&#8221; and &#8220;lose&#8221; in each interaction (as in
+<B>PaperScissorsRock.java</B>). Add a <B>battle(&#160;)</B> member function to
+<B>Project</B> that takes two <B>Inhabitant</B>s and matches them against each
+other. Now create a <B>meeting(&#160;)</B> member function for <B>Project</B>
+that creates groups of <B>Dwarf</B>, <B>Elf</B> and <B>Manager</B> and battles
+the groups against each other until only members of one group are left standing.
+These are the
+&#8220;winners.&#8221;</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+<B>PaperScissorsRock.java</B> to replace the double dispatching with a table
+lookup. The easiest way to do this is to create a <B>Map </B>of <B>Map</B>s,
+with the key of each <B>Map </B>the class of each object. Then you can do the
+lookup by
+saying:</FONT><BR><FONT FACE="Georgia">(<B>(Map)map.get(o1.getClass())).get(o2.getClass())</B></FONT><BR><FONT FACE="Georgia">Notice
+how much easier it is to reconfigure the system. When is it more appropriate to
+use this approach vs. hard-coding the dynamic dispatches? Can you create a
+system that has the syntactic simplicity of use of the dynamic dispatch but uses
+a table
+lookup?</FONT><LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">Modify
+Exercise 2 to use the table lookup technique described in Exercise
+3.</FONT></OL>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter11.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter13.html">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:09/08/2001</P></DIV>
+
+</BODY>
+
+</HTML>

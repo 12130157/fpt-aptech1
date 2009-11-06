@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:42
+Translation Platform:Win32
+Number of Output files:18
+This File:Chapter08.html
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>7: Changing the interface</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview-head.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana" size = "-1">
+    [ <a href="README-HTML.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.html">Revision History</a> ]
+    [ <a href="Building-Code.html">Build the Code</a> ]
+    [ <a href="TIPatterns-Corrections.html">Report an Error</a> ] <br>
+    [ <a href="http://www.mindview.net/MailingList.html">Free Newsletter</a> ]
+    [ <a href="http://www.mindview.net/Training.html">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CPPServices/#ConsultingServices">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana">
+  Thinking in Patterns <font size="4">with Java</font>, Revision 0.6</FONT></H2>
+  <H3><FONT FACE="Verdana">&copy;2001 by Bruce Eckel</FONT></H3>
+  
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter07.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter09.html">Next Chapter</a> ] 
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc476705909"></A><DIV ALIGN="LEFT"><P><A NAME="_Toc524504134"></A><BR></P></DIV>
+<A NAME="Heading60"></A><FONT FACE = "Verdana"><H1 ALIGN="LEFT">
+7: Changing the interface</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Sometimes the problem that you&#8217;re
+solving is as simple as &#8220;I don&#8217;t have the interface that I
+want.&#8221; Two of the patterns in <I>Design Patterns</I> solve this problem:
+<I>Adapter</I> takes one type and produces an interface to some other type.
+<I>Fa&ccedil;ade</I> creates an interface to a set of classes, simply to provide
+a more comfortable way to deal with a library or bundle of
+resources.</FONT><A NAME="_Toc476705910"></A><A NAME="_Toc524504135"></A><BR></P></DIV>
+<A NAME="Heading61"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Adapter</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">When you&#8217;ve got <I>this</I>, and
+you need <I>that</I>, <I>Adapter</I> solves the problem. The only requirement is
+to produce a <I>that</I>, and there are a number of ways you can accomplish this
+adaptation.</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c07:Adapter.java</font>
+<font color=#009900>// Variations on the Adapter pattern.</font>
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>class</font> WhatIHave {
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> g() {}
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> h() {}
+}
+
+<font color=#0000ff>interface</font> WhatIWant {
+  <font color=#0000ff>void</font> f();
+}
+
+<font color=#0000ff>class</font> ProxyAdapter <font color=#0000ff>implements</font> WhatIWant {
+  WhatIHave whatIHave;
+  <font color=#0000ff>public</font> ProxyAdapter(WhatIHave wih) {
+    whatIHave = wih;
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> f() {
+    <font color=#009900>// Implement behavior using </font>
+    <font color=#009900>// methods in WhatIHave:</font>
+    whatIHave.g();
+    whatIHave.h();
+  }
+}
+  
+<font color=#0000ff>class</font> WhatIUse {
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> op(WhatIWant wiw) {
+    wiw.f();
+  }
+}
+
+<font color=#009900>// Approach 2: build adapter use into op():</font>
+<font color=#0000ff>class</font> WhatIUse2 <font color=#0000ff>extends</font> WhatIUse {
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> op(WhatIHave wih) {
+    <font color=#0000ff>new</font> ProxyAdapter(wih).f();
+  }
+}
+
+<font color=#009900>// Approach 3: build adapter into WhatIHave:</font>
+<font color=#0000ff>class</font> WhatIHave2 <font color=#0000ff>extends</font> WhatIHave 
+<font color=#0000ff>implements</font> WhatIWant {
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> f() {
+    g();
+    h();
+  }
+}
+
+<font color=#009900>// Approach 4: use an inner class:</font>
+<font color=#0000ff>class</font> WhatIHave3 <font color=#0000ff>extends</font> WhatIHave {
+  <font color=#0000ff>private</font> <font color=#0000ff>class</font> InnerAdapter <font color=#0000ff>implements</font> WhatIWant{
+    <font color=#0000ff>public</font> <font color=#0000ff>void</font> f() {
+      g();
+      h();
+    }
+  }
+  <font color=#0000ff>public</font> WhatIWant whatIWant() { 
+    <font color=#0000ff>return</font> <font color=#0000ff>new</font> InnerAdapter(); 
+  }
+}
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> Adapter <font color=#0000ff>extends</font> UnitTest {
+  WhatIUse whatIUse = <font color=#0000ff>new</font> WhatIUse();
+  WhatIHave whatIHave = <font color=#0000ff>new</font> WhatIHave();
+  WhatIWant adapt= <font color=#0000ff>new</font> ProxyAdapter(whatIHave);
+  WhatIUse2 whatIUse2 = <font color=#0000ff>new</font> WhatIUse2();
+  WhatIHave2 whatIHave2 = <font color=#0000ff>new</font> WhatIHave2();
+  WhatIHave3 whatIHave3 = <font color=#0000ff>new</font> WhatIHave3();
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test() {
+    whatIUse.op(adapt);
+    <font color=#009900>// Approach 2:</font>
+    whatIUse2.op(whatIHave);
+    <font color=#009900>// Approach 3:</font>
+    whatIUse.op(whatIHave2);
+    <font color=#009900>// Approach 4:</font>
+    whatIUse.op(whatIHave3.whatIWant());
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String args[]) {
+    <font color=#0000ff>new</font> Adapter().test();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">I&#8217;m taking liberties
+with the term &#8220;proxy&#8221; here, because in <I>Design Patterns</I> they
+assert that a proxy must have an identical interface with the object that it is
+a surrogate for. However, if you have the two words together: &#8220;proxy
+adapter,&#8221; it is perhaps more
+reasonable.</FONT><A NAME="_Toc476705911"></A><A NAME="_Toc524504136"></A><BR></P></DIV>
+<A NAME="Heading62"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Fa&ccedil;ade</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">A general principle that I apply when
+I&#8217;m casting about trying to mold requirements into a first-cut object is
+&#8220;If something is ugly, hide it inside an object.&#8221; This is basically
+what <I>Fa&ccedil;ade</I> accomplishes. If you have a rather confusing
+collection of classes and interactions that the client programmer doesn&#8217;t
+really need to see, then you can create an interface that is useful for the
+client programmer and that only presents what&#8217;s
+necessary.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Fa&ccedil;ade is often implemented as
+singleton abstract factory. Of course, you can easily get this effect by
+creating a class containing <B>static</B> factory methods:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c07:Facade.java</font>
+<font color=#0000ff>import</font> com.bruceeckel.test.*;
+
+<font color=#0000ff>class</font> A { <font color=#0000ff>public</font> A(<font color=#0000ff>int</font> x) {} }
+<font color=#0000ff>class</font> B { <font color=#0000ff>public</font> B(<font color=#0000ff>long</font> x) {} }
+<font color=#0000ff>class</font> C { <font color=#0000ff>public</font> C(<font color=#0000ff>double</font> x) {} }
+
+<font color=#009900>// Other classes that aren't exposed by the</font>
+<font color=#009900>// facade go here ...</font>
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> Facade <font color=#0000ff>extends</font> UnitTest {
+  <font color=#0000ff>static</font> A makeA(<font color=#0000ff>int</font> x) { <font color=#0000ff>return</font> <font color=#0000ff>new</font> A(x); }
+  <font color=#0000ff>static</font> B makeB(<font color=#0000ff>long</font> x) { <font color=#0000ff>return</font> <font color=#0000ff>new</font> B(x); }
+  <font color=#0000ff>static</font> C makeC(<font color=#0000ff>double</font> x) { <font color=#0000ff>return</font> <font color=#0000ff>new</font> C(x); }
+  <font color=#009900>// The client programmer gets the objects</font>
+  <font color=#009900>// by calling the static methods:</font>
+  A a = Facade.makeA(1);
+  B b = Facade.makeB(1);
+  C c = Facade.makeC(1.0);
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> test() {}
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main(String args[]) {
+    <font color=#0000ff>new</font> Facade().test();
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The example given in
+<I>Design Patterns</I> isn&#8217;t really a <I>Fa&ccedil;ade</I> but just a
+class that uses the other classes.</FONT><A NAME="_Toc524504137"></A><BR></P></DIV>
+<A NAME="Heading63"></A><FONT FACE = "Verdana"><H3 ALIGN="LEFT">
+Package as a variation of Fa&ccedil;ade</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To me, the <I>Fa&ccedil;ade</I> has a
+rather &#8220;procedural&#8221; (non-object-oriented) feel to it: you are just
+calling some functions to give you objects. And how different is it, really,
+from <I>Abstract Factory</I>? The point of <I>Fa&ccedil;ade</I> is to hide part
+of a library of classes (and their interactions) from the client programmer, to
+make the interface to that group of classes more digestible and easier to
+understand.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">However, this is precisely what the
+packaging features in Java accomplish: outside of the library, you can only
+create and use <B>public</B> classes; all the non-<B>public</B> classes are only
+accessible within the package. It&#8217;s as if <I>Fa&ccedil;ade</I> is a
+built-in feature of Java.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">To be fair, <I>Design Patterns</I> is
+written primarily for a C++ audience. Although C++ has namespaces to prevent
+clashes of globals and class names, this does not provide the class hiding
+mechanism that you get with non-<B>public</B> classes in Java. The majority of
+the time I think that Java packages will solve the <I>Fa&ccedil;ade
+</I>problem.</FONT><A NAME="_Toc524504138"></A><BR></P></DIV>
+<A NAME="Heading64"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Exercises</H2></FONT>
+<OL>
+<LI><FONT FACE="Verdana">	</FONT><FONT FACE="Georgia">The <B>java.util.Map</B>
+has no way to automatically load a two-dimensional array of objects into a
+<B>Map</B> as key-value pairs. Create an adapter class that does
+this.</FONT><LI></OL>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter07.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+     [ <a href="Chapter09.html">Next Chapter</a> ] 
+    </FONT>
+    <BR>
+ Last Update:09/08/2001</P></DIV>
+
+</BODY>
+
+</HTML>

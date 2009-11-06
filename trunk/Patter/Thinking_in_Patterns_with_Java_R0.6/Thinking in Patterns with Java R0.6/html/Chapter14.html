@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<!--
+This document was converted from RTF source: 
+By rtftohtml 4.19
+See http://www.sunpack.com/RTF
+Filename:TIPatterns.rtf
+Application Directory:c:\tools\rtf2html\
+Subject:
+Author:Bruce Eckel
+Operator:Bruce Eckel
+Document Comments:
+Version Comments:
+Comments:
+Keywords:
+Translation Date:09/08/2001
+Translation Time:10:16:46
+Translation Platform:Win32
+Number of Output files:18
+This File:Chapter14.html
+SplitDepth=1
+SkipNavPanel=1
+SkipLeadingToc=1
+SkipTrailingToc=1
+GenContents=1
+GenFrames=1
+GenIndex=1
+-->
+<HEAD lang="en"><META http-equiv="Content-Type" content="text/html">
+<TITLE>13: Projects</TITLE>
+</HEAD>
+
+<BODY  BGCOLOR="#FFFFFF"><DIV ALIGN="CENTER">
+  <a href="http://www.MindView.net">
+  <img src="mindview-head.gif" alt="MindView Inc." BORDER = "0"></a>
+  <CENTER>
+    <FONT FACE="Verdana" size = "-1">
+    [ <a href="README-HTML.txt">Viewing Hints</a> ]
+    [ <a href="RevisionHistory.html">Revision History</a> ]
+    [ <a href="Building-Code.html">Build the Code</a> ]
+    [ <a href="TIPatterns-Corrections.html">Report an Error</a> ] <br>
+    [ <a href="http://www.mindview.net/MailingList.html">Free Newsletter</a> ]
+    [ <a href="http://www.mindview.net/Training.html">Seminars</a> ]
+    [ <a href="http://www.mindview.net/CPPServices/#ConsultingServices">Consulting</a> ]
+    </FONT>
+  <H2><FONT FACE="Verdana">
+  Thinking in Patterns <font size="4">with Java</font>, Revision 0.6</FONT></H2>
+  <H3><FONT FACE="Verdana">&copy;2001 by Bruce Eckel</FONT></H3>
+  
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter13.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+    
+    </FONT>
+    
+  </CENTER>
+  </P></DIV><A NAME="_Toc524504187"></A><A NAME="Heading114"></A><FONT FACE = "Verdana"><H1 ALIGN="LEFT">
+13: Projects</H1></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia" SIZE=4>A number of more challenging
+projects for you to solve. [[Some of these may turn into examples in the book,
+and so at some point might disappear from
+here]]</FONT><A NAME="_Toc524504188"></A><BR></P></DIV>
+<A NAME="Heading115"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+Rats &amp; Mazes</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">First, create a <I>Blackboard</I> (cite
+reference) which is an object on which anyone may record information. This
+particular blackboard draws a maze, and is used as information comes back about
+the structure of a maze from the rats that are investigating
+it.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Now create the maze itself. Like a real
+maze, this object reveals very little information about itself &#8212; given a
+coordinate, it will tell you whether there are walls or spaces in the four
+directions immediately surrounding that coordinate, but no more. For starters,
+read the maze in from a text file but consider hunting on the internet for a
+maze-generating algorithm. In any event, the result should be an object that,
+given a maze coordinate, will report walls and spaces around that coordinate.
+Also, you must be able to ask it for an entry point to the
+maze.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Finally, create the maze-investigating
+<B>Rat</B> class. Each rat can communicate with both the blackboard to give the
+current information and the maze to request new information based on the current
+position of the rat. However, each time a rat reaches a decision point where the
+maze branches, it creates a new rat to go down each of the branches. Each rat is
+driven by its own thread. When a rat reaches a dead end, it terminates itself
+after reporting the results of its final investigation to the
+blackboard.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The goal is to completely map the maze,
+but you must also determine whether the end condition will be naturally found or
+whether the blackboard must be responsible for the decision.</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">An example implementation by Jeremy
+Meyer:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c13:Maze.java</font>
+<font color=#0000ff>import</font> java.util.*;
+<font color=#0000ff>import</font> java.io.*;
+<font color=#0000ff>import</font> java.awt.*;
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> Maze <font color=#0000ff>extends</font> Canvas {
+  <font color=#0000ff>private</font> Vector lines; <font color=#009900>// a line is a char array</font>
+  <font color=#0000ff>private</font> <font color=#0000ff>int</font> width = -1;
+  <font color=#0000ff>private</font> <font color=#0000ff>int</font> height = -1;
+  <font color=#0000ff>public</font> <font color=#0000ff>static</font> <font color=#0000ff>void</font> main (String [] args) 
+  <font color=#0000ff>throws</font> IOException {
+    <font color=#0000ff>if</font> (args.length &lt; 1) {
+      System.out.println(<font color=#004488>"Enter filename"</font>);
+      System.exit(0);
+    }
+    Maze m = <font color=#0000ff>new</font> Maze();
+    m.load(args[0]);
+    Frame f = <font color=#0000ff>new</font> Frame();
+    f.setSize(m.width*20, m.height*20);
+    f.add(m);     
+    Rat r = <font color=#0000ff>new</font> Rat(m, 0, 0);
+    f.setVisible(<font color=#0000ff>true</font>);
+  }
+  <font color=#0000ff>public</font> Maze() {
+    lines = <font color=#0000ff>new</font> Vector();
+    setBackground(Color.lightGray);
+  }
+  <font color=#0000ff>synchronized</font> <font color=#0000ff>public</font> <font color=#0000ff>boolean</font> 
+  isEmptyXY(<font color=#0000ff>int</font> x, <font color=#0000ff>int</font> y) {
+    <font color=#0000ff>if</font> (x &lt; 0) x += width;
+    <font color=#0000ff>if</font> (y &lt; 0) y += height; 
+    <font color=#009900>// Use mod arithmetic to bring rat in line:</font>
+    <font color=#0000ff>byte</font>[] by = 
+      (<font color=#0000ff>byte</font>[])(lines.elementAt(y%height));  
+    <font color=#0000ff>return</font> by[x%width]==' ';
+  }
+  <font color=#0000ff>synchronized</font> <font color=#0000ff>public</font> <font color=#0000ff>void</font> 
+  setXY(<font color=#0000ff>int</font> x, <font color=#0000ff>int</font> y, <font color=#0000ff>byte</font> newByte) {
+    <font color=#0000ff>if</font> (x &lt; 0) x += width;
+    <font color=#0000ff>if</font> (y &lt; 0) y += height; 
+    <font color=#0000ff>byte</font>[] by = 
+      (<font color=#0000ff>byte</font>[])(lines.elementAt(y%height));
+    by[x%width] = newByte;
+    repaint();
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> 
+  load(String filename) <font color=#0000ff>throws</font> IOException {
+    String currentLine = <font color=#0000ff>null</font>;
+    BufferedReader br = <font color=#0000ff>new</font> BufferedReader(
+      <font color=#0000ff>new</font> FileReader(filename));
+    <font color=#0000ff>for</font>(currentLine = br.readLine(); 
+        currentLine != <font color=#0000ff>null</font>;
+        currentLine = br.readLine())  {
+      lines.addElement(currentLine.getBytes());       
+      <font color=#0000ff>if</font>(width &lt; 0 || 
+         currentLine.getBytes().length &gt; width)
+        width = currentLine.getBytes().length;
+    }
+    height = lines.size();
+    br.close();
+  }       
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> update(Graphics g) { paint(g); }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> paint (Graphics g) {
+    <font color=#0000ff>int</font> canvasHeight = <font color=#0000ff>this</font>.getBounds().height;
+    <font color=#0000ff>int</font> canvasWidth  = <font color=#0000ff>this</font>.getBounds().width;
+    <font color=#0000ff>if</font> (height &lt; 1 || width &lt; 1) 
+      <font color=#0000ff>return</font>; <font color=#009900>// nothing to do </font>
+    <font color=#0000ff>int</font> width = 
+      ((<font color=#0000ff>byte</font>[])(lines.elementAt(0))).length;
+    <font color=#0000ff>for</font> (<font color=#0000ff>int</font> y = 0; y &lt; lines.size(); y++) {
+      <font color=#0000ff>byte</font>[] b;
+      b = (<font color=#0000ff>byte</font>[])(lines.elementAt(y));
+      <font color=#0000ff>for</font> (<font color=#0000ff>int</font> x = 0; x &lt; width; x++) {
+        <font color=#0000ff>switch</font>(b[x]) {
+          <font color=#0000ff>case</font> ' ': <font color=#009900>// empty part of maze</font>
+            g.setColor(Color.lightGray);
+            g.fillRect(
+              x*(canvasWidth/width),
+              y*(canvasHeight/height),
+              canvasWidth/width,
+              canvasHeight/height);
+            <font color=#0000ff>break</font>;
+          <font color=#0000ff>case</font> '*':     <font color=#009900>// a wall </font>
+            g.setColor(Color.darkGray);
+            g.fillRect(
+              x*(canvasWidth/width),
+              y*(canvasHeight/height),
+              (canvasWidth/width)-1,
+              (canvasHeight/height)-1);
+            <font color=#0000ff>break</font>;
+          <font color=#0000ff>default</font>:      <font color=#009900>// must be rat</font>
+            g.setColor(Color.red);
+            g.fillOval(x*(canvasWidth/width),
+            y*(canvasHeight/height),
+            canvasWidth/width,
+            canvasHeight/height);
+            <font color=#0000ff>break</font>;              
+        }      
+      }     
+    }
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE><font color=#009900>//: c13:Rat.java</font>
+
+<font color=#0000ff>public</font> <font color=#0000ff>class</font> Rat {
+  <font color=#0000ff>static</font> <font color=#0000ff>int</font> ratCount = 0;
+  <font color=#0000ff>private</font> Maze prison;
+  <font color=#0000ff>private</font> <font color=#0000ff>int</font> vertDir = 0; 
+  <font color=#0000ff>private</font> <font color=#0000ff>int</font> horizDir = 0;
+  <font color=#0000ff>private</font> <font color=#0000ff>int</font> x,y;
+  <font color=#0000ff>private</font> <font color=#0000ff>int</font> myRatNo = 0;
+  <font color=#0000ff>public</font> Rat(Maze maze, <font color=#0000ff>int</font> xStart, <font color=#0000ff>int</font> yStart) {
+    myRatNo = ratCount++;
+    System.out.println(<font color=#004488>"Rat no."</font> + myRatNo + 
+      <font color=#004488>" ready to scurry."</font>);
+    prison = maze;
+    x = xStart;
+    y = yStart;
+    prison.setXY(x,y, (<font color=#0000ff>byte</font>)'R');
+    <font color=#0000ff>new</font> Thread() {
+      <font color=#0000ff>public</font> <font color=#0000ff>void</font> run(){ scurry(); }
+    }.start();
+  }
+  <font color=#0000ff>public</font> <font color=#0000ff>void</font> scurry() {
+    <font color=#009900>// Try and maintain direction if possible.</font>
+    <font color=#009900>// Horizontal backward</font>
+    <font color=#0000ff>boolean</font> ratCanMove = <font color=#0000ff>true</font>;
+    <font color=#0000ff>while</font>(ratCanMove) {
+      ratCanMove = <font color=#0000ff>false</font>;
+      <font color=#009900>// South </font>
+      <font color=#0000ff>if</font> (prison.isEmptyXY(x, y + 1)) {
+        vertDir = 1; horizDir = 0;         
+        ratCanMove = <font color=#0000ff>true</font>;
+      }
+      <font color=#009900>// North</font>
+      <font color=#0000ff>if</font> (prison.isEmptyXY(x, y - 1))
+        <font color=#0000ff>if</font> (ratCanMove)
+          <font color=#0000ff>new</font> Rat(prison, x, y-1);
+          <font color=#009900>// Rat can move already, so give </font>
+          <font color=#009900>// this choice to the next rat.</font>
+        <font color=#0000ff>else</font> {
+          vertDir = -1; horizDir = 0;         
+          ratCanMove = <font color=#0000ff>true</font>;
+        }
+      <font color=#009900>// West</font>
+      <font color=#0000ff>if</font> (prison.isEmptyXY(x-1, y))
+        <font color=#0000ff>if</font> (ratCanMove)
+          <font color=#0000ff>new</font> Rat(prison, x-1, y);   
+          <font color=#009900>// Rat can move already, so give </font>
+          <font color=#009900>// this choice to the next rat.</font>
+        <font color=#0000ff>else</font> {
+          vertDir = 0; horizDir = -1;         
+          ratCanMove = <font color=#0000ff>true</font>;
+        }
+      <font color=#009900>// East</font>
+      <font color=#0000ff>if</font> (prison.isEmptyXY(x+1, y))
+        <font color=#0000ff>if</font> (ratCanMove)
+          <font color=#0000ff>new</font> Rat(prison, x+1, y);   
+          <font color=#009900>// Rat can move already, so give </font>
+          <font color=#009900>// this choice to the next rat.</font>
+        <font color=#0000ff>else</font> {
+          vertDir = 0; horizDir = 1;         
+          ratCanMove = <font color=#0000ff>true</font>;
+        }
+      <font color=#0000ff>if</font> (ratCanMove) { <font color=#009900>// Move original rat.</font>
+        x += horizDir;
+        y += vertDir;
+        prison.setXY(x,y,(<font color=#0000ff>byte</font>)'R');
+      }  <font color=#009900>// If not then the rat will die.</font>
+      <font color=#0000ff>try</font> {
+        Thread.sleep(2000);   
+      } <font color=#0000ff>catch</font>(InterruptedException ie) {}
+    }
+    System.out.println(<font color=#004488>"Rat no."</font> + myRatNo + 
+      <font color=#004488>" can't move..dying..aarrgggh."</font>);
+  }
+} <font color=#009900>///:~</font></PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><FONT FACE="Georgia">The maze initialization
+file:</FONT><BR></P></DIV>
+
+<BLOCKQUOTE><FONT SIZE = "+1"><PRE>//:! c13:Amaze.txt
+   * **      *  * **      *
+ ***    * *******    * ****
+     ***          ***      
+ *****   **********   *****
+ * * * * **  ** * * * **  *
+   * * *  * **  * * *  * **
+ *     **     *     **     
+   * **   * **  * **   * **
+ *** *  *** ***** *  *** **
+ *      *   * *      *   * 
+   * ** * *     * ** * *   
+///:~</PRE></FONT></BLOCKQUOTE><DIV ALIGN="LEFT"><P><A NAME="_Toc524504189"></A><BR></P></DIV>
+<A NAME="Heading116"></A><FONT FACE = "Verdana"><H3 ALIGN="LEFT">
+Other maze resources</H3></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">A discussion of algorithms to create
+mazes as well as Java source code to implement them:</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><A HREF="http://www.mazeworks.com/mazegen/mazegen.htm">http://www.mazeworks.com/mazegen/mazegen.htm</A>
+</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">A discussion of algorithms for collision
+detection and other individual/group moving behavior for autonomous physical
+objects:</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia"><A HREF="http://www.red3d.com/cwr/steer/">http://www.red3d.com/cwr/steer/</A>
+</FONT><BR></P></DIV>
+<DIV ALIGN="LEFT"><P><A NAME="_Toc524504190"></A><BR></P></DIV>
+<A NAME="Heading117"></A><FONT FACE = "Verdana"><H2 ALIGN="LEFT">
+XML Decorator</H2></FONT>
+<DIV ALIGN="LEFT"><P><FONT FACE="Georgia">Create a pair of decorators for I/O
+Readers and Writers that encode (for the Writer decorator) and decode (for the
+reader decorator) XML</FONT><BR></P></DIV>
+<DIV ALIGN="CENTER">
+    <FONT FACE="Verdana" size = "-1">
+     [ <a href="Chapter13.html">Previous Chapter</a> ] 
+    [ <a href="SimpleContents.html">Short TOC</a> ] 
+    [ <a href="Contents.html">Table of Contents</a> ] 
+    [ <a href="DocIndex.html">Index</a> ]
+    
+    </FONT>
+    <BR>
+ Last Update:09/08/2001</P></DIV>
+
+</BODY>
+
+</HTML>
