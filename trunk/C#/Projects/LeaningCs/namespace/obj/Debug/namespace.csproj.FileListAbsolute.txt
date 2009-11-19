@@ -1,0 +1,5 @@
+D:\FPT-Aptech\C#\Projects\LeaningCs\namespace\bin\Debug\namespace.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\namespace\bin\Debug\namespace.pdb
+D:\FPT-Aptech\C#\Projects\LeaningCs\namespace\obj\Debug\ResolveAssemblyReference.cache
+D:\FPT-Aptech\C#\Projects\LeaningCs\namespace\obj\Debug\namespace.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\namespace\obj\Debug\namespace.pdb

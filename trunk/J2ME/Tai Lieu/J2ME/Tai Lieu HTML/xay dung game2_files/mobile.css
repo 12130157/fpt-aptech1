@@ -1,0 +1,24 @@
+#top {
+	background:#668b16 url(/community/graphics/themes/129/mobile.jpg);
+	color:#fff;
+	}
+
+#top2 {
+	padding-left:20px;
+	}
+
+#top span {
+	background:#4e6d0c;
+	padding:0 3px;
+	}
+
+#side h2, #side h2 a:link, #side h2 a:visited, #side caption {
+	margin:1px 0;
+	background:#000;
+	color:#fff;
+	}
+
+#side caption a:link, #side caption a:visited {
+	color:#fff;
+	text-decoration:none;
+	}

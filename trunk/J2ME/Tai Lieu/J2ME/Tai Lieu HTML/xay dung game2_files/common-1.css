@@ -1,0 +1,228 @@
+/* login n signup */
+
+#login-here {
+	clear:both;
+	margin:20px 0;
+	background:#fff;
+	color:#000;
+	}
+
+#login-here form div {
+	float:left;
+	width:250px;
+	font-size:11px;
+	margin-right:3px;
+	}
+
+#login-here form .cc1, #usrname {
+	width:135px;
+	margin-right:12px;
+	}
+
+#login-here label {
+	display:block;
+	}
+
+/* quick login */
+
+#loginbox {
+	border:1px solid #bbb;
+	background:#fafafa;
+	padding:10px;
+	margin:10px 0;
+	line-height:16px;
+	font-size:11px;
+	text-align:left;
+	color:#000;
+	}
+
+#loginbox input {
+	margin:0 8px -1px 4px;
+	font-size:10px;
+	}
+
+#loginbox a {
+	float:right;
+	margin-left:4px;
+	}
+
+/* report */
+
+.report {
+	clear:both;
+	height:29px;
+	line-height:26px;
+	font-size:11px;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	}
+
+#main .report a, #main .report a:visited {
+	text-decoration:none;
+	color:#777;
+	}
+
+#main .report a:hover {
+	color:#000;
+	}
+
+.report-it  {
+	padding-top:2px;
+	float:left;
+	line-height:26px;
+	background:transparent url(/community/graphics/main/icons1.gif) 0 -790px no-repeat;
+	padding-left:22px;
+	margin:0 0 10px 0;
+	}
+
+/* ratings */
+
+.rate-it {
+	padding-top:2px;
+	float:right;
+	width:230px;
+	color:#333;
+	text-align:right;
+	}
+
+.rate-it p {
+	margin:0;
+	}
+
+.rate-it img {
+	border:none;
+	}
+
+p.rate-text {
+	color:#777;
+	font-size:11px;
+	margin:0 60px 0 0;
+	}
+
+#stardiv {
+	margin:7px 1px 0 0;
+	display:inline; /* IE fix */
+	float:right;
+	width:55px;
+	height:10px;
+	margin-left:2px;
+	overflow:hidden;
+	background:transparent url(/community/graphics/stars0.gif) top left no-repeat;
+	}
+
+.rate5 {
+	background-image:url(/community/graphics/stars5.gif) !important;
+	}
+
+.rate4 {
+	background-image:url(/community/graphics/stars4.gif) !important;
+	}
+
+.rate3 {
+	background-image:url(/community/graphics/stars3.gif) !important;
+	}
+
+.rate2 {
+	background-image:url(/community/graphics/stars2.gif) !important;
+	}
+
+.rate1 {
+	background-image:url(/community/graphics/stars1.gif) !important;
+	}
+
+/* albums */
+
+#bigimg {
+	position:relative;
+	width:100%;
+	}
+
+#zoom {
+	position:absolute;
+	bottom:0;
+	right:0;
+	}
+
+/* get opera */
+
+#side #getopera p {
+	margin:7px 0;
+	}
+
+/* comments */
+
+#addsmilies {
+	position:relative;
+	}
+
+#addsmile {
+	float:right;
+	margin-right:1px;
+	}
+
+#addsmilies #smilies {
+	position:absolute;
+	z-index:999;
+	width:276px;
+	height:370px;
+	background:#fff;
+	border:1px solid #bbb;
+	top:-374px;
+	right:0px;
+	line-height:30px;
+	}
+
+#addsmilies #smilies div {
+	padding:12px;
+	}
+
+/* share this */
+
+div.sharethis {
+	float:right;
+	margin:10px 0;
+	}
+
+div.sharethis ul {
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	}
+
+div.sharethis ul li {
+	padding:4px;
+	display:inline;
+	}
+
+div.sharethis ul li a {
+	font-size:10px;
+	padding:2px 0 2px 20px;
+	}
+
+div.sharethis ul li a.facebook {
+	background:url('/community/graphics/sharethis/facebook.gif') top left no-repeat;
+	}
+
+div.sharethis ul li a.delicious {
+	background:url('/community/graphics/sharethis/delicious.png') top left no-repeat;
+	}
+
+div.sharethis ul li a.magnolia {
+	background:url('/community/graphics/sharethis/magnolia.png') top left no-repeat;
+	}
+
+div.sharethis ul li a.digg {
+	background:url('/community/graphics/sharethis/digg.png') top left no-repeat;
+	}
+
+div.sharethis ul li a.reddit {
+	background:url('/community/graphics/sharethis/reddit.gif') top left no-repeat;
+	}
+
+div.sharethis ul li a.slashdot {
+	background:url('/community/graphics/sharethis/slashdot.png') top left no-repeat;
+	}
+
+div.sharethis ul li a.technorati {
+	background:url('/community/graphics/sharethis/technorati.png') top left no-repeat;
+	}

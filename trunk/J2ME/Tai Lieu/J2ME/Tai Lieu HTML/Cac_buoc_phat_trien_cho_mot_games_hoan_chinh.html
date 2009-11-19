@@ -1,0 +1,916 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<title>JavaVietnam - Các bước phát triển cho một games hoàn chỉnh</title>
+<link type="text/css" rel="stylesheet" href="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/cds.css">
+<link href="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/logo_jvn.gif" rel="SHORTCUT ICON">
+<link rel="alternate" type="application/rss+xml" title="Cộng đồng lập trình viên Java Việt Nam" href="http://www.javavietnam.org/javavn/cms/rss?channelid=1">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="copyright" content="This software is copyrighted by MyVietnam.net and released under the terms of the GNU General Public License GPL license. All rights reserved.">
+<meta name="Keywords" content="mvnForum, server side java, online meetings, collaboration, bulletin board, board, forum, discussion board, jsp, servlet, java, j2se, j2ee, database, jdbc, connection pool, mysql, MyVietnam, mvnForum, framework, web app, web application, servlet container, tomcat, jboss, weblogic, websphere">
+<meta name="Description" content="mvnForum is a powerful Jsp/Servlet forum (discussion board) - based on Java technology.">
+<script type="text/javascript" src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/searchhi.js" language="JavaScript"></script>
+</head><body>
+<table class="bgwhite" align="center" border="0" cellpadding="0" cellspacing="0" width="990">
+  <tbody><tr>
+    <td width="990">
+
+      <table border="0" cellpadding="0" cellspacing="0" width="990">
+        <tbody><tr>
+          <td width="317"><a href="http://www.javavietnam.org/javavn/cms"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/logo_jvn.gif" alt="" border="0"></a></td>
+          <td class="bgheader" align="center" width="673">
+          
+          </td>
+        </tr>
+      </tbody></table></td>
+  </tr>
+  <tr>
+    <td width="990">
+
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+document.write('<link type="text/css" rel="stylesheet" href="/javavn/mvnplugin/mvncms/cds/standard/jvn2/menu/theme_002.css" />');
+//]]>
+</script><link type="text/css" rel="stylesheet" href="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/theme_002.css">
+
+<script type="text/javascript">
+var myMenu11 = [
+[null, 'Mobile Labs 2008', '/javavn/cms/vi/mbl2007/index.html', '_self', null]];
+var myMenu2 = [
+[null, 'Tin Tức', '/javavn/cms/vi/news/index.html', '_self', null, 
+[null, 'Tin tức Java', '/javavn/cms/vi/news/java_news/index.html', '_self', null], 
+[null, 'Tin tức tổng hợp', '/javavn/cms/vi/news/general_news/index.html', '_self', null], 
+[null, 'Computer Expo 2005', '/javavn/cms/vi/news/computerworld_expo2005/index.html', '_self', null]]];
+var myMenu10 = [
+[null, 'Developer of the Year', '/javavn/cms/vi/developer_of_the_year/index.html', '_self', null]];
+var myMenu9 = [
+[null, 'JavaVietnam Training', '/javavn/cms/vi/javavietnam_training_activities/index.html', '_self', null]];
+var myMenu5 = [
+[null, 'Bài học Java', '/javavn/cms/vi/java_tutorials/index.html', '_self', null, 
+[null, 'Java cơ bản', '/javavn/cms/vi/java_tutorials/java_tutorials_basic/index.html', '_self', null], 
+[null, 'Java nâng cao', '/javavn/cms/vi/java_tutorials/java_tutorials_intermediate/index.html', '_self', null]]];
+
+</script>
+
+<script type="text/javascript" language="JavaScript" src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/JSCookMenu.js"></script>
+<script type="text/javascript" language="JavaScript" src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/theme_002.js"></script>
+
+<table border="0" cellpadding="0" cellspacing="0" width="990">
+  <tbody><tr>
+    <td align="center" width="990">
+      <table class="bgmenu" style="border-left: 1px solid rgb(178, 178, 178); border-right: 1px solid rgb(178, 178, 178); border-collapse: collapse;" align="center" border="0" cellpadding="3" cellspacing="0" width="990">
+      <tbody><tr>
+
+    <td style="border-left: 1px solid rgb(178, 178, 178); border-right: 1px solid rgb(178, 178, 178);" align="left"><div id="menu11"><table summary="main menu" class="ThemePanelMenu" cellspacing="0"><tbody><tr><td class="ThemePanelMainItem" onmouseover="cmItemMouseOverOpenSub (this,1,null,0,0)" onmousedown="cmItemMouseDown (this,1,null,0,0)" onmouseout="cmItemMouseOut (this,1,null,0,0)" onmouseup="cmItemMouseUp (this,1,null,0,0)"><span class="ThemePanelMainItemLeft"></span><span class="ThemePanelMainItemText">Mobile Labs 2008</span><span class="ThemePanelMainItemRight"></span></td></tr></tbody></table></div></td>
+  
+    <td style="border-left: 1px solid rgb(178, 178, 178); border-right: 1px solid rgb(178, 178, 178);" align="left"><div id="menu2"><table summary="main menu" class="ThemePanelMenu" cellspacing="0"><tbody><tr><td class="ThemePanelMainItem" onmouseover="cmItemMouseOverOpenSub (this,1,'cmSubMenuID1',1,1)" onmousedown="cmItemMouseDown (this,1,'cmSubMenuID1',1,1)" onmouseout="cmItemMouseOut (this,1,'cmSubMenuID1',1,1)" onmouseup="cmItemMouseUp (this,1,'cmSubMenuID1',1,1)"><span class="ThemePanelMainFolderLeft"></span><span class="ThemePanelMainFolderText">Tin Tức</span><span class="ThemePanelMainFolderRight"></span></td></tr></tbody></table><div class="ThemePanelSubMenu" id="cmSubMenuID1" style="z-index: 1000; position: absolute; top: 0px; left: 0px;"><div class="ThemePanelSubMenuShadow"></div><div class="ThemePanelSubMenuBorder"><table summary="sub menu" id="cmSubMenuID1Table" class="ThemePanelSubMenuTable" cellspacing="0"><tbody><tr class="ThemePanelMenuItem" onmouseover="cmItemMouseOverOpenSub (this,0,null,1,2)" onmousedown="cmItemMouseDown (this,0,null,1,2)" onmouseout="cmItemMouseOut (this,0,null,1,2)" onmouseup="cmItemMouseUp (this,0,null,1,2)"><td class="ThemePanelMenuItemLeft"></td><td class="ThemePanelMenuItemText">Tin tức Java</td><td class="ThemePanelMenuItemRight"></td></tr><tr class="ThemePanelMenuItem" onmouseover="cmItemMouseOverOpenSub (this,0,null,1,3)" onmousedown="cmItemMouseDown (this,0,null,1,3)" onmouseout="cmItemMouseOut (this,0,null,1,3)" onmouseup="cmItemMouseUp (this,0,null,1,3)"><td class="ThemePanelMenuItemLeft"></td><td class="ThemePanelMenuItemText">Tin tức tổng hợp</td><td class="ThemePanelMenuItemRight"></td></tr><tr class="ThemePanelMenuItem" onmouseover="cmItemMouseOverOpenSub (this,0,null,1,4)" onmousedown="cmItemMouseDown (this,0,null,1,4)" onmouseout="cmItemMouseOut (this,0,null,1,4)" onmouseup="cmItemMouseUp (this,0,null,1,4)"><td class="ThemePanelMenuItemLeft"></td><td class="ThemePanelMenuItemText">Computer Expo 2005</td><td class="ThemePanelMenuItemRight"></td></tr></tbody></table></div></div></div></td>
+  
+    <td style="border-left: 1px solid rgb(178, 178, 178); border-right: 1px solid rgb(178, 178, 178);" align="left"><div id="menu10"><table summary="main menu" class="ThemePanelMenu" cellspacing="0"><tbody><tr><td class="ThemePanelMainItem" onmouseover="cmItemMouseOverOpenSub (this,1,null,2,5)" onmousedown="cmItemMouseDown (this,1,null,2,5)" onmouseout="cmItemMouseOut (this,1,null,2,5)" onmouseup="cmItemMouseUp (this,1,null,2,5)"><span class="ThemePanelMainItemLeft"></span><span class="ThemePanelMainItemText">Developer of the Year</span><span class="ThemePanelMainItemRight"></span></td></tr></tbody></table></div></td>
+  
+    <td style="border-left: 1px solid rgb(178, 178, 178); border-right: 1px solid rgb(178, 178, 178);" align="left"><div id="menu9"><table summary="main menu" class="ThemePanelMenu" cellspacing="0"><tbody><tr><td class="ThemePanelMainItem" onmouseover="cmItemMouseOverOpenSub (this,1,null,3,6)" onmousedown="cmItemMouseDown (this,1,null,3,6)" onmouseout="cmItemMouseOut (this,1,null,3,6)" onmouseup="cmItemMouseUp (this,1,null,3,6)"><span class="ThemePanelMainItemLeft"></span><span class="ThemePanelMainItemText">JavaVietnam Training</span><span class="ThemePanelMainItemRight"></span></td></tr></tbody></table></div></td>
+  
+    <td style="border-left: 1px solid rgb(178, 178, 178); border-right: 1px solid rgb(178, 178, 178);" align="left"><div id="menu5"><table summary="main menu" class="ThemePanelMenu" cellspacing="0"><tbody><tr><td class="ThemePanelMainItem" onmouseover="cmItemMouseOverOpenSub (this,1,'cmSubMenuID2',4,7)" onmousedown="cmItemMouseDown (this,1,'cmSubMenuID2',4,7)" onmouseout="cmItemMouseOut (this,1,'cmSubMenuID2',4,7)" onmouseup="cmItemMouseUp (this,1,'cmSubMenuID2',4,7)"><span class="ThemePanelMainFolderLeft"></span><span class="ThemePanelMainFolderText">Bài học Java</span><span class="ThemePanelMainFolderRight"></span></td></tr></tbody></table><div class="ThemePanelSubMenu" id="cmSubMenuID2" style="z-index: 1000; position: absolute; top: 0px; left: 0px;"><div class="ThemePanelSubMenuShadow"></div><div class="ThemePanelSubMenuBorder"><table summary="sub menu" id="cmSubMenuID2Table" class="ThemePanelSubMenuTable" cellspacing="0"><tbody><tr class="ThemePanelMenuItem" onmouseover="cmItemMouseOverOpenSub (this,0,null,4,8)" onmousedown="cmItemMouseDown (this,0,null,4,8)" onmouseout="cmItemMouseOut (this,0,null,4,8)" onmouseup="cmItemMouseUp (this,0,null,4,8)"><td class="ThemePanelMenuItemLeft"></td><td class="ThemePanelMenuItemText">Java cơ bản</td><td class="ThemePanelMenuItemRight"></td></tr><tr class="ThemePanelMenuItem" onmouseover="cmItemMouseOverOpenSub (this,0,null,4,9)" onmousedown="cmItemMouseDown (this,0,null,4,9)" onmouseout="cmItemMouseOut (this,0,null,4,9)" onmouseup="cmItemMouseUp (this,0,null,4,9)"><td class="ThemePanelMenuItemLeft"></td><td class="ThemePanelMenuItemText">Java nâng cao</td><td class="ThemePanelMenuItemRight"></td></tr></tbody></table></div></div></div></td>
+  
+      </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+cmDraw ('menu11', myMenu11, 'hbr', cmThemePanel, 'ThemePanel');
+//]]>
+</script>
+
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+cmDraw ('menu2', myMenu2, 'hbr', cmThemePanel, 'ThemePanel');
+//]]>
+</script>
+
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+cmDraw ('menu10', myMenu10, 'hbr', cmThemePanel, 'ThemePanel');
+//]]>
+</script>
+
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+cmDraw ('menu9', myMenu9, 'hbr', cmThemePanel, 'ThemePanel');
+//]]>
+</script>
+
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+cmDraw ('menu5', myMenu5, 'hbr', cmThemePanel, 'ThemePanel');
+//]]>
+</script>
+</td>
+  </tr>
+  <tr>
+    <td width="990">
+
+<script language="JavaScript" type="text/javascript" src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/avim.js"></script>
+<script language="JavaScript" type="text/javascript" src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/utils.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+function trim(str) {
+  return str.replace(/(^\s+)([^\s]*)(\s+$)/, '$2');
+}
+function isBlank(field, strBodyHeader) {
+  strTrimmed = trim(field.value);
+  if (strTrimmed.length > 0) return false;
+  alert(strBodyHeader);
+  field.focus();
+  return true;
+}
+function SubmitFormSearchBar() {
+  if (ValidateFormSearchBar() == true ) {
+    document.submitformsearchbar.submit();
+  }
+}
+function ValidateFormSearchBar() {
+  if (isBlank(document.submitformsearchbar.key, 'Từ khóa tìm kiếm chưa được nhập.')) return false;
+  return true;
+}
+//]]>
+</script>
+<table border="0" cellpadding="0" cellspacing="0" width="990">
+  <tbody><tr>
+    <td class="bgred" width="158" height="21"><a href="http://www.javavietnam.org/javavn/mvnforum"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/bullet.gif" alt="" border="0" width="5" height="5" hspace="3"></a><a href="http://www.javavietnam.org/javavn/mvnforum" class="link_language">Diễn đàn</a></td>
+    <td class="bgblack" align="center" width="264"><a href="http://www.javavietnam.org/javavn/cms" class="link_namewebsite">www.javavietnam.org</a></td>
+
+    <td class="bgblack" align="center" width="344"><span class="link_namewebsite">8h:06 AM - 06/01/2009</span></td>
+    <form action="/javavn/cms/search" method="get" name="submitformsearchbar"></form>
+    <td class="bgblack" align="right" width="124" height="21">
+      <input name="key" class="input_search" value="Tìm kiếm" onfocus="focus_clear(this, 'Tìm kiếm');" type="text">
+    </td>
+    <td class="bgblack" width="21"><a href="javascript:SubmitFormSearchBar()"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/button_go.gif" alt="" border="0" width="21" height="14"></a></td>
+    
+    <td class="bgblack" align="right" width="10"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/bullet.gif" alt="" border="0" width="5" height="5" hspace="2"></td>
+    <td class="bgblack" align="left" width="110"><a href="http://www.javavietnam.org/javavn/cms/search" class="link_timkiem">Tìm kiếm nâng cao</a></td>   
+  </tr>
+</tbody></table>
+</td>
+  </tr>
+  <tr>
+    <td width="990">
+
+<table class="bgwhite" align="center" border="0" cellpadding="0" cellspacing="0" width="990">
+  <tbody><tr>
+    <td class="border_lr" valign="top" width="145">
+      <div>
+
+<table class="border_mostread" border="0" cellpadding="0" cellspacing="0" width="145">
+  <tbody><tr>   
+    <td class="bg_mostread" height="18">Đọc nhiều nhất</td>
+  </tr>
+
+  <tr>   
+    <td class="padmostread"><span class="digitalbullet">1.</span><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/javacoban_class_phan1.html" class="linkmostread">Java cơ bản - Khái niệm Class - phần 1</a></td>
+  </tr>
+
+  <tr>   
+    <td class="padmostread"><span class="digitalbullet">2.</span><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_intermediate/java_jdbc_mysql_1.html" class="linkmostread">Nhập môn Java với JDBC và MySQL (phần 1)</a></td>
+  </tr>
+
+  <tr>   
+    <td class="padmostread"><span class="digitalbullet">3.</span><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_intermediate/AJAX_1.html" class="linkmostread">AJAX - Tương lai cho ứng dụng Web (phần 1)</a></td>
+  </tr>
+
+  <tr>   
+    <td class="padmostread"><span class="digitalbullet">4.</span><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/java_co_ban_khai_niem_class_phan_2.html" class="linkmostread">Java cơ bản - Khái niệm Class - phần 2</a></td>
+  </tr>
+
+  <tr>   
+    <td class="padmostread"><span class="digitalbullet">5.</span><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/Tong_quan_ve_J2EE.html" class="linkmostread">Tổng quan về J2EE</a></td>
+  </tr>
+
+</tbody></table></div>
+      <div>
+
+<table class="border_rightad" border="0" cellpadding="0" cellspacing="0" width="145">
+  <tbody><tr>
+    <td class="bg_leftad" width="145" height="18"></td>
+  </tr>
+
+  <tr>
+    <td colspan="2" height="3"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/square.gif" alt="" width="145" height="3"></td>
+  </tr>
+</tbody></table></div>
+    </td>
+    <td width="2"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/square.gif" alt="" width="2"></td>
+    <td valign="top" width="644">
+
+<table border="0" cellpadding="0" cellspacing="0" width="644">
+  <tbody><tr>
+    <td>
+
+
+<table class="tblmarquee" border="0" cellpadding="0" cellspacing="0" width="644">
+  <tbody><tr>
+    <td width="546" height="18">
+      <marquee behavior="scroll" direction="left" loop="-1" scrolldelay="0" scrollamount="2" onmouseover="this.stop()" onmouseout="this.start()" width="100%" height="20">
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/thoi_khoa_bieu_moi_cua_truong.html" class="textmarquee">Thời khóa biểu mới của trường</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/news/vi_pham_ban_quyen_phan_mem.html" class="textmarquee">Vi phạm bản quyền phần mềm có thể bị xử lý hình sự</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/news/Google_va_Microsoft.html" class="textmarquee">Google suy nghĩ về động thái mới của Microsoft</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/news/website_no_1.html" class="textmarquee">Google đoạt ngôi website No 1 tại Mỹ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/news/quang_cao_tuong_tac_la_mo_vang_cho_mang_xa_hoi_vn.html" class="textmarquee">Quảng cáo tương tác là ‘mỏ vàng’ cho mạng xã hội VN</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/lap_trinh_j2me_co_ban_bai_14.html" class="textmarquee">Bài 14: Lập trình giao diện cấp cao với lớp List (phần 3)</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/lap_trinh_j2me_co_ban_bai_13.html" class="textmarquee">Bài 13: Lập trình giao diện cấp cao với lớp List (phần 2)</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/lap_trinh_j2me_co_ban_bai_12.html" class="textmarquee">Bài 12: Lập trình giao diện cấp cao với lớp List</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/lap_trinh_j2me_co_ban_bai_11.html" class="textmarquee">Bài 11: Lập trình giao diện cấp cao với lớp Alert (phần 2)</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/lap_trinh_j2me_co_ban_bai_10.html" class="textmarquee">Bài 10: Lập trình giao diện cấp cao với lớp Alert</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+      </marquee>
+    </td>
+    <td width="22"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/bullet_marquee.gif" alt="" width="17" height="8"></td>
+    <td align="center" width="40" nowrap="nowrap"><a href="http://www.javavietnam.org/javavn/cms/listevents?id=11" class="linkhoso">Hồ sơ</a></td>
+    <td width="36"><a href="http://www.javavietnam.org/javavn/cms/rss?channelid=11"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/rss.gif" alt="" border="0"></a></td>
+  </tr>
+</tbody></table></td>
+  </tr>
+  <tr>
+    <td>
+
+<div><script type="text/javascript"><!--
+google_ad_client = "pub-4755965374109189";
+/* 468x15, created 6/15/08 */
+google_ad_slot = "5476698572";
+google_ad_width = 468;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript" src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/show_ads.js">
+</script><script src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/test_domain.js"></script><script>window.google_render_ad();</script><iframe name="google_ads_frame" src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/ads.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" width="468" frameborder="0" height="15"></iframe></div>
+</td>
+  </tr>
+  <tr>
+    <td>
+
+
+
+
+
+<table id="searcharea" class="bgwhite" border="0" cellpadding="0" cellspacing="0" width="644">
+  <tbody><tr>
+    <td width="14"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/spacer.gif" alt=""></td>
+    <td width="604">
+      <table border="0" cellpadding="0" cellspacing="0" width="604">
+        <tbody><tr>
+          <td nowrap="nowrap"><a href="http://www.javavietnam.org/javavn/cms/vi/mbl2007/index.html" class="title_tnb">Mobile Labs 2008&nbsp;</a></td>
+          <td class="bghorline" width="100%" height="25">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          
+            <table class="contentdetail" border="0" cellpadding="0" cellspacing="0">
+              <tbody><tr>
+                <td><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/95x70_TGVTA_html_c0b5a21.jpg" alt="" align="left" border="0" height="150"></td>
+              </tr>
+              <tr>
+                <td class="noteimg"></td>
+              </tr>
+            </tbody></table>
+          
+            <!-- ContentID: 84 -->
+            <div class="titlledetail">Các bước phát triển cho một games hoàn chỉnh</div>
+            
+            <div class="datetime" align="right">15:44:31 24-10-2007</div>
+            <div class="contentdetailnext">
+            
+              <br>
+Mỗi bạn khi mới viết game thì thiết kế phát triển game theo một cách
+riêng. Thường thì một vài bạn bắt tay vào code ngay, trong khi đó các
+bạn khác tạo tài liệu thiết kế thật chi tiết, trong đó chỉ rõ từng giai
+đoạn phát triển của games từ ý tưởng vể kịch bản, các thuộc tính của
+nhân vật, item;chọn phong cách chủ đạo của đồ họa và âm thanh;cho đến
+phân bố độ khó cho các màng chơi cho hợp lý; chỉ rõ vai trò của các
+phím mềm của điện thoại trong games.Thường thì các bạn có tài liệu được
+xây dựng ban đầu càng chi tiết thì thời gian phát triển sẽ nhanh hơn và
+sản phẩm làm ra sẽ có chất lượng tốt hơn và thừơng không bị khác xa so
+với ý tưởng ban đầu. </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            
+            
+
+
+            
+            
+            <table class="contentdetailadright" border="0" cellpadding="5" cellspacing="0">
+              <tbody><tr>
+                <td>
+
+
+<div align="center"><script type="text/javascript"><!--
+google_ad_client = "pub-4755965374109189";
+/* 336x280, created 6/15/08 */
+google_ad_slot = "6132458784";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript" src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/show_ads.js">
+</script><script>window.google_render_ad();</script><iframe name="google_ads_frame" src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/ads_002.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" width="336" frameborder="0" height="280"></iframe></div>
+</td>
+              </tr>
+            </tbody></table>
+            
+            <p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; </p><p>Trong một đội phát triển games thường sẽ có nhiều người nhưng ít nhất phải có những vị trí sau được đảm nhận: </p><p style="margin-bottom: 0in;" class="western">1. Lập trình viên.</p> <p style="margin-bottom: 0in;" class="western">2. Đồ họa viên</p> <p style="margin-bottom: 0in;" class="western">3. Soạn nhạc và hiệu ứng âm thanh</p> <p style="margin-bottom: 0in;" class="western">4. Viết kịch bản</p> <p style="margin-bottom: 0in;" class="western">5. Test games và Port games</p> <p style="margin-bottom: 0in;" class="western">
+Qua đó ta thấy sự cần thiết phải có một tài liệu thật tốt để mọi người
+có chung tiếng nói, hiểu được mục tiêu chung và cùng nhau phát triển
+tốt một sản phẩm</p>  <p style="margin-bottom: 0in;" class="western"><strong>&nbsp;&nbsp;&nbsp; Thường thì khi phát triển một games có 4 quá trình :</strong></p>  <p style="margin-bottom: 0in;" class="western">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; +Giai đoạn 	tiền sản phẩm/ý tưởng  	</p> 	<p style="margin-bottom: 0in;" class="western">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; +Đặc tả 	cho lập trình</p> 	<p style="margin-bottom: 0in;" class="western">&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; +Thực hiện
+code, thiết kế đồ họa và soạn nhạc, hiệu ứng âm thanh</p><p style="margin-bottom: 0in;" class="western">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; +Test và 	Port sản phẩm </p><br> <strong>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 1. Giai đoạn 	tiền sản phẩm/ Ý tưởng:</strong>     <p style="margin-bottom: 0in;" class="western">Trong
+giai đoạn này nhóm phát triển sản phẩm thường chỉ làm việc, trao đổi
+với nhau bằng các công cụ giấy tờ, có thể là các chương trình note,
+viết bảng hay viết tay bằng mọi cách để phát triển ý tưởng của mình và
+trao đổi cho với các đồng nghiệp để thống nhất về ý tưởng chủ đạo chính
+của sản phẩm.</p><p> Qua đó các ý tưởng cho lập trình, nội dung
+games,thể loại game (action, puzzle, adventure, platform, sport,RPG, …)
+,phong cách đồ họa và âm nhạc được dần hình thành thông qua biểu đồ,đặc
+tả,các thông số thử nghiệm , các hình vẽ tay về nhân vật (sketch), các
+giai điệu của nhạc được lựa chọn và thống nhất xuyên suốt các giai đoạn
+phát triển. </p><p><strong>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 2. Đặc tả 	cho lập trình</strong>   </p><p style="margin-bottom: 0in;" class="western">Đây
+là một giai đoạn rất quan trọng trong quá trỉnh thiết kế games.Bạn càng
+bỏ nhiều thời gian cho giai đoạn này thì khi lập trình, gỡ lỗi, test
+hay port.Người lập trình chuyên nghiệp biết rằng thiệt hại khi lỗi xuất
+hiện trong quá trình thiết kế sẽ rất nhiều hơn so với lỗi được phàt
+hiện trong giai đoan này.</p> <p style="margin-bottom: 0in;" class="western">Bạn
+cần giấy và bút hay chương trình văn bản với 1 vài người bạn cùng nhau
+chơi thử chương trình games.Khi “chơi thử” bằng cách ghi ra giấy bút
+các ưu và khuyết của thiết kế sẽ lộ rõ, tiếp tục chỉnh sửa cho đến khi
+bạn cảm thấy vừa ý.</p><p style="margin-bottom: 0in;" class="western"><strong>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 3. Thực hiện 	code, thiết kế đồ họa và soạn 	nhạc, hiệu ứng âm thanh</strong></p>    <ul><li><p style="margin-bottom: 0in;" class="western">Code:</p> </li></ul> <p style="margin-bottom: 0in;" class="western">Với
+đặc tả đã có bạn thực hiện công việc lập trình, bạn hãy dự tính thời
+lượng cho việc lập trình tính toán manday cho thật kỹ càng để có thể
+ước lượng khối lượng công việc và để theo dõi tiến độ.Thường thì cho
+một games di dộng giai đoạn này mất khoảng 30 manday cho lập trình.</p> <p style="margin-bottom: 0in;" class="western">Các lập trình viên thường dùng các chương trình như Esclipe, Netbean để phát triển</p>  <p style="margin-bottom: 0in;" class="western">Giao diện Esclipe</p><p style="margin-bottom: 0in;" class="western">&nbsp;<img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/TGVTA_html_m3649188a.jpg" alt="" width="700" height="450"></p>   <ul><li><p style="margin-bottom: 0in;" class="western">Thiết kế 	đồ họa:  	</p> </li></ul> <p style="margin-bottom: 0in;" class="western">Do
+độ phân giải của màn hình điện thoại di động khá nhỏ nên mọi vật thể đồ
+họa trong game đều được thực hiện bằng đồ họa điểm ảnh (pixel art).</p> <p style="margin-bottom: 0in;" class="western">Người thiết kế đồ họa pixel phải có kiến thức về vẽ tay, đổ bóng, và thực hiện các thao tác thật tỉ mỉ.</p> <p style="margin-bottom: 0in;" class="western">Các thiết kế pixel art cho games gồm:  </p> <p style="margin-bottom: 0in;" class="western">Tile:
+các hình khối hình vuông hay hình thoi (cho game isomatric) nhỏ để khi
+vẽ lại các khối đó gần nhau ta được một map hoàn chỉnh</p> <p style="margin-bottom: 0in;" class="western">Sprite:
+là một chuỗi liên hoàn các cử động của nhân vật, để khi vẽ liên tiếp
+các hình ấy lên màn hình điện thoại ta được một cử động của nhân vật</p> <p style="margin-bottom: 0in;" class="western">Các item: các nhân vật, đồ vật tĩnh ,…</p> <p style="margin-bottom: 0in;" class="western">Thiết
+kế giao diện: người làm đồ họa cũng phải biết các kiến thức và biết sử
+dụng các công cụ đồ họa khác như Photoshop và 3dMax để có các hình ảnh
+đẹp và nhẹ nhất,tối ưu nhất cho game.</p> <p style="margin-left: 0.25in; margin-bottom: 0in;" class="western">Giao diện Mappy</p> <p style="margin-left: 0.25in; margin-bottom: 0in;" class="western"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/TGVTA_html_c0b5a21.htm" alt="" width="700" height="450"></p> <ul><li><p style="margin-bottom: 0in;" class="western">Thiết kế 	Level (màng chơi):</p> </li></ul> <p style="margin-bottom: 0in;" class="western">Bằng
+cách vẽ kết nối các tile đã vẽ và đặt vị trí xuất hiện cho các nhân
+vật, kẻ thù người thiết kế map sẽ tạo ra một map hoàn chỉnh.Chú ý là
+phải phân bổ và tính toán sao cho phù hợp với cấp độ khó tăng dần</p>  <ul><li><p style="margin-bottom: 0in;" class="western">Thiết kế 	âm thanh:</p> </li></ul> <p style="margin-bottom: 0in;" class="western">Âm thanh trong games di động Java chỉ là âm thanh MIDI (<strong>M</strong>usical <strong>I</strong>nstrument <strong>D</strong>igital <strong>I</strong>nterface
+- Giao Diện Kỹ Thuật Số dành cho Nhạc Cụ).Nếu chọn nhạc nên thì sẽ soạn
+hay mix nhạc còn nếu làm hiệu ứng âm thanh thì sẽ mix các âm thanh hiệu
+ứng từ các tiếng nhạc cụ.Vì games Java J2ME chỉ hổ trợ một âm thanh
+trong cùng một thời gian.</p> <p style="margin-bottom: 0in;" class="western">Nếu
+soạn nhạc: người soạn nhạc phải có các kiến thức nhạc lý như một nhạc
+sĩ vậy, bạn phải biết cách sử dụng một nhạc cụ bộ gõ như trống và một
+nhạc cụ khác như piano hay guitar, bạn có thể sử dụng các chương trình
+soạn nhạc trên máy tính chuyên nghiệp.</p> <p style="margin-bottom: 0in;" class="western">Hiện
+tại cũng có nhiều chương trình giúp cho bạn soạn nhạc dễ dàng mà không
+cần biết nhiều về nhạc lý, bạn chỉ cần lựa vài hợp âm, nhạc cụ,tempo,
+điệu nhạc,…và chương trình sẽ tạo bản nhạc cho bạn ,tuy nhiên chất
+lượng và phong cách của bài nhạc sẽ không thực sự nổi bật.</p><p style="margin-bottom: 0in;" class="western"><strong>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 4.Test và 	port:</strong></p><p style="margin-bottom: 0in;" class="western">&nbsp;Giai
+đoạn chơi thử và test game.Nhóm lập trình sẽ cùng chơi thử, cảm nhận và
+ghi lại tất cả các ưu và khuyết.Sửa các lỗi nếu có. </p><p style="margin-bottom: 0in;" class="western">Phát hành bản beta cho game thủ chơi thử và lấy ý kiến của họ.</p>  <p style="margin-bottom: 0in;" class="western">Port:
+games cho di động phải được port cho các dòng máy khác nhau do các dòng
+máy này khác nhau về phím nhấn,memory và các thư viện hổ trợ.Các nhóm
+phát triển games tự phát cũng sẽ gặp rắc rối khi không có đủ các máy để
+test và port.</p> 
+            
+            
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="bghorline" colspan="2" width="100%" height="25">&nbsp;</td>
+        </tr>
+      </tbody></table>
+    </td>
+    <td width="26"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/spacer.gif" alt=""></td>
+  </tr>
+</tbody></table>
+</td>
+  </tr>
+  <tr>   
+    <td height="3"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+    <td>
+
+
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function _ShowHide(id1, id2) {
+  if (id1 != "") _toggleview(id1);
+  if (id2 != "") _toggleview(id2);
+}
+function _toggleview(id) {
+  if (!id) return;
+  if (itm = my_getbyid(id)) {
+    if (itm.style.display == "none") _my_show_div(itm);
+    else _my_hide_div(itm);
+  }
+}
+function _my_hide_div(itm) {
+  if (!itm) return;
+  itm.style.display = "none";
+  doLoad(120);
+}
+function _my_show_div(itm) {
+  if (!itm) return;
+  itm.style.display = "";
+  clearTimeout(t);
+}
+//]]>
+</script>
+<table class="bgwhite" border="0" cellpadding="0" cellspacing="0" width="644">
+  <tbody><tr>
+    <td width="14"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/spacer.gif" alt=""></td>
+    <td width="374">
+      <table align="center" border="0" cellpadding="0" cellspacing="2" width="374">
+        <tbody><tr>
+          <td align="left" width="20"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/ico_003.gif" alt="" width="20" height="20" hspace="3"></td>
+          <td align="left" width="90"><a href="http://www.javavietnam.org/javavn/cms/print?id=84" class="linkcontentrow2">In</a></td>
+          <td align="left" width="20"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/ico_002.gif" alt="" width="20" height="20" hspace="3"></td>
+          <td align="left" width="90"><a href="javascript:%20__Open('/javavn/cms/emailtofriends',%20370,%20310)" class="linkcontentrow2">Gửi</a></td>
+          
+        
+          <td align="right" width="20"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/ico.gif" alt="" width="20" height="20" hspace="3"></td>
+          <td align="left" width="100"><a href="javascript:my_hide_div(my_getbyid('oi_open'));_ShowHide('fb_open','fb_closed');" class="linkcontentrow2">Phản hồi</a></td>
+        
+        
+        </tr>
+      </tbody></table>
+    </td>
+    <td width="26"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/spacer.gif" alt=""></td>
+  </tr>
+</tbody></table></td>
+  </tr>
+  <tr>
+    <td height="3"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+    <td>
+      
+      
+
+
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <div id="fb_open" style="display: none; position: relative;">
+        ﻿
+
+<script type="text/javascript">
+//<![CDATA[
+function SubmitForm() {
+  if (ValidateForm() == true ) {
+    document.feedbackForm.submitbutton.disable = true;
+    document.feedbackForm.submit();
+  }
+}
+
+function ValidateForm() {
+  if (document.feedbackForm.FeedbackName.value == "" || document.feedbackForm.FeedbackName.value == "Họ và tên") {
+    alert("Bạn phải nhập tên.");
+    return false;
+  }
+  if (!Validate_Email_Address(document.feedbackForm.FeedbackEmail.value)) {
+    alert("Bạn phải nhập email.");
+    return false;
+  }
+  if (document.feedbackForm.FeedbackContent.value == "" &&
+        document.feedbackForm.file1.value == "" &&
+        document.feedbackForm.file2.value == "" &&
+        document.feedbackForm.file3.value == "") {
+    alert("Bạn phải nhập nội dung phản hồi.");
+    return false;
+  }
+  
+  return true;
+}
+//]]>
+</script>
+
+<form id="feedbackForm" name="feedbackForm" action="/javavn/cms/contentfeedbackprocess" method="post" enctype="multipart/form-data">
+<input id="ContentID" name="ContentID" value="84" type="hidden">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="644">
+  <tbody><tr>
+    <td width="14"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/spacer.gif" alt=""></td>
+    <td width="604">
+      <table border="0" cellpadding="0" cellspacing="0" width="604">      
+        <tbody><tr>
+          <td class="titlecontentdetail" nowrap="nowrap">Phản hồi, nhận xét bài viết</td>
+          <td class="bghorline" width="75%" height="25">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <table border="0" cellpadding="1" cellspacing="0" width="604">
+              <tbody><tr>
+                <td>
+                  <input name="FeedbackName" id="FeedbackName" value="Họ và tên" class="textboxfb" onfocus="focus_clear(this, 'Họ và tên');" onblur="lostfocus_default(this, 'Họ và tên');" type="text"> <span class="requiredfield">*</span>
+                </td>
+                <td>
+                  <input name="FeedbackEmail" id="FeedbackEmail" value="Địa chỉ email" class="textboxfb" onfocus="focus_clear(this, 'Địa chỉ email');" onblur="lostfocus_default(this, 'Địa chỉ email');" type="text"> <span class="requiredfield">*</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <select id="FeedbackDestination" name="FeedbackDestination">
+                    <option value="" selected="selected">Tòa Soạn</option>
+                    <option value="">Phòng quảng cáo</option>
+                    <option value="">Phòng phát hành</option>
+                  </select>
+                </td>
+                <td><input name="FeedbackSubject" id="FeedbackSubject" value="Tiêu đề" class="textboxfb" onfocus="focus_clear(this, 'Tiêu đề');" onblur="lostfocus_default(this, 'Tiêu đề');" type="text"></td>
+              </tr>
+              <tr>
+                <td colspan="2">Nội dung <span class="requiredfield">*</span></td>
+              </tr>
+              <tr>
+                <td colspan="2"><textarea name="FeedbackContent" cols="55" rows="5"></textarea></td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                
+                  <div align="center"><input name="submitbutton" value="Gửi" onclick="javascript: SubmitForm();" type="button"></div>
+                
+                </td>
+              </tr>
+            </tbody></table>
+          </td>
+        </tr>        
+      </tbody></table>     
+    </td>
+    <td width="26"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/spacer.gif" alt=""></td>
+  </tr>
+</tbody></table>
+</form>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+
+</td>
+  </tr>
+  
+  <tr>
+    <td>
+</td>
+  </tr>
+
+  <tr>   
+    <td height="15"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+  
+    <td>
+
+</td>
+  </tr>
+  <tr>   
+    <td height="2"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+   
+    <td>
+
+</td>
+  </tr>
+  <tr>
+    <td>
+</td>
+  </tr>
+  <tr>   
+    <td height="5"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+    <td>
+
+<table class="bgmorecontent" border="0" cellpadding="0" cellspacing="0" width="644">
+  <tbody><tr>
+    <td width="28"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/spacer.gif" alt="" width="28"></td>
+    <td colspan="2" width="588">
+      <table border="0" cellpadding="0" cellspacing="0" width="588">
+        <tbody><tr>
+          <td class="morenews" nowrap="nowrap">Tin đã đưa&nbsp;</td>
+          <td class="linemorenews" width="100%">&nbsp;</td>
+        </tr>
+      </tbody></table>
+    </td>  
+    <td width="20"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/spacer.gif" alt="" width="20"></td>
+  </tr>
+  <tr>
+    <td width="28"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/spacer.gif" alt=""></td>
+    <td colspan="2" width="588">
+
+      <div class="padcbs"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/bullet_red.gif" alt=""><a href="http://www.javavietnam.org/javavn/cms/vi/mbl2007/Cac_cong_cu_va_huong_dan.html" class="rightlinkcbs2">Các công cụ và hướng dẫn</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="datemorenews">(24/10/2007)</span></div>
+
+      <div class="padcbs"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/bullet_red.gif" alt=""><a href="http://www.javavietnam.org/javavn/cms/vi/mbl2007/Lap_trinh_cho_thiet_bi_di_dong.html" class="rightlinkcbs2">Lập trình cho thiết bị di động</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="datemorenews">(24/10/2007)</span></div>
+
+      <div class="padcbs"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/bullet_red.gif" alt=""><a href="http://www.javavietnam.org/javavn/cms/vi/mbl2007/So_sanh_Game_di_dong_va_Game_PC.html" class="rightlinkcbs2">So sánh Game di động và Game PC</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="datemorenews">(24/10/2007)</span></div>
+
+      
+      
+
+
+
+      <div align="right"><a href="http://www.javavietnam.org/javavn/cms/vi/mbl2007/index.html?time=1193226819000" class="nextpage">Trang sau</a></div><br>
+
+    </td>
+    <td width="20"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/spacer.gif" alt="">
+    </td>
+  </tr>  
+</tbody></table>
+</td>
+  </tr>
+  <tr>   
+    <td height="15"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+    <td>
+
+
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function trim(str) {
+  return str.replace(/(^\s+)([^\s]*)(\s+$)/, '$2');
+}
+function isBlank(field, strBodyHeader) {
+  strTrimmed = trim(field.value);
+  if (strTrimmed.length > 0) return false;
+  alert(strBodyHeader);
+  field.focus();
+  return true;
+}
+function validateFormGo() {
+  if (isBlank(document.submitFormGo.bydate, 'Bạn chưa chọn ngày.')) return false;
+  return true;
+}
+function clickFormGo() {
+  var select = document.getElementById('channel');
+  if (select.selectedIndex == 0) {
+    alert('Bạn chưa chọn nhóm tin.');
+    return false;
+  }
+    
+  document.submitFormGo.action = select.options[select.selectedIndex].value;
+  if (validateFormGo()) document.submitFormGo.submit();
+}
+document.write('<link rel="stylesheet" href="/javavn/mvnplugin/mvncms/cds/standard/jvn2/calendar/bluexp.css" />');
+//]]>
+</script><link rel="stylesheet" href="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/bluexp.css">
+<script type="text/javascript" src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/zapatec.js"></script>
+<script type="text/javascript" src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/calendar.js"></script>
+<script type="text/javascript" src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/calendar-vi.js"></script>
+<form name="submitFormGo" action="">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+  <tbody><tr>
+    <td align="right" width="200">
+      <input autocomplete="off" size="12" id="bydate" name="bydate" readonly="readonly" class="allinput" style="width: 100px;" type="text">
+    </td>
+    <td width="5">&nbsp;</td>
+    <td align="center" width="100">
+      <input id="choosebydate" class="allbutton" value="Chọn ngày" type="button">
+    </td>
+    <td width="5">&nbsp;</td>
+    <td width="150">
+      <select class="textbox_off" id="channel">
+        <option value="0" selected="selected">Nhóm tin</option>
+  
+        <option value="/javavn/cms/vi/mbl2007/index.html">-- Mobile Labs 2008</option>
+  
+        <option value="/javavn/cms/vi/news/index.html">-- Tin Tức</option>
+  
+        <option value="/javavn/cms/vi/news/java_news/index.html">---- Tin tức Java</option>
+  
+        <option value="/javavn/cms/vi/news/general_news/index.html">---- Tin tức tổng hợp</option>
+  
+        <option value="/javavn/cms/vi/news/computerworld_expo2005/index.html">---- Computer Expo 2005</option>
+  
+        <option value="/javavn/cms/vi/developer_of_the_year/index.html">-- Developer of the Year</option>
+  
+        <option value="/javavn/cms/vi/javavietnam_training_activities/index.html">-- JavaVietnam Training</option>
+  
+        <option value="/javavn/cms/vi/java_tutorials/index.html">-- Bài học Java</option>
+  
+        <option value="/javavn/cms/vi/java_tutorials/java_tutorials_basic/index.html">---- Java cơ bản</option>
+  
+        <option value="/javavn/cms/vi/java_tutorials/java_tutorials_intermediate/index.html">---- Java nâng cao</option>
+  
+      </select>
+    </td>
+    <td width="5">&nbsp;</td>  
+    <td align="left" width="200"><input onclick="clickFormGo();" value="Xem" class="allbutton" type="button"></td>
+  </tr>
+</tbody></table>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+      Zapatec.Calendar.setup({
+        firstDay          : 1,
+        weekNumbers       : false,
+        electric          : false,
+        inputField        : "bydate",
+        button            : "choosebydate",
+        ifFormat          : "%d/%m/%Y",
+        daFormat          : "%Y/%m/%d"
+      });
+//]]>
+</script></td>
+  </tr>
+</tbody></table></td>
+    <td width="2"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/square.gif" alt="" width="2"></td>
+    <td class="border_lr" valign="top" width="193">
+      <div>
+
+<table class="border_rightad" border="0" cellpadding="0" cellspacing="0" width="193">
+  <tbody><tr>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td align="center"><script type="text/javascript"><!--
+google_ad_client = "pub-4755965374109189";
+/* 160x600, created 6/15/08 */
+google_ad_slot = "2964634703";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/show_ads.js">
+</script><script>window.google_render_ad();</script><iframe name="google_ads_frame" src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/ads_003.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" width="160" frameborder="0" height="600"></iframe></td>
+  </tr>
+
+</tbody></table></div>
+      <div>
+
+<table border="0" cellpadding="0" cellspacing="0" width="193">
+  <tbody><tr>   
+    <td width="193" height="10"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/square.gif" alt=""></td>
+  </tr>
+
+</tbody></table></div>
+    </td>
+  </tr>
+</tbody></table>
+</td>
+  </tr>
+  <tr>   
+    <td width="990" height="5"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+    <td width="990">
+
+
+
+  <!-- bottom ads -->
+  <table align="center" border="0" cellpadding="0" cellspacing="0" width="798">
+    <tbody><tr>
+      <td width="10"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/square.gif" alt="" width="10"></td>
+      <td align="center" width="760">
+        <!-- SiteSearch Google -->
+<form method="get" action="http://www.google.com/custom" target="_top">
+<table bgcolor="#ffffff" border="0">
+<tbody><tr><td align="left" valign="top" height="32" nowrap="nowrap">
+<a href="http://www.google.com/">
+<img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/Logo_25wht.gif" alt="Google" align="middle" border="0"></a>
+</td>
+<td nowrap="nowrap">
+<input name="domains" value="www.javavietnam.org" type="hidden">
+<label for="sbi" style="display: none;">Enter your search terms</label>
+<input name="q" size="31" maxlength="255" value="" id="sbi" type="text">
+<label for="sbb" style="display: none;">Submit search form</label>
+<input name="sa" value="Search" id="sbb" type="submit">
+</td></tr>
+<tr>
+<td> </td>
+<td nowrap="nowrap">
+<table>
+<tbody><tr>
+<td>
+<input class="noborder" name="sitesearch" value="" checked="checked" id="ss0" type="radio">
+<label for="ss0" title="Search the Web"><font color="#000000" size="-1">Web</font></label></td>
+<td>
+<input class="noborder" name="sitesearch" value="www.javavietnam.org" id="ss1" type="radio">
+<label for="ss1" title="Search www.javavietnam.org"><font color="#000000" size="-1">www.javavietnam.org</font></label></td>
+</tr>
+</tbody></table>
+<input name="client" value="pub-4755965374109189" type="hidden">
+<input name="forid" value="1" type="hidden">
+<input name="channel" value="4062821725" type="hidden">
+<input name="ie" value="UTF-8" type="hidden">
+<input name="oe" value="UTF-8" type="hidden">
+<input name="safe" value="active" type="hidden">
+<input name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;LH:50;LW:140;L:http://www.javavietnam.org/javavn/mvnplugin/mvnforum/images/logo.gif;S:http://;FORID:1" type="hidden">
+<input name="hl" value="en" type="hidden">
+</td></tr></tbody></table>
+</form>
+<!-- SiteSearch Google -->
+      </td>
+      <td width="28"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/square.gif" alt="" width="28"></td>
+    </tr>
+  </tbody></table>
+
+</td>
+  </tr>
+  <tr>     
+    <td width="990" height="2"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+    <td width="990">
+
+<table class="bgblack" border="0" cellpadding="0" cellspacing="0" width="990">
+  <tbody><tr>
+    <td class="bgblack" width="18" height="10"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/spacer.gif" alt="" width="10" height="21"></td>
+    <td class="bgblack" width="23"><a href="http://www.javavietnam.org/javavn/cms"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/icon_homepage.gif" alt="" border="0"></a></td>
+    <td align="left"><a href="http://www.javavietnam.org/javavn/cms" class="link_namewebsite">www.javavietnam.org</a></td>
+    <td class="bgblack" width="13"><a href="javascript:scroll(0,0);"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/icon_top.gif" alt="" border="0" width="8" height="21"></a></td>
+    <td width="15"><a href="javascript:scroll(0,0);" class="link_top">Top</a></td>
+    <td class="bgblack" width="28"><img src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/spacer.gif" alt="" width="28" height="21"></td>
+  </tr>
+</tbody></table>
+</td>
+  </tr>
+  <tr>
+    <td width="990">
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="990">
+  <tbody><tr>
+    <td>
+    </td>
+  </tr>
+</tbody></table>
+</td>
+  </tr>
+</tbody></table>
+
+
+
+ 
+<!-- Alexa button -->
+
+<!-- End Alexa button -->
+ 
+<!-- Google Analytics -->
+<script type="text/javascript">
+//<![CDATA[
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+//]]>
+</script><script src="Cac_buoc_phat_trien_cho_mot_games_hoan_chinh_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+var pageTracker = _gat._getTracker("UA-4030481-2");
+pageTracker._initData();
+pageTracker._trackPageview();
+//]]>
+</script>
+<!-- End Google Analytics -->
+</body></html>

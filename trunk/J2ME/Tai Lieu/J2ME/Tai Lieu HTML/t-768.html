@@ -1,0 +1,422 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" lang="vi"><head>
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content=" Phát triển ứng dụng Java trên mobile., mait,admin,network,computer,security,system,hardware,software,vbulletin,vbb,economic,pr,marketing,finance,kinhtế,tàichính,tiếpthị,mait,mrit,mitvietnam">
+	<meta name="description" content="[Lưu Trữ]  Phát triển ứng dụng Java trên mobile. JAVA">
+	
+	<title> Phát triển ứng dụng Java trên mobile. [Lưu Trữ]  - Diễn đàn MaIT</title>
+	<link rel="stylesheet" type="text/css" href="t-768_files/archive.css">
+</head><body>
+<div class="pagebody">
+<div id="navbar"><a href="http://forum.mait.vn/archive/index.php">Diễn đàn MaIT</a> &gt; <a href="http://forum.mait.vn/archive/index.php/f-102.html">CÂU LẠC BỘ TIN HỌC</a> &gt; <a href="http://forum.mait.vn/archive/index.php/f-15.html">LẬP TRÌNH</a> &gt; <a href="http://forum.mait.vn/archive/index.php/f-30.html">JAVA</a> &gt;  Phát triển ứng dụng Java trên mobile.</div>
+<hr>
+<div class="pda"><a href="http://forum.mait.vn/archive/index.php/t-768.html?pda=1" rel="nofollow">PDA</a></div>
+<p class="largefont">View Full Version : <a href="http://forum.mait.vn/showthread.php?t=768">Phát triển ứng dụng Java trên mobile.</a></p>
+<hr>
+
+<div class="post"><div class="posttop"><div class="username">truongson1810</div><div class="date">18-02-2008, 01:22 PM</div></div><div class="posttext">:ok: bài này là báo cáo nghiên cứu ở công ty :cuoiruoi:<br>
+<br>
+ 1.Tổng quan về J2ME<br>
+   <br>
+   a.J2ME là gì ?<br>
+   <br>
+      J2ME là Java 2 Platform,Micro Edition, nền tảng phần mềm cho việc phát triển các ứng dụng java cho các thiết bị di động<br>
+   <br>
+   b. Lịch sử <br>
+   <br>
+J2ME được phát triển từ kiến trúc Java Card, Embeded Java và Personal
+Java của phiên bản Java 1.1. Đến sự ra đời của Java 2 thì Sun quyết
+định thay thế Personal Java và đươc gọi với tên mới là Java 2 Micro
+Edition, hay viết tắt là J2ME. Đúng với tên gọi, J2ME là nền tảng cho
+các thiết bị có tính chất nhỏ, gọn (Micro có nghĩa là nhỏ trong tiếng
+Anh). <br>
+  <br>
+  c . Lý do chọn J2ME·<br>
+  <br>
+Java ban đầu được thiết kế dành cho các máy với tài nguyên bộ nhớ hạn chế.<br>
+  <br>
+Thị trường của J2ME được mở rộng ra cho nhiều chủng loại thiết bị như:<br>
+1. Các lọai thẻ cá nhân như Java Card<br>
+2. Máy điện thoại di động<br>
+3. Máy PDA (Personal Digital Assistant - thiết bị trợ giúp cá nhân)<br>
+4. Các hộp điều khiển dành cho tivi, thiết bị giải trí gia dụng …<br>
+   <br>
+  d. Kiến trúc J2ME<br>
+  http://forum.mait.vn/attachment.php?attachmentid=151&amp;stc=1&amp;d=1203315610<br>
+<br>
+  <br>
+  Phần này chỉ sẽ tìm hiểu về CDLC và CDC<br>
+  <br>
++ CLDC (Connected Limited Device Configuration): được thiết kế để nhắm
+vào thị trường các thiết bị cấp thấp (low-end), các thiết bị này thông
+thường là máy điện thọai di động và PDA với khoảng 512 KB bộ nhớ. Vì
+tài nguyên bộ nhớ hạn chế nên CLDC được gắn với Java không dây (Java
+Wireless ), dạng như cho phép người sử dụng mua và tải về các ứng dụng
+Java, ví dụ như là Midlet. Thường loại ứng dụng này được sử dụng cho
+các loại điện thoại không sử dụng HĐH<br>
++ CDC- Connected Device Configuration: CDC được đưa ra nhắm đến các
+thiết bị có tính năng mạnh hơn dòng thiết bị thuộc CLDC nhưng vẫn yếu
+hơn các hệ thống máy để bàn sử dụng J2SE. Những thiết bị này có nhiều
+bộ nhớ hơn (thông thường là trên 2Mb) và có bộ xử lý mạnh hơn. Các sản
+phẩm này có thể kể đến như các máy PDA cấp cao, điện thoại web, các
+thiết bị gia dụng trong gia đình …<br>
+   <br>
+  <br>
+Cả 2 dạng Cấu hình kể trên đều chứa máy ảo Java (Java Virtual Machine)
+và tập hợp các lớp (class) Java cơ bản để cung cấp một môi trường cho
+các ứng dụng J2ME. Tuy nhiên, đối với các thiết bị cấp thấp, do hạn chế
+về tài nguyên như bộ nhớ và bộ xử lý nên không thể yêu cầu máy ảo hổ
+trợ tất cả các tính năng như với máy ảo của J2SE, ví dụ, các thiết bị
+thuộc CLDC không có phần cứng yêu cầu các phép tính toán dấu phẩy động,
+nên máy ảo thuộc CLDC không được yêu cầu hỗ trợ kiểu float và double.<br>
+   <br>
+  http://forum.mait.vn/attachment.php?attachmentid=152&amp;stc=1&amp;d=1203315610<br>
+<br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+  Bảng so sánh CLDC và CDC :<br>
+   <br>
+  http://forum.mait.vn/attachment.php?attachmentid=153&amp;stc=1&amp;d=1203315610<br>
+<br>
+   <br>
+  e.Định nghĩa về Profile:<br>
+   <br> Profile mở rộng
+Configuration bằng cách thêm vào các class để bổ trợ các tính năng cho
+từng thiết bị chuyên biệt. Cả 2 Configuration đều có những profile liên
+quan và từ những profile này có thể dùng các class lẫn nhau. <br>
+Đến đây ta có thể nhận thấy do mỗi profile định nghĩa một tập hợp các
+class khác nhau, nên thường ta không thể chuyển một ứng dụng Java viết
+cho một profile này và chạy trên một máy hỗ trợ một profile khác.<br>
+   Cũng với lý do đó, không thể lấy một ứng dụng viết trên J2SE hay J2EE và chạy trên các máy hỗ trợ J2ME.<br>
+   <br>
+  Các profiles tiêu biểu<br>
+  Mobile Information Device Profile      (MIDP) :<br>
+profile này sẽ bổ sung các tính năng như hỗ trợ kết nối, các thành phần
+hỗ trợ giao diện người dùng … vào CLDC. Profile này được thiết kế chủ
+yếu để nhắm vào điện thọai di động với đặc tính là màn hình hiển thị
+hạn chế, dung lượng chứa có hạn. Do đó MIDP sẽ cung cấp một giao diện
+người dùng đơn giản và các tính năng mạng đơn giản dựa trên HTTP. Có
+thể nói MIDP là profile nổi tiếng nhất bởi vì nó là kiến thức cơ bản
+cho lập trình Java trên các máy di động (Wireless Java)<br>
+  <br>
+  PDA Profile: tương tự MIDP, nhưng với thị trường là các máy PDA với màn hình và bộ nhớ lớn hơn<br>
+  <br>
+  Foundation Profile: cho phép mở rộng các tính năng của CDC với phần lớn các thư viện của bộ Core Java2 1.3<br>
+  <br>
+Ngoài ra còn có Personal Basis Profile, Personal Profile, RMI Profile, Game Profile.<br>
+   <br>
+  2.Phân tích profiles MIDP<br>
+   <br>
+  MDIP hiện tại có 3 version : 1.0, 2.0 và 2.1<br>
+  <br>
+  a. Sơ lược về MIDP:<br>
+   + là Profile được định nghĩa dành riêng cho các thiết bị di động và là thành phần chính trong J2ME.<br>
++ cung cấp các chức năng cơ bản cho hầu hết các dòng thiêt bị di động
+phổ biến nhất như các máy điện thoạI di động và các máy PDA.<br>
+   + được thiết kế cho các máy di động có cấu hình rất thấp.<br>
+   <br>
+   b. Những chức năng MIDP KHÔNG THỂ làm được:<br>
+   + Phép tính dấu phẩy động (floating point):<br>
+  + Bộ nạp class (Class Loader).<br>
++ Hỗ trợ từ khóa finalize() như trong J2SE: Việc “dọn dẹp“ tài nguyên trước khi nó bị xóa được đẩy về phía các lập trình viên.<br>
++ Không hỗ trợ JNI<br>
++ Hỗ trợ hạn chế thao tác bắt lỗi.<br>
++ Phần lớn các thư viện API cho Swing và AWT không thể sử dụng được trong MIDP.<br>
++ Không hỗ trợ các tính năng quản lý file và thư mục. Sun đã cung cấp
+một chức năng khác tương đương gọi là Record Management system (RMS) để
+cung cấp khả năng lưu trữ cho các thiết bị.<br>
+   <br>
+  c. Những chức năng MIDP cung cấp<br>
+  <br>
++ Các lớp và kiểu dữ liệu: Phần lớn các lớp vẫn còn được giữ lại như
+các lớp trong gói java.util như Stack, Vector,Hastable
+,Enumeration.(KHÔNG THỂ dùng Iterator)<br>
++ Hỗ trợ đối tượng Display: Một chương trình MIDP sẽ hỗ trợ duy nhất
+một đối tượng Display là đối tượng quản lý việc hiển thị dữ liệu trên
+màn hình điện thoại.<br>
+   + Hỗ trợ Form và các giao diện người dùng.<br>
+ + Hỗ trợ Timer và Alert<br>
+ + Cung cấp tính năng Record Management System (RMS) cho việc lưu trữ dữ liệu<br>
+   <br>
+  Các chức năng mới của MIDP 2.0 và 2.1:<br>
+   <br>
+  + Nâng cấp các tính năng bảo mật :<br>
+      - hỗ trợ giao thức HTTPS.<br>
+    - Kiểm soát việc kết nốI giữa máy di động và server<br>
+      - Thêm các API hỗ trợ Multimedia. <br>
++ Mở rộng các tính năng của Form. Nhiều cải tiến đã được đưa vào API
+javax.microedition.lcdui trong MIDP 2.0, nhưng các thay đổi lớn nhất
+(ngoài API cho game) là trong Form và Item. <br>
++ Hỗ trợ các lập trình viên Game bằng Game API: Với MIDP 1.0 thì các
+lập trình viên phải tự mình viết code để quản lý các hành động của nhân
+vật cũng như quản lý đồ họa. Việc này sẽ làm tăng kích thước file của
+sản phẩm cũng như việc xuất hiện các đoạn mã bị lỗi. Được hưởng lợi
+nhất từ Game API trong MIDP 2.0 không chỉ là các lập trình viên Game mà
+còn là các lập trình viên cần sử dụng các tính năng đồ họa cao cấp.<br>
+Ý tưởng cơ bản của Game API là việc giả định rằng một màn hình game là
+tập hợp các layer (lớp). Ví dụ như: trong một game đua xe thì màn hình
+nền là một layer, con đường là một layer và chiếc xe được xem như đang
+nằm trên layer khác.<br>
+Với Game API nhà phát triển còn được cung cấp các tính năng như quản lý các thao tác bàn phím.<br>
+  <br>
++ Hỗ trợ kiểu ảnh RGB: có thể biểu diễn hình ảnh dưới dạng các mảng số
+nguyên, cho phép MIDlet thao tác với dữ liệu hình ảnh một cách trực
+tiếp.<br>
+   <br>
+  <br>
+  <br>
+  <br>
+  3.Các công cụ và tài nguyên cần thiết để phát triển ứng dụng J2ME<br>
+   <br>
+   + cài JDK bản mới nhất (down tại http://java.sun.com (http://java.sun.com/))<br>
+   + cài JRE bản mới nhất<br>
+   + cài bản J2ME Wireless Toolkit ( down tại http://java.sun.com/products/j2mewtoolkit/) : dành cho phát triển ứng dụng MIDP<br>
+   + cài bản J2ME CDC Toolkit (down tại http://java.sun.com (http://java.sun.com/))<br>
+   <br>
+  Về phần IDE để phát triển ứng dụng thì hiện tại có rất nhiều IDE như Jbuilder,Jcreator,NetBeans….<br>
+   <br>
+  Ở đây đề nghị sử dụng NetBeans với các lý do sau<br>
+   + được Sun hỗ trợ (Sun phát triển đặc tả java)<br>
+   + có nhiều công cụ hỗ trợ<br>
+   + IDE hỗ trợ design giao diện và code trực quan, mạnh, dễ sử dụng<br>
+   + IDE hỗ trợ cả việc phát triển ứng dụng dựa trên ngôn ngữ C/C++<br>
+   <br>
+  Các Tools sau được cung cấp miễn phí :<br>
+   + NetBeans IDE (http://www.netbeans.info/downloads/index.php)<br>
+   + NetBeans Mobility CLDC (http://www.netbeans.org/products/mobility/)<br>
+   + NetBeans Mobility CDC (http://www.netbeans.org/products/mobility/<br>
+   + NetBeans Profiles (http://www.netbeans.org/products/profiler/)<br>
+   + NetBeans Visual Web Pack (http://www.netbeans.org/products/visualweb/)<br>
+  + NetBeans C/C++ Development Pack (http://www.netbeans.org/products/cplusplus/)<br>
+   <br>
+  4.Source code mẫu : chương trình gửi tin nhắn SMS đơn giản<br>
+   <br>
+   + được phát triển trên IDE Netbeans :  MIDP 2.0 ,CLDC 1.0 , Screen Size 170x220<br>
+   + cho phép gửi tin đến một số điện thoại do người dùng nhập vào<br>
++ khi gửi tin, do bản chất của Java , nên người dùng sẽ được hỏi cho
+phép hoặc không cho phép ứng dụng gửi tin nhắn. Để giải quyết vấn đề
+này , chương trình cần phải được Sign bởi một tổ chức nào đó,và cần
+import Certificate vào điện thoại. Quy trình chứng thực này phức tạp
+nên sẽ thảo luận ở một chủ đề khác.<br>
+   <br>
+  Hướng phát triển mở rộng:<br>
+   <br>
+   + thêm một số chức năng <br>
+   + gửi đến một tổng đài,mã hóa thông tin truyền đi àcần ứng dụng đầu cuối để giải mã thông tin<br>
+   + các ý tưởng khác</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">truongson1810</div><div class="date">18-02-2008, 01:27 PM</div></div><div class="posttext">:awkward: làm mất tiêu file word, nên pà kon đọc đỡ file PDF nhé :026:</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">vtsinh</div><div class="date">08-07-2008, 12:38 PM</div></div><div class="posttext">:awkward: làm mất tiêu file word, nên pà kon đọc đỡ file PDF nhé :026:<br>
+Chào bạn!<br>
+Mình mới tìm hiểu về j2me. Bài tập phải làm là viết chương trình gửi
+tin nhắn như bạn đã làm. Nhưng mình chưa biết bắt đầu từ đâu, viết code
+ntn, làm giao diên ra sao.<br>
+Bạn giúp mình với nhé.</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">phamthienbao</div><div class="date">08-07-2008, 01:13 PM</div></div><div class="posttext">Chào bạn!<br>
+Mình mới tìm hiểu về j2me. Bài tập phải làm là viết chương trình gửi
+tin nhắn như bạn đã làm. Nhưng mình chưa biết bắt đầu từ đâu, viết code
+ntn, làm giao diên ra sao.<br>
+Bạn giúp mình với nhé.<br>
+<br>
+Hi bạn,<br>
+<br>
+Để làm 1 bài tập J2ME cũng rất đơn giản, giống như là bạn viết 1 chương
+trình Java bình thường trên Netbeans, bạn chỉ cần sử dụng SDK dành cho
+việc phát triển ứng dụng trên Mobile của Netbeans thôi và bạn có thể
+tải file tài liệu mà truongson đã up, sau đó làm theo hướng dẫn là đc.<br>
+<br>
+Hoặc bạn có thể tham khảo bài viết này để viết thử 1 chương trình J2ME căn bản : http://forum.mait.vn/showthread.php?t=2928<br>
+<br>
+Thân,</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">vtsinh</div><div class="date">09-07-2008, 09:58 AM</div></div><div class="posttext">Hi bạn,<br>
+ <br>
+Để làm 1 bài tập J2ME cũng rất đơn giản, giống như là bạn viết 1 chương
+trình Java bình thường trên Netbeans, bạn chỉ cần sử dụng SDK dành cho
+việc phát triển ứng dụng trên Mobile của Netbeans thôi và bạn có thể
+tải file tài liệu mà truongson đã up, sau đó làm theo hướng dẫn là đc.<br>
+ <br>
+Hoặc bạn có thể tham khảo bài viết này để viết thử 1 chương trình J2ME căn bản : http://forum.mait.vn/showthread.php?t=2928<br>
+ <br>
+Thân,<br>
+Cám ơn bạn đã trả lời!<br>
+Vấn đề của mình bây giờ là phải viết chương trình gửi tin nhắn từ PC
+lên mobile và mình không biết cách thức để viết bởi vì liên quan đến cả
+viễn thông. Chẳng hạn mình muốn chương trình gửi tin lên máy Nokia 6300
+thì phải làm thế nào. Mình search thì có thấy 1 cách là: down toolkit
+nokia sms, nối mày vào pc, rồi dùng hàm api để lập trình gửi/nhận tin.<br>
+Mình biết cách viết chương trình j2me rồi vì cũng học sơ qua java. Mình
+chỉ không biết cách viết chương trình như mình nói ở trên, ko biết dùng
+giao thức gì, kết nối ntn.<br>
+Hơi lộn xộn một chút!:khonghieu: mong bạn giúp đỡ.</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">truongson1810</div><div class="date">09-07-2008, 10:27 AM</div></div><div class="posttext">Cám ơn bạn đã trả lời!<br>
+Vấn đề của mình bây giờ là phải viết chương trình gửi tin nhắn từ PC
+lên mobile và mình không biết cách thức để viết bởi vì liên quan đến cả
+viễn thông.<br>
+<br>
+Vấn đề của bạn : cần gửi tin nhắn từ PC đến MOBILE :surrenders:.<br>
+Để làm được cái này bạn cần giải quyết được yêu cầu sau : làm cho tin nhắn phát ra từ PC đến một số điện thoại nào đó :ok:.<br>
+Tiếp, PC bản thân nó không thể tự gửi tin nhắn được :khonghieu:, nên
+bạn phải sử dụng 1 công cụ khác có thể gửi tin nhắn mà PC có thể giao
+tiếp được, để PC gửi yêu cầu đến nó, nó gửi tin nhắn đi :ok:.<br>
+Tóm lại : Để gửi tin nhắn từ PC bạn phải có 1 thiết bị trung gian gắn vào PC, nhận lệnh từ PC để gửi tin đi . <br>
+<br>
+Chi tiết :<br> + Bạn phải tìm được thiết bị cho phép gắn vào PC
+và có thể dùng API đi kèm THAO TÁC ĐƯỢC với thiết bị này -&gt; Ví dụ :
+1 cái điện thoại Nokia :ok: (đời mới chút nha), bạn gắn vào máy thông
+qua DKU5 hoặc cổng COM,hoặc USB, bộ SDK bạn down từ Nokia về, miễn sao
+bạn sử dụng được bộ SDK này để viết chương trình giao tiếp được với cái
+điện thoại mà bạn gắn vào PC đó.<br>
++ Bạn viết chương trình yêu cầu cái điện thoại gửi tin nhắn đến 1 số
+nào đó,khi cắm điện thoại vào PC, chương trình này gửi yêu cầu đến máy
+điện thoại (thông qua giao tiếp như đã nói ở trên), máy điện thoại nhận
+yêu cầu và gửi tin đi :cuoingontay:, lưu ý là máy điện thoại của bạn
+bình thường phải GỬI TIN ĐƯỢC nha ( không bị khóa, sim còn
+$....:cuoiruoi:).<br>
+<br>
+Ngoài ra người ta còn sử dụng SMS gateway...Bạn có thể tham khảo thêm
+nhé ( ví dụ tại sao trang web mobifone.com.vn nó cho phép bạn gửi tin
+nhắn đi được :cuoingontay:, login vào , gõ số đt nhận, gõ nội dung
+,send :ok:).<br>
+<br>
+Hỏi anh google thêm nhé :Happy:</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">vtsinh</div><div class="date">09-07-2008, 12:12 PM</div></div><div class="posttext">Bạn
+vẫn online đấy chứ. Bạn nói đúng phần mình đang thắc mắc rồi. Giả sử
+mình có điện thoại kết nối máy tính qua cổng usb rồi. Hiện tại mình
+dùng NetBean 6.0. Làm thế nào để tích hợp SDK vào và SDK nào thì phù
+hợp với điện thoại.:coy:<br>
+Về phần chương trình thì phải viết như thế nào. Mình tạo ra một textbox
+để nhập tin nhắn, 2 command là exit và send, xong event nhấn 2 command
+kia thì như thế nào. Mình viết thế này có được không<br>
+if (c==cmExit)<br>
+        {<br>
+        destroyApp(false);<br>
+        notifyDestroyed();<br>
+        }<br>
+        else if (c==cmSend)<br>
+        {<br>
+        MessageConnection conn = null; <br>
+        String url = "sms://+84987141599:50000"; <br>
+        try { <br>
+        conn = (MessageConnection) Connector.open( url ); <br>
+        sendText(conn,tbMsg.getString(),url);<br>
+        } <br>
+        catch( Exception e ){ <br>
+        } <br>
+        finally { <br>
+        if( conn != null ){ <br>
+        try { conn.close(); } catch( Exception e ){} <br>
+        } <br>
+        }<br>
+        }<br>
+    }<br>
+    public void sendText( MessageConnection conn, String text , String url) <br>
+throws IOException, InterruptedIOException { <br>
+TextMessage tmsg = null;<br>
+        tmsg = (TextMessage)conn.newMessage( MessageConnection.TEXT_MESSAGE); <br>
+        tmsg.setAddress(url);<br>
+tmsg.setPayloadText( text ); <br>
+sendText(conn, text, url);</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">leantan</div><div class="date">09-07-2008, 02:38 PM</div></div><div class="posttext">Chính
+xác là chúng ta cần có 1 thiết bị gọi là SMS Gateway để gửi tin nhắn
+SMS từ PC đến điện thoại di động, dĩ nhiên là cũng cần có phần mềm để
+giao tiếp với thiết bị này. Một địa chỉ đáng quan tâm về đề tài
+này: http://www.developershome.com/sms/howToSendSMSFromPC.asp<br>
+<br>
+Bạn cũng có thể tham khảo thông tin về sản phẩm tại đây: http://www.ozekisms.com/product-manual/index.php?ow_page_number=148</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">vtsinh</div><div class="date">09-07-2008, 07:29 PM</div></div><div class="posttext">Chính
+xác là chúng ta cần có 1 thiết bị gọi là SMS Gateway để gửi tin nhắn
+SMS từ PC đến điện thoại di động, dĩ nhiên là cũng cần có phần mềm để
+giao tiếp với thiết bị này. Một địa chỉ đáng quan tâm về đề tài
+này: http://www.developershome.com/sms/howToSendSMSFromPC.asp<br>
+ <br>
+Bạn cũng có thể tham khảo thông tin về sản phẩm tại đây: http://www.ozekisms.com/product-manual/index.php?ow_page_number=148<br>
+Về SMS Gateway mình cũng đã đọc qua rồi. Nhưng mình chỉ muốn thử làm
+đơn giản như cách của truongson là nối qua điện thoại sử dụng sdk. Mình
+tìm trên nokia.com thấy có nhiều sdk như s40,s60. Mình down s40 sdk 3th
+Edition ve và cài thì nó đòi mấy thứ như jre 5, nmit 4.1 rồi cà jvm
+nữa. Mình down đủ về cài rồi. Cài ra rồi chạy cài emulator rồi. Tích
+hợp cả cái sdk vào netbean rồi. Bây giờ làm sao nữa hả bạn? Viết chương
+trình giao tiếp như thế nào để gửi được tin nhắn.<br>
+Rất mong sự giúp đỡ của bạn. Thanks a lot!</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">leantan</div><div class="date">09-07-2008, 09:41 PM</div></div><div class="posttext">Tại
+địa chỉ này (http://www.developershome.com/sms/) đã có khá đầy
+đủ thông tin về lập trình giao tiếp SMS cho điện thoại di động
+rồi, bạn chịu khó đọc và tìm hiểu nhé.</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">vtsinh</div><div class="date">10-07-2008, 05:08 PM</div></div><div class="posttext">Tại
+địa chỉ này (http://www.developershome.com/sms/) đã có khá đầy
+đủ thông tin về lập trình giao tiếp SMS cho điện thoại di động
+rồi, bạn chịu khó đọc và tìm hiểu nhé.<br>
+Cám ơn bạn đã trả lời. <br>
+Bạn ơi mình đã đọc tài liệu đấy rồi. Bây giờ muốn gửi tin nhắn mình tạo
+MessageConnection mscon = "sms://sdt:cổng"-&gt; mở kết nối -&gt; tạo
+TextMessage ... -&gt; mscon.send(tbmsg); Những cái này viết trong sự
+kiện nhấn nút Send. <br>
+Như thế này có được không.</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">vtsinh</div><div class="date">11-07-2008, 05:08 PM</div></div><div class="posttext">Cám ơn bạn đã trả lời. <br>
+Bạn ơi mình đã đọc tài liệu đấy rồi. Bây giờ muốn gửi tin nhắn mình tạo
+MessageConnection mscon = "sms://sdt:cổng"-&gt; mở kết nối -&gt; tạo
+TextMessage ... -&gt; mscon.send(tbmsg); Những cái này viết trong sự
+kiện nhấn nút Send. <br>
+Như thế này có được không.<br>
+ <br>
+Mình thử cài trên máy và gửi được tin rồi. Vui quá :ok: đây là thử
+nghiệm đầu tiên mà. Nhưng đây mới chỉ là đọc xong vọc luôn thôi chứ
+chửa hiểu sâu. Có gì còn làm phiền các bạn nữa nhá. Cảm ơn rất nhiều!</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">hunter1986</div><div class="date">25-07-2008, 05:36 PM</div></div><div class="posttext">em
+là mem mới của java mobile, nhờ 1 số link của các bác làm em cảm thấy
+rạo rực và mở mang nhiều.. với việc giao tiếp giữa mobile và pc, thì em
+còn 1 giải pháp khác, đó là sử dụng công nghệ p2p với frame work là
+jxme (phát triển từ jxta cho pc). Hiện tại việc gửi tin nhắn di động
+qua di động thì em làm rồi, nhưng từ pc ra di động thì do em đang bận
+quá nên cũng chưa viết thử (chắc cũng nhanh thôi nhưng ngại).. (tất
+nhiên nếu pc dùng simulator thì vẫn gửi tin nhắn được cho di động đều
+:021: )<br>
+ <br>
+quên nói, để chát giữa pc và máy di động yêu cầu, cả pc và di động đều
+kết nối internet. còn java thì chỉ cần máy đt sơ đẳng cỡ mid 1.0 là vẫn
+hoạt động. Hiện này em đang tìm hiểu về kỹ thuật mới của j2me như SVG
+để làm bản đò số. nếu các bác quan tâm thì có thể vào blog của em cho y
+kiến và giúp đỡ với ạ.<br>
+http://blog.360.yahoo.com/blog-LnbzMYglcqE8.X9rtDLY9.T3k48-?cq=1</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">nhanth87</div><div class="date">25-07-2008, 06:23 PM</div></div><div class="posttext">Bạn nào thử viết chương trình Boom trên DTDD đi :D :D</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">htm.IBM</div><div class="date">30-09-2008, 05:14 PM</div></div><div class="posttext">Bài viết về J2ME của bạn hay lắm, hy vong se co nhieu bai hay nua</div></div><hr>
+
+
+<div id="copyright">vBulletin® v3.7.3, Copyright ©2000-2009, Jelsoft Enterprises Ltd.</div>
+</div>
+</body></html>

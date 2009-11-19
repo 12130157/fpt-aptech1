@@ -1,0 +1,2400 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <title>JavaVietnam.org - Xem luồng - Nên viết ung dung trên MIDP1.0 hay 2.0???</title>
+<script type="text/javascript" src="viewthread_thread,14111_files/domLib.js"></script>
+<script type="text/javascript" src="viewthread_thread,14111_files/domMenu.js"></script>
+<script type="text/javascript" src="viewthread_thread,14111_files/prettify.js"></script>
+<script language="JavaScript1.2" src="viewthread_thread,14111_files/vietuni.js" type="text/javascript"></script>
+<script type="text/javascript" src="viewthread_thread,14111_files/searchhi.js" language="JavaScript"></script>
+
+
+<meta name="copyright" content="This software is copyrighted by MyVietnam.net and released under the terms of the GNU General Public License GPL license. All rights reserved.">
+<meta name="Keywords" content="mvnForum, vietnam, jsp, servlet, java, j2se, j2ee, database">
+<meta name="Description" content="Organization and forum for Java/J2SE/J2EE programmer in Vietnam">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link href="viewthread_thread,14111_files/logo.gif" rel="SHORTCUT ICON">
+
+<meta http-equiv="Expires" content="-1">
+
+<link href="viewthread_thread,14111_files/style.css" rel="stylesheet" type="text/css">
+<link href="viewthread_thread,14111_files/menu.css" rel="stylesheet" type="text/css">
+<link href="viewthread_thread,14111_files/prettify.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+//<![CDATA[
+function SubmitForm() {
+  if (ValidateForm()) {
+    
+    document.mvnform.submitbutton.disabled=true;
+    document.mvnform.previewbutton.disabled=true;
+    
+    document.mvnform.submit();
+  }
+}
+
+function ValidateForm() {
+  document.mvnform.message.value = document.mvnform.input.value;
+  if (isBlank(document.mvnform.input, "Nội dung")) return false;
+  return true;
+}
+
+function PreviewForm() {
+  if (ValidateForm()) {
+    document.mvnform.preview.value='true';
+    document.mvnform.action=document.getElementById('previewUrl').value;
+    
+    
+    document.mvnform.submitbutton.disabled=true;
+    document.mvnform.previewbutton.disabled=true;
+    
+    document.mvnform.submit();
+  }
+}
+
+function QuickReply(parentId) {
+  var topic = document.getElementById("posttopic_" + parentId).innerHTML;
+  if (document.getElementById("input")) {
+    document.getElementById("input").focus();
+    document.getElementById("quickreplymessage").innerHTML = "Trả lời nhanh cho bài [" + parentId + ", " + topic + "]";
+  }
+  if (topic.indexOf("Re: ") == -1) {
+    topic = "Re: " + topic;
+  }
+  document.mvnform.parent.value=parentId;
+  document.mvnform.PostTopic.value=topic;
+}
+
+
+//handle vote poll form
+function SubmitPollVoteForm() {
+  if (ValidatePollVoteForm()) {
+    
+      document.pollvoteform.pollvotebutton.disabled=true;
+      
+    document.pollvoteform.submit();
+  }
+}
+
+function ValidatePollVoteForm() {
+  document.getElementById("pollvotebutton").disabled = true;
+  var params = "";
+  
+  var inputArray = document.getElementsByTagName("input");
+  
+  if (inputArray != null) {
+    var youhaschecked = false;
+    for (var i = 0; i < inputArray.length; i++) {
+      if ((inputArray[i] != null) && (inputArray[i].getAttribute("name") != null )) {
+        if (inputArray[i].getAttribute("name").indexOf("option_") != -1) {
+          if (inputArray[i].checked) {
+            youhaschecked = true;
+            //inputArray[i].getAttribute("name"): option_{0,1,2,...} 
+            //inputArray[i].getAttribute("value"): ${pollanswerid}
+            //your_opinion_${pollanswerid}
+            
+            pollanswerid = inputArray[i].getAttribute("value");
+            if (document.getElementById("your_opinion_" + pollanswerid) != null) {
+              youropinion = trim(document.getElementById("your_opinion_" + pollanswerid).value);
+              if (youropinion.length == 0) {
+                alert("Bạn phải nhập vào thông tin ý kiến của bạn.");
+                document.getElementById("pollvotebutton").disabled = false;
+                return false;
+              }  
+            }            
+          }
+        }
+      }
+    }
+  }
+  if (youhaschecked == true) {
+    return true;
+  } else {
+    alert("Bạn phải chọn ít nhất một lựa chọn.");
+    document.getElementById("pollvotebutton").disabled = false;
+    return false;
+  }  
+}
+
+function ViewPollResult(viewresulturl) {
+  showDialog(viewresulturl, 450, 170);
+}
+
+function showDialog(url, width, height) {
+  return showWindow(url, false, false, true, false, false, false, true, true, width, height, 0, 0);
+}
+function showWindow(url, isStatus, isResizeable, isScrollbars, isToolbar, isLocation, isFullscreen, isTitlebar, isCentered, width, height, top, left) {
+  if (isCentered) {
+    top = (screen.height - height) / 2;
+    left = (screen.width - width) / 2;
+  }
+
+  open(url, 'Result', 'status=' + (isStatus ? 'yes' : 'no') + ','
+  + 'resizable=' + (isResizeable ? 'yes' : 'no') + ','
+  + 'scrollbars=' + (isScrollbars ? 'yes' : 'no') + ','
+  + 'toolbar=' + (isToolbar ? 'yes' : 'no') + ','
+  + 'location=' + (isLocation ? 'yes' : 'no') + ','
+  + 'fullscreen=' + (isFullscreen ? 'yes' : 'no') + ','
+  + 'titlebar=' + (isTitlebar ? 'yes' : 'no') + ','
+  + 'height=' + height + ',' + 'width=' + width + ','
+  + 'top=' + top + ',' + 'left=' + left);
+}
+
+  
+
+function handleUnload() {
+  if (document.mvnform) {
+    if (document.mvnform.submitbutton) {
+      document.mvnform.submitbutton.disabled=false;
+    }
+    if (document.mvnform.previewbutton) {
+      document.mvnform.previewbutton.disabled=false;
+    }
+  }    
+
+  if (document.pollvoteform && document.pollvoteform.pollvotebutton) {
+    document.pollvoteform.pollvotebutton.disabled=false;
+  }    
+  
+}
+//]]>
+</script>
+</head><body onload="prettyPrint()" onunload="handleUnload()">
+
+
+<script type="text/javascript" language="JavaScript" src="viewthread_thread,14111_files/myvietnam.js"></script>
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function isBlank(field, strBodyHeader) {
+    strTrimmed = trim(field.value);
+    if (strTrimmed.length > 0) return false;
+    alert("\"" + strBodyHeader + "\" là một giá trị bắt buộc.");
+    field.focus();
+    return true;
+}
+function isEmail(field, strBodyHeader) {
+    emailStr = field.value;
+    if (emailStr.length == 0) return true;
+    if (!complexEmailCheck(emailStr)) {
+        alert(strBodyHeader + " là một địa chỉ email không hợp lệ.");
+        field.focus();
+        return false;
+    }
+    return true;
+}
+function isUnsignedInteger(obj, message) {
+    if (isBlank(obj, message)) {
+      return false;
+    }
+    var  val = obj.value;
+    for (var i=0;i<val.length;i++) {
+        if (!isDigit(val.charAt(i))) {
+            alert(message + " phải là một con số không dấu.");
+            obj.focus();
+            return false;
+        }
+    }
+    obj.value = parseInt(val,10);
+    return true;
+}
+function checkGoodName(str, desc) {
+    s = trim(str);
+    len = s.length; 
+    for (i = 0; i < len; i++) {
+        b = s.charCodeAt(i);
+        if ((b >= toInt('a')) && (b <= toInt('z'))) { // not a cast, it's a function.
+            // low chars
+        } else if ((b >= toInt('A')) && (b <= toInt('Z'))) {
+            // up chars
+        } else if ((b >= toInt('0')) && (b <= toInt('9'))) {
+            // numbers 
+        } else if (( (b==toInt('_')) || (b==toInt('.')) || (b==toInt('@')) ) && (i != 0)) {
+            // very litte special chars
+        } else {
+            alert(desc + " \"" + s +  "\" " + "không phải là một tên hợp lệ. Ký tự không hợp lệ là \"" + s.charAt(i) + "\""); 
+            return false;
+            // not good name error
+        }
+    }
+    return true;
+}
+
+function toInt(c) {
+  return c.charCodeAt(0);
+}
+//]]>
+</script>
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+function SubmitFormSearch() {
+  if (ValidateFormSearch()) {
+    // uncomment when we find a way to enable the button
+    //document.submitformsearch.submitbutton.disabled = true;
+    document.submitformsearch.submit();
+  }
+}
+
+function ValidateFormSearch() {
+  if (isBlank(document.submitformsearch.key, "Tìm kiếm")) return false;
+  return true;
+}
+//]]>
+</script>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="95%">
+  <tbody><tr>
+    <td height="60">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td rowspan="2">
+            <a href="http://www.javavietnam.org/"><img src="viewthread_thread,14111_files/logo.gif" alt="Trang chủ JavaVietnam.org" title="Trang chủ JavaVietnam.org" border="0" height="50"></a>
+          </td>
+          <td rowspan="2" align="center" valign="top">
+            
+
+
+<br>
+<table class="noborder" align="center" cellpadding="3" cellspacing="0" width="95%">
+   <tbody><tr>
+     <td align="center"><script type="text/javascript" language="JavaScript" src="viewthread_thread,14111_files/getparam.js"></script>
+<script type="text/javascript" language="JavaScript">
+<!--
+document.write("<"+"script language='JavaScript' type='text/javascript' src='http://www.JavaVietnam.org/javavn/delivery/getad?zoneID=67"+mvnadparam+"'><"+"/script>");
+//-->
+</script><script language="JavaScript" type="text/javascript" src="viewthread_thread,14111_files/getad.js"></script><table class="noborder" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="370" height="55"><a href="http://www.javavietnam.org/javavn/delivery/clickad?bannerID=28&amp;zoneID=67&amp;screen=1024x768" target="_blank"><img src="viewthread_thread,14111_files/Java_Recruitment_banner_VN.gif" alt="" border="0" width="370" height="55"></a></td></tr></tbody></table>
+</td>
+   </tr>
+</tbody></table>
+<br>
+
+
+          </td>
+          <td class="portlet-font" align="right" valign="top" width="100%" height="25" nowrap="nowrap">
+            <span class="welcomeHeader">Xin chào</span>
+            
+                  Khách JavaVietnam
+               
+               
+               &nbsp;|&nbsp;&nbsp;<a class="command" href="http://www.javavietnam.org/javavn/mvnforum/registermember">Đăng ký</a>
+               
+               
+               &nbsp;|&nbsp;&nbsp;<a class="command" href="http://www.javavietnam.org/javavn/mvnforum/login">Đăng nhập</a>
+                 
+                 
+
+
+
+
+
+<script type="text/javascript" language="JavaScript" src="viewthread_thread,14111_files/md5.js"></script>
+
+<script type="text/javascript">
+//<![CDATA[
+function checkEnterLogin(event) {
+  var agt=navigator.userAgent.toLowerCase();
+  
+  // Maybe, Opera make an onClick event when user press enter key 
+  // on the text field of the form
+  if (agt.indexOf('opera') >= 0) return;
+
+  // enter key is pressed
+  if (getKeyCode(event) == 13)
+    SubmitFormLogin();
+}
+
+function SubmitFormLogin() {
+  if (ValidateFormLogin()) {
+    var enableEncrypted = true;
+    if (enableEncrypted) {
+      pw2md5(document.sublogin.MemberMatkhau, document.sublogin.md5pw);
+    }    
+    
+    document.sublogin.submitbutton.disabled=true;
+    
+    return document.sublogin.submit();
+  }
+  return false;
+}
+
+function ValidateFormLogin() {
+  if (isBlank(document.sublogin.MemberName, "Định danh")) return false;
+  if (isBlank(document.sublogin.MemberMatkhau, "Mật khẩu")) return false;
+  //Check Password's length
+  if (document.sublogin.MemberMatkhau.value.length < 3) {
+    alert("Mật khẩu của bạn không được dưới 3 ký tự");
+    document.sublogin.MemberMatkhau.focus();
+    return false;
+  }
+  return true;
+}
+//]]>
+</script>
+
+<table class="noborder">
+  <tbody><tr>
+    
+    <form action="loginprocess" method="post" name="sublogin" onsubmit="return false;"></form>
+    
+      <td>
+        <input name="FromLoginPage" value="true" type="hidden">
+        <input name="md5pw" value="" type="hidden">
+        <input name="url" value="" type="hidden">
+        Định danh
+        <input name="MemberName" value="" size="10" type="text">
+        Mật khẩu
+        <input name="MemberMatkhau" onkeypress="checkEnterLogin(event);" size="10" type="password">
+        <input name="submitbutton" value="Đăng nhập" onclick="javascript:SubmitFormLogin();" class="portlet-form-button" type="button">
+      </td>
+    
+  </tr>
+</tbody></table>
+
+
+                 
+               
+            
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" height="35">
+          
+            <form action="search" id="submitformsearch" name="submitformsearch" method="get">
+            
+            <table class="tborder" style="width: 0%;" align="right" cellpadding="2" cellspacing="0">
+              <tbody><tr class="topmenu">
+                <td align="left" valign="top" nowrap="nowrap">&nbsp;
+                
+                
+                
+                
+                  <a href="http://www.javavietnam.org/javavn/mvnforum/search" class="topmenu"><img src="viewthread_thread,14111_files/search.gif" alt="Tìm kiếm" title="Tìm kiếm" align="bottom" border="0" vspace="0" hspace="0"></a>
+                  <input size="10" name="key" type="text">
+                  <input name="submitbutton" value="Tìm kiếm" onclick="javascript:SubmitFormSearch();" class="portlet-form-button" type="button">&nbsp;
+                </td>
+              </tr>
+            </tbody></table>
+            </form>
+          
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+<table class="tborder" align="center" cellpadding="2" cellspacing="0" width="95%">
+  <tbody><tr class="topmenu">
+    <td nowrap="nowrap">&nbsp;
+      <a href="http://www.javavietnam.org/javavn/mvnforum/index" class="topmenu">Trang chủ</a>
+      
+      &nbsp;|&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/listrecentthreads" class="topmenu">Những luồng mới</a>
+      
+      &nbsp;|&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/listunansweredthreads" class="topmenu">Luồng chưa trả lời</a>
+      
+      
+      
+      &nbsp;|&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/listpolls" class="topmenu">Các bầu chọn</a>
+      
+      
+      &nbsp;|&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/listpublicalbums" class="topmenu">Tập ảnh chung</a>
+      
+      
+      &nbsp;|&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/listonlineusers" class="topmenu">Người dùng trực tuyến</a>
+      
+      
+      &nbsp;|&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/listmembers" class="topmenu">Thành viên</a>
+      
+      
+      &nbsp;|&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/help" class="topmenu">Giúp đỡ</a>
+      
+      
+    </td>
+  </tr>
+</tbody></table>
+
+
+
+
+<br>
+  
+<table class="tborder-no_need" align="center" cellpadding="3" cellspacing="0" width="95%">
+   <tbody><tr class="portlet-section-body">
+   
+     <td align="center"><script type="text/javascript" language="JavaScript" src="viewthread_thread,14111_files/getparam.js"></script>
+<script type="text/javascript" language="JavaScript">
+<!--
+document.write("<"+"script language='JavaScript' type='text/javascript' src='http://www.JavaVietnam.org/javavn/delivery/getad?zoneID=68"+mvnadparam+"'><"+"/script>");
+//-->
+</script><script language="JavaScript" type="text/javascript" src="viewthread_thread,14111_files/getad_002.js"></script><table class="noborder" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="140" height="50"><a href="http://www.javavietnam.org/javavn/delivery/clickad?bannerID=30&amp;zoneID=68&amp;screen=1024x768" target="_blank"><img src="viewthread_thread,14111_files/webtamsu.gif" alt="" border="0" width="140" height="50"></a></td></tr></tbody></table>
+</td>
+   
+     <td align="center"><script type="text/javascript" language="JavaScript" src="viewthread_thread,14111_files/getparam.js"></script>
+<script type="text/javascript" language="JavaScript">
+<!--
+document.write("<"+"script language='JavaScript' type='text/javascript' src='http://www.JavaVietnam.org/javavn/delivery/getad?zoneID=69"+mvnadparam+"'><"+"/script>");
+//-->
+</script><script language="JavaScript" type="text/javascript" src="viewthread_thread,14111_files/getad_003.js"></script><table class="noborder" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="140" height="50"><a href="http://www.javavietnam.org/javavn/delivery/clickad?bannerID=31&amp;zoneID=69&amp;screen=1024x768" target="_blank"><img src="viewthread_thread,14111_files/anhso_24.gif" alt="" border="0" width="140" height="50"></a></td></tr></tbody></table>
+</td>
+   
+   </tr>
+</tbody></table>
+
+
+
+
+
+
+
+
+
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="95%">
+  <tbody><tr>
+    <td>
+      
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td>
+            <br>
+            
+
+
+
+
+
+
+
+
+
+<link type="text/css" rel="stylesheet" href="viewthread_thread,14111_files/listview.css">
+<table class="newstbl" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr>
+  
+    <td class="col" valign="top" width="20%">
+      <div class="line"><a href="http://www.javavietnam.org/javavn/cms/vi/mbl2007/index.html" class="newstitle">Mobile Labs 2008</a>
+        <a href="#">
+          <img src="viewthread_thread,14111_files/arrow_right.gif" alt="" border="0" width="4" height="7">
+        </a>
+      </div>
+      <ul class="news">
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/mbl2007/15_sp_lot_vao_chung_khao.html" class="itemlink">Mobile Labs 2007: 15 sản phẩm lọt vào...</a>
+        </li>
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/mbl2007/Cac_buoc_phat_trien_cho_mot_games_hoan_chinh.html" class="itemlink">Các bước phát triển cho một games hoàn...</a>
+        </li>
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/mbl2007/Cac_cong_cu_va_huong_dan.html" class="itemlink">Các công cụ và hướng dẫn...</a>
+        </li>
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/mbl2007/Lap_trinh_cho_thiet_bi_di_dong.html" class="itemlink">Lập trình cho thiết bị di động...</a>
+        </li>
+      
+      </ul>
+    </td>
+    
+  
+    <td class="col" valign="top" width="20%">
+      <div class="line"><a href="http://www.javavietnam.org/javavn/cms/vi/news/index.html" class="newstitle">Tin Tức</a>
+        <a href="#">
+          <img src="viewthread_thread,14111_files/arrow_right.gif" alt="" border="0" width="4" height="7">
+        </a>
+      </div>
+      <ul class="news">
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/news/vi_pham_ban_quyen_phan_mem.html" class="itemlink">Vi phạm bản quyền phần mềm có thể bị xử...</a>
+        </li>
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/news/Google_va_Microsoft.html" class="itemlink">Google suy nghĩ về động thái mới của...</a>
+        </li>
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/news/website_no_1.html" class="itemlink">Google đoạt ngôi website No 1 tại Mỹ...</a>
+        </li>
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/news/quang_cao_tuong_tac_la_mo_vang_cho_mang_xa_hoi_vn.html" class="itemlink">Quảng cáo tương tác là ‘mỏ vàng’ cho...</a>
+        </li>
+      
+      </ul>
+    </td>
+    
+  
+    <td class="col" valign="top" width="20%">
+      <div class="line"><a href="http://www.javavietnam.org/javavn/cms/vi/developer_of_the_year/index.html" class="newstitle">Developer of the Year</a>
+        <a href="#">
+          <img src="viewthread_thread,14111_files/arrow_right.gif" alt="" border="0" width="4" height="7">
+        </a>
+      </div>
+      <ul class="news">
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/developer_of_the_year/SWT.html" class="itemlink">SWT – Một hướng tiếp cận trong Lập...</a>
+        </li>
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/developer_of_the_year/Xu_ly_tai_lieu_XML_voi_XStream.html" class="itemlink">Xử lý tài liệu XML với XStream...</a>
+        </li>
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/developer_of_the_year/SWT_Layout.html" class="itemlink">SWT – Layout...</a>
+        </li>
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/developer_of_the_year/JAVA_DESKTOP2.html" class="itemlink">JAVA DESKTOP TỪ A ------...------&gt; Z -...</a>
+        </li>
+      
+      </ul>
+    </td>
+    
+  
+    <td class="col" valign="top" width="20%">
+      <div class="line"><a href="http://www.javavietnam.org/javavn/cms/vi/javavietnam_training_activities/index.html" class="newstitle">JavaVietnam Training</a>
+        <a href="#">
+          <img src="viewthread_thread,14111_files/arrow_right.gif" alt="" border="0" width="4" height="7">
+        </a>
+      </div>
+      <ul class="news">
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/javavietnam_training_activities/javavietnam_training_hue_24_9_2005.html" class="itemlink">Java training tại Huế 24/9/2005...</a>
+        </li>
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/javavietnam_training_activities/Hoi_thao_Portal_Portlet_Cac_buoc_lam_quen_va_kinh_nghiem_chuyen_doi.html" class="itemlink">Hội thảo "Portal/Portlet Development -...</a>
+        </li>
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/javavietnam_training_activities/Hinh_anh_buoi_hoc_J2ME_ha_noi.html" class="itemlink">Hình ảnh về buổi học J2ME đầu tiên tại...</a>
+        </li>
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/javavietnam_training_activities/HaNoi_J2ME.html" class="itemlink">Hình ảnh về buổi học J2ME đầu tiên tại...</a>
+        </li>
+      
+      </ul>
+    </td>
+    
+  
+    <td class="col" valign="top" width="20%">
+      <div class="line"><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/index.html" class="newstitle">Bài học Java</a>
+        <a href="#">
+          <img src="viewthread_thread,14111_files/arrow_right.gif" alt="" border="0" width="4" height="7">
+        </a>
+      </div>
+      <ul class="news">
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/lap_trinh_j2me_co_ban_bai_14.html" class="itemlink">Bài 14: Lập trình giao diện cấp cao với...</a>
+        </li>
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/lap_trinh_j2me_co_ban_bai_13.html" class="itemlink">Bài 13: Lập trình giao diện cấp cao với...</a>
+        </li>
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/lap_trinh_j2me_co_ban_bai_12.html" class="itemlink">Bài 12: Lập trình giao diện cấp cao với...</a>
+        </li>
+      
+        <li>
+          <span>•</span>&nbsp;<a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/lap_trinh_j2me_co_ban_bai_11.html" class="itemlink">Bài 11: Lập trình giao diện cấp cao với...</a>
+        </li>
+      
+      </ul>
+    </td>
+    
+    
+  </tr>
+</tbody></table>
+
+
+          </td>
+        </tr>
+      </tbody></table>
+      
+    </td>
+  </tr>
+</tbody></table>
+
+
+<br>
+
+
+
+
+
+
+
+
+
+
+<table align="center" width="95%">
+  <tbody><tr class="nav">
+    <td width="100%" nowrap="nowrap">
+        <img src="viewthread_thread,14111_files/nav2.gif" alt="" border="0" width="15" height="15">&nbsp;
+  <a href="http://www.javavietnam.org/javavn/mvnforum/index" class="nav1">JavaVietnam.org</a>
+  <br>
+
+
+    <img src="viewthread_thread,14111_files/icon_bar.gif" alt="" border="0" width="15" height="15">
+    <img src="viewthread_thread,14111_files/icon_folder_open.gif" alt="" border="0" width="15" height="15">&nbsp;  
+    <span class="nav1">Nhóm diễn đàn:</span>&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/listforums?category=3&amp;other_category_invisible=true" class="nav1">Java ME</a><br>
+
+
+
+      <img src="viewthread_thread,14111_files/icon_blank.gif" alt="" border="0" width="15" height="15">
+    <img src="viewthread_thread,14111_files/icon_bar.gif" alt="" border="0" width="15" height="15">
+    <img src="viewthread_thread,14111_files/icon_folder_open_topic.gif" alt="" border="0" width="15" height="15">&nbsp;
+    <span class="nav1">Diễn đàn:</span>&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/listthreads?forum=13" class="nav1">Lập trình thiết bị di động với công nghệ Java ME</a>
+    <br>
+
+
+
+        <img src="viewthread_thread,14111_files/icon_blank.gif" alt="" border="0" width="15" height="15">
+        <img src="viewthread_thread,14111_files/icon_blank.gif" alt="" border="0" width="15" height="15">
+    <img src="viewthread_thread,14111_files/icon_bar.gif" alt="" border="0" width="15" height="15">
+    <img src="viewthread_thread,14111_files/icon_thread_topic.gif" alt="" border="0" width="15" height="15">&nbsp;
+    <span class="rowcurrent">Luồng: Nên viết ung dung trên MIDP1.0 hay 2.0???</span>
+
+    </td>
+  </tr>
+</tbody></table>
+<br>
+
+<table align="center" width="95%">
+  <tbody><tr class="portlet-font"><td>
+    <form action="">
+      Chuyển nhanh tới »
+              <select name="FastGoForum" onchange="gotoPage(this.options[this.selectedIndex].value)">
+            <option value="">Chọn diễn đàn</option>
+            <option value=""></option>
+                  <option value="listforums?category=4&amp;other_category_invisible=true">
+      
+        ----&gt;JavaVietnam.org 
+        </option>   
+                <option value="">--------------------------------</option>
+                    <option value="listthreads?forum=1">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thông báo</option>
+                    <option value="listthreads?forum=2">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Góp ý xây dựng diễn đàn</option>
+                    <option value="listthreads?forum=24">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Box dành cho dự án Hỗ trợ Tiếng việt Unicode trong J2SDK</option>
+            <option value=""></option>
+                  <option value="listforums?category=6&amp;other_category_invisible=true">
+      
+        ----&gt;Tutorial - Bài viết hướng dẫn hoàn chỉnh 
+        </option>   
+                <option value="">--------------------------------</option>
+                    <option value="listthreads?forum=28">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Java Tutor</option>
+                    <option value="listthreads?forum=31">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Các vấn đề khác</option>
+                    <option value="listthreads?forum=33">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Box dành cho dự án</option>
+            <option value=""></option>
+                  <option value="listforums?category=8&amp;other_category_invisible=true">
+      
+        ----&gt;Cuộc thi Developer of the Year - 2006 
+        </option>   
+                <option value="">--------------------------------</option>
+                    <option value="listthreads?forum=43">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kỳ 4: Lập trình Java Desktop</option>
+                    <option value="listthreads?forum=40">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kỳ 3: Web Service</option>
+                    <option value="listthreads?forum=39">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kỳ 2: Tiếp cận Portal</option>
+                    <option value="listthreads?forum=38">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kỳ 1: Những Kỹ thuật lập trình trong Mobile Games 2005</option>
+            <option value=""></option>
+                  <option value="listforums?category=1&amp;other_category_invisible=true">
+      
+        ----&gt;Java SE 
+        </option>   
+                <option value="">--------------------------------</option>
+                    <option value="listthreads?forum=17">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Core Java - Java nền tảng</option>
+                    <option value="listthreads?forum=27">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Java Bugs và Java Request to Enhances</option>
+                    <option value="listthreads?forum=20">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Advanced  Java - Java nâng cao</option>
+                    <option value="listthreads?forum=4">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Applets</option>
+                    <option value="listthreads?forum=8">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lập trình cơ sở dữ liệu với JDBC</option>
+                    <option value="listthreads?forum=25">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lập trình tiếng Việt và lập trình đa ngôn ngữ trong Java</option>
+                    <option value="listthreads?forum=3">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Swing / JFC / AWT / SWT</option>
+                    <option value="listthreads?forum=5">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Xuất nhập (I/O) và lập trình mạng</option>
+                    <option value="listthreads?forum=7">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tăng hiệu suất và tốc độ cho các chương trình Java</option>
+                    <option value="listthreads?forum=6">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lập trình đa luồng và đồng bộ hoá trong Java</option>
+                    <option value="listthreads?forum=21">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Java Certificate - Luyện thi chứng chỉ Java</option>
+                    <option value="listthreads?forum=9">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Những vấn đề khác trong J2SE</option>
+            <option value=""></option>
+                  <option value="listforums?category=2&amp;other_category_invisible=true">
+      
+        ----&gt;Java EE 
+        </option>   
+                <option value="">--------------------------------</option>
+                    <option value="listthreads?forum=10">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JSP, Servlet, JavaServer Faces</option>
+                    <option value="listthreads?forum=11">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EJB và các công nghệ khác trong J2EE</option>
+                    <option value="listthreads?forum=12">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Các dịch vụ Web (Web Services) và XML</option>
+                    <option value="listthreads?forum=26">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Portal trong Java</option>
+            <option value=""></option>
+                  <option value="listforums?category=3&amp;other_category_invisible=true">
+      
+        ----&gt;Java ME 
+        </option>   
+                <option value="">--------------------------------</option>
+                    <option value="listthreads?forum=13" selected="selected">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lập trình thiết bị di động với công nghệ Java ME</option>
+                    <option value="listthreads?forum=42">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Các bài hướng dẫn về Java ME</option>
+                    <option value="listthreads?forum=34">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Java Mobile Games 2004</option>
+                    <option value="listthreads?forum=36">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Java Mobile Games 2005</option>
+            <option value=""></option>
+                  <option value="listforums?category=9&amp;other_category_invisible=true">
+      
+        ----&gt;Mobile Labs 2008 
+        </option>   
+                <option value="">--------------------------------</option>
+                    <option value="listthreads?forum=44">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mobile Labs 2008 - JAVA MIDP 2.0</option>
+            <option value=""></option>
+                  <option value="listforums?category=5&amp;other_category_invisible=true">
+      
+        ----&gt;Các thảo luận khác 
+        </option>   
+                <option value="">--------------------------------</option>
+                    <option value="listthreads?forum=16">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tin tức về Java</option>
+                    <option value="listthreads?forum=32">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Các kỹ thuật lập trình, thiết kế phần mềm, phân tích và thiết kế hệ thống</option>
+                    <option value="listthreads?forum=35">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Việc Làm-Tuyển Dụng ngành phần mềm</option>
+                    <option value="listthreads?forum=18">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tài nguyên cho người sử dụng Java</option>
+                    <option value="listthreads?forum=15">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Công cụ và môi trường phát triển Java</option>
+                    <option value="listthreads?forum=23">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mã nguồn mẫu - Dự án lập trình - Ý tưởng thiết kế của bạn</option>
+                    <option value="listthreads?forum=22">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trao đổi - Thảo luận - ChitChat</option>
+            <option value=""></option>
+                  <option value="listforums?category=7&amp;other_category_invisible=true">
+      
+        ----&gt;Garbage Collection 
+        </option>   
+                <option value="">--------------------------------</option>
+                    <option value="listthreads?forum=41">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thùng rác</option>
+       </select>
+        
+    </form>
+  </td></tr>
+</tbody></table>
+<br>
+
+  
+<br>
+
+
+
+<table align="center" width="95%">
+  <tbody><tr>
+    <td class="portlet-font">
+                    
+          Không có thành viên nào đang xem luồng    
+    
+    </td>
+  </tr>
+</tbody></table>
+
+
+<table align="center" width="95%">
+  <tbody><tr>
+    <td valign="bottom">
+      <span class="portlet-font">Trạng thái luồng: <span class="">Bình thường</span></span><br>
+      
+      
+      <span class="highlight">Tổng số bài viết trong luồng này: 32</span>
+      
+
+
+<table cellpadding="0" cellspacing="0">
+  <tbody><tr class="pager">
+    <td align="right" nowrap="nowrap">
+      Số bài viết: 32&nbsp;&nbsp;&nbsp;Số trang: 4&nbsp;&nbsp;&nbsp;[
+      
+      
+        
+          <span class="pagerCurrent">1</span>
+        
+      
+        
+          <a href="http://www.javavietnam.org/javavn/mvnforum/viewthread_thread,14111_offset,10" class="pager">2</a>
+        
+      
+        
+          <a href="http://www.javavietnam.org/javavn/mvnforum/viewthread_thread,14111_offset,20" class="pager">3</a>
+        
+      
+        
+          <a href="http://www.javavietnam.org/javavn/mvnforum/viewthread_thread,14111_offset,30" class="pager">4</a>
+        
+      
+      | <a href="http://www.javavietnam.org/javavn/mvnforum/viewthread_thread,14111_offset,10" class="pager">Trang kế tiếp</a> ]
+    </td>
+  </tr>
+</tbody></table>
+
+
+    </td>
+
+    <td align="right" valign="bottom">
+    
+      
+                
+      
+        
+
+
+
+    
+    <a class="command" href="http://www.javavietnam.org/javavn/mvnforum/addpost?forum=13"><img src="viewthread_thread,14111_files/button_new_thread.gif" alt="Tạo luồng mới" title="Tạo luồng mới" border="0"></a>
+    
+    </td>
+
+  </tr>
+</tbody></table>
+
+<table class="tborder" align="center" cellpadding="5" cellspacing="0" width="95%">
+  <tbody><tr class="portlet-section-header">
+    <td align="center" width="155" nowrap="nowrap">Tác giả</td>
+    <td align="center">
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td nowrap="nowrap">
+            
+            <a href="http://www.javavietnam.org/javavn/mvnforum/viewthread_thread,14110"><img src="viewthread_thread,14111_files/left.gif" alt="Luồng trước đó" title="Luồng trước đó" border="0"></a>
+            
+          </td>
+          <td class="portlet-section-header" align="center" width="100%">
+            Luồng này đã được xem <font color="Aqua">1246</font> lần và có <font color="Yellow">31</font>
+            bài trả lời
+          </td>
+          <td nowrap="nowrap">
+            
+            <a href="http://www.javavietnam.org/javavn/mvnforum/viewthread_thread,14118"><img src="viewthread_thread,14111_files/right.gif" alt="Luồng kế tiếp" title="Luồng kế tiếp" border="0"></a>
+            
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+
+
+
+
+<a name="65797"></a>
+
+<table class="tborder" align="center" cellpadding="5" cellspacing="0" width="95%">
+  <tbody><tr class="trow0">
+    <td rowspan="2" valign="top" width="155">
+      
+          
+          
+          <img src="viewthread_thread,14111_files/male.gif" alt="Nam" title="Nam" border="0">
+          
+        <a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=detieubao" class="memberName">detieubao</a>
+        <br>
+        Thành viên mới
+        <br>
+        
+        <br><br>
+        
+        <br>
+        
+        <br>
+        
+              
+        Tham gia: <b>04-03-2006</b><br>
+        
+             
+        Tổng số bài đã viết: <b>13</b><br>
+        
+
+        
+          Trạng thái:
+          
+              Ngoại tuyến
+          
+        
+      
+    </td>
+    <td valign="top">
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td class="messageTextBold" valign="top" width="100%">
+            
+            
+              
+            
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65797"><img src="viewthread_thread,14111_files/button_reply.gif" alt="Trả lời bài viết" title="Trả lời bài viết" border="0"></a>&nbsp;
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65797&amp;quote=yes"><img src="viewthread_thread,14111_files/button_quote.gif" alt="Trả lời với trích dẫn" title="Trả lời với trích dẫn" border="0"></a>&nbsp;
+            
+              
+          </td>
+          
+        </tr>
+        <tr>
+          <td colspan="2" class="messageTextBold" align="left" valign="top" width="100%">
+            
+                <img src="viewthread_thread,14111_files/confused.gif" alt="confused" title="confused" border="0"> 
+            
+
+            
+            <span id="posttopic_65797">
+              Nên viết ung dung trên MIDP1.0 hay 2.0???
+            </span>
+          </td>
+        </tr>   
+      </tbody></table>
+      <hr size="1" noshade="noshade">
+Tui là người mới làm quen với lập trình J2ME. Định viết 1game nho nhỏ
+để chạy trên điên thoại của mình cũng là để học hỏi thêm.<br>     Cho tui hỏi 1 số vấn đề về MIDP 1.0 hay 2.0:<br>
+1. Mình nên bắt đầu với MIDP 1.0 hay 2.0. Vì theo tui nghĩ: v2.0 thì sẽ
+hỗ trợ cho mình các hàm API phong phú, dễ cho việc lập trình, lại là
+version mới có nhiều điện thoại hỗ trợ. V1.0 mặc dù đã cũ nhưng vẫn còn
+nhiều điện thoại trên thị trường chỉ hộ trợ version này, và sẽ khó khăn
+hơn trong việc lập trình. Nhưng 1.0 cơ bản hơn 2.0 (tui nghĩ cũng giống
+như VC++ với C# không biết có đúng không). Vì vậy, nếu mình bắt đầu với
+v1.0 thì sẽ dễ dàng chuyển game đó qua v2.0. Nhưng điều ngược lại thì
+chắc khó hơn. Không biết tui nghĩ vậy có đúng không nữa.<br>      2. Làm sao để play 1 file midi trên MIDP 1.0<br>      3. Khi mình chuyển 1ứng dụng từ điện thoại hiệu SamSung sang Nokia mình nên quan tâm đến những vấn đề gì<br>
+Thật ra tui cũng đã đọc 1số tài liệu trước khi post bài này, nhưng chỉ
+vì chưa có nhiều kinh nghiệm trong lĩnh vực này, nên thắc mắc hơi bị
+nhiều. Mong các anh chị nào biết chỉ dùm. Cảm ơn nhiều.<br>
+    
+      
+      
+
+      
+      
+        <br>
+        
+      
+      
+      
+    </td>
+  </tr>
+  <tr class="trow0">
+    <td>
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr class="trow0">
+          <td nowrap="nowrap">
+          [10:14:56 10-07-2006]
+          
+            <a href="http://www.javavietnam.org/javavn/mvnforum/printpost_post,65797"><img src="viewthread_thread,14111_files/printer.gif" alt="Xem bản để in của bài viết" title="Xem bản để in của bài viết" border="0"></a>
+          </td>
+          <td width="100%">
+            
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=detieubao"><img src="viewthread_thread,14111_files/button_profile.gif" alt="Xem thông tin cá nhân của thành viên" title="Xem thông tin cá nhân của thành viên" border="0"></a>
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/addmessage?MessageToList=detieubao"><img src="viewthread_thread,14111_files/button_pm.gif" alt="Gửi thông điệp cá nhân" title="Gửi thông điệp cá nhân" border="0"></a>
+              
+                    &nbsp;&nbsp;&nbsp;<img src="viewthread_thread,14111_files/button_email.gif" alt="Không hiển thị cho khách viếng" title="Không hiển thị cho khách viếng" border="0">
+                
+               
+              
+              
+              
+              
+            
+          </td>
+          <td nowrap="nowrap">
+            <a href="#65797">[Liên kết của bài]</a>
+            
+              <img src="viewthread_thread,14111_files/threat.gif" alt="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" title="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" border="0">
+            
+            &nbsp;<a href="#"><img src="viewthread_thread,14111_files/up.gif" alt="Chuyển về đầu trang" title="Chuyển về đầu trang" border="0"></a>&nbsp;
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+
+
+
+<a name="65815"></a>
+
+<table class="tborder" align="center" cellpadding="5" cellspacing="0" width="95%">
+  <tbody><tr class="portlet-section-alternate">
+    <td rowspan="2" valign="top" width="155">
+      
+          
+          
+          <img src="viewthread_thread,14111_files/male.gif" alt="Nam" title="Nam" border="0">
+          
+        <a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=minhxp" class="memberName">minhxp</a>
+        <br>
+        Thành viên nghiện Java và JavaVietnam.org
+        <br>
+        
+        <div align="center"><img src="viewthread_thread,14111_files/getavatar_002.jpeg" alt="Hình đại diện của thành viên" title="Hình đại diện của thành viên" border="0"></div>
+        
+        <br>
+        
+        <br>
+        
+              
+        Tham gia: <b>05-07-2004</b><br>
+        
+             
+        Tổng số bài đã viết: <b>248</b><br>
+        
+
+        
+          Trạng thái:
+          
+              Ngoại tuyến
+          
+        
+      
+    </td>
+    <td valign="top">
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td class="messageTextBold" valign="top" width="100%">
+            
+            
+              
+            
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65815"><img src="viewthread_thread,14111_files/button_reply.gif" alt="Trả lời bài viết" title="Trả lời bài viết" border="0"></a>&nbsp;
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65815&amp;quote=yes"><img src="viewthread_thread,14111_files/button_quote.gif" alt="Trả lời với trích dẫn" title="Trả lời với trích dẫn" border="0"></a>&nbsp;
+            
+              
+          </td>
+          
+        </tr>
+        <tr>
+          <td colspan="2" class="messageTextBold" align="left" valign="top" width="100%">
+            
+
+            
+            <span id="posttopic_65815">
+              Re: Nên viết ung dung trên MIDP1.0 hay 2.0???
+            </span>
+          </td>
+        </tr>   
+      </tbody></table>
+      <hr size="1" noshade="noshade">
+    
+      Xin chào, đây là ý kiến của mình<br>1.
+Mình nên bắt đầu với MIDP 1.0 hay 2.0. Vì theo tui nghĩ: v2.0 thì sẽ hỗ
+trợ cho mình các hàm API phong phú, dễ cho việc lập trình, lại là
+version mới có nhiều điện thoại hỗ trợ. V1.0 mặc dù đã cũ nhưng vẫn còn
+nhiều điện thoại trên thị trường chỉ hộ trợ version này, và sẽ khó khăn
+hơn trong việc lập trình. Nhưng 1.0 cơ bản hơn 2.0 (tui nghĩ cũng giống
+như VC++ với C# không biết có đúng không). Vì vậy, nếu mình bắt đầu với
+v1.0 thì sẽ dễ dàng chuyển game đó qua v2.0. Nhưng điều ngược lại thì
+chắc khó hơn. Không biết tui nghĩ vậy có đúng không nữa.<br><br>Hiện
+nay vẫn còn nhiều điện thoại dùng MIDP 1.0, có nghĩa là ứng dụng MIDP
+2.0 không thể chạy được, thế nhưng MIDP 2.0 vẫn hổ trợ 1.0. Lập trình
+trên đt không như trên máy tính vì sự khác biệt về cấu hình, kích thước
+màn hình, thư viện hổ trợ... nên hầu như các chương trình đt được làm
+thành nhiều bản cho từng loại đt, nhất là game. Nếu bạn muốn viết 1 ứng
+dụng nhỏ, chạy được trên nhiều loại máy thì hãy dùng MIDP 1.0 và làm
+giao diện high level. Nếu bạn muốn lập trình game thì đành phải dung
+MIDP 2.0 và chấp nhận hạn chế không chạy được tên nhiều loại máy. MIDP
+2.0 có API hổ trợ nhiều cho lập trình game như drawRegion(),
+flushgraphics()... dể viết hơn MIDP 1.0 nhiều.<br><br>2. Làm sao để play 1 file midi trên MIDP 1.0<br>Samsung thường hổ trợ file MMF, bạn phải dùng tool chuyển MIDI sang MMF. Bạn hãy vào trang web mobilegames sẽ có đủ tool.<br><br>3. Khi mình chuyển 1ứng dụng từ điện thoại hiệu SamSung sang Nokia mình nên quan tâm đến những vấn đề gì<br>Đến API của Samsung mà Nokia không có, như thư viện AudioClip, Vibration... phải chuyển sang dùng thư viện chuẩn.<br>
+    
+      
+      
+            ----------------------------------------<br>
+            <a href="http://game.fptmobile.com.vn/" target="_blank">http://game.fptmobile.com.vn</a><br>
+        
+
+      
+      
+      
+      
+    </td>
+  </tr>
+  <tr class="portlet-section-alternate">
+    <td>
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr class="portlet-section-alternate">
+          <td nowrap="nowrap">
+          [20:39:46 10-07-2006]
+          
+            <a href="http://www.javavietnam.org/javavn/mvnforum/printpost_post,65815"><img src="viewthread_thread,14111_files/printer.gif" alt="Xem bản để in của bài viết" title="Xem bản để in của bài viết" border="0"></a>
+          </td>
+          <td width="100%">
+            
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=minhxp"><img src="viewthread_thread,14111_files/button_profile.gif" alt="Xem thông tin cá nhân của thành viên" title="Xem thông tin cá nhân của thành viên" border="0"></a>
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/addmessage?MessageToList=minhxp"><img src="viewthread_thread,14111_files/button_pm.gif" alt="Gửi thông điệp cá nhân" title="Gửi thông điệp cá nhân" border="0"></a>
+              
+                    &nbsp;&nbsp;&nbsp;<img src="viewthread_thread,14111_files/button_email.gif" alt="Không hiển thị cho khách viếng" title="Không hiển thị cho khách viếng" border="0">
+                
+               
+              &nbsp;&nbsp;&nbsp;<a href="http://game.fptmobile.com.vn/"><img src="viewthread_thread,14111_files/www.gif" alt="http://game.fptmobile.com.vn" title="http://game.fptmobile.com.vn" border="0"></a>
+              &nbsp;&nbsp;&nbsp;<a href="http://edit.yahoo.com/config/send_webmesg?.target=minhxp2003&amp;.src=pg"><img src="viewthread_thread,14111_files/yim.gif" alt="minhxp2003" title="minhxp2003" border="0"></a>
+              
+              
+            
+          </td>
+          <td nowrap="nowrap">
+            <a href="#65815">[Liên kết của bài]</a>
+            
+              <img src="viewthread_thread,14111_files/threat.gif" alt="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" title="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" border="0">
+            
+            &nbsp;<a href="#"><img src="viewthread_thread,14111_files/up.gif" alt="Chuyển về đầu trang" title="Chuyển về đầu trang" border="0"></a>&nbsp;
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+
+
+
+<a name="65839"></a>
+
+<table class="tborder" align="center" cellpadding="5" cellspacing="0" width="95%">
+  <tbody><tr class="portlet-section-body">
+    <td rowspan="2" valign="top" width="155">
+      
+          
+          
+          <img src="viewthread_thread,14111_files/male.gif" alt="Nam" title="Nam" border="0">
+          
+        <a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=detieubao" class="memberName">detieubao</a>
+        <br>
+        Thành viên mới
+        <br>
+        
+        <br><br>
+        
+        <br>
+        
+        <br>
+        
+              
+        Tham gia: <b>04-03-2006</b><br>
+        
+             
+        Tổng số bài đã viết: <b>13</b><br>
+        
+
+        
+          Trạng thái:
+          
+              Ngoại tuyến
+          
+        
+      
+    </td>
+    <td valign="top">
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td class="messageTextBold" valign="top" width="100%">
+            
+            
+              
+            
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65839"><img src="viewthread_thread,14111_files/button_reply.gif" alt="Trả lời bài viết" title="Trả lời bài viết" border="0"></a>&nbsp;
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65839&amp;quote=yes"><img src="viewthread_thread,14111_files/button_quote.gif" alt="Trả lời với trích dẫn" title="Trả lời với trích dẫn" border="0"></a>&nbsp;
+            
+              
+          </td>
+          
+        </tr>
+        <tr>
+          <td colspan="2" class="messageTextBold" align="left" valign="top" width="100%">
+            
+
+            
+            <span id="posttopic_65839">
+              Re: Nên viết ung dung trên MIDP1.0 hay 2.0???
+            </span>
+          </td>
+        </tr>   
+      </tbody></table>
+      <hr size="1" noshade="noshade">
+Đầu tiên xin cảm ơn anh Minhxp đã trả lời rất nhiệt tình cho câu hỏi
+của tôi. Sau khi đọc bài trả lời của anh tui đã hiễu rõ hơn về game
+mình định viết. Đồng thời, nó cũng đã gợi cho tui nhiều câu hỏi khác,
+mong anh Minhxp tiếp tục giúp đỡ dùm<br><br>  1.  ...MIDP 2.0 có API hổ trợ nhiều cho lập trình game như drawRegion(), flushgraphics()... dể viết hơn MIDP 1.0 nhiều.<br>==&gt; Hix..hix... điện thoại đang xài hiệu <b>Nokia chỉ hỗ trợ MIDP 1.0</b>
+thôi. Như vậy nếu tui muốn viết 1game có các hình là các layer chồng
+lên nhau, và di chuyển liên tục liệu có thực hiện được không. Và nếu
+được xin anh cho chút manh mối để tìm tài liệu về vấn đề này, vì hiện
+nay sao ít tài liệu 1.0 quá, toàn 2.0 không à.<br><br>  2. Samsung thường hổ trợ file MMF, bạn phải dùng tool chuyển MIDI sang MMF. Bạn hãy vào trang web mobilegames sẽ có đủ tool.<br>==&gt;
+Anh có thể cho 1 đoạn code sample nho nhỏ kg? Hoặc tài liêu cũng đc. Vì
+theo sự tìm hiểu nông cạn của tui, trên MIDP 1.0 chỉ có hàm playSound
+trong AlertType của lớp Alert là có thể phát ra âm thanh à <img src="viewthread_thread,14111_files/sad.gif" alt="sad" title="sad" border="0"> <br> <br>
+3. Khi mình viết 1game, mình chỉ cần dùng những hàm API của MIDP 1.0 là
+đủ , chắc chắn nó sẽ chạy được trên điện thoại thật, hay là mình cần
+phải quan tâm đến cả NXS điện thoại (Nokia) để tìm những hàm API tối ưu
+hơn<br>
+    
+      
+      
+
+      
+      
+      
+      
+    </td>
+  </tr>
+  <tr class="portlet-section-body">
+    <td>
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr class="portlet-section-body">
+          <td nowrap="nowrap">
+          [16:21:13 11-07-2006]
+          
+            <a href="http://www.javavietnam.org/javavn/mvnforum/printpost_post,65839"><img src="viewthread_thread,14111_files/printer.gif" alt="Xem bản để in của bài viết" title="Xem bản để in của bài viết" border="0"></a>
+          </td>
+          <td width="100%">
+            
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=detieubao"><img src="viewthread_thread,14111_files/button_profile.gif" alt="Xem thông tin cá nhân của thành viên" title="Xem thông tin cá nhân của thành viên" border="0"></a>
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/addmessage?MessageToList=detieubao"><img src="viewthread_thread,14111_files/button_pm.gif" alt="Gửi thông điệp cá nhân" title="Gửi thông điệp cá nhân" border="0"></a>
+              
+                    &nbsp;&nbsp;&nbsp;<img src="viewthread_thread,14111_files/button_email.gif" alt="Không hiển thị cho khách viếng" title="Không hiển thị cho khách viếng" border="0">
+                
+               
+              
+              
+              
+              
+            
+          </td>
+          <td nowrap="nowrap">
+            <a href="#65839">[Liên kết của bài]</a>
+            
+              <img src="viewthread_thread,14111_files/threat.gif" alt="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" title="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" border="0">
+            
+            &nbsp;<a href="#"><img src="viewthread_thread,14111_files/up.gif" alt="Chuyển về đầu trang" title="Chuyển về đầu trang" border="0"></a>&nbsp;
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+
+
+
+<a name="65844"></a>
+
+<table class="tborder" align="center" cellpadding="5" cellspacing="0" width="95%">
+  <tbody><tr class="portlet-section-alternate">
+    <td rowspan="2" valign="top" width="155">
+      
+          
+          
+          <img src="viewthread_thread,14111_files/male.gif" alt="Nam" title="Nam" border="0">
+          
+        <a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=moonjava" class="memberName">moonjava</a>
+        <br>
+        JavaVietnam SuperMod - Game Developer
+        <br>
+        
+        <div align="center"><img src="viewthread_thread,14111_files/getavatar_003.jpeg" alt="Hình đại diện của thành viên" title="Hình đại diện của thành viên" border="0"></div>
+        
+        <br>
+        
+        <br>
+        
+              
+        Tham gia: <b>14-07-2004</b><br>
+        
+             
+        Tổng số bài đã viết: <b>702</b><br>
+        
+
+        
+          Trạng thái:
+          
+              Ngoại tuyến
+          
+        
+      
+    </td>
+    <td valign="top">
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td class="messageTextBold" valign="top" width="100%">
+            
+            
+              
+            
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65844"><img src="viewthread_thread,14111_files/button_reply.gif" alt="Trả lời bài viết" title="Trả lời bài viết" border="0"></a>&nbsp;
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65844&amp;quote=yes"><img src="viewthread_thread,14111_files/button_quote.gif" alt="Trả lời với trích dẫn" title="Trả lời với trích dẫn" border="0"></a>&nbsp;
+            
+              
+          </td>
+          
+        </tr>
+        <tr>
+          <td colspan="2" class="messageTextBold" align="left" valign="top" width="100%">
+            
+
+            
+            <span id="posttopic_65844">
+              Re: Nên viết ung dung trên MIDP1.0 hay 2.0???
+            </span>
+          </td>
+        </tr>   
+      </tbody></table>
+      <hr size="1" noshade="noshade">
+Cái này tùy mục đích của ứng dụng mà bạn viết ra. Nếu bạn viết Game,
+chắc chắn là MIDP-2.0 sẽ là sự lựa chọn sáng suốt vì Game đòi hỏi nhiều
+Multimedia. Còn nếu bạn viết 1 ứng dụng nhằm phục vụ một số mục đích
+thương mại (ví dụ: đặt vé máy bay,...), bạn nên chọn MIDP-1.0 để hỗ trợ
+nhiều loại điện thoại<br>
+    
+      
+      
+            ----------------------------------------<br>
+            Type small code, making the great dreams<br>
+        
+
+      
+      
+      
+      
+    </td>
+  </tr>
+  <tr class="portlet-section-alternate">
+    <td>
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr class="portlet-section-alternate">
+          <td nowrap="nowrap">
+          [16:48:54 11-07-2006]
+          
+            <a href="http://www.javavietnam.org/javavn/mvnforum/printpost_post,65844"><img src="viewthread_thread,14111_files/printer.gif" alt="Xem bản để in của bài viết" title="Xem bản để in của bài viết" border="0"></a>
+          </td>
+          <td width="100%">
+            
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=moonjava"><img src="viewthread_thread,14111_files/button_profile.gif" alt="Xem thông tin cá nhân của thành viên" title="Xem thông tin cá nhân của thành viên" border="0"></a>
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/addmessage?MessageToList=moonjava"><img src="viewthread_thread,14111_files/button_pm.gif" alt="Gửi thông điệp cá nhân" title="Gửi thông điệp cá nhân" border="0"></a>
+              
+               
+              &nbsp;&nbsp;&nbsp;<a href="http://chat.ola.vn/"><img src="viewthread_thread,14111_files/www.gif" alt="http://chat.ola.vn" title="http://chat.ola.vn" border="0"></a>
+              
+              
+              
+            
+          </td>
+          <td nowrap="nowrap">
+            <a href="#65844">[Liên kết của bài]</a>
+            
+              <img src="viewthread_thread,14111_files/threat.gif" alt="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" title="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" border="0">
+            
+            &nbsp;<a href="#"><img src="viewthread_thread,14111_files/up.gif" alt="Chuyển về đầu trang" title="Chuyển về đầu trang" border="0"></a>&nbsp;
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+
+
+
+<a name="65862"></a>
+
+<table class="tborder" align="center" cellpadding="5" cellspacing="0" width="95%">
+  <tbody><tr class="portlet-section-body">
+    <td rowspan="2" valign="top" width="155">
+      
+          
+          
+          <img src="viewthread_thread,14111_files/male.gif" alt="Nam" title="Nam" border="0">
+          
+        <a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=detieubao" class="memberName">detieubao</a>
+        <br>
+        Thành viên mới
+        <br>
+        
+        <br><br>
+        
+        <br>
+        
+        <br>
+        
+              
+        Tham gia: <b>04-03-2006</b><br>
+        
+             
+        Tổng số bài đã viết: <b>13</b><br>
+        
+
+        
+          Trạng thái:
+          
+              Ngoại tuyến
+          
+        
+      
+    </td>
+    <td valign="top">
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td class="messageTextBold" valign="top" width="100%">
+            
+            
+              
+            
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65862"><img src="viewthread_thread,14111_files/button_reply.gif" alt="Trả lời bài viết" title="Trả lời bài viết" border="0"></a>&nbsp;
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65862&amp;quote=yes"><img src="viewthread_thread,14111_files/button_quote.gif" alt="Trả lời với trích dẫn" title="Trả lời với trích dẫn" border="0"></a>&nbsp;
+            
+              
+          </td>
+          
+        </tr>
+        <tr>
+          <td colspan="2" class="messageTextBold" align="left" valign="top" width="100%">
+            
+
+            
+            <span id="posttopic_65862">
+              Re: Nên viết ung dung trên MIDP1.0 hay 2.0???
+            </span>
+          </td>
+        </tr>   
+      </tbody></table>
+      <hr size="1" noshade="noshade">
+    
+      Nếu tui viết game co' <b>giao dien đồ họa đẹp</b>, có cả <b>file âmthanh midi</b> thì <b>MIDP 1.0</b> có làm đc kg? Hay là chỉ có thể lam dc tren <b>MIDP 2.0</b> thôi<br>
+    
+      
+      
+
+      
+      
+      
+      
+    </td>
+  </tr>
+  <tr class="portlet-section-body">
+    <td>
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr class="portlet-section-body">
+          <td nowrap="nowrap">
+          [09:39:00 12-07-2006]
+          
+            <a href="http://www.javavietnam.org/javavn/mvnforum/printpost_post,65862"><img src="viewthread_thread,14111_files/printer.gif" alt="Xem bản để in của bài viết" title="Xem bản để in của bài viết" border="0"></a>
+          </td>
+          <td width="100%">
+            
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=detieubao"><img src="viewthread_thread,14111_files/button_profile.gif" alt="Xem thông tin cá nhân của thành viên" title="Xem thông tin cá nhân của thành viên" border="0"></a>
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/addmessage?MessageToList=detieubao"><img src="viewthread_thread,14111_files/button_pm.gif" alt="Gửi thông điệp cá nhân" title="Gửi thông điệp cá nhân" border="0"></a>
+              
+                    &nbsp;&nbsp;&nbsp;<img src="viewthread_thread,14111_files/button_email.gif" alt="Không hiển thị cho khách viếng" title="Không hiển thị cho khách viếng" border="0">
+                
+               
+              
+              
+              
+              
+            
+          </td>
+          <td nowrap="nowrap">
+            <a href="#65862">[Liên kết của bài]</a>
+            
+              <img src="viewthread_thread,14111_files/threat.gif" alt="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" title="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" border="0">
+            
+            &nbsp;<a href="#"><img src="viewthread_thread,14111_files/up.gif" alt="Chuyển về đầu trang" title="Chuyển về đầu trang" border="0"></a>&nbsp;
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+
+
+
+<a name="65867"></a>
+
+<table class="tborder" align="center" cellpadding="5" cellspacing="0" width="95%">
+  <tbody><tr class="portlet-section-alternate">
+    <td rowspan="2" valign="top" width="155">
+      
+          
+          
+          <img src="viewthread_thread,14111_files/male.gif" alt="Nam" title="Nam" border="0">
+          
+        <a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=moonjava" class="memberName">moonjava</a>
+        <br>
+        JavaVietnam SuperMod - Game Developer
+        <br>
+        
+        <div align="center"><img src="viewthread_thread,14111_files/getavatar_003.jpeg" alt="Hình đại diện của thành viên" title="Hình đại diện của thành viên" border="0"></div>
+        
+        <br>
+        
+        <br>
+        
+              
+        Tham gia: <b>14-07-2004</b><br>
+        
+             
+        Tổng số bài đã viết: <b>702</b><br>
+        
+
+        
+          Trạng thái:
+          
+              Ngoại tuyến
+          
+        
+      
+    </td>
+    <td valign="top">
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td class="messageTextBold" valign="top" width="100%">
+            
+            
+              
+            
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65867"><img src="viewthread_thread,14111_files/button_reply.gif" alt="Trả lời bài viết" title="Trả lời bài viết" border="0"></a>&nbsp;
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65867&amp;quote=yes"><img src="viewthread_thread,14111_files/button_quote.gif" alt="Trả lời với trích dẫn" title="Trả lời với trích dẫn" border="0"></a>&nbsp;
+            
+              
+          </td>
+          
+        </tr>
+        <tr>
+          <td colspan="2" class="messageTextBold" align="left" valign="top" width="100%">
+            
+
+            
+            <span id="posttopic_65867">
+              Re: Nên viết ung dung trên MIDP1.0 hay 2.0???
+            </span>
+          </td>
+        </tr>   
+      </tbody></table>
+      <hr size="1" noshade="noshade">
+    
+      Nếu bạn viết game và chú trọng nhiều đến Multimedia thì dùng MIDP-2.0 là tốt nhất vì nó hỗ trợ khá mạnh vụ này<br>
+    
+      
+      
+            ----------------------------------------<br>
+            Type small code, making the great dreams<br>
+        
+
+      
+      
+      
+      
+    </td>
+  </tr>
+  <tr class="portlet-section-alternate">
+    <td>
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr class="portlet-section-alternate">
+          <td nowrap="nowrap">
+          [11:04:52 12-07-2006]
+          
+            <a href="http://www.javavietnam.org/javavn/mvnforum/printpost_post,65867"><img src="viewthread_thread,14111_files/printer.gif" alt="Xem bản để in của bài viết" title="Xem bản để in của bài viết" border="0"></a>
+          </td>
+          <td width="100%">
+            
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=moonjava"><img src="viewthread_thread,14111_files/button_profile.gif" alt="Xem thông tin cá nhân của thành viên" title="Xem thông tin cá nhân của thành viên" border="0"></a>
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/addmessage?MessageToList=moonjava"><img src="viewthread_thread,14111_files/button_pm.gif" alt="Gửi thông điệp cá nhân" title="Gửi thông điệp cá nhân" border="0"></a>
+              
+               
+              &nbsp;&nbsp;&nbsp;<a href="http://chat.ola.vn/"><img src="viewthread_thread,14111_files/www.gif" alt="http://chat.ola.vn" title="http://chat.ola.vn" border="0"></a>
+              
+              
+              
+            
+          </td>
+          <td nowrap="nowrap">
+            <a href="#65867">[Liên kết của bài]</a>
+            
+              <img src="viewthread_thread,14111_files/threat.gif" alt="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" title="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" border="0">
+            
+            &nbsp;<a href="#"><img src="viewthread_thread,14111_files/up.gif" alt="Chuyển về đầu trang" title="Chuyển về đầu trang" border="0"></a>&nbsp;
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+
+
+
+<a name="65930"></a>
+
+<table class="tborder" align="center" cellpadding="5" cellspacing="0" width="95%">
+  <tbody><tr class="portlet-section-body">
+    <td rowspan="2" valign="top" width="155">
+      
+          
+          
+          <img src="viewthread_thread,14111_files/female.gif" alt="Nữ" title="Nữ" border="0">
+          
+        <a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=piggy" class="memberName">piggy</a>
+        <br>
+        Thành viên nghiện Java và JavaVietnam.org
+        <br>
+        
+        <div align="center"><img src="viewthread_thread,14111_files/getavatar.jpeg" alt="Hình đại diện của thành viên" title="Hình đại diện của thành viên" border="0"></div>
+        
+        <br>
+        
+        VietNem<br>
+        
+              
+        Tham gia: <b>10-08-2005</b><br>
+        
+             
+        Tổng số bài đã viết: <b>148</b><br>
+        
+
+        
+          Trạng thái:
+          
+              Ngoại tuyến
+          
+        
+      
+    </td>
+    <td valign="top">
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td class="messageTextBold" valign="top" width="100%">
+            
+            
+              
+            
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65930"><img src="viewthread_thread,14111_files/button_reply.gif" alt="Trả lời bài viết" title="Trả lời bài viết" border="0"></a>&nbsp;
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65930&amp;quote=yes"><img src="viewthread_thread,14111_files/button_quote.gif" alt="Trả lời với trích dẫn" title="Trả lời với trích dẫn" border="0"></a>&nbsp;
+            
+              
+          </td>
+          
+        </tr>
+        <tr>
+          <td colspan="2" class="messageTextBold" align="left" valign="top" width="100%">
+            
+
+            
+            <span id="posttopic_65930">
+              Re: Nên viết ung dung trên MIDP1.0 hay 2.0???
+            </span>
+          </td>
+        </tr>   
+      </tbody></table>
+      <hr size="1" noshade="noshade">
+    
+      <div class="quote">Nếu bạn muốn lập trình game thì <b>đành</b> phải dung MIDP 2.0 và <b>chấp nhận</b> hạn chế không chạy được tên nhiều loại máy</div><br><br>Nói như thế có nghĩa là kô có game chạy trên MIDP 1.0 hả anh.  <img src="viewthread_thread,14111_files/blushing.gif" alt="blushing" title="blushing" border="0">  <img src="viewthread_thread,14111_files/blushing.gif" alt="blushing" title="blushing" border="0"> <br><br>Theo em thì<br><br>Nếu
+mục đích của bạn chỉ dừng ở mức độ nghiên cứu thì nên dùng MIDP 2.0. Nó
+hỗ trợ nhìu hơn cho việc lập trình game. Nó giúp bạn viết được game
+nhanh chóng và kô mất nhìu thời gian. Tuy nhiên cái gì cũng có mặt trái
+của nó, nếu dùng engine có sẳn, bạn phải đánh đổi một số thứ, chẳng hạn
+như tốc độ game, độ linh hoạt, tùy biến của game.... v.v. <br><br>Nhưng
+nếu muốn thương mại sản phẩm thì đừng bao giờ nghĩ đến chuyện làm game
+chỉ chạy trên MIDP 2.0. Game di động không giống như game PC làm game
+xong rồi mới đưa ra cấu hình. Chẳng ai bỏ tiền để mua một cái phone mới
+chỉ để chạy đựơc cái game của bạn.<br><br>Còn về việc playsound thì nếu
+sài MIDP 1.0 bạn sẽ phải sử dụng các gói sound có sẳn của từng hãng, vì
+dụ samsung thì sài MMF, Nokia thì sài ott v.v<br><br><div class="quote">Khi
+mình viết game, mình chỉ cần dùng những hàm API của MIDP 1.0 là đủ ,
+chắc chắn nó sẽ chạy được trên điện thoại thật, hay là mình cần phải
+quan tâm đến cả NXS điện thoại (Nokia) để tìm những hàm API tối ưu hơn</div><br><br>Cũng
+không hẳn là như thế. Những cái này cần phải linh hoạt, tuy nhiên đây
+là cách mà những hãng game mobile lớn luôn dùng. Nếu bạn đã từng nghiên
+cứu API của Nokia, chắc hẳn bạn sẽ biết được Nokia có gói
+DirectGraphics cực mạnh, nó có thể vẽ một Image từ một mảng byte mà
+không cần phải createImage trước, nó hổ trợ Flip, Rotation ... mà không
+cần phải dùng đến drawRegion của MIDP 2.0. Đó là sự linh hoạt. Và cũng
+như mình đã nói ở trên, game di động không giống như game PC, không ai
+có thể tạo ra được một cái game mà chắc chắn nó chạy được trên tất cả
+các phone. Khi làm game cho di động, bạn cần lưu ý các vấn đề sau<br><br>- Kích thước màn hình (Full screen và kô Full screen)<br>- Kích thước jar size. Một số phone chỉ hỗ trợ jar size cố định. Ví dụ SamsungE700 là &lt;100k và Nokia S40 là &lt; 64k<br>- Tốc độ xử lý: nhanh hay chậm<br>- Bộ nhớ: nhìu hay ít<br><br>Đó là các vấn đề thiết yếu cần lưu ý. Ngoài ra còn rất nhìu vấn đề phát sinh mà chỉ khi bắt tay vào làm bạn mới thấy được  <img src="viewthread_thread,14111_files/blushing.gif" alt="blushing" title="blushing" border="0">  <img src="viewthread_thread,14111_files/blushing.gif" alt="blushing" title="blushing" border="0"><br>
+    
+      
+      
+            ----------------------------------------<br>
+            Em điệu mà em giỏi . ^_^<br>
+        
+
+      
+      
+      
+      
+    </td>
+  </tr>
+  <tr class="portlet-section-body">
+    <td>
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr class="portlet-section-body">
+          <td nowrap="nowrap">
+          [16:16:29 13-07-2006]
+          
+            <a href="http://www.javavietnam.org/javavn/mvnforum/printpost_post,65930"><img src="viewthread_thread,14111_files/printer.gif" alt="Xem bản để in của bài viết" title="Xem bản để in của bài viết" border="0"></a>
+          </td>
+          <td width="100%">
+            
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=piggy"><img src="viewthread_thread,14111_files/button_profile.gif" alt="Xem thông tin cá nhân của thành viên" title="Xem thông tin cá nhân của thành viên" border="0"></a>
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/addmessage?MessageToList=piggy"><img src="viewthread_thread,14111_files/button_pm.gif" alt="Gửi thông điệp cá nhân" title="Gửi thông điệp cá nhân" border="0"></a>
+              
+               
+              
+              
+              &nbsp;&nbsp;&nbsp;<a href="aim:goim?screenname=phuonghaiha86&amp;message=Hello+Are+you+there?"><img src="viewthread_thread,14111_files/aim.gif" alt="phuonghaiha86" title="phuonghaiha86" border="0"></a>
+              &nbsp;&nbsp;&nbsp;<a href="http://wwp.icq.com/scripts/search.dll?to=luv4uisnverdie"><img src="viewthread_thread,14111_files/icq.gif" alt="luv4uisnverdie" title="luv4uisnverdie" border="0"></a>
+            
+          </td>
+          <td nowrap="nowrap">
+            <a href="#65930">[Liên kết của bài]</a>
+            
+              <img src="viewthread_thread,14111_files/threat.gif" alt="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" title="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" border="0">
+            
+            &nbsp;<a href="#"><img src="viewthread_thread,14111_files/up.gif" alt="Chuyển về đầu trang" title="Chuyển về đầu trang" border="0"></a>&nbsp;
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+
+
+
+<a name="65952"></a>
+
+<table class="tborder" align="center" cellpadding="5" cellspacing="0" width="95%">
+  <tbody><tr class="portlet-section-alternate">
+    <td rowspan="2" valign="top" width="155">
+      
+          
+          
+          <img src="viewthread_thread,14111_files/male.gif" alt="Nam" title="Nam" border="0">
+          
+        <a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=minhxp" class="memberName">minhxp</a>
+        <br>
+        Thành viên nghiện Java và JavaVietnam.org
+        <br>
+        
+        <div align="center"><img src="viewthread_thread,14111_files/getavatar_002.jpeg" alt="Hình đại diện của thành viên" title="Hình đại diện của thành viên" border="0"></div>
+        
+        <br>
+        
+        <br>
+        
+              
+        Tham gia: <b>05-07-2004</b><br>
+        
+             
+        Tổng số bài đã viết: <b>248</b><br>
+        
+
+        
+          Trạng thái:
+          
+              Ngoại tuyến
+          
+        
+      
+    </td>
+    <td valign="top">
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td class="messageTextBold" valign="top" width="100%">
+            
+            
+              
+            
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65952"><img src="viewthread_thread,14111_files/button_reply.gif" alt="Trả lời bài viết" title="Trả lời bài viết" border="0"></a>&nbsp;
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65952&amp;quote=yes"><img src="viewthread_thread,14111_files/button_quote.gif" alt="Trả lời với trích dẫn" title="Trả lời với trích dẫn" border="0"></a>&nbsp;
+            
+              
+          </td>
+          
+        </tr>
+        <tr>
+          <td colspan="2" class="messageTextBold" align="left" valign="top" width="100%">
+            
+
+            
+            <span id="posttopic_65952">
+              Re: Nên viết ung dung trên MIDP1.0 hay 2.0???
+            </span>
+          </td>
+        </tr>   
+      </tbody></table>
+      <hr size="1" noshade="noshade">
+    
+      Chào bạn, mình sẽ bàn sâu hơn 1 tí nhé<br><br>Như
+vậy nếu tui muốn viết 1game có các hình là các layer chồng lên nhau, và
+di chuyển liên tục liệu có thực hiện được không. Và nếu được xin anh
+cho chút manh mối để tìm tài liệu về vấn đề này, vì hiện nay sao ít tài
+liệu 1.0 quá, toàn 2.0 không à.<br><br>Thật ra khái niệm layer cũng
+không có gì ghe gớm, mình có thể tự làm được việc này mà không cần đến
+thư viện MIDP 2.0 (sprite, tiledlayer...) Vấn đề quan trọng hơn ở đâ là
+cấu hình máy, và nó có thể chịu được mấy layer. Thực tế mỗi đt có đặc
+điểm khác nhau, đt hổ trợ thư viện này tốt, đt kia thì không, vd Nokia
+tuy rất mạnh nhưng không hổ trợ tốt thư viện MIDP 2.0 (tiledlayer,
+sprite, và cả hàm drawRegion, nếu bạn cho nó xoay hình, nó sẽ vẽ cực
+chậm), nhưng trên motorola phải dùng thư viện MIDP 2.0 chuẩn.<br><br>Anh
+có thể cho 1 đoạn code sample nho nhỏ kg? Hoặc tài liêu cũng đc. Vì
+theo sự tìm hiểu nông cạn của tui, trên MIDP 1.0 chỉ có hàm playSound
+trong AlertType của lớp Alert là có thể phát ra âm thanh à <br><br>Phần
+phát âm thanh là phần rất dể, bạn không phải lo ngại về nó, chỉ có 1
+điều bạn cần biết là không thể phát 2 file âm thanh cùng 1 lúc trên
+cùng 1 thư viện.<br><br>3. Khi mình viết 1game, mình chỉ cần dùng những
+hàm API của MIDP 1.0 là đủ , chắc chắn nó sẽ chạy được trên điện thoại
+thật, hay là mình cần phải quan tâm đến cả NXS điện thoại (Nokia) để
+tìm những hàm API tối ưu hơn<br><br>Như các bạn đã nói ở trên, không
+thể viết 1 game cho tất cả các hãng điện thoại (các loại cùng hãng còn
+không thể nữa là). Bạn phải xác định viết cho điện thoại nào là chính,
+chú ý 1 tí đến tính tương thích để dể prot sau này, chú làm 1 lúc cho
+nhiều đt thì rất khó, ngay cả GameLoft còn không làm được, phải có 1
+công ty port to đùng thế kia.<br><br>Nếu bạn viết cho Nokia thì bạn nên
+dùng thư viện của nó, vì nó sẽ rất nhanh. Nhưng cũng tuỳ vào mức độ
+game co yêu cầu tối ưu đến mức đó không.<br><br>1 vài ý kiến góp ý, bạn nên tham khảo thêm tài liệu để nắm rỏ hơn, làm qua rồi mới nắm vững được<br>
+    
+      
+      
+            ----------------------------------------<br>
+            <a href="http://game.fptmobile.com.vn/" target="_blank">http://game.fptmobile.com.vn</a><br>
+        
+
+      
+      
+      
+      
+    </td>
+  </tr>
+  <tr class="portlet-section-alternate">
+    <td>
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr class="portlet-section-alternate">
+          <td nowrap="nowrap">
+          [23:48:37 13-07-2006]
+          
+            <a href="http://www.javavietnam.org/javavn/mvnforum/printpost_post,65952"><img src="viewthread_thread,14111_files/printer.gif" alt="Xem bản để in của bài viết" title="Xem bản để in của bài viết" border="0"></a>
+          </td>
+          <td width="100%">
+            
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=minhxp"><img src="viewthread_thread,14111_files/button_profile.gif" alt="Xem thông tin cá nhân của thành viên" title="Xem thông tin cá nhân của thành viên" border="0"></a>
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/addmessage?MessageToList=minhxp"><img src="viewthread_thread,14111_files/button_pm.gif" alt="Gửi thông điệp cá nhân" title="Gửi thông điệp cá nhân" border="0"></a>
+              
+                    &nbsp;&nbsp;&nbsp;<img src="viewthread_thread,14111_files/button_email.gif" alt="Không hiển thị cho khách viếng" title="Không hiển thị cho khách viếng" border="0">
+                
+               
+              &nbsp;&nbsp;&nbsp;<a href="http://game.fptmobile.com.vn/"><img src="viewthread_thread,14111_files/www.gif" alt="http://game.fptmobile.com.vn" title="http://game.fptmobile.com.vn" border="0"></a>
+              &nbsp;&nbsp;&nbsp;<a href="http://edit.yahoo.com/config/send_webmesg?.target=minhxp2003&amp;.src=pg"><img src="viewthread_thread,14111_files/yim.gif" alt="minhxp2003" title="minhxp2003" border="0"></a>
+              
+              
+            
+          </td>
+          <td nowrap="nowrap">
+            <a href="#65952">[Liên kết của bài]</a>
+            
+              <img src="viewthread_thread,14111_files/threat.gif" alt="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" title="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" border="0">
+            
+            &nbsp;<a href="#"><img src="viewthread_thread,14111_files/up.gif" alt="Chuyển về đầu trang" title="Chuyển về đầu trang" border="0"></a>&nbsp;
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+
+
+
+<a name="65977"></a>
+
+<table class="tborder" align="center" cellpadding="5" cellspacing="0" width="95%">
+  <tbody><tr class="portlet-section-body">
+    <td rowspan="2" valign="top" width="155">
+      
+          
+          
+          <img src="viewthread_thread,14111_files/female.gif" alt="Nữ" title="Nữ" border="0">
+          
+        <a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=piggy" class="memberName">piggy</a>
+        <br>
+        Thành viên nghiện Java và JavaVietnam.org
+        <br>
+        
+        <div align="center"><img src="viewthread_thread,14111_files/getavatar.jpeg" alt="Hình đại diện của thành viên" title="Hình đại diện của thành viên" border="0"></div>
+        
+        <br>
+        
+        VietNem<br>
+        
+              
+        Tham gia: <b>10-08-2005</b><br>
+        
+             
+        Tổng số bài đã viết: <b>148</b><br>
+        
+
+        
+          Trạng thái:
+          
+              Ngoại tuyến
+          
+        
+      
+    </td>
+    <td valign="top">
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td class="messageTextBold" valign="top" width="100%">
+            
+            
+              
+            
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65977"><img src="viewthread_thread,14111_files/button_reply.gif" alt="Trả lời bài viết" title="Trả lời bài viết" border="0"></a>&nbsp;
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=65977&amp;quote=yes"><img src="viewthread_thread,14111_files/button_quote.gif" alt="Trả lời với trích dẫn" title="Trả lời với trích dẫn" border="0"></a>&nbsp;
+            
+              
+          </td>
+          
+        </tr>
+        <tr>
+          <td colspan="2" class="messageTextBold" align="left" valign="top" width="100%">
+            
+
+            
+            <span id="posttopic_65977">
+              Re: Nên viết ung dung trên MIDP1.0 hay 2.0???
+            </span>
+          </td>
+        </tr>   
+      </tbody></table>
+      <hr size="1" noshade="noshade">
+    
+      <div class="quote"><br>vd
+Nokia tuy rất mạnh nhưng không hổ trợ tốt thư viện MIDP 2.0
+(tiledlayer, sprite, và cả hàm drawRegion, nếu bạn cho nó xoay hình, nó
+sẽ vẽ cực chậm)<br></div><br><br>Chắc không vậy, em dám cá là không có phone nào có khả năng vẽ xoay hình nhanh bằng Nokia đó, chẳng wa là kô biết dùng thôi.  <img src="viewthread_thread,14111_files/tongue.gif" alt="tongue" title="tongue" border="0">  <img src="viewthread_thread,14111_files/tongue.gif" alt="tongue" title="tongue" border="0"><br>
+    
+      
+      
+            ----------------------------------------<br>
+            Em điệu mà em giỏi . ^_^<br>
+        
+
+      
+      
+      
+      
+    </td>
+  </tr>
+  <tr class="portlet-section-body">
+    <td>
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr class="portlet-section-body">
+          <td nowrap="nowrap">
+          [10:37:57 14-07-2006]
+          
+            <a href="http://www.javavietnam.org/javavn/mvnforum/printpost_post,65977"><img src="viewthread_thread,14111_files/printer.gif" alt="Xem bản để in của bài viết" title="Xem bản để in của bài viết" border="0"></a>
+          </td>
+          <td width="100%">
+            
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=piggy"><img src="viewthread_thread,14111_files/button_profile.gif" alt="Xem thông tin cá nhân của thành viên" title="Xem thông tin cá nhân của thành viên" border="0"></a>
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/addmessage?MessageToList=piggy"><img src="viewthread_thread,14111_files/button_pm.gif" alt="Gửi thông điệp cá nhân" title="Gửi thông điệp cá nhân" border="0"></a>
+              
+               
+              
+              
+              &nbsp;&nbsp;&nbsp;<a href="aim:goim?screenname=phuonghaiha86&amp;message=Hello+Are+you+there?"><img src="viewthread_thread,14111_files/aim.gif" alt="phuonghaiha86" title="phuonghaiha86" border="0"></a>
+              &nbsp;&nbsp;&nbsp;<a href="http://wwp.icq.com/scripts/search.dll?to=luv4uisnverdie"><img src="viewthread_thread,14111_files/icq.gif" alt="luv4uisnverdie" title="luv4uisnverdie" border="0"></a>
+            
+          </td>
+          <td nowrap="nowrap">
+            <a href="#65977">[Liên kết của bài]</a>
+            
+              <img src="viewthread_thread,14111_files/threat.gif" alt="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" title="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" border="0">
+            
+            &nbsp;<a href="#"><img src="viewthread_thread,14111_files/up.gif" alt="Chuyển về đầu trang" title="Chuyển về đầu trang" border="0"></a>&nbsp;
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+
+
+
+<a name="66010"></a>
+
+  <a name="lastpost"></a>
+
+<table class="tborder" align="center" cellpadding="5" cellspacing="0" width="95%">
+  <tbody><tr class="portlet-section-alternate">
+    <td rowspan="2" valign="top" width="155">
+      
+          
+          
+          <img src="viewthread_thread,14111_files/male.gif" alt="Nam" title="Nam" border="0">
+          
+        <a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=minhxp" class="memberName">minhxp</a>
+        <br>
+        Thành viên nghiện Java và JavaVietnam.org
+        <br>
+        
+        <div align="center"><img src="viewthread_thread,14111_files/getavatar_002.jpeg" alt="Hình đại diện của thành viên" title="Hình đại diện của thành viên" border="0"></div>
+        
+        <br>
+        
+        <br>
+        
+              
+        Tham gia: <b>05-07-2004</b><br>
+        
+             
+        Tổng số bài đã viết: <b>248</b><br>
+        
+
+        
+          Trạng thái:
+          
+              Ngoại tuyến
+          
+        
+      
+    </td>
+    <td valign="top">
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td class="messageTextBold" valign="top" width="100%">
+            
+            
+              
+            
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=66010"><img src="viewthread_thread,14111_files/button_reply.gif" alt="Trả lời bài viết" title="Trả lời bài viết" border="0"></a>&nbsp;
+               <a href="http://www.javavietnam.org/javavn/mvnforum/addpost?parent=66010&amp;quote=yes"><img src="viewthread_thread,14111_files/button_quote.gif" alt="Trả lời với trích dẫn" title="Trả lời với trích dẫn" border="0"></a>&nbsp;
+            
+              
+          </td>
+          
+        </tr>
+        <tr>
+          <td colspan="2" class="messageTextBold" align="left" valign="top" width="100%">
+            
+
+            
+            <span id="posttopic_66010">
+              Re: Nên viết ung dung trên MIDP1.0 hay 2.0???
+            </span>
+          </td>
+        </tr>   
+      </tbody></table>
+      <hr size="1" noshade="noshade">
+    
+      <div class="quote"><div class="quote"><br>vd
+Nokia tuy rất mạnh nhưng không hổ trợ tốt thư viện MIDP 2.0
+(tiledlayer, sprite, và cả hàm drawRegion, nếu bạn cho nó xoay hình, nó
+sẽ vẽ cực chậm)<br></div><br><br>Chắc không vậy, em dám cá là không có phone nào có khả năng vẽ xoay hình nhanh bằng Nokia đó, chẳng wa là kô biết dùng thôi.  <img src="viewthread_thread,14111_files/tongue.gif" alt="tongue" title="tongue" border="0">  <img src="viewthread_thread,14111_files/tongue.gif" alt="tongue" title="tongue" border="0"></div><br><br>Em
+thử nói cách của em đi, đừng nói là cache trước nhé. Anh cá với em là
+điện thoại Samsung xoay trực tiếp (không cache) nhanh hơn đấy, không hề
+chậm hơn vẽ mặc định (không xoay).<br>
+    
+      
+      
+            ----------------------------------------<br>
+            <a href="http://game.fptmobile.com.vn/" target="_blank">http://game.fptmobile.com.vn</a><br>
+        
+
+      
+        ----------------------------------------<br>
+        [Thay đổi 1 lần,
+        thay đổi lần cuối bởi <a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=minhxp" class="memberName">minhxp</a> lúc 22:29:45 14-07-2006]
+      
+      
+      
+      
+    </td>
+  </tr>
+  <tr class="portlet-section-alternate">
+    <td>
+      <table class="noborder" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr class="portlet-section-alternate">
+          <td nowrap="nowrap">
+          [22:28:07 14-07-2006]
+          
+            <a href="http://www.javavietnam.org/javavn/mvnforum/printpost_post,66010"><img src="viewthread_thread,14111_files/printer.gif" alt="Xem bản để in của bài viết" title="Xem bản để in của bài viết" border="0"></a>
+          </td>
+          <td width="100%">
+            
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/viewmember?member=minhxp"><img src="viewthread_thread,14111_files/button_profile.gif" alt="Xem thông tin cá nhân của thành viên" title="Xem thông tin cá nhân của thành viên" border="0"></a>
+              &nbsp;&nbsp;&nbsp;<a href="http://www.javavietnam.org/javavn/mvnforum/addmessage?MessageToList=minhxp"><img src="viewthread_thread,14111_files/button_pm.gif" alt="Gửi thông điệp cá nhân" title="Gửi thông điệp cá nhân" border="0"></a>
+              
+                    &nbsp;&nbsp;&nbsp;<img src="viewthread_thread,14111_files/button_email.gif" alt="Không hiển thị cho khách viếng" title="Không hiển thị cho khách viếng" border="0">
+                
+               
+              &nbsp;&nbsp;&nbsp;<a href="http://game.fptmobile.com.vn/"><img src="viewthread_thread,14111_files/www.gif" alt="http://game.fptmobile.com.vn" title="http://game.fptmobile.com.vn" border="0"></a>
+              &nbsp;&nbsp;&nbsp;<a href="http://edit.yahoo.com/config/send_webmesg?.target=minhxp2003&amp;.src=pg"><img src="viewthread_thread,14111_files/yim.gif" alt="minhxp2003" title="minhxp2003" border="0"></a>
+              
+              
+            
+          </td>
+          <td nowrap="nowrap">
+            <a href="#66010">[Liên kết của bài]</a>
+            
+              <img src="viewthread_thread,14111_files/threat.gif" alt="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" title="Thông báo bài gửi có nội dung xấu: mời bạn đăng nhập trước" border="0">
+            
+            &nbsp;<a href="#"><img src="viewthread_thread,14111_files/up.gif" alt="Chuyển về đầu trang" title="Chuyển về đầu trang" border="0"></a>&nbsp;
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+
+
+<table align="center" width="95%">
+  <tbody><tr>
+    <td>
+      
+
+
+<table cellpadding="0" cellspacing="0">
+  <tbody><tr class="pager">
+    <td align="right" nowrap="nowrap">
+      Số bài viết: 32&nbsp;&nbsp;&nbsp;Số trang: 4&nbsp;&nbsp;&nbsp;[
+      
+      
+        
+          <span class="pagerCurrent">1</span>
+        
+      
+        
+          <a href="http://www.javavietnam.org/javavn/mvnforum/viewthread_thread,14111_offset,10" class="pager">2</a>
+        
+      
+        
+          <a href="http://www.javavietnam.org/javavn/mvnforum/viewthread_thread,14111_offset,20" class="pager">3</a>
+        
+      
+        
+          <a href="http://www.javavietnam.org/javavn/mvnforum/viewthread_thread,14111_offset,30" class="pager">4</a>
+        
+      
+      | <a href="http://www.javavietnam.org/javavn/mvnforum/viewthread_thread,14111_offset,10" class="pager">Trang kế tiếp</a> ]
+    </td>
+  </tr>
+</tbody></table>
+
+
+    </td>
+    <td align="right">
+      <a class="command" href="http://www.javavietnam.org/javavn/mvnforum/printthread_thread,14111"><img src="viewthread_thread,14111_files/button_printer_friendly_version.gif" alt="Xem bản để in" title="Xem bản để in" border="0"></a>&nbsp;
+    
+      <a class="command" href="http://www.javavietnam.org/javavn/mvnforum/addpost?forum=13"><img src="viewthread_thread,14111_files/button_new_thread.gif" alt="Tạo luồng mới" title="Tạo luồng mới" border="0"></a>
+    
+    </td>
+  </tr>
+</tbody></table>
+
+<input name="previewUrl" id="previewUrl" value="addpost" type="hidden">
+
+
+<br>
+ 
+
+
+
+
+<table class="tborder-no_need" align="center" cellpadding="3" cellspacing="0" width="95%">
+   <tbody><tr class="portlet-section-body">
+   
+     <td align="center"><!-- SiteSearch Google -->
+<form method="get" action="http://www.google.com/custom" target="_top">
+<table bgcolor="#ffffff" border="0">
+<tbody><tr><td align="left" valign="top" height="32" nowrap="nowrap">
+<a href="http://www.google.com/">
+<img src="viewthread_thread,14111_files/Logo_25wht.gif" alt="Google" align="middle" border="0"></a>
+</td>
+<td nowrap="nowrap">
+<input name="domains" value="www.javavietnam.org" type="hidden">
+<label for="sbi" style="display: none;">Enter your search terms</label>
+<input name="q" size="31" maxlength="255" value="" id="sbi" type="text">
+<label for="sbb" style="display: none;">Submit search form</label>
+<input name="sa" value="Search" id="sbb" type="submit">
+</td></tr>
+<tr>
+<td> </td>
+<td nowrap="nowrap">
+<table>
+<tbody><tr>
+<td>
+<input class="noborder" name="sitesearch" value="" checked="checked" id="ss0" type="radio">
+<label for="ss0" title="Search the Web"><font color="#000000" size="-1">Web</font></label></td>
+<td>
+<input class="noborder" name="sitesearch" value="www.javavietnam.org" id="ss1" type="radio">
+<label for="ss1" title="Search www.javavietnam.org"><font color="#000000" size="-1">www.javavietnam.org</font></label></td>
+</tr>
+</tbody></table>
+<input name="client" value="pub-4755965374109189" type="hidden">
+<input name="forid" value="1" type="hidden">
+<input name="channel" value="4062821725" type="hidden">
+<input name="ie" value="UTF-8" type="hidden">
+<input name="oe" value="UTF-8" type="hidden">
+<input name="safe" value="active" type="hidden">
+<input name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;LH:50;LW:140;L:http://www.javavietnam.org/javavn/mvnplugin/mvnforum/images/logo.gif;S:http://;FORID:1" type="hidden">
+<input name="hl" value="en" type="hidden">
+</td></tr></tbody></table>
+</form>
+<!-- SiteSearch Google --></td>
+   
+   </tr>
+</tbody></table>
+<br>
+
+
+<hr class="hrfooter">
+
+<table align="center" cellpadding="0" cellspacing="0" width="95%">
+  <tbody><tr>
+    <td class="pageFooter" align="left">
+    
+      <a href="http://www.javavietnam.org/javavn/mvnforum/rsssummary" class="topmenu"><img src="viewthread_thread,14111_files/xml.gif" alt="Tổng hợp tin (RSS)" title="Tổng hợp tin (RSS)" align="bottom" border="0" vspace="0" hspace="0"></a>
+    
+    </td> 
+    <td class="pageFooter" align="right">
+      Múi giờ hiện tại là +7<br>    
+      15:38:42 06-01-2009
+    </td>
+  </tr>
+</tbody></table>
+
+<hr class="hrfooter">
+<br>
+
+<div class="pageFooter" align="center">
+  <!--
+  We request you retain the full copyright notice below including the link to www.mvnForum.com.
+  This not only gives respect to the large amount of time given freely by the developers
+  but also helps build interest, traffic and use of mvnForum. If you cannot (for good
+  reason) retain the full copyright we request you at least leave in place the
+  "Powered by mvnForum" line, with mvnForum linked to http://www.mvnForum.com.
+  These conditions are parts of the licence this software is released under.
+  For detailed information about mvnForum License Agreement, look at the License Notice at
+  the top of all jsp, java files, README.txt and the GNU General Public License.
+
+  NOTE: In case you need to remove this "Powered by mvnForum", please contact us at 
+  web site www.MyVietnam.net to order a special "Copyright notice Removal" license 
+  with a small license fee. After receiving this special license, you can remove 
+  the copyright notice in this footer.jsp file.
+
+  MyVietnam.net Group
+  -->
+  Powered by <a href="http://www.mvnforum.com/" target="_blank">mvnForum Enterprise 1.3-dev</a> (Build: 24 July 2008)<br>
+  Copyright © 2002-2008 by <a href="http://www.myvietnam.net/" target="_blank">MyVietnam.net</a>
+  <p>&nbsp;</p>
+</div>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="viewthread_thread,14111_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-4030481-2");
+pageTracker._initData();
+pageTracker._trackPageview();
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+</body></html>

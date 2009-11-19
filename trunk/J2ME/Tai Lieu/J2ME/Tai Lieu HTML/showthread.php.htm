@@ -1,0 +1,1579 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" lang="vn"><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="vBulletin 3.7.4">
+<meta name="keywords" content=" Tổng quan về J2ME, mobile phone, pocket pc, ppc, xda, nokia, samsung, sony ericsson, forum, software, dtdd, đtdđ, dien thoai di dong, thienlong, ebook, ring tone, symbian, java, wm5.0, game, mobile game,  điện thoại di động, chuông, game, hình, nhạc, trò chơi, tin tức, iphone, itune">
+<meta name="description" content=" Tổng quan về J2ME LẬP TRÌNH TRÊN ĐIỆN THOẠI DI ĐỘNG">
+<!-- CSS Stylesheet -->
+<style type="text/css" id="vbulletin_css">
+/**
+* vBulletin 3.7.4 CSS
+* Style: 'newyear_2009'; Style ID: 5
+*/
+body
+{
+background: #FFFFFF url(images/styles/christmas_2008/misc/bg.jpg) repeat-x top left;
+color: #323232;
+font: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+margin: 0px 0px 0px 0px;
+padding: 0px;
+}
+a:link, body_alink
+{
+color: #035BA2;
+text-decoration: none;
+}
+a:visited, body_avisited
+{
+color: #035BA2;
+text-decoration: none;
+}
+a:hover, a:active, body_ahover
+{
+color: #E3452C;
+text-decoration: none;
+}
+.page
+{
+background: #FFFFFF;
+color: #323232;
+}
+.page a:link, .page_alink
+{
+color: #035BA2;
+text-decoration: none;
+}
+.page a:visited, .page_avisited
+{
+color: #035BA2;
+text-decoration: none;
+}
+.page a:hover, .page a:active, .page_ahover
+{
+color: #E3452C;
+text-decoration: none;
+}
+td, th, p, li
+{
+font: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}
+.tborder
+{
+background: #FFFFFF;
+color: #323232;
+border: 1px solid #0166B8;
+}
+.tcat
+{
+background: #0166B8 url(images/styles/christmas_2008/misc/cat_back.gif) repeat-x top left;
+color: #FFFFFF;
+font: bold 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}
+.tcat a:link, .tcat_alink
+{
+color: #ffffff;
+text-decoration: none;
+}
+.tcat a:visited, .tcat_avisited
+{
+color: #ffffff;
+text-decoration: none;
+}
+.tcat a:hover, .tcat a:active, .tcat_ahover
+{
+color: #FFFF66;
+text-decoration: none;
+}
+.thead
+{
+background: #D7290E url(images/styles/christmas_2008/misc/thead.gif) repeat-x top left;
+color: #FFFFFF;
+font: 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}
+.thead a:link, .thead_alink
+{
+color: #FFFFFF;
+text-decoration: none;
+}
+.thead a:visited, .thead_avisited
+{
+color: #FFFFFF;
+text-decoration: none;
+}
+.thead a:hover, .thead a:active, .thead_ahover
+{
+color: #FFFF00;
+text-decoration: none;
+}
+.tfoot
+{
+background: #FFFFFF;
+color: #323232;
+}
+.tfoot a:link, .tfoot_alink
+{
+color: #035BA2;
+text-decoration: none;
+}
+.tfoot a:visited, .tfoot_avisited
+{
+color: #035BA2;
+text-decoration: none;
+}
+.tfoot a:hover, .tfoot a:active, .tfoot_ahover
+{
+color: #E3452C;
+text-decoration: none;
+}
+.alt1, .alt1Active
+{
+background: #EEF3F9;
+color: #323232;
+}
+.alt1 a:link, .alt1_alink, .alt1Active a:link, .alt1Active_alink
+{
+color: #035BA2;
+text-decoration: none;
+}
+.alt1 a:visited, .alt1_avisited, .alt1Active a:visited, .alt1Active_avisited
+{
+color: #035BA2;
+text-decoration: none;
+}
+.alt1 a:hover, .alt1 a:active, .alt1_ahover, .alt1Active a:hover, .alt1Active a:active, .alt1Active_ahover
+{
+color: #E3452C;
+text-decoration: none;
+}
+.alt2, .alt2Active
+{
+background: #DDE7F3;
+color: #323232;
+}
+.alt2 a:link, .alt2_alink, .alt2Active a:link, .alt2Active_alink
+{
+color: #035BA2;
+text-decoration: none;
+}
+.alt2 a:visited, .alt2_avisited, .alt2Active a:visited, .alt2Active_avisited
+{
+color: #035BA2;
+text-decoration: none;
+}
+.alt2 a:hover, .alt2 a:active, .alt2_ahover, .alt2Active a:hover, .alt2Active a:active, .alt2Active_ahover
+{
+color: #E3452C;
+text-decoration: none;
+}
+.inlinemod
+{
+background: #FFFFCC;
+color: #000000;
+}
+.wysiwyg
+{
+background: #FFFFFF;
+color: #323232;
+font: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+margin: 5px 10px 10px 10px;
+padding: 0px;
+}
+.wysiwyg a:link, .wysiwyg_alink
+{
+color: #035BA2;
+text-decoration: none;
+}
+.wysiwyg a:visited, .wysiwyg_avisited
+{
+color: #035BA2;
+text-decoration: none;
+}
+.wysiwyg a:hover, .wysiwyg a:active, .wysiwyg_ahover
+{
+color: #E3452C;
+text-decoration: none;
+}
+textarea, .bginput
+{
+background: #FFFFFF;
+color: #323232;
+font: 10pt verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+border: 1px solid #E3452C;
+}
+.bginput option, .bginput optgroup
+{
+font-size: 10pt;
+font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}
+.button
+{
+background: #035BA2;
+color: #FFFFFF;
+font: bold 10px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+border: 1px solid #ffffff;
+}
+select
+{
+background: #ffffff;
+color: #323232;
+font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}
+option, optgroup
+{
+font-size: 11px;
+font-family: verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}
+.smallfont
+{
+font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}
+.time
+{
+color: #323232;
+font-style: italic;
+}
+.navbar
+{
+color: #323232;
+font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}
+.navbar a:link, .navbar_alink
+{
+color: #035BA2;
+text-decoration: none;
+}
+.navbar a:visited, .navbar_avisited
+{
+color: #035BA2;
+text-decoration: none;
+}
+.navbar a:hover, .navbar a:active, .navbar_ahover
+{
+color: #E3452C;
+text-decoration: none;
+}
+.highlight
+{
+color: #FF0000;
+font-weight: bold;
+}
+.fjsel
+{
+background: #ffffff;
+color: #035BA2;
+}
+.fjdpth0
+{
+background: #EEF3F9;
+color: #323232;
+}
+.panel
+{
+background: #EEF3F9;
+color: #323232;
+}
+.panel a:link, .panel_alink
+{
+color: #035BA2;
+text-decoration: none;
+}
+.panel a:visited, .panel_avisited
+{
+color: #035BA2;
+text-decoration: none;
+}
+.panel a:hover, .panel a:active, .panel_ahover
+{
+color: #E3452C;
+text-decoration: none;
+}
+.panelsurround
+{
+background: #EEF3F9;
+color: #323232;
+}
+legend
+{
+color: #323232;
+font: italic 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}
+.vbmenu_control
+{
+background: #0166B8 url(images/styles/christmas_2008/misc/cat_back.gif) repeat-x top left;
+color: #FFFFFF;
+font: bold 11px tahoma, verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+padding: 3px 6px 3px 6px;
+white-space: nowrap;
+}
+.vbmenu_control a:link, .vbmenu_control_alink
+{
+color: #FFFFFF;
+text-decoration: none;
+}
+.vbmenu_control a:visited, .vbmenu_control_avisited
+{
+color: #FFFFFF;
+text-decoration: none;
+}
+.vbmenu_control a:hover, .vbmenu_control a:active, .vbmenu_control_ahover
+{
+color: #FFFFFF;
+text-decoration: none;
+}
+.vbmenu_popup
+{
+background: #FFFFFF;
+color: #323232;
+border: 1px solid #035BA2;
+}
+.vbmenu_option
+{
+background: #EEF3F9;
+color: #323232;
+font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+white-space: nowrap;
+cursor: pointer;
+}
+.vbmenu_option a:link, .vbmenu_option_alink
+{
+color: #035BA2;
+text-decoration: none;
+}
+.vbmenu_option a:visited, .vbmenu_option_avisited
+{
+color: #035BA2;
+text-decoration: none;
+}
+.vbmenu_option a:hover, .vbmenu_option a:active, .vbmenu_option_ahover
+{
+color: #035BA2;
+text-decoration: none;
+}
+.vbmenu_hilite
+{
+background: #FFFFFF;
+color: #323232;
+font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+white-space: nowrap;
+cursor: pointer;
+}
+.vbmenu_hilite a:link, .vbmenu_hilite_alink
+{
+color: #E3452C;
+text-decoration: none;
+}
+.vbmenu_hilite a:visited, .vbmenu_hilite_avisited
+{
+color: #E3452C;
+text-decoration: none;
+}
+.vbmenu_hilite a:hover, .vbmenu_hilite a:active, .vbmenu_hilite_ahover
+{
+color: #E3452C;
+text-decoration: none;
+}
+/* ***** styling for 'big' usernames on postbit etc. ***** */
+.bigusername { font-size: 14pt; }
+/* ***** small padding on 'thead' elements ***** */
+td.thead, th.thead, div.thead { padding: 4px; }
+/* ***** basic styles for multi-page nav elements */
+.pagenav a { text-decoration: none; }
+.pagenav td { padding: 2px 4px 2px 4px; }
+/* ***** de-emphasized text */
+.shade, a.shade:link, a.shade:visited { color: #777777; text-decoration: none; }
+a.shade:active, a.shade:hover { color: #FF4400; text-decoration: underline; }
+.tcat .shade, .thead .shade, .tfoot .shade { color: #DDDDDD; }
+/* ***** define margin and font-size for elements inside panels ***** */
+.fieldset { margin-bottom: 6px; }
+.fieldset, .fieldset td, .fieldset p, .fieldset li { font-size: 11px; }
+.main_tcat {
+background: #0166B8 url(images/styles/christmas_2008/misc/cat_back.gif) repeat-x top left;
+}
+.main_tcat_left {
+background-image: url(images/styles/christmas_2008/misc/cat_left.gif);
+background-repeat: no-repeat;
+background-position: top left;
+}
+.main_tcat_right {
+color: #FFFFFF;
+font: bold 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+background-image: url(images/styles/christmas_2008/misc/cat_right.gif);
+background-repeat: no-repeat;
+background-position: top right;
+height: 30px;
+padding-left: 30px;
+}
+.main_tcat_right a:link, .main_tcat_right a:visited
+{
+color: #FFFFFF;
+text-decoration: none;
+}
+.main_tcat_right a:hover, .main_tcat_right a:active
+{
+color: #FFFFFF;
+text-decoration: underline;
+}
+.alt5, .alt5Active
+{
+color: #FFFFFF;
+font: 11px verdana, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}
+.alt5 a:link, .alt5_alink, .alt5Active a:link, .alt5Active_alink
+{
+color: #FFFFFF;
+text-decoration: none;
+}
+.alt5 a:visited, .alt5_avisited, .alt5Active a:visited, .alt5Active_avisited
+{
+color: #FFFFFF;
+text-decoration: none;
+}
+.alt5 a:hover, .alt5 a:active, .alt5_ahover, .alt5Active a:hover, .alt5Active a:active, .alt5Active_ahover
+{
+color: #FFFF00;
+text-decoration: none;
+}
+.gap
+{
+height: 16px;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="showthread.php_files/vbulletin_important.css">
+<!-- / CSS Stylesheet -->
+<script type="text/javascript" src="showthread.php_files/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="showthread.php_files/connection-min.js"></script>
+<script type="text/javascript">
+<!--
+var SESSIONURL = "s=fedb72c0c44cd31c7e9e682f5bb58276&";
+var SECURITYTOKEN = "guest";
+var IMGDIR_MISC = "images/styles/christmas_2008/misc";
+var vb_disable_ajax = parseInt("0", 10);
+// -->
+</script>
+<script type="text/javascript" src="showthread.php_files/vbulletin_global.js"></script>
+<script type="text/javascript" src="showthread.php_files/vbulletin_menu.js"></script>
+<link rel="alternate" type="application/rss+xml" title="DIỄN ĐÀN ĐIỆN THOẠI DI ĐỘNG - MOBILE PHONE FORUM RSS Feed" href="http://www.thienlong.org/forumvn/external.php?type=RSS2">
+<link rel="alternate" type="application/rss+xml" title="DIỄN ĐÀN ĐIỆN THOẠI DI ĐỘNG - MOBILE PHONE FORUM - LẬP TRÌNH TRÊN ĐIỆN THOẠI DI ĐỘNG - RSS Feed" href="http://www.thienlong.org/forumvn/external.php?type=RSS2&amp;forumids=150">
+<script type="text/javascript" src="showthread.php_files/post_thanks.js"></script>
+<title> Tổng quan về J2ME - DIỄN ĐÀN ĐIỆN THOẠI DI ĐỘNG - MOBILE PHONE FORUM</title>
+<script type="text/javascript" src="showthread.php_files/vbulletin_post_loader.js"></script>
+<style type="text/css" id="vbulletin_showthread_css">
+<!--
+#links div { white-space: nowrap; }
+#links img { vertical-align: middle; }
+-->
+</style>
+</head><body onload="">
+<!-- logo -->
+<a name="top"></a>
+<table style="background-image: url(images/styles/christmas_2008/misc/head_back.jpg);" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td align="left" valign="top"><a href="http://www.thienlong.org/forumvn/index.php?s=fedb72c0c44cd31c7e9e682f5bb58276"><img src="showthread.php_files/logo.jpg" alt="" border="0"></a></td>
+<td align="right" valign="bottom"><img src="showthread.php_files/logor.jpg" alt="" border="0"></td>
+</tr>
+</tbody></table>
+<!-- /logo -->
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="top">
+<td><img src="showthread.php_files/left.jpg" alt="" border="0"></td>
+<td width="100%">
+<table style="background-image: url(images/styles/christmas_2008/misc/gap.jpg);" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td align="left" valign="top"><img src="showthread.php_files/gap.jpg" alt="" border="0"></td>
+</tr>
+</tbody></table>
+<!-- content table -->
+<!-- open content container -->
+<div align="center">
+<div class="page" style="width: 100%; text-align: left;">
+<div style="padding: 0px;" align="left">
+<div id="GALBox" style="text-align: left; position: absolute; z-index: 100; visibility: hidden; left: 387px; top: 1808px;" onmouseover="this.style.visibility='visible';" onmouseout="this.style.visibility='hidden';"><table border="0" cellpadding="0" cellspacing="0" width="300"><tbody><tr><td onmouseover="GAL_keepopen();" onmouseout="GAL_hidepopup();"><div style="border: 1pt solid rgb(0, 0, 0);" width="300"><div style="border-top: 1px solid black; border-bottom: 1px solid black; padding: 1px; background: rgb(204, 204, 204) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-size: 10px; font-weight: bold; color: rgb(0, 0, 0);">Giải thích từ : samsung</div><div style="padding: 2px; background: rgb(255, 255, 204) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; font-size: 10px;">Là nhà sản xuất điện thoại di động hàng đầu tại Hàn Quốc. Và đứng hàng thứ 2 trên thế giới.</div></div></td></tr><tr></tr></tbody></table></div><script type="text/javascript" src="showthread.php_files/gal_popup.js"></script>
+<!-- breadcrumb, login, pm info -->
+<table class="tborder" align="center" border="0" cellpadding="6" cellspacing="1" width="100%">
+<tbody><tr>
+<td class="alt1" width="100%">
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr valign="bottom">
+<td><a href="#" onclick="history.back(1); return false;"><img title="Quay lại" src="showthread.php_files/navbits_start.gif" alt="Quay lại" border="0"></a></td>
+<td>&nbsp;</td>
+<td width="100%"><span class="navbar"><a href="http://www.thienlong.org/forumvn/index.php?s=fedb72c0c44cd31c7e9e682f5bb58276" accesskey="1">DIỄN ĐÀN ĐIỆN THOẠI DI ĐỘNG - MOBILE PHONE FORUM</a></span> 
+<span class="navbar">&gt; <a href="http://www.thienlong.org/forumvn/forumdisplay.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;f=113">LÝ THUYẾT ĐIỆN THOẠI DI ĐỘNG</a></span>
+<span class="navbar">&gt; <a href="http://www.thienlong.org/forumvn/forumdisplay.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;f=150">LẬP TRÌNH TRÊN ĐIỆN THOẠI DI ĐỘNG</a></span>
+</td>
+</tr>
+<tr>
+<td class="navbar" style="font-size: 10pt; padding-top: 1px;" colspan="3"><a href="http://www.thienlong.org/forumvn/showthread.php?t=8862"><img title="Cập nhật lại trang này" class="inlineimg" src="showthread.php_files/navbits_finallink_ltr.gif" alt="Cập nhật lại trang này" border="0"></a> <strong>
+Tổng quan về J2ME
+</strong></td>
+</tr>
+</tbody></table>
+</td>
+<td class="alt2" style="padding: 0px;" nowrap="nowrap">
+<!-- login form -->
+<form action="login.php?do=login" method="post" onsubmit="md5hash(vb_login_password, vb_login_md5password, vb_login_md5password_utf, 0)">
+<script type="text/javascript" src="showthread.php_files/vbulletin_md5.js"></script>
+<table border="0" cellpadding="0" cellspacing="3">
+<tbody><tr>
+<td class="smallfont" style="white-space: nowrap;"><label for="navbar_username">Tên Đăng nhập</label></td>
+<td><input class="bginput" style="font-size: 11px;" name="vb_login_username" id="navbar_username" size="10" accesskey="u" tabindex="101" value="Tên Đăng nhập" onfocus="if (this.value == 'Tên Đăng nhập') this.value = '';" type="text"></td>
+<td class="smallfont" nowrap="nowrap"><label for="cb_cookieuser_navbar"><input name="cookieuser" value="1" tabindex="103" id="cb_cookieuser_navbar" accesskey="c" type="checkbox">Ghi nhớ?</label></td>
+</tr>
+<tr>
+<td class="smallfont"><label for="navbar_password">Mật Khẩu</label></td>
+<td><input class="bginput" style="font-size: 11px;" name="vb_login_password" id="navbar_password" size="10" tabindex="102" type="password"></td>
+<td><input class="button" value="Đăng Nhập" tabindex="104" title="Vui lòng nhập tên Đăng nhập và Mật khẩu vào ô, hoặc nhấn nút 'Đăng ký' để tạo Tài khoản riêng cho bạn." accesskey="s" type="submit"></td>
+</tr>
+</tbody></table>
+<input name="s" value="fedb72c0c44cd31c7e9e682f5bb58276" type="hidden">
+<input name="securitytoken" value="guest" type="hidden">
+<input name="do" value="login" type="hidden">
+<input name="vb_login_md5password" type="hidden">
+<input name="vb_login_md5password_utf" type="hidden">
+</form>
+<!-- / login form -->
+</td>
+</tr>
+</tbody></table>
+<!-- / breadcrumb, login, pm info -->
+<!-- nav buttons bar -->
+<div class="tborder" style="padding: 1px; border-top-width: 0px;">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr align="center">
+<td class="vbmenu_control"><a href="http://www.thienlong.org/forumvn/register.php?s=fedb72c0c44cd31c7e9e682f5bb58276" rel="nofollow">Đăng Kí</a></td>
+<td class="vbmenu_control"><a href="http://www.thienlong.org/forumvn/faq.php?s=fedb72c0c44cd31c7e9e682f5bb58276" accesskey="5">Hỏi/Đáp</a></td>
+<td class="vbmenu_control"><a href="http://www.thienlong.org/forumvn/memberlist.php?s=fedb72c0c44cd31c7e9e682f5bb58276">Thành viên</a></td>
+<td class="vbmenu_control"><a href="http://www.thienlong.org/forumvn/calendar.php?s=fedb72c0c44cd31c7e9e682f5bb58276">Lịch</a></td>
+</tr>
+</tbody></table>
+</div>
+<!-- / nav buttons bar -->
+<div align="center">
+<br>
+<div id="navbar_adcode">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4367543425535879";
+/*  */
+google_ad_slot = "0167324524";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="showthread.php_files/show_ads.js">
+</script><script src="showthread.php_files/test_domain.js"></script><script>window.google_render_ad();</script><iframe name="google_ads_frame" src="showthread.php_files/ads.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" width="728" frameborder="0" height="90"></iframe>
+</div>
+<div class="smallfont">
+<a href="http://www.thienlong.org/forumvn/register.php">Remove advertisements</a>
+</div>
+</div>
+<br>
+<table class="tborder" align="center" border="0" cellpadding="6" cellspacing="1" width="100%">
+<tbody><tr>
+<td class="alt1" width="100%"><strong>LẬP TRÌNH TRÊN ĐIỆN THOẠI DI ĐỘNG</strong> <span class="smallfont">Thảo luận về một số kỹ thuật và kinh nghiệm khi lập trình cho máy điện thoại di động.</span></td>
+</tr>
+</tbody></table>
+<br>
+<!-- NAVBAR POPUP MENUS -->
+<!-- / NAVBAR POPUP MENUS -->
+<!-- PAGENAV POPUP -->
+<div class="vbmenu_popup" id="pagenav_menu" style="display: none;">
+<table border="0" cellpadding="4" cellspacing="1">
+<tbody><tr>
+<td class="thead" nowrap="nowrap">Đi đến trang...</td>
+</tr>
+<tr>
+<td class="vbmenu_option" title="nohilite">
+<form action="index.php" method="get" onsubmit="return this.gotopage()" id="pagenav_form">
+<input class="bginput" id="pagenav_itxt" style="font-size: 11px;" size="4" type="text">
+<input class="button" id="pagenav_ibtn" value="Tiếp tục" type="button">
+</form>
+</td>
+</tr>
+</tbody></table>
+</div>
+<!-- / PAGENAV POPUP -->
+<a name="poststop" id="poststop"></a>
+<!-- controls above postbits -->
+<table style="margin-bottom: 3px;" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="bottom">
+<td class="smallfont"><a href="http://www.thienlong.org/forumvn/newreply.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;do=newreply&amp;noquote=1&amp;p=38819" rel="nofollow"><img title="Gửi trả lời" src="showthread.php_files/reply.gif" alt="Gửi trả lời" border="0"></a></td>
+</tr>
+</tbody></table>
+<!-- / controls above postbits -->
+<!-- toolbar -->
+<table class="tborder" style="border-bottom-width: 0px;" align="center" border="0" cellpadding="6" cellspacing="1" width="100%">
+<tbody><tr>
+<td class="tcat" width="100%">
+<div class="smallfont">
+&nbsp;
+</div>
+</td>
+<td style="cursor: pointer;" class="vbmenu_control" id="threadtools" nowrap="nowrap">
+<a href="http://www.thienlong.org/forumvn/showthread.php?t=8862&amp;nojs=1#goto_threadtools">Công Cụ</a>
+<script type="text/javascript"> vbmenu_register("threadtools"); </script> <img alt="" title="" src="showthread.php_files/menu_open.gif" border="0">
+</td>
+<td style="cursor: pointer;" class="vbmenu_control" id="displaymodes" nowrap="nowrap">
+<a href="http://www.thienlong.org/forumvn/showthread.php?t=8862&amp;nojs=1#goto_displaymodes">Dạng sắp xếp bài</a>
+<script type="text/javascript"> vbmenu_register("displaymodes"); </script> <img alt="" title="" src="showthread.php_files/menu_open.gif" border="0">
+</td>
+</tr>
+</tbody></table>
+<!-- / toolbar -->
+<!-- end content table -->
+</div>
+</div>
+</div>
+<!-- / close content container -->
+<!-- / end content table -->
+<div id="posts"><!-- post #38819 -->
+<!-- open content container -->
+<div align="center">
+<div class="page" style="width: 100%; text-align: left;">
+<div style="padding: 0px;" align="left">
+<div id="edit38819" style="padding: 0px 0px 6px;">
+<!-- this is not the last post shown on the page -->
+<table id="post38819" class="tborder" align="center" border="0" cellpadding="6" cellspacing="0" width="100%">
+<tbody><tr>
+<td class="thead" style="border-style: solid none solid solid; border-color: rgb(255, 255, 255) -moz-use-text-color rgb(255, 255, 255) rgb(255, 255, 255); border-width: 1px 0px 1px 1px; font-weight: normal;">
+<!-- status icon and date -->
+<a name="post38819"><img title="Cũ" class="inlineimg" src="showthread.php_files/post_old.gif" alt="Cũ" border="0"></a>
+28-04-2006, 01:12 PM
+<!-- / status icon and date -->
+</td>
+<td class="thead" style="border-style: solid solid solid none; border-color: rgb(255, 255, 255) rgb(255, 255, 255) rgb(255, 255, 255) -moz-use-text-color; border-width: 1px 1px 1px 0px; font-weight: normal;" align="right">
+&nbsp;
+#<a href="http://www.thienlong.org/forumvn/showpost.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;p=38819&amp;postcount=1" target="new" rel="nofollow" id="postcount38819" name="1"><strong>1</strong></a>
+</td>
+</tr>
+<tr valign="top">
+<td class="alt2" style="border-style: none solid; border-color: -moz-use-text-color rgb(255, 255, 255); border-width: 0px 1px;" width="175">
+<div id="postmenu_38819">
+<a class="bigusername" href="http://www.thienlong.org/forumvn/member.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;u=4">Quang Thảo</a>
+<script type="text/javascript"> vbmenu_register("postmenu_38819", true); </script>
+</div>
+<div class="smallfont">Chuyên gia điện thoại</div>
+<div class="smallfont"><img src="showthread.php_files/yellow.gif" alt="" border=""><img src="showthread.php_files/yellow.gif" alt="" border=""><img src="showthread.php_files/yellow.gif" alt="" border=""><img src="showthread.php_files/yellow.gif" alt="" border=""><img src="showthread.php_files/yellow.gif" alt="" border=""><img src="showthread.php_files/yellow.gif" alt="" border=""><img src="showthread.php_files/yellow.gif" alt="" border=""></div>
+<div class="smallfont">
+&nbsp;<br><a href="http://www.thienlong.org/forumvn/member.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;u=4"><img title="Avatar của Quang Thảo" src="showthread.php_files/image.jpeg" alt="Avatar của Quang Thảo" border="0" width="150" height="113"></a>
+</div>
+<div class="smallfont">
+&nbsp;<br>
+<div>Ngày gia nhập: Oct 2003</div>
+<div>Nơi cư ngụ: Trên ghế, gần cái bàn, trước cái laptop.</div>
+<div>
+Bài gửi: 1,488
+</div>
+<div>Thanks: 5</div>
+<div>
+Thanked 624 Times in 200 Posts
+</div>
+Rep Power: <span id="reppower_38819_4">7</span> <div><span id="repdisplay_38819_4"><img title="Quang Thảo is on a distinguished road" class="inlineimg" src="showthread.php_files/reputation_pos.gif" alt="Quang Thảo is on a distinguished road" border="0"></span></div>
+<div><a href="#" onclick="imwindow('icq', '4', 500, 450); return false;"><img title="Gửi tin nhắn qua ICQ tới Quang Thảo" src="showthread.php_files/im_icq.gif" alt="Gửi tin nhắn qua ICQ tới Quang Thảo" border="0"></a>   <a href="#" onclick="imwindow('yahoo', '4', 400, 200); return false;"><img title="Gửi tin nhắn qua Yahoo tới Quang Thảo" src="showthread.php_files/im_yahoo.gif" alt="Gửi tin nhắn qua Yahoo tới Quang Thảo" border="0"></a> <a href="#" onclick="imwindow('skype', '4', 400, 285); return false;"><img title="Gửi tin nhắn qua Skype™ tới Quang Thảo" src="showthread.php_files/quangthao.png" alt="Gửi tin nhắn qua Skype™ tới Quang Thảo" border="0"></a></div>
+</div>
+</td>
+<td class="alt1" id="td_post_38819" style="border-right: 1px solid rgb(255, 255, 255);">
+<!-- icon and title -->
+<div class="smallfont">
+<img title="Mặc định" class="inlineimg" src="showthread.php_files/icon1.gif" alt="Mặc định" border="0">
+<strong>Tổng quan về J2ME</strong>
+</div>
+<hr style="color: rgb(255, 255, 255); background-color: rgb(255, 255, 255);" size="1">
+<!-- / icon and title -->
+<!-- message -->
+<div id="post_message_38819">
+<b>I. Lời nói đầu:</b><br>
+Số lượng thiết bị di động ngày càng tăng ở Việt Nam, nhiều người đã coi
+điện thọai di động như một vật không thể thiếu trong cuộc sống hằng
+ngày. Cùng với sự gia tăng số lượng người dùng thì các tính năng dành
+cho điện thoại cũng tăng theo tương ứng. Hàng loạt các tính năng cao
+cấp được giới thiệu như chụp hình số, nghe nhạc và đặc biệt nhất là có
+thể sử dụng các chương trình không phải do nhà sản xuất điện thọai cung
+cấp. Đây có thể được coi là một cuộc cách mạng trong lĩnh vực di động,
+nó biến chiếc điện thọai nhỏ bé của bạn thành một chiếc máy tính thu
+nhỏ, với những chủng loại điện thoại này bạn có thể đọc báo, tiểu
+thuyết, tra từ điển, bản đồ và nhất là mang thế giới giải trí đến bên
+cạnh, những bản nhạc hay, những games hay sẽ luôn sẵn sàng mỗi khi bạn
+cần đến. Đặc biệt hơn, với sự hỗ trợ của nền tảng phần mềm sử dụng cho
+thiết bị di động, nhà thiết kế còn có thể biến những đồ vật dùng trong
+gia đình thành những “cỗ máy biết suy nghĩ” như lò vi sóng, hộp điều
+khiển ti-vi, hệ thống xem DVD, VCD, các máy PDA dùng cho cá nhân và
+trên xe hơi … Để góp phần cho sự phát triển đó ngoài yếu tố phần cứng
+thì nền tảng phần mềm là nhân tố quyết định vì chúng ta đã biết, có
+hàng chục hãng sản xuất điện thoại khác nhau và sử dụng công nghệ khác
+nhau. Làm sao để các thiết bị phần cứng khác nhau có thể sử dụng chung
+một nền tảng phần mềm? Đây là nội dung chúng ta sẽ tìm hiểu trong bài
+viết hôm nay, đó là nền tảng <a href="http://www.thienlong.org/forumvn/showthread.php?t=8862" target="_blank" class="gal" onmouseover='GAL_popup(this,"1", 300, "style=\"border: 1pt solid #000000;\"", "J2ME được phát triển từ kiến trúc Java Card, Embeded Java và Personal Java của phiên bản Java 1.1. Đến sự ra đời của Java 2 thì Sun quyết định thay thế Personal Java và đươc gọi với tên mới là Java 2 Micro Edition, hay viết tắt là J2ME. Đúng với tên gọi, J2ME là nền tảng cho các thiết bị có tính chất nhỏ, gọn (Micro có nghĩa là nhỏ trong tiếng Anh).", "style=\"background: #FFFFCC;padding: 2px;font-size: 10px;\"", "Giải thích từ : J2ME", "style=\"border-top: 1px solid black;border-bottom: 1px solid black;background: #CCCCCC;padding: 1px;font-size: 10px;font-weight: bold;color: #000000;\"");' onmouseout="GAL_hidepopup();">J2ME</a>- Java 2 Platform,Micro Edition.<br>
+<b>Để có thể hiểu rõ bài viết, độc giả cần phải có kiến thức Java cơ bản</b><br>
+<b>a. Lịch sử:</b> J2ME được phát triển từ kiến trúc Java Card, Embeded
+Java và Personal Java của phiên bản Java 1.1. Đến sự ra đời của Java 2
+thì Sun quyết định thay thế Personal Java và đươc gọi với tên mới là
+Java 2 Micro Edition, hay viết tắt là J2ME. Đúng với tên gọi, J2ME là
+nền tảng cho các thiết bị có tính chất nhỏ, gọn (Micro có nghĩa là nhỏ
+trong tiếng Anh). Mời bạn xem hình dưới<br>
+<div align="center"><img src="showthread.php_files/j2me1.jpg" alt="" border="0"></div><b>b . Lý do chọn J2ME</b>·<br>
+Java ban đầu được thiết kế dành cho các máy với tài nguyên bộ nhớ hạn chế<br>
+· Thị trường của J2ME được mở rộng ra cho nhiều chủng loại thiết bị như:<br>
+1. Các lọai thẻ cá nhân như Java Card<br>
+2. Máy điện thoại di động<br>
+3. Máy PDA (Personal Digital Assistant - thiết bị trợ giúp cá nhân)<br>
+4. Các hộp điều khiển dành cho tivi, thiết bị giải trí gia dụng …<br>
+<b>II. Kiến trúc J2ME:</b> phần này sẽ trình bày kiến trúc tổng quát
+toàn bộ nền tảng Java, để qua đó độc giả có thể thấy rõ hơn chiến lược
+về Java của Sun<br>
+<div align="center"><img src="showthread.php_files/j2me2.jpg" alt="" border="0"></div>a. Giới thiệu các thành phần trong nền tảng J2ME:<br>
+1. Định nghĩa về Configuration (Cấu hình): là đặc tả định nghĩa một môi
+trường phần mềm cho một dòng các thiết bị được phân loại bởi tập hợp
+các đặc tính, ví dụ như:<br>
+·Kiểu và số lượng bộ nhớ<br>
+·Kiểu và tốc độ bộ vi xử lý<br>
+·Kiểu mạng kết nối<br>
+Do đây là đặc tả nên các nhà sản xuất thiết bị như  <a href="http://www.thienlong.org/forumvn/showthread.php?p=71640#post71640" target="_blank" class="gal" onmouseover='GAL_popup(this,"1", 300, "style=\"border: 1pt solid #000000;\"", "Là nhà sản xuất điện thoại di động hàng đầu tại Hàn Quốc. Và đứng hàng thứ 2 trên thế giới.", "style=\"background: #FFFFCC;padding: 2px;font-size: 10px;\"", "Giải thích từ : samsung", "style=\"border-top: 1px solid black;border-bottom: 1px solid black;background: #CCCCCC;padding: 1px;font-size: 10px;font-weight: bold;color: #000000;\"");' onmouseout="GAL_hidepopup();">Samsung</a>,
+Nokia …bắt buộc phải thực thi đầy đủ các đặc tả do Sun qui định để các
+lập trình viên có thể dựa vào môi trường lập trình nhất quán và thông
+qua sự nhất quán này, các ứng dụng được tạo ra có thể mang tính độc lập
+thiết bị cao nhất có thể. Ví dụ như một lập trình viên viết chương
+trình game cho điện thoại Samsung thì có thể sửa đổi chương trình của
+mình một cách tối thiểu nhất để có thể chạy trên điện thọai Nokia. Qua
+đây ta thấy khẩu hiệu “Write Once, Run Everywhere” của Java đã không
+còn đúng nữa, nhưng ta cũng phải đánh giá cao sự nổ lực của Sun trong
+việc tạo ra một môi trường phần mềm chung cho vô số chủng loại thiết bị
+di động có trên thị trường. Hiện nay Sun đã đưa ra 2 dạng Configuration.<br>
+2. CLDC (Connected Limited Device Configuration-Cấu hình thiết bị kết
+nối giới hạn): được thiết kế để nhắm vào thị trường các thiết bị cấp
+thấp (low-end), các thiết bị này thông thường là máy điện thọai di động
+và PDA với khoảng 512 KB bộ nhớ. Vì tài nguyên bộ nhớ hạn chế nên CLDC
+được gắn với Java không dây (Java Wireless ), dạng như cho phép người
+sử dụng mua và tải về các ứng dụng Java, ví dụ như là Midlet.<br>
+3. CDC- Connected Device Configuration (Cấu hình thiết bị kết nối): CDC
+được đưa ra nhắm đến các thiết bị có tính năng mạnh hơn dòng thiết bị
+thuộc CLDC nhưng vẫn yếu hơn các hệ thống máy để bàn sử dụng J2SE.
+Những thiết bị này có nhiều bộ nhớ hơn (thông thường là trên 2Mb) và có
+bộ xử lý mạnh hơn. Các sản phẩm này có thể kể đến như các máy PDA cấp
+cao, điện thoại web, các thiết bị gia dụng trong gia đình …<br>
+Cả 2 dạng Cấu hình kể trên đều chứa máy ảo Java (Java Virtual Machine)
+và tập hợp các lớp (class) Java cơ bản để cung cấp một môi trường cho
+các ứng dụng J2ME. Tuy nhiên, bạn chú ý rằng đối với các thiết bị cấp
+thấp, do hạn chế về tài nguyên như bộ nhớ và bộ xử lý nên không thể yêu
+cầu máy ảo hổ trợ tất cả các tính năng như với máy ảo của J2SE, ví dụ,
+các thiết bị thuộc CLDC không có phần cứng yêu cầu các phép tính toán
+dấu phẩy động, nên máy ảo thuộc CLDC không được yêu cầu hỗ trợ kiểu
+float và double.<br>
+Để dễ hiểu hơn 2 khái niệm CLDC và CDC, mời bạn đọc xem hình dưới <br>
+<div align="center"><img src="showthread.php_files/j2me3.jpg" alt="" border="0"></div>Bảng dưới là sự so sánh các thông số kỹ thuật của CDC và CLDC<br>
+<div align="center"><img src="showthread.php_files/bang1.jpg" alt="" border="0"></div><b>b.Định nghĩa về Profile:</b>
+Profile mở rộng Configuration bằng cách thêm vào các class để bổ trợ
+các tính năng cho từng thiết bị chuyên biệt. Cả 2 Configuration đều có
+những profile liên quan và từ những profile này có thể dùng các class
+lẫn nhau. Đến đây ta có thể nhận thấy do mỗi profile định nghĩa một tập
+hợp các class khác nhau, nên thường ta không thể chuyển một ứng dụng
+Java viết cho một profile này và chạy trên một máy hỗ trợ một profile
+khác. Cũng với lý do đó, bạn không thể lấy một ứng dụng viết trên J2SE
+hay J2EE và chạy trên các máy hỗ trợ J2ME. Chúng ta sẽ điểm qua các
+profile tiêu biểu:<br>
+<b>1. Mobile Information Device Profile (MIDP)ban :</b> profile này sẽ
+bổ sung các tính năng như hỗ trợ kết nối, các thành phần hỗ trợ giao
+diện người dùng … vào CLDC. Profile này được thiết kế chủ yếu để nhắm
+vào điện thọai di động với đặc tính là màn hình hiển thị hạn chế, dung
+lượng chứa có hạn. Do đó MIDP sẽ cung cấp một giao diện người dùng đơn
+giản và các tính năng mạng đơn giản dựa trên HTTP. Có thể nói MIDP là
+profile nổi tiếng nhất bởi vì nó là kiến thức cơ bản cho lập trình Java
+trên các máy di động (Wireless Java)<br>
+<b>2. PDA Profile:</b> tương tự MIDP, nhưng với thị trường là các máy PDA với màn hình và bộ nhớ lớn hơn<br>
+<b>3. Foundation Profile:</b> cho phép mở rộng các tính năng của CDC với phần lớn các thư viện của bộ Core Java2 1.3<br>
+Ngoài ra còn có Personal Basis Profile, Personal Profile, RMI Profile, Game Profile.<br>
+Bạn đọc có thể hiểu rõ hơn về vị trí của các profile này trong kiến trúc J2ME theo hình bên dưới<br>
+<div align="center"><img src="showthread.php_files/j2me4.jpg" alt="" border="0"></div>Trong
+phạm vi bài viết này, người viết chỉ đặt trọng tâm vào MIDP vì mục tiêu
+là các tạo các chương trình chạy trên điện thọai di động<br>
+<b>c. Sơ lược về MIDP:</b><br>
+Định nghĩa: Đây là Profile được định nghĩa dành riêng cho các thiết bị
+di động và là thành phần chính trong J2ME. MIDP cung cấp các chức năng
+cơ bản cho hầu hết các dòng thiêt bị di động phổ biến nhất như các máy
+điện thoạI di động và các máy PDA. Tuy nhiên MIDP không phải là cây đũa
+thần cho mọi lập trình viên vì như chúng ta đã biết, MIDP được thiết kế
+cho các máy di động có cấu hình rất thấp. Trong phần sau tôi sẽ liệt kê
+qua các tính năng mà MIDP cung cấp và những giới hạn của nó.<br>
+<b>Những chức năng MIDP KHÔNG THỂ làm được:</b><br>
+<b>1. Phép tính dấu phẩy động (floating point):</b> Phép tính này đòi hỏi rất nhiều tài nguyên  <a href="#" target="_blank" class="gal" onmouseover='GAL_popup(this,"1", 300, "style=\"border: 1pt solid #000000;\"", "Trong máy di động nó là chip xử lý mọi hoạt động của máy. Có một số tài liệu dùng từ MPU.", "style=\"background: #FFFFCC;padding: 2px;font-size: 10px;\"", "Giải thích từ : CPU", "style=\"border-top: 1px solid black;border-bottom: 1px solid black;background: #CCCCCC;padding: 1px;font-size: 10px;font-weight: bold;color: #000000;\"");' onmouseout="GAL_hidepopup();">CPU</a> và phần lớn các CPU cho các thiết bị di động không hỗ trợ phép tính này, do đó MIDP cũng không có.<br>
+2. Bộ nạp class (Class Loader).<br>
+3. Hỗ trợ từ khóa finalize() như trong J2SE: Việc “dọn dẹp“ tài nguyên trước khi nó bị xóa được đẩy về phía các lập trình viên.<br>
+4. Không hỗ trợ JNI<br>
+5. Hỗ trợ hạn chế thao tác bắt lỗi.<br>
+6. Phần lớn các thư viện API cho Swing và AWT không thể sử dụng được trong MIDP.<br>
+7. Không hỗ trợ các tính năng quản lý file và thư mục: Đây có thể làm
+bạn ngạc nhiên nhưng thực tế là các thiết bị J2ME không có hỗ trợ các
+thiết bị lưu trữ thông thường như ổ cứng v.v. Tuy nhiên, điều đó không
+có nghĩa là bạn phải mất đi mọi dữ liệu quan trọng mỗi khi tắt máy, Sun
+đã cung cấp một chức năng khác tương đương gọi là Record Management
+system (RMS) để cung cấp khả năng lưu trữ cho các thiết bị này.<br>
+<b>Những chức năng MIDP cung cấp</b><br>
+1. Các lớp và kiểu dữ liệu: Phần lớn các lớp mà các lập trình viên Java
+quen thuộc vẫn còn được giữ lại ví dụ như các lớp trong gói java.util
+như Stack, Vector và Hastable cũng như Enumeration. Tuy nhiên, mong bạn
+đọc chú ý là tôi nhấn mạnh từ “phần lớn” vì bạn KHÔNG THỂ dùng
+Iterator. Trong phần phụ lục, tôi sẽ liệt kê các gói (package) cũng như
+số lượng của chúng được hỗ trợ trong môi trường J2ME bao gồm CLDC, CDC
+và MIDP.<br>
+2. Hỗ trợ đối tượng Display: Đúng như tên gọi một chương trình MIDP sẽ
+hỗ trợ duy nhất một đối tượng Display là đối tượng quản lý việc hiển
+thị dữ liệu trên màn hình điện thoại.<br>
+3. Hỗ trợ Form và các giao diện người dùng.<br>
+4. Hỗ trợ Timer và Alert<br>
+5. Cung cấp tính năng Record Management System (RMS) cho việc lưu trữ dữ liệu<br>
+Ngoài ra vào tháng 11 năm 2003 Sun đã tung ra MIDP 2.0 với hàng loạt
+tính năng khác được cung cấp thêm so vớI bản 1.0 (Hiện nay tại Việt Nam
+đã có những đời điện thoại hỗ trợ MIDP 2.0 ví dụ như Nokia 6600 hay
+Sony Ericsson P900). Tôi xin trình bày các cải tiến nổi bật so với MIDP
+1.0<br>
+1. Nâng cấp các tính năng bảo mật như<br>
+a. Download qua mạng an toàn hơn qua việc hỗ trợ giao thức HTTPS.<br>
+b. Kiểm soát việc kết nốI giữa máy di động và server: ví dụ như các
+chương trình không thể kết nối tới server nếu thiếu sự chấp thuận của
+ngườI sử dụng.<br>
+2. Thêm các API hỗ trợ Multimedia. Một trong nhưng cải tiến hấp dẫn
+nhất của MIDP 2.0 là tập các API media của nó. Các API này là một tập
+con chỉ hỗ trợ âm thanh của Mobile Media API (MMAPI).<br>
+3. Mở rộng các tính năng của Form. Nhiều cải tiến đã được đưa vào API
+javax.microedition.lcdui trong MIDP 2.0, nhưng các thay đổi lớn nhất
+(ngoài API cho game) là trong Form và Item. <br>
+4. Hỗ trợ các lập trình viên Game bằng cách tung ra Game API: Có lẽ Sun
+đã kịp nhận ra thị trường đầy tiềm năng của các thiết bị di động trong
+lĩnh vực Game. Với MIDP 1.0 thì các lập trình viên phải tự mình viết
+code để quản lý các hành động của nhân vật cũng như quản lý đồ họa.
+Việc này sẽ làm tăng kích thước file của sản phẩm cũng như việc xuất
+hiện các đoạn mã bị lỗi. Được hưởng lợi nhất từ Game API trong MIDP 2.0
+không chỉ là các lập trình viên Game mà còn là các lập trình viên cần
+sử dụng các tính năng đồ họa cao cấp.<br>
+Ý tưởng cơ bản của Game API là việc giả định rằng một màn hình game là
+tập hợp các layer (lớp). Ví dụ như: trong một game đua xe thì màn hình
+nền là một layer, con đường là một layer và chiếc xe được xem như đang
+nằm trên layer khác.<br>
+Với Game API nhà phát triển còn được cung cấp các tính năng như quản lý các thao tác bàn phím.<br>
+5. Hỗ trợ kiểu ảnh RGB: một trong những cải tiến hấp dẫn cho các nhà
+phát triển MIDP là việc biểu diễn hình ảnh dưới dạng các mảng số
+nguyên, cho phép MIDlet thao tác với dữ liệu hình ảnh một cách trực
+tiếp.<br>
+<b>III.Mổ xẻ chương trình J2ME đầu tiên</b><br>
+<b>a.Thiết lập môi trường lập trình:</b><br>
+<b>1. Cài đặt:</b><br>
+Bạn cần cài đặt bộ J2SE vào máy tính của bạn. Tôi giả sử là bạn đang sử dụng Windows 2000 phiên bản Professional.<br>
+Địa chỉ tải J2SE về là <a href="http://java.sun.com/j2se/" target="_blank">http://java.sun.com/j2se/</a>,
+việc cài đặt này khá dễ dàng nên tôi không đi vào chi tiết, tôi giả sử
+là bạn cài đặt ở thư mục j2sdk1.4.0_03 ở thư mục gốc ổ đĩa C<br>
+<b>2. Thiết lập giá trị cho các biến môi trường:</b><br>
+·Bạn vào Control Panel -&gt; System -&gt; chọn tab Advanced, click vào
+nút Environment Variables. Bạn thêm giá trị JAVA_HOME với giá trị là
+c:\j2sdk1.4.0_03.<br>
+·Thiết lập đường dẫn:<br>
+Cũng vẫn ở trong cửa sổ Environment Variables. Thêm giá trị c:\j2sdk1.4.0_03\bin vào biến môi trường Path<br>
+<b>3. Cài đặt J2ME Wireless Toolkit</b><br>
+Đây là bộ công cụ do Sun phát triển, giúp các lập trình viên có thể
+test và chạy thử chương trình của mình mà không cần phải có máy điện
+thoại thật. Bạn đọc có thể lấy bộ công cụ này về từ địa chỉ <a href="http://java.sun.com/products/j2mewtoolkit/" target="_blank">http://java.sun.com/products/j2mewtoolkit/</a><br>
+Chú ý là phải đăng ký thành viên trước khi download. Việc đăng ký này
+là hoàn toàn miễn phí. Để cài đặt, bạn làm theo hướng dẫn của chương
+trình. Tôi giả sử bạn sẽ cài đặt vào thư mục Wtk104 trên thư mục gốc ổ
+đĩa C<br>
+Sau khi cài đặt thành công, bạn sẽ có thư mục chương trình trong menu Start như hình vẽ<br>
+<div align="center"><img src="showthread.php_files/j2me5.jpg" alt="" border="0"></div>Để chạy bộ Tool Kit này, bạn chọn Ktoolbar. Nếu mọi việc suôn sẻ, bạn sẽ thấy cửa bộ chính hiện ra<br>
+<div align="center"><img src="showthread.php_files/j2me6.jpg" alt="" border="0"></div>Chúc mừng bạn, bạn đã sẵn sàng cho việc viết chương trình cho chiếc điện thoại của mình<br>
+<b>b. Viết những dòng code đầu tiên</b><br>
+Sau khi hoàn thành các các bước ở trên, đây là lúc bắt đầu viết những dòng code đầu tiên.<br>
+Bạn nhấp chuột vào nút bấm New Project và nhập vào tên Project và Class
+mà bạn muốn tạo, ví dụ TestMidlet. Chú ý là bạn không nhất thiết phải
+tạo trùng tên class với tên Project. <br>
+Trên cửa sổ chương trình sẽ hiển thị các thông báo về việc tạo các thư mục phục vụ cho việc xây dựng và thực thi mã chương trình<br>
+<div align="center"><img src="showthread.php_files/j2me7.jpg" alt="" border="0"></div>Bạn hãy dùng Windows Explorer để xem xét các thư mục vừa tạo<br>
+<div align="center"><img src="showthread.php_files/j2me8.jpg" alt="" border="0"></div>ToolKit
+sẽ tự động tạo 1 thư mục con trong thư mục apps có tên trùng với tên
+Project mà bạn vừa tạo, trong trường hợp này là TestMidlet. Ta hãy điểm
+sơ qua vài thư mục quan trọng.<br>
+1. Bin: Chứa 2 file để cài đặt, .Jar ( Java ARchive) và file miêu tả .jad<br>
+2. Lib: Chứa các thư viện bổ sung mà bạn muốn thêm vào chương trình<br>
+3. Res; là thư mục để bạn để các file tài nguyên dành riêng cho chương trình như file văn bản và hình ảnh.<br>
+4. Src: Đây là thư mục quan trọng nhất, là nơi bạn đặt các file chứa mã nguồn<br>
+Ngòai ra, khi chạy chương trình bộ Toolkit này còn tạo ra một số thư mục để dành mục đích riêng .<br>
+Bây giờ là đến lúc bắt đầu viết mã chương trình. Bạn hãy dùng 1 chương trình sọan thảo văn bản nào đó, và viết đọan code sau<br>
+import javax.microedition.lcdui.*;<br>
+import javax.microedition.midlet.*;<br>
+public class TestMidlet<br>
+extends MIDlet <br>
+implements CommandListener {<br>
+private Form mMainForm;<br>
+public TestMidlet() {<br>
+mMainForm = new Form("Chuong trinh so 1");<br>
+mMainForm.append(new StringItem(null, "Chao cac ban, MIDP!"));<br>
+mMainForm.addCommand(new Command("Exit", Command.EXIT, 0));<br>
+mMainForm.setCommandListener(this);<br>
+}<br>
+public void startApp() {<br>
+Display.getDisplay(this).setCurrent(mMainForm);<br>
+}<br>
+public void pauseApp() {}<br>
+public void destroyApp(boolean unconditional) {}<br>
+public void commandAction(Command c, Displayable s) {<br>
+notifyDestroyed();<br>
+}<br>
+}<br>
+Sau đó, hãy lưu đoạn code trên vào file tên là TestMidlet.java trong thư mục src.<br>
+Sau đó bấm vào nút Build, nếu code của bạn không bị lỗi, bạn sẽ nhận được thông báo sau<br>
+Project settings saved<br>
+Building "TestMidlet"<br>
+Build complete<br>
+Nhấn nút Run để chạy Emulator, chọn TestMidlet<br>
+Nếu bạn thấy trên máy bạn xuất hiện hình như hình vẽ bên dưới thì xin
+chúc mừng bạn. Chương trình J2ME đầu tiên đã chạy thành công <br>
+<div align="center"><img src="showthread.php_files/j2me9.jpg" alt="" border="0"></div><b>c. Tìm hiểu chi tiết mã nguồn</b><br>
+Giống như dạng chương trình Applet trên J2SE, một Midlet luôn luôn kế thừa javax.microedition.midlet <br>
+Hàm cơ bản nhất trong mọi Midlet là startApp(), hàm này sẽ khởi tạo
+Midlet cũng như vận hành các thành phần hoặc đối tượng khác, ngoài
+startApp(), mỗi Midlet còn có pauseApp() và destroyApp(), mỗi hàm này
+sẽ đựợc gọi thực thi tương ứng khi user chọn dừng hoặc thoát chương
+trình.<br>
+Bạn tham khảo hình minh họa<br>
+<div align="center"><img src="showthread.php_files/j2me10.jpg" alt="" border="0"></div>Màn
+hình thật sự trên điện thọai di động được hình tượng hóa bằng đối tượng
+Display. Mỗi Midlet chỉ có một và duy nhất một đối tượng Display, mà
+bạn có thể truy cập bằng cách dùng lệnh getDisplay(this) <br>
+<b>IV. Kết luận</b><br>
+Trong phạm vi bài viết này, người viết chí có dụng ý giới thiệu đến mọi
+người lợi ích của J2ME trong thế giới số ngày này, đồng thời giới thiệu
+mô hình J2ME trong kiến trúc tổng thể Java 2 của Sun. <br>
+Ngoài ra qua một ví dụ nhỏ và hết sức cơ bản, bạn đọc có thể hiểu rõ
+cách một chưong trình Midlet được kích hoạt và chạy như thế nào. Hi
+vọng trong những bài viết sau, sẽ giới thiệu cho mọI người những ứng
+dụng có ích và thực tế hơn, cũng như cách chạy trên điện thoại thật sự.<br>
+<div align="center"><img src="showthread.php_files/bang23.jpg" alt="" border="0"><br>
+<img src="showthread.php_files/bang4.jpg" alt="" border="0"></div><b>V. Phụ lục</b><br>
+Tham khảo:<br>
+<a href="http://www.cs.armstrong.edu/burge/pdf/huc/01_J2ME_Overview.pdf" target="_blank">http://www.cs.armstrong.edu/burge/pd...E_Overview.pdf</a><br>
+<br>
+<a href="http://www.onjava.com/pub/a/onjava/2001/03/08/J2ME.html" target="_blank">http://www.onjava.com/pub/a/onjava/2001/03/08/J2ME.html</a><br>
+<br>
+<a href="http://developers.sun.com/techtopics/mobility/midp/articles/wtoolkit/" target="_blank">http://developers.sun.com/techtopics...cles/wtoolkit/</a> <br>
+<br>
+<i>Nguyễn Hữu Mai (JavaVietnam Admin)</i>
+</div>
+<!-- / message -->
+<!-- sig -->
+<div>
+__________________<br>
+<font color="Red"><b>"Think Different, Do Different" </b></font>
+</div>
+<!-- / sig -->
+<!-- edit note -->
+<div class="smallfont">
+<hr style="color: rgb(255, 255, 255); background-color: rgb(255, 255, 255);" size="1">
+<em>
+Sửa bởi thienlongtelecom : 28-04-2006 lúc <span class="time">02:30 PM</span>
+</em>
+</div>
+<!-- / edit note -->
+</td>
+</tr>
+<tr>
+<td class="alt2" style="border-style: none solid solid; border-color: -moz-use-text-color rgb(255, 255, 255) rgb(255, 255, 255); border-width: 0px 1px 1px;">
+<img title="Quang Thảo đang Offline" class="inlineimg" src="showthread.php_files/user_offline.gif" alt="Quang Thảo đang Offline" border="0">
+&nbsp;
+</td>
+<td class="alt1" style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(255, 255, 255) rgb(255, 255, 255) -moz-use-text-color; border-width: 0px 1px 1px 0px;" align="right">
+<!-- controls -->
+<a href="http://www.thienlong.org/forumvn/newreply.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;do=newreply&amp;p=38819" rel="nofollow"><img title="Trả lời kèm theo trích dẫn" src="showthread.php_files/quote.gif" alt="Trả lời kèm theo trích dẫn" border="0"></a>
+<!-- / controls -->
+</td>
+</tr>
+</tbody></table>
+<div id="post_thanks_box_38819"></div>
+<!-- post 38819 popup menu -->
+<div class="vbmenu_popup" id="postmenu_38819_menu" style="display: none;">
+<table border="0" cellpadding="4" cellspacing="1">
+<tbody><tr>
+<td class="thead">Quang Thảo</td>
+</tr>
+<tr><td class="vbmenu_option"><a href="http://www.thienlong.org/forumvn/member.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;u=4">Xem Hồ sơ</a></td></tr>
+<tr><td class="vbmenu_option"><a href="http://www.thienlong.org/forumvn/private.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;do=newpm&amp;u=4" rel="nofollow">Gửi tin nhắn đến Quang Thảo</a></td></tr>
+<tr><td class="vbmenu_option"><a href="http://www.thienlong.org/forumvn/search.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;do=finduser&amp;u=4" rel="nofollow">Tìm thêm bài gửi bởi Quang Thảo</a></td></tr>
+</tbody></table>
+</div>
+<!-- / post 38819 popup menu -->
+</div>
+</div>
+</div>
+</div>
+<!-- / close content container -->
+<!-- / post #38819 --><!-- post #571887 -->
+<!-- open content container -->
+<div align="center">
+<div class="page" style="width: 100%; text-align: left;">
+<div style="padding: 0px;" align="left">
+<div id="edit571887" style="padding: 0px 0px 6px;">
+<table id="post571887" class="tborder" align="center" border="0" cellpadding="6" cellspacing="0" width="100%">
+<tbody><tr>
+<td class="thead" style="border-style: solid none solid solid; border-color: rgb(255, 255, 255) -moz-use-text-color rgb(255, 255, 255) rgb(255, 255, 255); border-width: 1px 0px 1px 1px; font-weight: normal;">
+<!-- status icon and date -->
+<a name="post571887"><img title="Cũ" class="inlineimg" src="showthread.php_files/post_old.gif" alt="Cũ" border="0"></a>
+17-10-2008, 12:48 PM
+<!-- / status icon and date -->
+</td>
+<td class="thead" style="border-style: solid solid solid none; border-color: rgb(255, 255, 255) rgb(255, 255, 255) rgb(255, 255, 255) -moz-use-text-color; border-width: 1px 1px 1px 0px; font-weight: normal;" align="right">
+&nbsp;
+#<a href="http://www.thienlong.org/forumvn/showpost.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;p=571887&amp;postcount=2" target="new" rel="nofollow" id="postcount571887" name="2"><strong>2</strong></a>
+</td>
+</tr>
+<tr valign="top">
+<td class="alt2" style="border-style: none solid; border-color: -moz-use-text-color rgb(255, 255, 255); border-width: 0px 1px;" width="175">
+<div id="postmenu_571887">
+<a class="bigusername" href="http://www.thienlong.org/forumvn/member.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;u=71354">Ntl190981</a>
+<script type="text/javascript"> vbmenu_register("postmenu_571887", true); </script>
+</div>
+<div class="smallfont">Ít đóng góp</div>
+<div class="smallfont"><img src="showthread.php_files/yellow.gif" alt="" border=""></div>
+<div class="smallfont">
+&nbsp;<br>
+<div>Ngày gia nhập: Aug 2007</div>
+<div>
+Bài gửi: 10
+</div>
+<div>Thanks: 0</div>
+<div>
+Thanked 7 Times in 1 Post
+</div>
+Rep Power: <span id="reppower_571887_71354">0</span> <div><span id="repdisplay_571887_71354"><img title="Ntl190981 is on a distinguished road" class="inlineimg" src="showthread.php_files/reputation_pos.gif" alt="Ntl190981 is on a distinguished road" border="0"></span></div>
+<div>    </div>
+</div>
+</td>
+<td class="alt1" id="td_post_571887" style="border-right: 1px solid rgb(255, 255, 255);">
+<!-- icon and title -->
+<div class="smallfont">
+<img title="Mặc định" class="inlineimg" src="showthread.php_files/icon1.gif" alt="Mặc định" border="0">
+<strong>Xin hướng dẫn đoạn code sau</strong>
+</div>
+<hr style="color: rgb(255, 255, 255); background-color: rgb(255, 255, 255);" size="1">
+<!-- / icon and title -->
+<!-- message -->
+<div id="post_message_571887">
+import javax.microedition.lcdui.*;<br>
+import javax.microedition.midlet.*;<br>
+import javax.microedition.io.*;<br>
+public class Hello<br>
+extends MIDlet implements CommandListener <br>
+{ <br>
+ private Form mMainForm;<br>
+ public Hello() <br>
+ {<br>
+  String telNo = "tel:+84918957907"; <br>
+  platformRequest(telNo );<br>
+  mMainForm = new Form("Hello");<br>
+  mMainForm.append("Xin chao cac ban");<br>
+  mMainForm.addCommand(new Command("Exit", Command.EXIT, 0));<br>
+  mMainForm.setCommandListener(this);<br>
+ }<br>
+public void startApp() <br>
+{<br>
+ Display.getDisplay(this).setCurrent(mMainForm);<br>
+}<br>
+public void pauseApp() {}<br>
+public void destroyApp(boolean unconditional) {}<br>
+public void commandAction(Command c, Displayable s) <br>
+{<br>
+ notifyDestroyed();<br>
+}}<br>
+ <br>
+ <br>
+cho em hỏi đoạn code này còn thiếu những gì anh Quang Thảo có thể bổ sung dùm em???
+</div>
+<!-- / message -->
+</td>
+</tr>
+<tr>
+<td class="alt2" style="border-style: none solid solid; border-color: -moz-use-text-color rgb(255, 255, 255) rgb(255, 255, 255); border-width: 0px 1px 1px;">
+<img title="Ntl190981 đang Offline" class="inlineimg" src="showthread.php_files/user_offline.gif" alt="Ntl190981 đang Offline" border="0">
+&nbsp;
+</td>
+<td class="alt1" style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(255, 255, 255) rgb(255, 255, 255) -moz-use-text-color; border-width: 0px 1px 1px 0px;" align="right">
+<!-- controls -->
+<a href="http://www.thienlong.org/forumvn/newreply.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;do=newreply&amp;p=571887" rel="nofollow"><img title="Trả lời kèm theo trích dẫn" src="showthread.php_files/quote.gif" alt="Trả lời kèm theo trích dẫn" border="0"></a>
+<!-- / controls -->
+</td>
+</tr>
+</tbody></table>
+<div id="post_thanks_box_571887"></div>
+<!-- post 571887 popup menu -->
+<div class="vbmenu_popup" id="postmenu_571887_menu" style="display: none;">
+<table border="0" cellpadding="4" cellspacing="1">
+<tbody><tr>
+<td class="thead">Ntl190981</td>
+</tr>
+<tr><td class="vbmenu_option"><a href="http://www.thienlong.org/forumvn/member.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;u=71354">Xem Hồ sơ</a></td></tr>
+<tr><td class="vbmenu_option"><a href="http://www.thienlong.org/forumvn/private.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;do=newpm&amp;u=71354" rel="nofollow">Gửi tin nhắn đến Ntl190981</a></td></tr>
+<tr><td class="vbmenu_option"><a href="http://www.thienlong.org/forumvn/search.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;do=finduser&amp;u=71354" rel="nofollow">Tìm thêm bài gửi bởi Ntl190981</a></td></tr>
+</tbody></table>
+</div>
+<!-- / post 571887 popup menu -->
+</div>
+</div>
+</div>
+</div>
+<!-- / close content container -->
+<!-- / post #571887 --><div id="lastpost"></div></div>
+<!-- start content table -->
+<!-- open content container -->
+<div align="center">
+<div class="page" style="width: 100%; text-align: left;">
+<div style="padding: 0px;" align="left">
+<!-- / start content table -->
+<!-- controls below postbits -->
+<table style="margin-top: -3px;" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="top">
+<td class="smallfont"><a href="http://www.thienlong.org/forumvn/newreply.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;do=newreply&amp;noquote=1&amp;p=571887" rel="nofollow"><img title="Gửi trả lời" src="showthread.php_files/reply.gif" alt="Gửi trả lời" border="0"></a></td>
+</tr>
+</tbody></table>
+<!-- / controls below postbits -->
+<!-- lightbox scripts -->
+<script type="text/javascript" src="showthread.php_files/vbulletin_lightbox.js"></script>
+<script type="text/javascript">
+<!--
+vBulletin.register_control("vB_Lightbox_Container", "posts", 1);
+//-->
+</script>
+<!-- / lightbox scripts -->
+<!-- next / previous links -->
+<br>
+<div class="smallfont" align="center">
+<strong>«</strong>
+<a href="http://www.thienlong.org/forumvn/showthread.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;t=8862&amp;goto=nextoldest" rel="nofollow">Chủ đề trước</a>
+|
+<a href="http://www.thienlong.org/forumvn/showthread.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;t=8862&amp;goto=nextnewest" rel="nofollow">Chủ đề kế tiếp</a>
+<strong>»</strong>
+</div>
+<!-- / next / previous links -->
+<!-- popup menu contents -->
+<br>
+<!-- thread tools menu -->
+<div class="vbmenu_popup" id="threadtools_menu" style="display: none;">
+<form action="postings.php?t=8862&amp;pollid=" method="post" name="threadadminform">
+<table border="0" cellpadding="4" cellspacing="1">
+<tbody><tr>
+<td class="thead">Công Cụ<a name="goto_threadtools"></a></td>
+</tr>
+<tr>
+<td class="vbmenu_option"><img title="Tạo trang in" class="inlineimg" src="showthread.php_files/printer.gif" alt="Tạo trang in"> <a href="http://www.thienlong.org/forumvn/printthread.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;t=8862" accesskey="3" rel="nofollow">Tạo trang in</a></td>
+</tr>
+<tr>
+<td class="vbmenu_option"><img title="Gửi Email Trang Này" class="inlineimg" src="showthread.php_files/sendtofriend.gif" alt="Gửi Email Trang Này"> <a href="http://www.thienlong.org/forumvn/sendmessage.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;do=sendtofriend&amp;t=8862" rel="nofollow">Gửi Email Trang Này</a></td>
+</tr>
+</tbody></table>
+</form>
+</div>
+<!-- / thread tools menu -->
+<!-- **************************************************** -->
+<!-- thread display mode menu -->
+<div class="vbmenu_popup" id="displaymodes_menu" style="display: none;">
+<table border="0" cellpadding="4" cellspacing="1">
+<tbody><tr>
+<td class="thead">Dạng sắp xếp bài<a name="goto_displaymodes"></a></td>
+</tr>
+<tr>
+<td class="vbmenu_option" title="nohilite"><img title="Chế độ bình thường" class="inlineimg" src="showthread.php_files/mode_linear.gif" alt="Chế độ bình thường"> <strong>Chế độ bình thường</strong></td>
+</tr>
+<tr>
+<td class="vbmenu_option"><img title="Chế độ pha trộn" class="inlineimg" src="showthread.php_files/mode_hybrid.gif" alt="Chế độ pha trộn"> <a href="http://www.thienlong.org/forumvn/showthread.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;mode=hybrid&amp;t=8862">Chuyển sang chế độ pha trộn</a></td>
+</tr>
+<tr>
+<td class="vbmenu_option"><img title="Chế độ dạng cây" class="inlineimg" src="showthread.php_files/mode_threaded.gif" alt="Chế độ dạng cây"> <a href="http://www.thienlong.org/forumvn/showthread.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;p=38819&amp;mode=threaded#post38819">Chuyển sang chế độ dạng cây</a></td>
+</tr>
+</tbody></table>
+</div>
+<!-- / thread display mode menu -->
+<!-- **************************************************** -->
+<!-- **************************************************** -->
+<!-- / popup menu contents -->
+<!-- forum rules and admin links -->
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="bottom">
+<td valign="top" width="100%">
+<table class="tborder" border="0" cellpadding="6" cellspacing="1" width="210">
+<thead>
+<tr>
+<td class="thead">
+<a style="float: right;" href="#top" onclick="return toggle_collapse('forumrules')"><img id="collapseimg_forumrules" src="showthread.php_files/collapse_thead.gif" alt="" border="0"></a>
+Quyền hạn Gửi bài
+</td>
+</tr>
+</thead>
+<tbody id="collapseobj_forumrules" style="">
+<tr>
+<td class="alt1" nowrap="nowrap"><div class="smallfont">
+<div>Bạn <strong>không thể</strong> gửi chủ đề</div>
+<div>Bạn <strong>không thể</strong> gửi trả lời</div>
+<div>Bạn <strong>không thể</strong> gửi đính kèm</div>
+<div>Bạn <strong>không thể</strong> sửa bài của mình</div>
+<hr>
+<div><a href="http://www.thienlong.org/forumvn/misc.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;do=bbcode" target="_blank">Mã BB</a> đang <strong>Mở</strong></div>
+<div><a href="http://www.thienlong.org/forumvn/misc.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;do=showsmilies" target="_blank"> Biểu tượng vui </a> đang <strong>Mở</strong></div>
+<div>Mã <a href="http://www.thienlong.org/forumvn/misc.php?s=fedb72c0c44cd31c7e9e682f5bb58276&amp;do=bbcode#imgcode" target="_blank">[IMG]</a> đang <strong>Mở</strong></div>
+<div>Mã HTML  đang <strong>Mở</strong></div>
+</div></td>
+</tr>
+</tbody>
+</table>
+</td>
+<td class="smallfont" align="right">
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td>
+<div class="smallfont" style="text-align: left; white-space: nowrap;">
+<form action="forumdisplay.php" method="get">
+<input name="s" value="fedb72c0c44cd31c7e9e682f5bb58276" type="hidden">
+<input name="daysprune" value="" type="hidden">
+<strong>Chuyển đến Chuyên mục</strong><br>
+<select name="f" onchange="this.form.submit();">
+<optgroup label="Vị trí trên Trang web">
+<option value="cp">Khung điều khiển</option>
+<option value="pm">Tin nhắn riêng</option>
+<option value="subs">Đang theo dõi</option>
+<option value="wol">Ai đang Online</option>
+<option value="search">Tìm kiếm trong Chuyên mục</option>
+<option value="home">Trang chủ</option>
+</optgroup>
+<optgroup label="Diễn đàn">
+<option value="3" class="fjdpth0"> NỘI QUY CHUNG VÀ THÔNG BÁO</option>
+<option value="10" class="fjdpth1">&nbsp; &nbsp;  Nội quy diễn đàn</option>
+<option value="11" class="fjdpth1">&nbsp; &nbsp;  Các vấn đề chung</option>
+<option value="157" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Tin tức - thông báo</option>
+<option value="158" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Hướng dẫn hỗ trợ</option>
+<option value="59" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Góp ý cho diễn đàn</option>
+<option value="132" class="fjdpth1">&nbsp; &nbsp;  Nơi cảnh cáo các thành viên vi phạm - Ban members!!!</option>
+<option value="35" class="fjdpth1">&nbsp; &nbsp;  Vấn đề thành lập "HIỆP HỘI ĐIỆN THOẠI DI ĐỘNG"</option>
+<option value="4" class="fjdpth0"> THẢO LUẬN VỀ KỸ THUẬT MÁY GSM</option>
+<option value="247" class="fjdpth1">&nbsp; &nbsp;  BLACKBERRY</option>
+<option value="248" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần mềm</option>
+<option value="249" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần cứng</option>
+<option value="250" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Tài liệu kỹ thuật</option>
+<option value="251" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề kỹ thuật khác</option>
+<option value="13" class="fjdpth1">&nbsp; &nbsp;  NOKIA</option>
+<option value="139" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần mềm</option>
+<option value="94" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần cứng</option>
+<option value="72" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Tài liệu kỹ thuật</option>
+<option value="153" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề kỹ thuật khác</option>
+<option value="14" class="fjdpth1">&nbsp; &nbsp;  SAMSUNG</option>
+<option value="140" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần mềm</option>
+<option value="95" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần cứng</option>
+<option value="73" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Tài liệu kỹ thuật</option>
+<option value="154" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề kỹ thuật khác</option>
+<option value="15" class="fjdpth1">&nbsp; &nbsp;  MOTOROLA</option>
+<option value="141" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần mềm</option>
+<option value="96" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần cứng</option>
+<option value="74" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Tài liệu kỹ thuật</option>
+<option value="155" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề kỹ thuật khác</option>
+<option value="16" class="fjdpth1">&nbsp; &nbsp;  SIEMENS-BENQ</option>
+<option value="142" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần mềm</option>
+<option value="93" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần cứng</option>
+<option value="75" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Tài liệu kỹ thuật</option>
+<option value="182" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề kỹ thuật khác</option>
+<option value="17" class="fjdpth1">&nbsp; &nbsp;  PANASONIC</option>
+<option value="143" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần mềm</option>
+<option value="107" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần cứng</option>
+<option value="76" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Tài liệu kỹ thuật</option>
+<option value="18" class="fjdpth1">&nbsp; &nbsp;  SONY- ERICSSON</option>
+<option value="144" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần mềm</option>
+<option value="105" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần cứng</option>
+<option value="77" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Tài liệu kỹ thuật</option>
+<option value="31" class="fjdpth1">&nbsp; &nbsp;  LG GSM</option>
+<option value="145" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần mềm</option>
+<option value="108" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần cứng</option>
+<option value="78" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Tài liệu kỹ thuật</option>
+<option value="19" class="fjdpth1">&nbsp; &nbsp;  SHARP</option>
+<option value="147" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần mềm</option>
+<option value="148" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần cứng</option>
+<option value="79" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Tài liệu kỹ thuật</option>
+<option value="204" class="fjdpth1">&nbsp; &nbsp;  Các loại máy Trung Quốc</option>
+<option value="205" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần mềm</option>
+<option value="206" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần cứng</option>
+<option value="242" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Tài liệu kỹ thuật</option>
+<option value="207" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề kỹ thuật khác</option>
+<option value="32" class="fjdpth1">&nbsp; &nbsp;  Các loại máy GSM khác</option>
+<option value="170" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần mềm</option>
+<option value="171" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần cứng</option>
+<option value="172" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Tài liệu kỹ thuật</option>
+<option value="173" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề kỹ thuật khác</option>
+<option value="97" class="fjdpth0"> KỸ THUẬT POCKET PC - SMART PHONE</option>
+<option value="98" class="fjdpth1">&nbsp; &nbsp;  Pocket PC hệ điều hành Windows Mobile PDA</option>
+<option value="101" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần mềm</option>
+<option value="104" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần cứng</option>
+<option value="197" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Tài liệu kỹ thuật</option>
+<option value="174" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề kỹ thuật khác</option>
+<option value="99" class="fjdpth1">&nbsp; &nbsp;  Smart Phone sử dụng hệ điều hành Windows</option>
+<option value="102" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần mềm</option>
+<option value="103" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề về phần cứng</option>
+<option value="198" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Tài liệu kỹ thuật</option>
+<option value="181" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các vấn đề kỹ thuật khác</option>
+<option value="100" class="fjdpth1">&nbsp; &nbsp;  Dòng PDA sử dụng hệ điều hành PALM</option>
+<option value="235" class="fjdpth1">&nbsp; &nbsp;  Apple iPhone</option>
+<option value="159" class="fjdpth1">&nbsp; &nbsp;  Lập trình cho PPC,Palm, Smart Phone...</option>
+<option value="5" class="fjdpth0"> THẢO LUẬN VỀ  KỸ THUẬT MÁY  CDMA</option>
+<option value="21" class="fjdpth1">&nbsp; &nbsp;  Các vấn đề chung về mạng CDMA</option>
+<option value="23" class="fjdpth1">&nbsp; &nbsp;  LG Mobile</option>
+<option value="37" class="fjdpth1">&nbsp; &nbsp;  Nokia CDMA</option>
+<option value="22" class="fjdpth1">&nbsp; &nbsp;  Samsung CDMA</option>
+<option value="202" class="fjdpth1">&nbsp; &nbsp;  Motorola CDMA</option>
+<option value="106" class="fjdpth1">&nbsp; &nbsp;  SK Teletech (SKY)</option>
+<option value="240" class="fjdpth1">&nbsp; &nbsp;  Pocket PC CDMA</option>
+<option value="38" class="fjdpth1">&nbsp; &nbsp;  Các loại máy CDMA khác</option>
+<option value="47" class="fjdpth0"> CÁC THIẾT BỊ DÀNH CHO KỸ THUẬT</option>
+<option value="48" class="fjdpth1">&nbsp; &nbsp;  Thiết bị - Box - Dongle</option>
+<option value="111" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Blazer</option>
+<option value="256" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Advance Box</option>
+<option value="243" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  BB5 box</option>
+<option value="209" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  MTK - Super Doctor</option>
+<option value="195" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  FuriouS TeaM Products</option>
+<option value="196" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Infinity-Box</option>
+<option value="123" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  J.A.F</option>
+<option value="61" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Cruiser / Fighter</option>
+<option value="128" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  MARTECH  Products</option>
+<option value="124" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  UST Pro II</option>
+<option value="49" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  UFS/N box/Tornado</option>
+<option value="109" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Red Box - Red Box II và SWS-SAG</option>
+<option value="110" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Phoenix Black Box</option>
+<option value="50" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Smart-Clip</option>
+<option value="60" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Griffin/MT box</option>
+<option value="58" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  SEtool</option>
+<option value="84" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  USB Smart</option>
+<option value="85" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  MSS victor</option>
+<option value="252" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  SPT (Samsung box)</option>
+<option value="255" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  UniversalBox (UB)</option>
+<option value="254" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  NSPro</option>
+<option value="86" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các thiết bị khác</option>
+<option value="52" class="fjdpth1">&nbsp; &nbsp;  Phần mềm không dùng box</option>
+<option value="151" class="fjdpth1">&nbsp; &nbsp;  Tư vấn mua sắm thiết bị</option>
+<option value="8" class="fjdpth0"> ỨNG DỤNG - TRÒ CHƠI - HƯỚNG DẪN SỬ DỤNG</option>
+<option value="236" class="fjdpth1">&nbsp; &nbsp;  iPhone</option>
+<option value="237" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Ứng dụng iPhone</option>
+<option value="238" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Trò chơi iphone</option>
+<option value="241" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Themes - Hình nền</option>
+<option value="239" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Kinh nghiệm sử dụng</option>
+<option value="40" class="fjdpth1">&nbsp; &nbsp;  Windows Mobile™ Pocket PC</option>
+<option value="65" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Ứng dụng</option>
+<option value="228" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Net - Chat - Email</option>
+<option value="226" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Quản lý hệ thống</option>
+<option value="227" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Ứng dụng văn phòng</option>
+<option value="229" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Ứng dụng bảo mật - Quét Virus</option>
+<option value="230" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Báo thức - Lịch - Đồng hồ</option>
+<option value="231" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Chụp hình - Quay phim</option>
+<option value="232" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Nghe nhạc - Xem phim</option>
+<option value="233" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Quản lý cuộc gọi - SMS</option>
+<option value="234" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Các ứng dụng khác</option>
+<option value="66" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Trò chơi</option>
+<option value="67" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Themes - Hình nền</option>
+<option value="87" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Hỏi đáp về sử dụng</option>
+<option value="41" class="fjdpth1">&nbsp; &nbsp;  Dòng Symbian S60</option>
+<option value="68" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Ứng dụng</option>
+<option value="188" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Quản lý cuộc gọi, tin nhắn...</option>
+<option value="184" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Các chương trình xem phim</option>
+<option value="183" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Các chương trình Nghe nhạc - Ghi âm.</option>
+<option value="185" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Chương trình Quay phim - Chụp ảnh.</option>
+<option value="189" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Các chương trình chat, internet.</option>
+<option value="193" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Các ứng dụng văn phòng</option>
+<option value="194" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Việt hoá và Phần mềm Việt Nam</option>
+<option value="186" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Chương trình liên quan tới hệ thống</option>
+<option value="187" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Các chương trình khác</option>
+<option value="69" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Trò chơi</option>
+<option value="70" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Themes - Hình nền</option>
+<option value="88" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Hỏi đáp về sử dụng</option>
+<option value="176" class="fjdpth1">&nbsp; &nbsp;  Dòng Symbian S60 3rd - OS 9.1</option>
+<option value="177" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Ứng dụng</option>
+<option value="212" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Quản lý cuộc gọi - tin nhắn</option>
+<option value="213" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Chương trình nghe nhạc - xem phim</option>
+<option value="211" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Ứng dụng cho Hệ Thống</option>
+<option value="214" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Chụp hình - Quay phim - Hình ảnh</option>
+<option value="215" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Ứng dụng văn phòng</option>
+<option value="216" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Trình duyệt Net - Chat - Email...</option>
+<option value="245" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Các chương trình bảo mật - Quét Virus.</option>
+<option value="246" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Các ứng dụng Việt Nam và Việt Hoá</option>
+<option value="217" class="fjdpth3">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Các chương trình khác</option>
+<option value="178" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Trò chơi</option>
+<option value="179" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Themes - Hình nền</option>
+<option value="180" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Hỏi đáp về sử dụng</option>
+<option value="133" class="fjdpth1">&nbsp; &nbsp;  Dòng Symbian S80 - S90</option>
+<option value="134" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Ứng dụng</option>
+<option value="135" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Trò chơi</option>
+<option value="136" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Hình nền</option>
+<option value="137" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Hòi đáp về sử dụng</option>
+<option value="43" class="fjdpth1">&nbsp; &nbsp;  Dòng Series S40/S40 3rd</option>
+<option value="161" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Ứng dụng</option>
+<option value="162" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Trò chơi</option>
+<option value="163" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Hình nền</option>
+<option value="92" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Hỏi đáp về sử dụng</option>
+<option value="42" class="fjdpth1">&nbsp; &nbsp;  Dòng Symbian UIQ / UIQ 3rd</option>
+<option value="81" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Ứng dụng</option>
+<option value="82" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Trò chơi</option>
+<option value="83" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Themes - Hình nền</option>
+<option value="89" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Hỏi đáp về sử dụng</option>
+<option value="44" class="fjdpth1">&nbsp; &nbsp;  Dòng máy Samsung</option>
+<option value="127" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Ứng dụng</option>
+<option value="126" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Trò chơi</option>
+<option value="125" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Hình nền</option>
+<option value="91" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Hỏi đáp về sử dụng</option>
+<option value="62" class="fjdpth1">&nbsp; &nbsp;  Dòng hệ điều hành Linux</option>
+<option value="64" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Ứng dụng</option>
+<option value="63" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Trò chơi</option>
+<option value="168" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Hình nền</option>
+<option value="90" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Hỏi đáp về sử dụng</option>
+<option value="160" class="fjdpth1">&nbsp; &nbsp;  Dòng Motorola</option>
+<option value="164" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Ứng dụng</option>
+<option value="165" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Trò chơi</option>
+<option value="166" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Hình nền - Skin</option>
+<option value="167" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Hỏi đáp về sử dụng</option>
+<option value="121" class="fjdpth1">&nbsp; &nbsp;  Thủ thuật - mẹo vặt trong sử dụng</option>
+<option value="220" class="fjdpth0"> FUN ZONE</option>
+<option value="51" class="fjdpth1">&nbsp; &nbsp;  Các loại chuông cho di động</option>
+<option value="253" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Nhạc chuông iPhone M4R</option>
+<option value="53" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Nhạc chuông dạng  MP3</option>
+<option value="54" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Nhạc chuông dạng MMF</option>
+<option value="55" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Nhạc chuông dạng WAV</option>
+<option value="56" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Nhạc chuông dạng AMR</option>
+<option value="57" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Nhạc chuông dạng Midi</option>
+<option value="221" class="fjdpth1">&nbsp; &nbsp;  Phim cho di động</option>
+<option value="222" class="fjdpth1">&nbsp; &nbsp;  Sách - Truyện - Tài liệu</option>
+<option value="190" class="fjdpth1">&nbsp; &nbsp;  Phần mềm hỗ trợ chạy trên PC</option>
+<option value="191" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Phần mềm chuyển đổi</option>
+<option value="192" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Phần mềm kết nối</option>
+<option value="113" class="fjdpth0"> LÝ THUYẾT ĐIỆN THOẠI DI ĐỘNG</option>
+<option value="114" class="fjdpth1">&nbsp; &nbsp;  LÝ THUYẾT VỀ GSM</option>
+<option value="117" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Lý thuyết về Handset GSM</option>
+<option value="118" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Lý thuyết về mạng GSM</option>
+<option value="115" class="fjdpth1">&nbsp; &nbsp;  LÝ THUYẾT MẠNG CDMA</option>
+<option value="119" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Lý thuyết về Handset</option>
+<option value="120" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Lý thuyết về Mạng CDMA</option>
+<option value="116" class="fjdpth1">&nbsp; &nbsp;  CÁC HỆ THỐNG MOBILE KHÁC</option>
+<option value="150" class="fjsel" selected="selected">&nbsp; &nbsp;  LẬP TRÌNH TRÊN ĐIỆN THOẠI DI ĐỘNG</option>
+<option value="6" class="fjdpth0"> MUA BÁN - QUẢNG CÁO - THỊ TRƯỜNG</option>
+<option value="199" class="fjdpth1">&nbsp; &nbsp;  Tuyển dụng - Việc làm - Học tập</option>
+<option value="201" class="fjdpth1">&nbsp; &nbsp;  Công ty - Cửa hàng tự giới thiệu</option>
+<option value="218" class="fjdpth1">&nbsp; &nbsp;  Mua - Bán - Rao vặt</option>
+<option value="25" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Máy điện thoại mới và cũ</option>
+<option value="210" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Mua bán SIM, Số , thẻ cào các loại</option>
+<option value="26" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Mua bán Thiết bị - Linh kiện</option>
+<option value="27" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Mua bán Phần mềm</option>
+<option value="219" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Mua bán các thiết bị số khác</option>
+<option value="28" class="fjdpth1">&nbsp; &nbsp;  Khu Vực Quảng cáo</option>
+<option value="34" class="fjdpth1">&nbsp; &nbsp;  Các link, trang web hay</option>
+<option value="156" class="fjdpth1">&nbsp; &nbsp;  Giới thiệu bình luận về máy ĐTDĐ</option>
+<option value="208" class="fjdpth1">&nbsp; &nbsp;  Các mạng ĐTDĐ tại Việt Nam</option>
+<option value="257" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Mobifone</option>
+<option value="259" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Viettel</option>
+<option value="258" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Vinaphone</option>
+<option value="260" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  S Fone</option>
+<option value="261" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Các mạng khác</option>
+<option value="7" class="fjdpth0"> CÁC VẤN ĐỀ KHÁC</option>
+<option value="33" class="fjdpth1">&nbsp; &nbsp;  Tin tức</option>
+<option value="29" class="fjdpth1">&nbsp; &nbsp;  Giải trí - Thư giản</option>
+<option value="39" class="fjdpth1">&nbsp; &nbsp;  Các bài viết lạc đề, lỗi thời.</option>
+</optgroup>
+</select><input class="button" value="Tiếp tục" type="submit">
+</form>
+</div>
+</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<!-- /forum rules and admin links -->
+<br>
+<br>
+<div class="smallfont" align="center">Tất cả thời gian được tính theo GMT +7. Bây giờ là <span class="time">07:29 PM</span>.</div>
+<br>
+</div>
+</div>
+</div>
+<!-- / close content container -->
+<!-- /content area table -->
+<!-- Vietnamese keyboard -->
+<script type="text/javascript">
+<!--
+////////////////////////////  Author's DavidNg
+// Vietnamese Keybooard ™ //
+//////////////////////////// ©2002-2006 VietOnLine®
+///////////////////////// vBulletin Board ////////////////
+// product-vietkey.xml //
+///////////////////////// Other Author's TrucLinh | Q.Nhu
+engviet=0
+mod=0
+dockspell=1
+Old=1
+WebCookie=0
+novks="vb_login_username,username,password,passwordconfirm,recipients,email,emailconfirm,imagestamp,referrername,homepage,icq,aim,msn,yahoo,skype,folder[1],folder[2],folder[3],avatarurl,listbits[],sigpicurl,user[username],user[email],user[homepage],user[icq],user[aim],user[yahoo],user[msn],user[skype],user[parentemail],user[referrerid]".split(',')
+folder="./clientscript/vietkey/";
+function statusMessage() { // IE Only
+var str='VietKey-Mode:'
+if(engviet==0) str+=' English'
+else if(mod==0) str+=' Auto'
+else if(mod==1) str+=' Telex'
+else if(mod==2) str+=' VNI'
+else if(mod==3) str+=' VIQR'
+if(isKHTML) str+=" [Alt-F8] "
+else str+=" [F8] "
+str+="| Spell:"
+str+=(dockspell==0)?" OFF":" ON"
+if(isKHTML) str+=" [Alt-F9] "
+else str+=" [F9] "
+str+="| Accent:"
+str+=(Old==1)?" OLD":" NEW"
+if(isKHTML) str+=" [Alt-F7] "
+else str+=" [F7] "
+str+="| Việt/English [F12] | ©2002-2007, VietOnLine®"
+window.status=str }
+function updateInfo() { setCookie(); if(support) statusMessage() }
+//-->
+</script>
+<script language="javascript1.3" src="showthread.php_files/vbulletin_mod_vietkey.js"></script>
+<script language="javascript1.3" src="showthread.php_files/vbulletin_vks_detection.js"></script>
+<!-- / Vietnamese keyboard -->
+<form action="index.php" method="get">
+<table class="page" align="center" border="0" cellpadding="6" cellspacing="0" width="100%">
+<tbody><tr>
+<td class="tfoot" align="right" width="100%">
+<div class="smallfont">
+<strong>
+<a href="http://www.thienlong.org/forumvn/sendmessage.php?s=fedb72c0c44cd31c7e9e682f5bb58276" rel="nofollow" accesskey="9">Liên hệ với chúng tôi</a> -
+<a href="http://www.thienlong.org/">Thiên Long Telecom</a> -
+<a href="http://www.thienlong.org/forumvn/archive/index.php">Lưu Trữ</a> -
+<a href="#top" onclick="self.scrollTo(0, 0); return false;">Trở lên trên</a>
+</strong>
+</div>
+</td>
+</tr>
+</tbody></table>
+</form>
+</td>
+<td><img src="showthread.php_files/right.jpg" alt="" border="0"></td>
+</tr>
+</tbody></table>
+<table style="background-image: url(images/styles/christmas_2008/misc/footbg.jpg);" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td style="padding-left: 35px;" align="left" valign="top">
+<div class="smallfont" style="padding-top: 15px;"><a href="http://www.soft4mobi.com/" target="_blank">Happy new year 2009</a>
+</div>
+<br><br>
+<div class="alt5">
+Powered by vBulletin® Version 3.7.4<br>Copyright ©2000 - 2008, Jelsoft Enterprises Ltd.
+Công ty TNHH Thiết Bị Viễn Thông THIÊN LONG. 176B Trần Hưng Đạo - Q1 - TP HCM.Ad Management by <a href="http://redtyger.co.uk/" title="RedTyger website design, hosting and domains." target="_blank">RedTyger</a>
+</div>
+</td>
+<td align="right" valign="bottom"><img src="showthread.php_files/footright.jpg" alt="" border="0"></td>
+</tr>
+</tbody></table>
+<script type="text/javascript">
+<!--
+// Main vBulletin Javascript Initialization
+vBulletin_init();
+//-->
+</script>
+<!-- temp -->
+<div style="display: none;">
+<!-- thread rate -->
+<!-- / thread rate -->
+</div>
+<center><span class="smallfont">[Output: 88.49 Kb. compressed to <b>86.34</b> Kb. by saving <b>2.15</b> Kb. (2.43%)]</span></center></body></html>

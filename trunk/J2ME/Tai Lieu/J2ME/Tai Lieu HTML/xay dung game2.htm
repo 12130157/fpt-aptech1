@@ -1,0 +1,391 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en"><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Khám phá Trò chơi API of MIDP 2.0 - By Nguyễn xuân thành</title>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://my.opera.com/thanh_nx08/xml/rsd">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="xay%20dung%20game2_files/mobile01.css" type="text/css" media="handheld">
+<link rel="stylesheet" href="xay%20dung%20game2_files/mobile.css" type="text/css" media="handheld">
+<link rel="stylesheet" href="xay%20dung%20game2_files/main.css" type="text/css" media="screen,projection,tv,print">
+<link rel="stylesheet" href="xay%20dung%20game2_files/user.css" type="text/css" media="screen,projection,tv,print" charset="utf-8">
+<link rel="stylesheet" href="xay%20dung%20game2_files/common-1.css" type="text/css" media="screen,projection,tv,print">
+<link rel="stylesheet" href="xay%20dung%20game2_files/topbar1.css" type="text/css" media="screen,projection,tv,print">
+<style type="text/css" media="screen,projection,tv,print">
+		#myo { padding:0 20px; text-align:center; }
+		#myo2 { min-height:47px; }
+		#myo2, #myo-login div { width:920px; min-width:640px; text-align:left; margin:0 auto; padding:0; }
+		#myo-nav ul { margin-right:0; }
+		</style>
+<style type="text/css" media="handheld,screen,projection,tv,print">
+		#side ul:after {
+			content:".";
+			display:block;
+			height:0;
+			clear:both;
+			visibility:hidden;
+			}
+		</style>
+<link rel="shortcut icon" href="http://my.opera.com/community/favicon.ico" type="image/x-icon">
+<link rel="meta" type="application/rdf+xml" title="FOAF" href="http://my.opera.com/thanh_nx08/xml/foaf/">
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0 Feed" href="http://my.opera.com/thanh_nx08/xml/rss/blog/">
+<link rel="alternate" type="application/atom+xml" title="Atom 1.0 Feed" href="http://my.opera.com/thanh_nx08/xml/atom/blog/">
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0 Feed for comments" href="http://my.opera.com/thanh_nx08/xml/rss/comments/1041982">
+<link rel="alternate" type="application/atom+xml" title="Atom 1.0 Feed for comments" href="http://my.opera.com/thanh_nx08/xml/atom/comments/1041982">
+<link rel="alternate" type="application/x-opera-widgets" href="http://widgets.opera.com/widgetize/Feed%20Reader/Advanced/?serve&amp;skin=skin129&amp;widgetname=L%E1%BA%ADp%20tr%C3%ACnh%20Game%20tr%C3%AAn%20%C4%90TD%C4%90%20b%E1%BA%B1ng%20J2ME&amp;rel=myopera&amp;ref=thanh_nx08">
+</head><body id="myopera" onload="startAnimation()">
+<p class="hide"><a href="#content">Skip navigation</a>.</p>
+<div id="myo"><div id="myo2">
+<a href="http://my.opera.com/community/" title="My Opera - Home" id="myo-logo"><img src="xay%20dung%20game2_files/logo.gif" alt="My Opera" class="hidemobile" width="86" height="50"><img src="xay%20dung%20game2_files/logo-mobile.gif" alt="My Opera" class="mobile" width="60" height="16"></a><p id="myo-signup"><a href="http://my.opera.com/community/login/" class="hidemobile" onclick="document.getElementById('myo-login').className = 'show';document.getElementById('username').focus();return false;">
+				Log in</a> <span class="hidemobile"> | </span> <a href="http://my.opera.com/community/signup/">Sign up</a></p>
+<div id="myo-nav" class="hidemobile"><ul>
+<li><a href="http://my.opera.com/community/" accesskey="2">Home</a></li>
+<li><a href="http://my.opera.com/community/explore/" accesskey="3">Community</a></li>
+<li><a href="http://my.opera.com/community/forums/" accesskey="4">Forums</a></li>
+<li><a href="http://my.opera.com/chooseopera/blog/" accesskey="5">Opera</a></li>
+</ul></div>
+<div class="mobileclear"></div>
+</div></div>
+<form action="/community/login/index.pl" method="post" id="myo-login" class="hide" name="toplogin"><div>
+<a href="http://my.opera.com/community/help/" class="hidemobile"><input name="cancel" value=" Help / FAQ " style="margin: 8px 20px 0pt 0pt; float: right; font-size: 10px;" type="button"></a><p><span class="m"><label for="username"><b><span>username:</span></b> <input name="user" value="" maxlength="64" class="login" id="username" type="text"></label> </span><span class="m"><label for="password"><b><span>password:</span></b> <input name="passwd" value="" maxlength="64" class="login" id="password" type="password"></label> </span><span class="m"><label for="rememberme"><span><input name="remember" value="1" id="rememberme" type="checkbox"> remember</span></label></span> <span class="m"><input value="  log in  " type="submit"></span></p>
+<div class="mobileclear"></div>
+</div></form>
+<div id="wrap0"><div id="wrap1"><div id="wrap2"><div id="wrap3"><div id="wrap4">
+<div id="top" class="top-blog">
+<div id="top2"><h1><span>Lập trình Game trên ĐTDĐ bằng J2ME</span></h1></div>
+<div id="menu">
+<ul>
+<li id="menu_blog"><a href="http://my.opera.com/thanh_nx08/blog/" id="selected">
+		Blog
+		</a></li>
+<li id="menu_albums"><a href="http://my.opera.com/thanh_nx08/albums/">Photos</a></li>
+<li id="menu_friends"><a href="http://my.opera.com/thanh_nx08/friends/">Friends</a></li>
+<li id="menu_about"><a href="http://my.opera.com/thanh_nx08/about/">About</a></li>
+</ul>
+<div class="mobile" id="mobmenu"></div>
+</div>
+</div>
+<div id="content" class="blogentry">
+<div id="mainwrap"><div id="main">
+
+
+
+   
+
+   
+
+   
+   
+
+   
+
+   
+
+   
+   
+
+   
+
+   
+
+   
+
+   
+
+   
+
+
+
+
+
+
+
+
+
+
+   
+
+   
+
+   
+
+
+<!--<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/"><rdf:Description rdf:about="http://my.opera.com/thanh_nx08/blog/show.dml/1041982" dc:identifier="http://my.opera.com/thanh_nx08/blog/show.dml/1041982" dc:title="Khám phá Trò chơi API of MIDP 2.0" trackback:ping="http://my.opera.com/thanh_nx08/blog/trackback.pl/1041982/"></rdf:Description></rdf:RDF>--><div class="post" id="firstpost">
+<h2 class="title">Khám phá Trò chơi API of MIDP 2.0</h2>
+<p class="postdate">Tuesday, 29. May 2007, 13:04:52</p>
+<div class="content">
+<div id="excerpt">J2ME Là một nền tảng đại chúng để phát triển những
+trò chơi những thiết bị vô tuyến. Với MIDP 2.0, một gói mới đã được
+giới thiệu mà cung cấp vài cơ cấu chơi mà chỉ đã khả dĩ print MIDP 1.0
+với nhiều mã lặp lại. Trong phần này loạt dạy kèm này, Tôi sẽ cho bạn
+làm quen với gói chơi này và giúp đỡ bạn phát triển một trò chơi đơn
+giản mà sử dụng tất cả các lớp gói này như một công cụ học Gói được gọi
+là javax.microedition.lcdui.game,và nó những xây dựng ở trên những khái
+niệm mà bạn được học trong những sự xếp đặt trước đây trong loạt này.</div>
+<br>J2ME Gaming API:<br>Có chỉ có năm lớp Print:javax.microedition.lcdui.game package: GameCanvas, Layer, Sprite, TiledLayer, and LayerManager.<br>Năm lớp này sẽ đủ cung cấp một nền tảng (cho) sự phát triển (của) những trò chơi với một phạm vi rộng (của) những khả năng.<br>The
+Layer class is the superclass of the Sprite and TiledLayer classes Lớp
+này trừu xuất hành vi (của) một phần tử trực quan trong một trò
+chơi.Phần tử này có thể Build Một sprite,mà đại diện cho một người độc
+lập đồ thị (hay một tập hợp (của) đồ họa (cho) hoạt cảnh) mà có thể
+được di chuyển xung quanh trò chơi screen...</div>
+</div>
+<div class="sharethis"><ul>
+<li><a href="http://del.icio.us/post?url=http%3A%2F%2Fmy.opera.com%2Fthanh_nx08%2Fblog%2Fshow.dml%2F1041982&amp;title=Kh%C3%A1m%20ph%C3%A1%20Tr%C3%B2%20ch%C6%A1i%20API%20of%20MIDP%202.0" onclick="window.open('http://del.icio.us/post?v=4;noui;jump=close;url='+encodeURIComponent(location.href)+';title='+encodeURIComponent('Khám phá Trò chơi API of MIDP 2.0'),'delicious','location=0,menubar=0,status=0,titlebar=0,toolbar=0,width=700,height=400'); return false;" title="Share on del.icio.us" class="delicious">del.icio.us</a></li>
+<li><a href="http://digg.com/submit?url=http%3A%2F%2Fmy.opera.com%2Fthanh_nx08%2Fblog%2Fshow.dml%2F1041982&amp;title=Kh%C3%A1m%20ph%C3%A1%20Tr%C3%B2%20ch%C6%A1i%20API%20of%20MIDP%202.0&amp;media=news&amp;topic=people&amp;thumbnails=0" onclick="window.open('http://digg.com/submit?phase=2&amp;url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent('Khám phá Trò chơi API of MIDP 2.0'),'digg','location=0,menubar=0,scrollbars=1,status=0,titlebar=0,toolbar=0,width=1024,height=600'); return false;" title="Share on digg" class="digg">digg</a></li>
+<li><a href="http://www.facebook.com/share.php?src=bm&amp;v=4&amp;i=1210255278&amp;u=http%3A%2F%2Fmy.opera.com%2Fthanh_nx08%2Fblog%2Fshow.dml%2F1041982&amp;t=Kh%C3%A1m%20ph%C3%A1%20Tr%C3%B2%20ch%C6%A1i%20API%20of%20MIDP%202.0" onclick="window.open('http://www.facebook.com/sharer.php?src=bm&amp;v=4&amp;i=1210255278&amp;u='+encodeURIComponent(location.href)+'&amp;t='+encodeURIComponent('Khám phá Trò chơi API of MIDP 2.0'),'facebook','location=0,menubar=0,status=0,titlebar=0,toolbar=0,scrollbars=no,width=626,height=436'); return false;" title="Share on Facebook" class="facebook">Facebook</a></li>
+<li><a href="http://ma.gnolia.com/bookmarks/quicksave?url=http%3A%2F%2Fmy.opera.com%2Fthanh_nx08%2Fblog%2Fshow.dml%2F1041982&amp;title=Kh%C3%A1m%20ph%C3%A1%20Tr%C3%B2%20ch%C6%A1i%20API%20of%20MIDP%202.0" onclick="window.open('http://ma.gnolia.com/bookmarklet/popup/add?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent('Khám phá Trò chơi API of MIDP 2.0'),'magnolia','location=0,menubar=0,scrollbars=1,status=0,titlebar=0,toolbar=0,width=800,height=600'); return false;" title="Share on ma.gnolia" class="magnolia">ma.gnolia</a></li>
+<li><a href="http://reddit.com/submit?url=http%3A%2F%2Fmy.opera.com%2Fthanh_nx08%2Fblog%2Fshow.dml%2F1041982&amp;title=Kh%C3%A1m%20ph%C3%A1%20Tr%C3%B2%20ch%C6%A1i%20API%20of%20MIDP%202.0" onclick="window.open('http://reddit.com/submit?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent('Khám phá Trò chơi API of MIDP 2.0'),'reddit','location=0,menubar=0,scrollbars=1,status=0,titlebar=0,toolbar=0,width=800,height=600'); return false;" title="Share on reddit" class="reddit">reddit</a></li>
+<li><a href="http://slashdot.org/submit.pl?url=http%3A%2F%2Fmy.opera.com%2Fthanh_nx08%2Fblog%2Fshow.dml%2F1041982&amp;subj=Kh%C3%A1m%20ph%C3%A1%20Tr%C3%B2%20ch%C6%A1i%20API%20of%20MIDP%202.0" onclick="window.open('http://slashdot.org/slashdot-it.pl?op=basic&amp;url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent('Khám phá Trò chơi API of MIDP 2.0'),'slashdot','location=0,menubar=0,scrollbars=1,status=0,titlebar=0,toolbar=0,width=800,height=600'); return false;" title="Share on Slashdot" class="slashdot">Slashdot</a></li>
+</ul></div>
+<p class="postnav"><span class="prv"><img src="xay%20dung%20game2_files/prev.gif" alt="" class="arrow-prev" width="9" height="8"><a href="http://my.opera.com/thanh_nx08/blog/2007/05/24/interactive-gauge"><span>Interactive Gauge (Số đo Tương tác )</span></a></span><span class="nxt"><a href="http://my.opera.com/thanh_nx08/blog/show.dml/1195876"><span>An example MIDlet with simple Alert UI component containing an Image</span></a><img src="xay%20dung%20game2_files/next.gif" alt="" class="arrow-next" width="9" height="8"></span></p>
+<a name="comments"></a><div class="comments">
+<h2>
+<a href="http://my.opera.com/thanh_nx08/xml/rss/comments/1041982"><img src="xay%20dung%20game2_files/feedicon16.gif" alt="" class="feedicon" width="16" height="16"></a> Comments</h2>
+<div class="comment1 ownercomment" id="comment2959229"><div class="top"><div class="bot">
+<div class="avatar"><a href="http://my.opera.com/thanh_nx08/info/"><img src="xay%20dung%20game2_files/648775.jpeg" alt="avatar"></a></div>
+<div class="text">Một Sách vỡ lòng rất Ngắn trên Tòa nhà Trò chơi:<br>Một
+trò chơi hay hoạt cảnh được xây dựng theo nguyên lý Của Lặp lại Thực
+hiện Một mẩu mã. Mẩu mã này theo dõi giá trị (của) những biến thể hiện
+và cập nhật trạng thái trò chơi tương ứng. Dựa vào trạng thái trò chơi,
+mã rồi những vẽ/ những sơn/ Sơn lại màn ảnh trò chơi với những phần tử
+mà tạo ra trò chơi. Những giá trị (của) những biến thể hiện có thể thay
+đổi bởi vì hoặc sự tương tác người sử dụng hoặc hành vi trò chơi bên
+trong.<br>Sự thực hiện lặp lại được đem lại bằng việc đặt mã lặp lại
+trong một vòng vô hạn.Our translation server is too busy, please try
+again later. Mã trong vòng cần phải cho phép luồng hiện thời (của) sự
+thực hiện ngủ mỗi vài mili-giây kiểm soát nhịp độ mà sự cập nhật tới
+những biến thể hiện được làm ( Trên thực tế, Như thế nào Nhanh chóng
+Station.<br>Để mang nó vào viết mã những thuật ngữ :<br><br>// lớp chính <br>public MainClass {<br>  private GameCanvas canvas = new MyGameCanvas();<br><br><br>  public MainClass() {<br>    // bắt đầu một luồng mà sẽ chạy vô tận<br>canvas.start();<br>  }<br>  <br>  // phần còn lại (của) mã <br>}<br><br><br>// lớp bản vẽ thực tế <br>public MyGameCanvas extends GameCanvas implements Runnable {<br><br><br>  public MyGameCanvas() {<br>    // sự khởi tạo mã <br>  }<br>  <br>  public void start() {<br>    // làm sự khởi tạo<br><br>// và sau đó bắt đầu một luồng<br>Thread runner = new Thread(this);<br>runner.start();<br>  }<br>  <br>  private void run() {<br>  <br>    // hay trong khi (keeprun = thật)  <br>    //ở đâu keeprunning là một biến thể hiện<br><br>    while(true) { <br><br><br>      // những sự kiểm tra nếu trò chơi được đạt đến <br>      // một số trạng thái ranh giới hay điều kiện bắt buộc<br>  verifyGameState(); <br><br><br>      // đưa đầu vào từ người sử dụng và<br>      // cập nhật những biến thể hiện<br>      // mà mô tả những phần tử những trò chơi<br><br>    checkUserInput(); <br><br><br>      // những phần tử những sơn trên màn ảnh để phản chiếu<br>      // trạng thái trò chơi hiện thời sử dụng dòng <br>      // đối tượng graphics <br><br>  updateGameScreen(getGraphics());<br><br><br>      // kiểm soát nhịp độ mà những sự cập nhật màn ảnh được làm<br><br>  Thread.sleep(milliseconds); <br>}<br>  }<br>}<br><br>Chúng tôi sẽ sử dụng cấu trúc này để phát triển một trò chơi trong những mục(khu vực) sau đây.</div>
+<p class="comment-by"><span class="comment-user">
+                  By <a href="http://my.opera.com/thanh_nx08/info/" class="username">thanh_nx08</a>,
+                </span> <span class="permalink hidemobile"><a href="http://my.opera.com/thanh_nx08/blog/show.dml/1041982#comment2959229">#</a></span> <span class="commentdate"> 29. May 2007, 13:22:47</span></p>
+</div></div></div>
+<div class="comment2" id="comment3314780"><div class="top"><div class="bot">
+<div class="avatar"><a href="http://my.opera.com/bimbipthaibinh/info/"><img src="xay%20dung%20game2_files/697290.htm" alt="avatar"></a></div>
+<div class="text">Tôi là dân ngoại đạo nên đọc chẳng hiểu gì cả. Chán thật! Mặc dù rất thích cái CNTT</div>
+<p class="comment-by"><span class="comment-user">
+                  By <a href="http://my.opera.com/bimbipthaibinh/info/" class="username">bimbipthaibinh</a>,
+                </span> <span class="permalink hidemobile"><a href="http://my.opera.com/thanh_nx08/blog/show.dml/1041982#comment3314780">#</a></span> <span class="commentdate"> 7. August 2007, 12:05:21</span></p>
+</div></div></div>
+<a name="lastcomment"></a><div class="comment1 ownercomment" id="comment3370625"><div class="top"><div class="bot">
+<div class="avatar"><a href="http://my.opera.com/thanh_nx08/info/"><img src="xay%20dung%20game2_files/648775.jpeg" alt="avatar"></a></div>
+<div class="text">Hé vậy sao bạn hiện nay đang có cuộc thi hay lắm đó bạn thử tim hiểu coi có gi liên hệ với mình nhé:0613205317!</div>
+<p class="comment-by"><span class="comment-user">
+                  By <a href="http://my.opera.com/thanh_nx08/info/" class="username">thanh_nx08</a>,
+                </span> <span class="permalink hidemobile"><a href="http://my.opera.com/thanh_nx08/blog/show.dml/1041982#comment3370625">#</a></span> <span class="commentdate"> 15. August 2007, 13:22:42</span></p>
+</div></div></div>
+</div>
+<div class="w100"><div id="login-here">
+<h2>Write a comment</h2>
+<div id="login-message">
+<p><img src="xay%20dung%20game2_files/info.gif" alt="" class="icon" width="16" height="16"> 
+                        You must be logged in to write a comment. If you're not a registered member, please <a href="http://my.opera.com/community/signup/">sign up</a>.
+                     </p>
+<form action="/community/login/index.pl" method="post">
+<div class="cc1">
+<label for="usrname">Username:</label><input name="user" value="" maxlength="64" id="usrname" type="text">
+</div>
+<div class="cc2">
+<label for="passwd">Password:</label><input name="passwd" value="" maxlength="64" id="passwd" type="password"> <input value="login" id="loginbutton" type="submit">
+</div>
+</form>
+<div class="clear"></div>
+</div>
+</div></div>
+
+</div></div>
+<div id="sidewrap"><div id="side">
+<div class="sidebox hidemobile" id="qp">
+<h2>Nguyễn xuân thành</h2>
+<div id="myphoto"><a href="http://my.opera.com/thanh_nx08/about/"><img src="xay%20dung%20game2_files/648775_l.jpg" alt="photo" width="220" height="165"></a></div>
+<div class="pad"><div class="clear"></div></div>
+</div>
+<div id="blogsearch" class="sidebox">
+<h2><label for="searchbox">Blog search</label></h2>
+<form action="/thanh_nx08/search/?" method="get"><div class="pad">
+<input name="search" value="" id="searchbox" maxlength="128" type="text"><input value="search" id="submitsearch" type="submit">
+</div></form>
+</div>
+<div class="sidebox hidemobile">
+<h2>Photos</h2>
+<div class="pad"><div id="albumslides">
+<a href="http://my.opera.com/thanh_nx08/albums/showpic.dml?album=264262&amp;picture=3905675"><img src="xay%20dung%20game2_files/IMGCOAMQT9W67.jpg" alt="IMGCOAMQT9W67.jpg" width="240" height="180"></a><a href="http://my.opera.com/thanh_nx08/albums/showpic.dml?album=264262&amp;picture=3938309"><img src="xay%20dung%20game2_files/IMGAV8AMP6030.jpg" alt="IMGAV8AMP6030.jpg" width="240" height="180"></a><a href="http://my.opera.com/thanh_nx08/albums/showpic.dml?album=264262&amp;picture=4056139"><img src="xay%20dung%20game2_files/IMG4X7LUD7EFA.jpg" alt="IMG4X7LUD7EFA.jpg" width="240" height="180"></a><a href="http://my.opera.com/thanh_nx08/albums/showpic.dml?album=264262&amp;picture=5304462"><img src="xay%20dung%20game2_files/3.jpg" alt="3.jpg" width="240" height="180"></a><a href="http://my.opera.com/thanh_nx08/albums/showpic.dml?album=264262&amp;picture=6540764"><img src="xay%20dung%20game2_files/hinhso_noel8.jpg" alt="hinhso_noel8.jpg" width="240" height="180"></a><a href="http://my.opera.com/thanh_nx08/albums/showpic.dml?album=264262&amp;picture=3971510"><img src="xay%20dung%20game2_files/IMGBJ0OXK7YVF.jpg" alt="IMGBJ0OXK7YVF.jpg" width="240" height="180"></a><a href="http://my.opera.com/thanh_nx08/albums/showpic.dml?album=264262&amp;picture=3973796"><img src="xay%20dung%20game2_files/IMGD2JVID4HEZ.jpg" alt="IMGD2JVID4HEZ.jpg" width="240" height="180"></a><a href="http://my.opera.com/thanh_nx08/albums/showpic.dml?album=264262&amp;picture=6540766"><img src="xay%20dung%20game2_files/hinhso0123.jpg" alt="hinhso0123.jpg" width="240" height="180"></a><a href="http://my.opera.com/thanh_nx08/albums/showpic.dml?album=264262&amp;picture=6540765"><img src="xay%20dung%20game2_files/hinhso_noel12.jpg" alt="hinhso_noel12.jpg" width="240" height="180"></a><a href="http://my.opera.com/thanh_nx08/albums/showpic.dml?album=264262&amp;picture=3905674"><img src="xay%20dung%20game2_files/IMGMR4GH3UY56.jpg" alt="IMGMR4GH3UY56.jpg" width="240" height="180"></a>
+</div></div>
+</div>
+<div class="sidebox" id="friendz">
+<h2>Friends</h2>
+<div class="pad">
+<ul class="userlist nobullets">
+<li class="first"><a href="http://my.opera.com/mrtrananhvu/info/"><img src="xay%20dung%20game2_files/picture_006.jpeg" alt="mrtrananhvu photo" title="mrtrananhvu Cuối cùng đã tìm ra cách để học...." width="104" height="78"><span class="block">mrtrananhvu</span></a></li>
+<li><a href="http://my.opera.com/Saigoncool/info/"><img src="xay%20dung%20game2_files/picture_010.jpeg" alt="Saigoncool photo" title="Saigoncool Birthday in New York" width="104" height="78"><span class="block">Saigoncool</span></a></li>
+<li class="first"><a href="http://my.opera.com/Hannyvictor/info/"><img src="xay%20dung%20game2_files/picture_007.jpeg" alt="Hannyvictor photo" title="Hannyvictor dreaming... of a white christmas" width="104" height="78"><span class="block">Hannyvictor</span></a></li>
+<li><a href="http://my.opera.com/lenho/info/"><img src="xay%20dung%20game2_files/picture_004.jpeg" alt="lenho photo" title="lenho ... còn ta với nồng nàn ..." width="104" height="78"><span class="block">lenho</span></a></li>
+<li class="first"><a href="http://my.opera.com/michael_lee/info/"><img src="xay%20dung%20game2_files/picture_003.jpeg" alt="michael_lee photo" title="michael_lee xin tình đừng ngoảnh mặt quay đi!" width="104" height="78"><span class="block">michael_lee</span></a></li>
+<li><a href="http://my.opera.com/tamhonbuon/info/"><img src="xay%20dung%20game2_files/picture_008.jpeg" alt="tamhonbuon photo" title="tamhonbuon Làm sao để em biết ... Tôi vẫn tồn tại.Làm sao để em biết ... Tôi ... vẫn yêu em." width="104" height="78"><span class="block">tamhonbuon</span></a></li>
+</ul>
+<div class="clear"></div>
+</div>
+</div>
+<table id="calendar">
+<caption><a href="http://archive/monthly/?month=200901" id="calendarmonth">January 2009</a></caption>
+<thead><tr>
+<th scope="col" title="Sunday" abbr="Sunday">S</th>
+<th scope="col" title="Monday" abbr="Monday">M</th>
+<th scope="col" title="Tuesday" abbr="Tuesday">T</th>
+<th scope="col" title="Wednesday" abbr="Wednesday">W</th>
+<th scope="col" title="Thursday" abbr="Thursday">T</th>
+<th scope="col" title="Friday" abbr="Friday">F</th>
+<th scope="col" title="Saturday" abbr="Saturday">S</th>
+</tr></thead>
+<tfoot><tr><td colspan="7">
+<span id="prevmonth" class="left"><img src="xay%20dung%20game2_files/prev.gif" alt="" class="arrow-prev" width="9" height="8"><a href="http://my.opera.com/thanh_nx08/archive/monthly/?month=200812" title="December 2008">December 2008</a></span><span id="nextmonth" class="right"><a href="http://my.opera.com/thanh_nx08/archive/monthly/?month=200902" title="February 2009">February 2009</a><img src="xay%20dung%20game2_files/next.gif" alt="" class="arrow-next" width="9" height="8"></span>
+</td></tr></tfoot>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+</tr>
+<tr>
+<td>11</td>
+<td>12</td>
+<td>13</td>
+<td>14</td>
+<td>15</td>
+<td>16</td>
+<td>17</td>
+</tr>
+<tr>
+<td>18</td>
+<td>19</td>
+<td>20</td>
+<td>21</td>
+<td>22</td>
+<td>23</td>
+<td>24</td>
+</tr>
+<tr>
+<td>25</td>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+<td>29</td>
+<td>30</td>
+<td>31</td>
+</tr>
+</tbody>
+</table>
+<div class="sidebox sidelinx">
+<h2>ebooks_symbian and J2ME</h2>
+<div class="pad"><ul>
+<li>
+<a href="http://download-v5.streamload.com/6c806178-8d44-450c-8fae-03fd7c5c0844/thanh_nx08/Hosted/%28Mobile%20Programming%29%20Programming%20games%20on%20Symbian.pdf">symbian</a><p>lap trinh</p>
+</li>
+<li>
+<a href="http://www.3gvietnam.org/ebooks/symbian/%28ebook%29%20Symbian%20OS%20Designing%20Bluetooth%20Applications%20in%20C++%20%28v1.0%29.pdf">Symbian OS</a><p>lap trinh</p>
+</li>
+<li>
+<a href="http://www.3gvietnam.org/ebooks/symbian/Nokia_Symbian.pdf">Nokia_Symbian</a><p>lap trinh</p>
+</li>
+<li>
+<a href="http://www.3gvietnam.org/ebooks/symbian/Symbian%20C++%20Coding%20Standards.pdf">Symbian C++ Coding</a><p>lap trinh</p>
+</li>
+<li>
+<a href="http://www.3gvietnam.org/ebooks/symbian/Symbian%20C++%20for%20mobile%20Phones%20VOL%20I.pdf">Symbian C++ for mobi</a><p>lap trinh</p>
+</li>
+<li>
+<a href="http://www.3gvietnam.org/ebooks/symbian/Symbian%20OS%20V9%20and%20platform%20security%20for%20developers.pdf"> Symbian OS V9</a><p>lap trinh</p>
+</li>
+<li><a href="http://files.myopera.com/thanh_nx08/thanhmom/Premier%20Press%20-%20J2ME%20Game%">J2ME Game Programming</a></li>
+<li><a href="http://files.myopera.com/thanh_nx08/thanhmom/Sams%20-%20J2ME%20Application%20Development,%202002.pdf">J2ME Application Development</a></li>
+<li><a href="http://files.myopera.com/thanh_nx08/thanhmom/Prentice%20Hall%20-%20Enterprise%20J2ME%20-%20Developing%20Mobile%20Java%20Applications,%202003.chm">Enterprise J2ME - Developing Mobile Java</a></li>
+<li><a href="http://files.myopera.com/thanh_nx08/files/j2megamingbook.zip">j2megamingbook</a></li>
+<li>
+<a href="http://files.myopera.com/thanh_nx08/thanhmom/Wireless%20Java%20Developing%20with%20J2ME%20%28MIDP%202.0%29,%202nd%20-%20Apress%28.chm">Wireless Java Developing with J2ME (MIDP 2.0)</a><p>j2me</p>
+</li>
+</ul></div>
+</div>
+<div class="sidebox" id="visitors">
+<h2>Recent visitors</h2>
+<div class="pad">
+<ul class="nobullets userlist">
+<li><a href="http://my.opera.com/baovietnam/"><img src="xay%20dung%20game2_files/picture.jpeg" alt="baovietnam" width="68" height="51"><span class="block">baovietnam</span></a></li>
+<li class="mid"><a href="http://my.opera.com/Hoangtuchiengsung/"><img src="xay%20dung%20game2_files/picture_002.png" alt="Hoangtuchiengsung" width="68" height="51"><span class="block">Hoangtuchiengsu</span></a></li>
+<li><a href="http://my.opera.com/sharprose/"><img src="xay%20dung%20game2_files/picture.png" alt="sharprose" width="68" height="51"><span class="block">sharprose</span></a></li>
+<li><a href="http://my.opera.com/3dvietnam/"><img src="xay%20dung%20game2_files/picture_002.jpeg" alt="3dvietnam" width="68" height="51"><span class="block">3dvietnam</span></a></li>
+<li class="mid"><a href="http://my.opera.com/askbills/"><img src="xay%20dung%20game2_files/picture_009.jpeg" alt="askbills" width="68" height="51"><span class="block">askbills</span></a></li>
+<li><a href="http://my.opera.com/dinhhautehy/"><img src="xay%20dung%20game2_files/picture_005.jpeg" alt="dinhhautehy" width="68" height="51"><span class="block">dinhhautehy</span></a></li>
+</ul>
+<div class="clear"></div>
+</div>
+</div>
+</div></div>
+<div id="footer"><div id="footer2">
+<p id="meta"><a href="http://my.opera.com/thanh_nx08/xml/rss/blog/"><img src="xay%20dung%20game2_files/feedicon12.gif" alt="" class="feedicon" width="12" height="12"></a> <a href="http://my.opera.com/thanh_nx08/xml/rss/blog/" title="RSS 2.0 Feed for latest blog posts"><acronym>RSS</acronym></a> | <a href="http://my.opera.com/thanh_nx08/xml/atom/blog/" title="Atom 1.0 Feed for latest blog posts">ATOM</a> <a href="http://widgets.opera.com/widgetize/Feed%20Reader/Advanced/?serve&amp;skin=skin129&amp;widgetname=L%E1%BA%ADp%20tr%C3%ACnh%20Game%20tr%C3%AAn%20%C4%90TD%C4%90%20b%E1%BA%B1ng%20J2ME&amp;rel=myopera&amp;ref=thanh_nx08" id="widgetize-blog" class="widgetize"><img src="xay%20dung%20game2_files/widgetize12.gif" alt="widgetize" width="12" height="12"> WIDGETIZE</a></p>
+<p>
+		A proud member of the <a href="http://my.opera.com/community/" id="o">My Opera community</a>. | <a href="http://my.opera.com/community/help/">Help</a> | <a href="http://my.opera.com/community/disclaimer/">Disclaimer</a>
+            | <a href="http://my.opera.com/community/terms-of-service/" class="black">Terms of service</a><br><a href="http://os.hitslink.com/">Web analytics powered by HitsLink</a></p>
+<form action="/community/change-language.dml" method="get" name="sitelang" id="sitelang"><div>
+<input name="return_url" value="/thanh_nx08/blog/show.dml/1041982" type="hidden"><label for="chooselang"><b>Site language:</b></label><select name="lang" id="chooselang"><option value="en" selected="selected">
+	English
+	</option>
+<option value="it">
+	Italiano
+	</option>
+<option value="no">
+	Norsk
+	</option>
+<option value="es">
+	Español
+	</option>
+<option value="vn">
+	Tiếng Việt
+	</option>
+<option value="ru">
+	Русский
+	</option>
+<option value="ja">
+	日本語
+	</option>
+<option value="zh-cn">
+	简体中文
+	</option></select> </div></form>
+<a href="http://my.opera.com/thanh_nx08/blog/show.dml/1041982?viewmobile" onclick="createCookie('mobile','true','999')"><img src="xay%20dung%20game2_files/viewmobile1.gif" alt="view mobile site" id="mobileswitch" title="click to see what My Opera looks like if you surf with Opera on your mobile" width="103" height="19"></a>
+</div></div>
+</div>
+</div></div></div></div></div>
+<script type="text/javascript" src="xay%20dung%20game2_files/cookies.js"></script><script type="text/javascript"><!--
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+--></script><script src="xay%20dung%20game2_files/ga.js" type="text/javascript"></script><script type="text/javascript"><!--
+var pageTracker = _gat._getTracker("UA-4118503-7");
+pageTracker._trackPageview();
+--></script><script type="text/javascript"><!--
+document.cookie='__support_check=1';
+wa_tz=new Date();wa_data='&an='+escape(navigator.appName)+
+'&hr='+escape(location.href)+'&tks='+wa_tz.getTime()+
+'&ck='+document.cookie.length+
+'&rf='+escape(document.referrer)+'&sl='+escape(navigator.systemLanguage)+
+'&av='+escape(navigator.appVersion)+'&l='+escape(navigator.language)+
+'&pf='+escape(navigator.platform)+'&pg='+escape(location.pathname);
+wa_data=wa_data+'&cd='+
+screen.colorDepth+'&rs='+escape(screen.width+' x '+screen.height)+
+'&tz='+wa_tz.getTimezoneOffset()+'&je='+ navigator.javaEnabled(); wa_img=new
+Image();wa_img.src='http://profiles.hitslink.com/statistics.aspx'+
+'?profile=1'+wa_data+'&tks='+wa_tz.getTime();
+--></script><script src="xay%20dung%20game2_files/albumslides.js" type="text/javascript"></script>
+<!-- hostname: b5.opera.com --></body></html>

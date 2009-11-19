@@ -1,0 +1,585 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" lang="vn"><head>
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content=" Lập trình game hành động 2D với MIDP 2.0, VBB, mã nguồn, tin học, thủ thuật máy tính, games online, games, giải trí, kết bạn, webmaster, câu lạc bộ tin học, tin học văn phòng, đồ họa, code php, code, code asp, html, dotnet, java, internet, ajax, nukeviet, portal, mã nguồn mở, PHP, PBB, Vbulletin, giao lưu, chia sẻ, vbb, vbulletin, việt nam, mod, hack, template">
+	<meta name="description" content="[Lưu Trữ]  Lập trình game hành động 2D với MIDP 2.0 Java &amp; Ajax Programming">
+	
+	<title> Lập trình game hành động 2D với MIDP 2.0 [Lưu Trữ]  - :+|IT-ChicKclub.Vn|+:</title>
+	<link rel="stylesheet" type="text/css" href="xay%20dung%20game1_files/archive.css">
+</head><body>
+<div class="pagebody">
+<div id="navbar"><a href="http://it.chickclub.vn/archive/index.php">:+|IT-ChicKclub.Vn|+:</a> &gt; <a href="http://it.chickclub.vn/archive/index.php/f-18.html">Programming Languages</a> &gt; <a href="http://it.chickclub.vn/archive/index.php/f-23.html">Java &amp; Ajax Programming</a> &gt;  Lập trình game hành động 2D với MIDP 2.0</div>
+<hr>
+<div class="pda"><a href="http://it.chickclub.vn/archive/index.php/t-1350.html?pda=1" rel="nofollow">PDA</a></div>
+<p class="largefont">View Full Version : <a href="http://it.chickclub.vn/showthread.php?t=1350">Lập trình game hành động 2D với MIDP 2.0</a></p>
+<hr>
+
+<div class="post"><div class="posttop"><div class="username">yama</div><div class="date">10-06-2008, 01:57 PM</div></div><div class="posttext">Phiên
+bản MIDP 2.0 có nhiều ưu điểm hơn so với MIDP 1.0, giúp cho việc lập
+trình di động trở nên dễ dàng hơn rất nhiều. Và có lẽ điều mà các lập
+trình viên game mong đợi và hoan nghênh nhất đó là Game API mới trong
+MIDP 2.0 đơn giản hóa việc viết game 2D. API này nhỏ gọn, chỉ bao gồm
+năm lớp trong gói javax.microedition.lcdui.game. Năm lớp này cung cấp
+hai khả năng quan trọng:<br>
+<br>
+• Lớp GameCanvas mới cho phép vẽ lên màn hình và đáp ứng lại dữ liệu
+nhập trong vòng lặp game, thay vì dựa vào các thread vẽ và nhập liệu
+của hệ thống.<br>
+<br>
+• API quản lý layer mạnh và linh hoạt, cho phép xây dựng hiệu quả các cảnh game phức tạp.<br>
+<br>
+Xây dựng vòng lặp với GameCanvas<br>
+<br>
+GameCanvas là Canvas có thêm một số tính năng: cung cấp các phương thức
+để vẽ tức thời và kiểm tra trạng thái bàn phím thiết bị. Các phương
+thức mới này giúp tập hợp tất cả các chức năng của game trong một vòng
+lặp đơn, dưới sự điều khiển của một thread đơn. Để hiểu tại sao việc
+này lại hấp dẫn, hãy so sánh với cách mà bạn sẽ thực hiện một game mẫu
+bằng Canvas:<br>
+<br>
+public void MicroTankCanvas<br>
+<br>
+   extends Canvas<br>
+<br>
+   implements Runnable {<br>
+<br>
+ public void run() {<br>
+<br>
+   while (true) {<br>
+<br>
+      // Update the game state.<br>
+<br>
+    repaint();<br>
+<br>
+     // Delay one time step.<br>
+<br>
+  }<br>
+<br>
+}<br>
+<br>
+public void paint(Graphics g) {<br>
+<br>
+  // Painting code goes here.<br>
+<br>
+}<br>
+<br>
+protected void keyPressed(int keyCode) {<br>
+<br>
+  // Respond to key presses here.<br>
+<br>
+  }<br>
+<br>
+}<br>
+<br>
+Đây không phải là một cách tốt. Phương thức run(), chạy trong một
+thread của ứng dụng, cập nhật game theo từng thời điểm. Các tác vụ
+chính sẽ cập nhật vị trí của trái banh hay tàu vũ trụ để làm cử động
+các nhân vật hay phương tiện. Qua mỗi vòng lặp, repaint() được gọi để
+cập nhật màn hình. Hệ thống gởi sự kiện nhấn phím cho phương thức
+keyPressed(), phương thức này sẽ cập nhật trạng thái của game một cách
+tương ứng.<br>
+<br>
+Vấn đề là các phương thức nằm trong các thread khác nhau. Khi vòng lặp
+hoạt họa chính trong run() gọi repaint(), không có cách nào để biết
+chính xác khi nào hệ thống sẽ gọi hàm paint(). Khi hệ thống gọi phương
+thức keyPressed(), không có cách nào để biết điều gì đang xảy ra với
+các phần khác của ứng dụng. Nếu đoạn mã trong keyPressed() đang cập
+nhật trạng thái của game cùng lúc với màn hình đang được vẽ trong
+paint(), thì màn hình sẽ kết thúc không như mong đợi. Nếu việc vẽ màn
+hình chậm hơn một bước thời gian trong run(), thì chuyển động của game
+có thể bị giật và không bình thường.<br>
+<br>
+GameCanvas cho phép bạn làm chủ được việc vẽ hình theo cách thông
+thường và cơ chế sự kiện nhấn phím để cho tất cả các logic của game có
+thể được chứa trong một vòng lặp đơn. Đầu tiên, GameCanvas cho phép bạn
+truy xuất trực tiếp đối tượng Graphics của nó sử dụng phương thức
+getGraphics(). Bất kỳ công việc vẽ nào trên đối tượng Graphics được trả
+về cũng sẽ được hoàn thành trong bộ đệm ngoài màn hình (offscreen). Sau
+đó bạn có thể chép bộ đệm vào màn hình sử dụng flushGraphics() mà không
+cần phải đợi cho đến khi màn hình được cập nhật. Cách tiếp cận này cho
+phép bạn điều khiển tốt hơn việc gọi repaint(). Phương thức repaint()
+trả về ngay lập tức và ứng dụng của bạn không cần phải bảo đảm chính
+xác khi nào hệ thống sẽ gọi paint() để cập nhật màn hình.<br>
+<br>
+GameCanvas cũng có một phương thức để lấy trạng thái hiện thời của bàn
+phím thiết bị, một kỹ thuật được gọi là thăm dò (polling). Thay vì chờ
+cho hệ thống gọi phương thức keyPressed(), bạn có thể xác định ngay lập
+tức các phím nào được nhấn bằng cách gọi phương thức getKeyStates() của
+GameCanvas.<br>
+<br>
+Một vòng lặp game mẫu sử dụng GameCanvas sẽ giống như thế này:<br>
+<br>
+public void MicroTankCanvas<br>
+<br>
+  extends GameCanvas<br>
+<br>
+  implements Runnable {<br>
+<br>
+ public void run() {<br>
+<br>
+  Graphics g = getGraphics();<br>
+<br>
+  while (true) {<br>
+<br>
+    // Update the game state.<br>
+<br>
+  int keyState = getKeyStates();<br>
+<br>
+   // Respond to key presses here.<br>
+<br>
+  // Painting code goes here.<br>
+<br>
+ flushGraphics();<br>
+<br>
+  // Delay one time step.<br>
+<br>
+  }<br>
+<br>
+ }<br>
+<br>
+}<br>
+<br>
+Ví dụ sau thể hiện một vòng lặp game cơ bản. Nó sẽ hiển thị một chữ X
+quay vòng mà bạn có thể di chuyển xung quanh màn hình bằng cách sử dụng
+các phím mũi tên. Phương thức run() cực kỳ gọn và rõ ràng, nhờ
+GameCanvas:<br>
+<br>
+import javax.microedition.lcdui.*;<br>
+<br>
+import javax.microedition.lcdui.game.*;<br>
+<br>
+public class SimpleGameCanvas<br>
+<br>
+   extends GameCanvas<br>
+<br>
+   implements Runnable {<br>
+<br>
+ private volatile boolean mTrucking;<br>
+<br>
+ private long mFrameDelay;<br>
+<br>
+ private int mX, mY;<br>
+<br>
+ private int mState;<br>
+<br>
+ public SimpleGameCanvas() {<br>
+<br>
+   super(true);<br>
+<br>
+   mX = getWidth() / 2;<br>
+<br>
+   mY = getHeight() / 2;<br>
+<br>
+   mState = 0;<br>
+<br>
+   mFrameDelay = 20;<br>
+<br>
+}<br>
+<br>
+public void start() {<br>
+<br>
+  mTrucking = true;<br>
+<br>
+  Thread t = new Thread(this);<br>
+<br>
+  t.start();<br>
+<br>
+}<br>
+<br>
+public void stop(){ mTrucking = false;}<br>
+<br>
+public void run(){<br>
+<br>
+ Graphics g = getGraphics();<br>
+<br>
+ while (mTrucking == true) {<br>
+<br>
+  tick();<br>
+<br>
+  input();<br>
+<br>
+  render(g);<br>
+<br>
+  try { Thread.sleep(mFrameDelay);}<br>
+<br>
+  catch (InterruptedException ie){ stop();}<br>
+<br>
+ }<br>
+<br>
+}<br>
+<br>
+private void tick() {<br>
+<br>
+  mState = (mState + 1) % 20;<br>
+<br>
+}<br>
+<br>
+private void input() {<br>
+<br>
+  int keyStates = getKeyStates();<br>
+<br>
+  if ((keyStates &amp; LEFT_PRESSED) != 0)<br>
+<br>
+     mX = Math.max(0, mX - 1);<br>
+<br>
+  if ((keyStates &amp; RIGHT_PRESSED) != 0)<br>
+<br>
+    mX = Math.min(getWidth(), mX + 1);<br>
+<br>
+  if ((keyStates &amp; UP_PRESSED) != 0)<br>
+<br>
+    mY = Math.max(0, mY - 1);<br>
+<br>
+  if ((keyStates &amp; DOWN_PRESSED) != 0)<br>
+<br>
+    mY = Math.min(getHeight(), mY + 1);<br>
+<br>
+}<br>
+<br>
+private void render(Graphics g) {<br>
+<br>
+  g.setColor(0xffffff);<br>
+<br>
+  g.fillRect(0, 0, getWidth(), getHeight());<br>
+<br>
+  g.setColor(0x0000ff);<br>
+<br>
+  g.drawLine(mX,mY,mX-10+mState,mY-10);<br>
+<br>
+  g.drawLine(mX,mY,mX+10,mY-10+mState);<br>
+<br>
+  g.drawLine(mX,mY,mX+10-mState,mY+10);<br>
+<br>
+  g.drawLine(mX,mY,mX-10,mY+10-mState);<br>
+<br>
+  flushGraphics();<br>
+<br>
+ }<br>
+<br>
+}<br>
+<br>
+Sau đây là đoạn mã SimpleGameMIDlet.java sử dụng Canvas này.<br>
+<br>
+import javax.microedition.lcdui.*;<br>
+<br>
+import javax.microedition.midlet.MIDlet;<br>
+<br>
+public class SimpleGameMIDlet<br>
+<br>
+extends MIDlet<br>
+<br>
+implements CommandListener {<br>
+<br>
+private Display mDisplay;<br>
+<br>
+private SimpleGameCanvas mCanvas;<br>
+<br>
+private Command mExitCommand;<br>
+<br>
+public void startApp() {<br>
+<br>
+  if (mCanvas == null) {<br>
+<br>
+  mCanvas = new SimpleGameCanvas();<br>
+<br>
+  mCanvas.start();<br>
+<br>
+  mExitCommand = new Command("Exit", Command.EXIT, 0);<br>
+<br>
+  mCanvas.addCommand(mExitCommand);<br>
+<br>
+  mCanvas.setCommandListener(this);<br>
+<br>
+}<br>
+<br>
+mDisplay = Display.getDisplay(this);<br>
+<br>
+mDisplay.setCurrent(mCanvas);<br>
+<br>
+}<br>
+<br>
+public void pauseApp() {}<br>
+<br>
+public void destroyApp(boolean unconditional) { mCanvas.stop();}<br>
+<br>
+public void commandAction(Command c, Displayable s) {<br>
+<br>
+if (c.getCommandType() == Command.EXIT) {<br>
+<br>
+destroyApp(true);<br>
+<br>
+notifyDestroyed();<br>
+<br>
+  }<br>
+<br>
+ }<br>
+<br>
+}<br>
+<br>
+Hãy thử chạy SimpleGameMIDlet để xem nó hoạt động như thế nào.<br>
+<br>
+<br>
+ [Only registered and activated users can see links]<br>
+	<br>
+<br>
+SimpleGameMIDlet Screen Shot<br>
+<br>
+Cảnh Game - Các lớp của củ hành<br>
+<br>
+Các game hành động 2D điển hình bao gồm một nền và nhiều nhân vật
+chuyển động. Mặc dù bạn có thể tự vẽ loại cảnh này, Game API cho phép
+bạn xây dựng các cảnh bằng cách sử dụng các layer. Bạn có thể tạo một
+layer là nền thành phố, và một layer khác là chiếc xe hơi. Đặt layer xe
+hơi lên trên hình nền sẽ tạo thành một cảnh hoàn chỉnh. Sử dụng chiếc
+xe như là một layer riêng biệt giúp việc thao tác được dễ dàng và độc
+lập với hình nền, và với bất kỳ layer nào khác trong cảnh game.<br>
+Game API thực hiện việc hỗ trợ mềm dẻo cho các layer thông qua bốn lớp:<br>
+<br>
+• Layer là một lớp cha abstract của tất cả các layer. Nó xác định các
+thuộc tính cơ bản của một layer, bao gồm vị trí, kích thước, và việc
+layer có được hiển thị hay không. Mỗi lớp con của Layer phải định nghĩa
+một phương thức paint() để hiển thị layer trên bề mặt vẽ của Graphics.
+Hai lớp con cụ thể là TiledLayer và Sprite, sẽ đáp ứng đầy đủ yêu cầu
+làm game 2D của bạn.<br>
+<br>
+• TiledLayer có ích trong việc tạo các hình nền. Bạn có thể sử dụng một
+tập nhỏ các hình ảnh nguồn ghép lại với nhau để tạo thành các hình ảnh
+lớn một cách hiệu quả.<br>
+<br>
+• Sprite là một lớp hoạt họa. Bạn cung cấp các frame nguồn và có toàn
+quyền điều khiển việc chuyển động. Sprite cũng cung cấp khả năng để lật
+ngược và quay các frame nguồn theo bội số của 90o.<br>
+<br>
+• LayerManager là một lớp tiện dụng để theo dõi tất cả các layer trong
+cảnh game của bạn. Chỉ cần một lần gọi phương thức paint() của
+LayerManager cũng đủ để hiển thị tất cả các layer được chứa trong nó.<br>
+<br>
+Sử dụng TiledLayer<br>
+<br>
+[Only registered and activated users can see links]<br>
+<br>
+Hình nguồn<br>
+	<br>
+<br>
+ <br>
+<br>
+TiledLayer khá đơn giản để hiểu, mặc dù nó có một số tính chất không
+thể hiểu rõ ngay từ đầu. Ý tưởng căn bản là có một hình nguồn cung cấp
+một tập các tile (tạm dịch là viên gạch lót) có thể được sắp xếp để tạo
+thành một cảnh lớn. Ví dụ, hình nguồn có kích thước là 64 x 48 pixels.<br>
+<br>
+Hình này có thể được chia thành 12 tile, mỗi tile có kích thước 16 x 16
+pixels. TiledLayer gán cho mỗi tile một con số, bắt đầu bằng số1 kể từ
+góc trái trên. Các tile trong hình nguồn được đánh số như sau:<br>
+<br>
+Tạo một TiledLayer trong chương trình cũng khá đơn giản. Bạn cần xác
+định số cột và số hàng, hình nguồn, và kích thước theo pixel của các
+tile trong hình nguồn. Đoạn chương trình sau biểu diễn cách nạp hình và
+tạo một TiledLayer.<br>
+<br>
+Image image = Image.createImage("/board.png");<br>
+<br>
+ <br>
+	[Only registered and activated users can see links]<br>
+<br>
+                   Đánh số các file<br>
+<br>
+TiledLayer tiledLayer = new TiledLayer(10, 10, image, 16, 16);<br>
+Trong ví dụ trên, ta đã tạo một TiledLayer mới có 10 cột và 10 hàng. Các tile tạo thành từ hình có kích thước vuông 16 pixels.<br>
+<br>
+Đến phần thú vị là tạo một cảnh sử dụng các tile này. Để gán một tile
+cho một cell (một ô), gọi hàm setCell(). Bạn cần phải cung cấp số cột
+và hàng của cell và số của tile. Ví dụ, bạn có thể gán tile số 5 cho
+cell thứ ba của hàng thứ hai bằng cách gọi hàm setCell(2, 1, 5). Nếu
+các tham số này bị sai, hãy chú ý là chỉ mục của tile bắt đầu từ 1,
+trong khi cột và hàng bắt đầu từ 0. Theo mặc định, tất cả các cell
+trong TiledLayer mới có giá trị tile là 0, có nghĩa là chúng rỗng.<br>
+<br>
+Đoạn chương trình sau biểu diễn một cách để phát sinh một TiledLayer,
+sử dụng một mảng số nguyên. Trong trò chơi thực tế, các TiledLayer có
+thể được định nghĩa từ các tập tin tài nguyên, cho phép định nghĩa nền
+game linh hoạt hơn và nâng cấp game với phiên bản mới.<br>
+<br>
+private TiledLayer createBoard() {<br>
+<br>
+  Image image = null;<br>
+<br>
+  try { image = Image.createImage("/board.png"); }<br>
+<br>
+  catch (IOException ioe){return null;}<br>
+<br>
+  TiledLayer tiledLayer = new TiledLayer(10, 10, image, 16, 16);<br>
+<br>
+  int[] map = {<br>
+<br>
+   1, 1, 1, 1, 11, 0, 0, 0, 0, 0,<br>
+   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,<br>
+   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,<br>
+   0, 0, 0, 0, 9, 0, 0, 0, 0, 0,<br>
+   0, 0, 0, 0, 1, 0, 0, 0, 0, 0,<br>
+   0, 0, 0, 7, 1, 0, 0, 0, 0, 0,<br>
+   1, 1, 1, 1, 6, 0, 0, 0, 0, 0,<br>
+   0, 0, 0, 0, 0, 0, 0, 7, 11, 0,<br>
+   0, 0, 0, 0, 0, 0, 7, 6, 0, 0,<br>
+   0, 0, 0, 0, 0, 7, 6, 0, 0, 0<br>
+<br>
+};<br>
+<br>
+for (int i = 0; i &lt; map.length; i++) {<br>
+<br>
+  int column = i % 10;<br>
+<br>
+  int row = (i - column) / 10;<br>
+<br>
+  tiledLayer.setCell(column, row, map[i]);<br>
+<br>
+ }<br>
+<br>
+   return tiledLayer;<br>
+<br>
+}<br>
+<br>
+Để hiển thị TiledLayer này lên màn hình, bạn cần phải chuyển đối tượng Graphics cho phương thức paint() của nó.<br>
+<br>
+TiledLayer cũng hỗ trợ các tile chuyển động (animated tile), làm cho
+việc di chuyển một tập các cell qua một chuỗi các tile được dễ dàng
+hơn. Để biết thêm chi tiết, xin xem tài liệu API của TiledLayer.<br>
+<br>
+Sử dụng Sprite cho chuyển động nhân vật<br>
+<br>
+Một layer cụ thể khác được cung cấp trong Game API là Sprite. Theo một
+cách nào đó, Sprite là khái niệm ngược lại của TiledLayer. Trong khi
+TiledLayer sử dụng một bảng pallete của các tile từ hình nguồn để tạo
+thành một cảnh lớn, thì Sprite lại sử dụng một chuỗi các khung hình
+nguồn để tạo thành chuyển động.<br>
+<br>
+Tất cả những gì bạn cần để tạo thành một Sprite là một hình nguồn và
+kích thước của mỗi frame (khung). Trong TiledLayer, hình nguồn được
+chia thành các tile có kích thước bằng nhau; còn trong Sprite, các hình
+con được gọi là các frame. Trong ví dụ sau, một hình nguồn tank.png
+được dùng để tạo thành một Sprite với kích thước frame là 32 x 32
+pixels.<br>
+<br>
+private MicroTankSprite createTank(){<br>
+<br>
+Image image = null;<br>
+<br>
+try {image = Image.createImage("/tank.png");}<br>
+<br>
+catch (IOException ioe){return null;}<br>
+<br>
+return new MicroTankSprite(image, 32,32);<br>
+<br>
+}<br>
+<br>
+Mỗi frame của hình nguồn được đánh số, bắt đầu từ 0 và đếm lên (hãy nhớ
+là các số của tile bắt đầu từ 1). Sprite có một frame sequence (trình
+tự frame) xác định thứ tự hiển thị frame. Frame sequence mặc định cho
+một Sprite mới bắt đầu từ 0 và đếm lên qua các frame có sẵn.<br>
+<br>
+Để chuyển đến frame trước hay kế tiếp trong frame sequence, ta sử dụng
+các phương thức nextFrame() và prevFrame() của Sprite. Các phương thức
+này cuộn từ đầu cho đến cuối frame sequence. Nếu Sprite đang hiển thị
+frame cuối trong frame sequence của nó, có thể gọi phương thức
+nextFrame() để hiển thị frame đầu tiên trong frame sequence.<br>
+<br>
+Để xác định một frame sequence khác so với mặc định, hãy chuyển
+sequence, được biểu diễn dưới dạng một mảng số nguyên, cho
+setFrameSequence().<br>
+<br>
+Bạn có thể nhảy đến một điểm cụ thể trong frame sequence hiện tại bằng
+cách gọi phương thức setFrame(). Không có cách nào để nhảy đến một
+frame có số cụ thể. Bạn chỉ có thể nhảy đến một điểm nào đó trong frame
+sequence.<br>
+<br>
+Các thay đổi frame chỉ thấy được trong lần kế tiếp Sprite được hiển thị, sử dụng phương thức paint() kế thừa từ layer.<br>
+<br>
+Sprite cũng có thể biến đổi các frame nguồn. Frame có thể được quay
+theo cấp số nhân của 90o, lật ngược, hay kết hợp cả hai. Các hằng số
+trong lớp Sprite sẽ định nghĩa các khả năng biến đổi. Việc biến đổi
+hiện thời của Sprite có thể được thiết lập bằng cách chuyển một trong
+các hằng số này cho phương thức setTransform(). Ví dụ sau lật ngược
+frame hiện tại quanh trục đứng, và quay nó 90o:<br>
+<br>
+// Sprite sprite = ...<br>
+sprite.setTransform(Sprite.TRANS_MIRROR_ROT90);<br>
+<br>
+Việc biến đổi được áp dụng sao cho pixel tham chiếu (reference pixel)
+của Sprite không di chuyển. Theo mặc định, pixel tham chiếu của Sprite
+được đặt tại vị trí (0, 0) trong không gian tọa độ, tại góc trái trên.
+Khi việc biến đổi được áp dụng, vị trí của pixel tham chiếu cũng biến
+đổi. Vị trí của Sprite được điều chỉnh để pixel tham chiếu vẫn ở cùng
+vị trí.<br>
+<br>
+Bạn có thể thay đổi vị trí của pixel tham chiếu bằng phương thức
+defineReferencePixel(). Đối với nhiều loại chuyển động, ta thường định
+nghĩa pixel tham chiếu là điểm giữa của Sprite.<br>
+<br>
+Cuối cùng, Sprite cung cấp một vài phương thức collidesWith() để phát
+hiện va chạm với các Sprite, TiledLayer, hay Images khác. Bạn có thể
+phát hiện va chạm bằng việc sử dụng các hình chữ nhật va chạm (nhanh
+nhưng không chính xác) hay ở mức pixel (chậm nhưng chính xác). Tính
+chất của các phương thức này cũng khá khó nắm bắt; hãy xem tài liệu API
+để biết thêm chi tiết.<br>
+<br>
+Tóm tắt<br>
+<br>
+Game API của MIDP 2.0 cung cấp một framework để đơn giản hóa việc phát
+triển các game hành động 2D. Đầu tiên, lớp GameCanvas cung cấp các
+phương thức vẽ và nhập liệu làm cho vòng lặp game chặt chẽ hơn. Kế
+tiếp, các layer giúp tạo nên các cảnh game phức tạp. TiledLayer tập hợp
+pallete các tile của ảnh nguồn để tạo thành một nền hay một cảnh lớn.
+Sprite thích hợp để tạo các nhân vật chuyển động và có thể phát hiện va
+chạm với các đối tượng khác trong game. LayerManager là chất keo để kết
+nối các layer lại với nhau... Với các cải tiến và mở rộng của Game API
+trong MIDP 2.0, các lập trình viên game có thể cho ra đời nhiều game
+xuất sắc.<br>
+<br>
+Lê Ngọc Quốc Khánh<br>
+[Only registered and activated users can see links]<br>
+<br>
+ <br>
+	<br>
+<br>
+TÀI LIÊU THAM KHẢO	<br>
+<br>
+• Sun - Creating 2D Action Games with the Game API - ([Only registered and activated users can see links])<br>
+• Sun - Game API Documentation<br>
+• Nokia - What's in MIDP 2.0: A Guide for Java™ Developers.</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">pqrs479</div><div class="date">06-10-2008, 03:55 PM</div></div><div class="posttext">So
+make sure about it and hope you can have a good troll. We are a world
+class eq2 plat ([Only registered and activated users can see links])
+store online. We supply cheap eq2 plat, the cheapest eq2 plat to our
+loyal and reliable customers. You may buy cheap eq2 plat ([Only
+registered and activated users can see links]) here. There is eq2 plat
+for sale; you can buy really cheap eq2 plat here. We have mass
+available stock of wow gold ([Only registered and activated users can
+see links]) on most of the servers, so that we can do a really instant
+way of cheap wow gold ([Only registered and activated users can see
+links]) delivery.</div></div><hr>
+
+
+<div class="post"><div class="posttop"><div class="username">game08hall</div><div class="date">31-10-2008, 09:24 AM</div></div><div class="posttext">Wanna
+find the cheapest wow power leveling ([Only registered and activated
+users can see links])? Place an order for power leveling on [Only
+registered and activated users can see links] is the best and securest
+way to power level your character to your desired high level fast. We
+have an outstanding world of wow power leveling experience. We have
+done a great number of orders for world of warcraft gold ([Only
+registered and activated users can see links]) and have hundreds of
+orders for wow gold ([Only registered and activated users can see
+links]) currently. We are sure that you can't get such an outstanding
+cheap wow gold ([Only registered and activated users can see links])
+service as the same as we do. Our guys for wow power leveling are
+skilled gamers for years. They know how to power level ([Only
+registered and activated users can see links]) your character in your
+satisfied way.</div></div><hr>
+
+
+<div id="copyright">vBulletin Phiên bản 3.7.0 Release Candidate 3, Bản quyền © 2004-2009, Jelsoft Enterprises Ltd.</div>
+</div>
+</body></html>

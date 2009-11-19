@@ -1,0 +1,231 @@
+body { 
+	background : #000066; 
+	scrollbar-face-color: #C9DBED;
+	scrollbar-highlight-color: #FFFFFF;
+	scrollbar-shadow-color: #DEE3E7;
+	scrollbar-3dlight-color: #D1D7DC;
+	scrollbar-arrow-color:  #006699;
+	scrollbar-track-color: #EFEFEF;
+	scrollbar-darkshadow-color: #98AAB1;
+}
+
+.main {
+	background : #34689A;
+	font-family : Arial, Helvetica, sans-serif;
+	color : #E5E5E5;
+	padding : 5px 5px 5px 5px;
+	vertical-align : top
+}
+
+.main p {
+	line-height : 108%;
+	font-size : 12px;
+	color : #E5E5E5;
+	margin : 1px 0 15px 0
+}
+
+.main h1 {
+	font-size : 17px;
+	margin : 1px 0 15px 0;
+	color : #FFCC33
+}
+
+.main h2 {
+	font-size : 15px;
+	margin : 1px 0 1px 0;
+	color : #6699CC
+}
+
+.main h3 {
+	font-size : 12px;
+	margin : 1px 0 1px 0;
+	color : #FFFFFF;
+	font-weight: bold;
+}
+
+.main a:link { color : #FFFFFF }
+
+.main a:visited { color : #FFFFFF }
+
+.main a:hover { color : #FFCC33 }
+
+.menucell { vertical-align : top; background : #336699 }
+
+.munuborder {
+	background : #6699CC;
+	border-top : 1px solid #FFCC33;
+	border-bottom : 1px solid #FFCC33
+}
+
+.submenu { background : #34689A; text-align : center }
+
+p.submenu {
+	color : #333333;
+	font : 11px Arial, Helvetica, sans-serif;
+	margin : 3px 5px 3px 5px
+}
+
+.submenu a {
+	color : #000066;
+	display : block;
+	text-decoration : none;
+	width : 180px;
+	border : 1px solid #B28600;
+	padding : 2px 0 2px 5px;
+	background : #FFCC33
+}
+
+.submenu a:hover {
+	color : #000066;
+	text-decoration : none;
+	border : 1px solid #B28600;
+	font-style : italic;
+	background : #F2B600
+}
+
+.submenudown {
+	font : italic 11px Arial, Helvetica, sans-serif;
+	color : #000066;
+	display : block;
+	text-decoration : none;
+	width : 180px;
+	border : 1px solid #B28600;
+	margin : 3px 5px 3px 5px;
+	padding : 2px 0 2px 5px;
+	background : #F2B600
+}
+
+.tableborder { border : 1px solid #FFFFFF }
+
+/* Begin form style */
+form { padding : 0 0 0 0 }
+
+input,
+select,
+button,
+textarea { color : inherit; background : #34689A }
+
+input,
+textarea,
+select {
+	border : 0 transparent solid;
+	color : #FFFFFF;
+	padding : 0 4px 0 4px;
+	font : 11px Verdana, Geneva, Arial, Helvetica, sans-serif
+}
+
+.formbottomleft {
+	border : 1px solid #FFFFFF;
+	color : #FFCC33;
+	padding : 4px 4px 4px 4px;
+	vertical-align : top;
+	font : 11px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	background : #6699CC
+}
+
+.formbottomright {
+	border-bottom : 1px solid #FFFFFF;
+	border-right : 1px solid #FFFFFF;
+	border-top : 1px solid #FFFFFF
+}
+
+.formnoborder {
+	padding : 20px 0 4px 0;
+	font : bold 13px Verdana, Geneva, Arial, Helvetica, sans-serif
+}
+
+.formtopleft {
+	border-left : 1px solid #FFFFFF;
+	border-right : 1px solid #FFFFFF;
+	border-top : 1px solid #FFFFFF;
+	color : #FFCC33;
+	padding : 4px 4px 4px 4px;
+	vertical-align : top;
+	font : 11px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	background : #6699CC
+}
+
+.formtopright {
+	border-right : 1px solid #FFFFFF;
+	border-top : 1px solid #FFFFFF;
+
+
+}
+
+.w250 { width : 250px }
+
+/* End form style */
+.footer {
+	background : #6699CC;
+	border-top : 1px solid #FFCC33;
+	border-bottom : 1px solid #FFCC33;
+	font : 11px Arial, Helvetica, sans-serif;
+	padding : 3px 3px 3px 3px;
+	text-align : center
+}
+
+.footer a:link { color : #FFFFFF }
+
+.footer a:visited { color : #FFFFFF }
+
+.footer a:active { color : #FFFFFF }
+
+.footer a:hover { color : #FFCC33 }
+
+.fix {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+}
+.tablebottomleft {
+	border : 1px solid #FFFFFF;
+	color : #FFCC33;
+	padding : 4px 4px 4px 4px;
+	vertical-align : top;
+	font : 11px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	background : #6699CC
+}
+.tablebottomright {
+	border-bottom : 1px solid #FFFFFF;
+	border-right : 1px solid #FFFFFF;
+	border-top : 1px solid #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+}
+.tablenoborder {
+	padding : 20px 0 4px 0;
+	font : bold 13px Verdana, Geneva, Arial, Helvetica, sans-serif
+}
+.tabletopleft {
+	border-left : 1px solid #FFFFFF;
+	border-right : 1px solid #FFFFFF;
+	border-top : 1px solid #FFFFFF;
+	color : #FFCC33;
+	padding : 4px 4px 4px 4px;
+	vertical-align : top;
+	font : 11px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	background : #6699CC
+}
+.tabletopright {
+	border-right : 1px solid #FFFFFF;
+	border-top : 1px solid #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+}
+.field {
+	background-color: #FFFFFF;
+	border: thin solid #FFCC33;
+	color: #000000;
+}
+.button {
+	border: thin solid #FFCC33;
+	font-weight: bold;
+	background-color: #CCCCCC;
+	color: #000000;
+
+
+
+
+}
