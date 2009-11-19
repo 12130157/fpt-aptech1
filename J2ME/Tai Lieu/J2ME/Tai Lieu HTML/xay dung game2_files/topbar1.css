@@ -1,0 +1,305 @@
+/* silver top bar */
+
+#editmode { position:absolute; top:0; right:0; font-size:11px; margin:4px 0 0 0; }
+
+body #topinfo {
+	margin:0;
+	background:#111;
+	padding:10px;
+	color:#fff;
+	}
+
+body #topinfo a:link, body #topinfo a:visited {
+	color:#fff;
+	}
+
+body, p.spotlight, #myo-nav ul, #myo-login, #myo-login p {
+	margin:0;
+	padding:0;
+	}
+
+#wrap0 {
+	clear:both;
+	position:relative;
+	}
+
+#myo img {
+	border:none;
+	}
+
+#myo-logo {
+	float:left;
+	width:86px;
+	height:50px;
+	margin:0 20px;
+	}
+
+#myo .show {
+	line-height:15px;
+	height:auto;
+	overflow:auto;
+	padding:16px 0 7px 0;
+	}
+
+#myo .indent {
+	width:0px;
+	overflow:hidden;
+	position:absolute;
+	text-indent:-999em;
+	}
+
+.mobile, .hide, .handheld, #myo .hide {
+	display:none !important;
+	}
+
+#myo, #myo-login, #topinfo {
+	line-height:1;
+	font-family:'trebuchet ms', 'lucida grande', 'lucida sans unicode', arial, helvetica, sans-serif;
+	font-size:11px;
+	text-align:left;
+	}
+
+#myo {
+	background:#eee url(/community/graphics/users/topmenu1/sprites.png);
+	color:#fff;
+	height:50px;
+	position:relative;
+	z-index:9999;
+	padding-left:0;
+	}
+
+#myo2 {
+	min-width:600px;
+	position:relative;
+	}
+
+#myo a, #myo a:link, #myo a:visited, #topinfo a, #topinfo a:link, #topinfo a:visited {
+	color:#111;
+	}
+
+#myo a:hover {
+	text-decoration:none;
+	}
+
+#myo-nav ul {
+	width:328px;
+	display:inline;
+	float:right;
+	margin:26px 20px 0 0;
+	}
+
+#myo-nav li {
+	display:inline;
+	float:left;
+	margin:0 0 0 4px;
+	width:78px;
+	list-style:none;
+	list-style-position:outside;
+	font-size:11px;
+	text-align:center;
+	}
+
+#myo-nav a:link, #myo-nav a:visited, #myo-nav a:active {
+	display:block;
+	width:78px;
+	line-height:24px;
+	background:#eee url(/community/graphics/users/topmenu1/sprites.png) 0 -50px;
+	text-decoration:none;
+	color:#111;
+	}
+
+#myo-nav li.on a:link, #myo-nav li.on a:visited, #myo-nav li.on a:active, #myo-nav a:hover {
+	background:#fff url(/community/graphics/users/topmenu1/sprites.png) 0 -74px;
+	}
+
+/* user links */
+
+#user-info {
+	float:left;
+	width:550px;
+	font-size:11px;
+	height:50px;
+	}
+
+#useravatar {
+	display:block;
+	float:left;
+	width:50px;
+	height:50px;
+	margin:0 10px 0 0;
+	overflow:hidden;
+	}
+
+#useravatar img {
+	display:block;
+	}
+
+#editme {
+	position:absolute;
+	display:block;
+	width:60px;
+	height:60px;
+	}
+
+#editme:hover #changepic {
+	display:block !important;
+	position:absolute;
+	width:14px;
+	height:14px;
+	top:0px;
+	left:37px;
+	z-index:999999;
+	}
+
+#user-info p {
+	line-height:15px;
+	margin:0;
+	}
+
+#userlinx	{
+	margin:0;
+	padding:0;
+	position:absolute;
+	top:0;
+	left:64px;
+	z-index:99992;
+	}
+
+#userlinx li {
+	display:block;
+	float:left;
+	line-height:50px;
+	margin:0 10px 0 0;
+	padding:0 0 10px 0;
+	list-style:none;
+	color:#ccc;
+	font-weight:bold;
+	position:relative;
+	white-space:nowrap;
+	}
+
+#userlinx a {
+	font-weight:normal;
+	}
+
+#userlinx span {
+	display:block;
+	height:50px;
+	}
+
+#userlinx .i-drop {
+	padding-right:13px;
+	background:transparent url(/community/graphics/main/icons1.gif) 100% -1786px no-repeat;
+	}
+
+#userlinx #inbox {
+	padding-left:21px;
+	background:transparent url(/community/graphics/main/icons1.gif) 0 -1715px no-repeat;
+	}
+
+#userlinx b {
+	margin:0 1px;
+	color:#111;
+	}
+
+#userlinx ul {
+	position:absolute;
+	width:161px;
+	padding:0;
+	top:37px;
+	left:0;
+	margin-left:-1000em;
+	background:#fff;
+	z-index:99993;
+	border-top:1px solid #999;
+	border-bottom:1px solid #999;
+	}
+
+#userlinx li:hover ul, #userlinx li.sfhover ul {
+	margin-left:0;
+	}
+
+#userlinx li a:focus + ul, #userlinx li:hover a:focus, #userlinx li.sfhover a.sffocus {
+	margin-left:0;
+	}
+
+#userlinx ul li {
+	min-width:159px;
+	width:159px;
+	padding:0;
+	margin:0;
+	height:24px;
+	background:#fff url(/community/graphics/main/dropbg1.gif);
+	list-style:none;
+	border-right:1px solid #999;
+	border-left:1px solid #999;
+	border-bottom:1px solid #ddd;
+	}
+
+#userlinx ul a:link, #userlinx ul a:visited, #userlinx ul a:active {
+	display:block;
+	background:transparent url(/community/graphics/main/icons1.gif) 6px 0px no-repeat;
+	padding:0 0 0 35px;
+	border:none;
+	color:#111;
+	line-height:24px;
+	text-decoration:none;
+	}
+
+#userlinx ul.drop a:hover, #userlinx ul.drop a.sffocus {
+	background-color:#f4f4f4;
+	font-weight:normal;
+	}
+
+/* log in and sign up */
+
+#myo-signup {
+	margin:0;
+	float:left;
+	line-height:50px;
+	color:#ccc;
+	font-size:11px;
+	}
+
+#myo-signup span {
+	padding:0 3px;
+	}
+
+.hidelogin {
+	visibility:hidden !important;
+	height:0 !important;
+	line-height:1px !important;
+	overflow:hidden !important;
+	border:none !important;
+	}
+
+.show {
+	visibility:visible;
+	}
+
+#myo-login {
+	clear:both;
+	background:#eee url(/community/graphics/users/topmenu1/sprites.png);
+	position:relative;
+	color:#111;
+	border-bottom:1px solid #fff;
+	height:38px;
+	overflow:hidden;
+	}
+
+#myo-login p {
+	padding:8px 20px;
+	}
+
+#myo-login input {
+	font-size:11px;
+	}
+
+#myo-login label {
+	padding-right:5px;
+	white-space:nowrap;
+	}
+
+#mystatusfield {
+	width:320px;
+	}

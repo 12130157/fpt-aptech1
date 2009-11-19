@@ -1,0 +1,971 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<title>JavaVietnam - Bài 3: Phân tích và tìm hiểu ứng dụng HelloWorld đầu tiên của bạn</title>
+<link type="text/css" rel="stylesheet" href="lap_trinh_j2me_co_ban_bai_3_files/cds.css">
+<link href="lap_trinh_j2me_co_ban_bai_3_files/logo_jvn.gif" rel="SHORTCUT ICON">
+<link rel="alternate" type="application/rss+xml" title="Cộng đồng lập trình viên Java Việt Nam" href="http://www.javavietnam.org/javavn/cms/rss?channelid=1">
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="copyright" content="This software is copyrighted by MyVietnam.net and released under the terms of the GNU General Public License GPL license. All rights reserved.">
+<meta name="Keywords" content="mvnForum, server side java, online meetings, collaboration, bulletin board, board, forum, discussion board, jsp, servlet, java, j2se, j2ee, database, jdbc, connection pool, mysql, MyVietnam, mvnForum, framework, web app, web application, servlet container, tomcat, jboss, weblogic, websphere">
+<meta name="Description" content="mvnForum is a powerful Jsp/Servlet forum (discussion board) - based on Java technology.">
+<script type="text/javascript" src="lap_trinh_j2me_co_ban_bai_3_files/searchhi.js" language="JavaScript"></script>
+</head><body>
+<table class="bgwhite" align="center" border="0" cellpadding="0" cellspacing="0" width="990">
+  <tbody><tr>
+    <td width="990">
+
+      <table border="0" cellpadding="0" cellspacing="0" width="990">
+        <tbody><tr>
+          <td width="317"><a href="http://www.javavietnam.org/javavn/cms"><img src="lap_trinh_j2me_co_ban_bai_3_files/logo_jvn.gif" alt="" border="0"></a></td>
+          <td class="bgheader" align="center" width="673">
+          
+          </td>
+        </tr>
+      </tbody></table></td>
+  </tr>
+  <tr>
+    <td width="990">
+
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+document.write('<link type="text/css" rel="stylesheet" href="/javavn/mvnplugin/mvncms/cds/standard/jvn2/menu/theme_002.css" />');
+//]]>
+</script><link type="text/css" rel="stylesheet" href="lap_trinh_j2me_co_ban_bai_3_files/theme_002.css">
+
+<script type="text/javascript">
+var myMenu11 = [
+[null, 'Mobile Labs 2008', '/javavn/cms/vi/mbl2007/index.html', '_self', null]];
+var myMenu2 = [
+[null, 'Tin Tức', '/javavn/cms/vi/news/index.html', '_self', null, 
+[null, 'Tin tức Java', '/javavn/cms/vi/news/java_news/index.html', '_self', null], 
+[null, 'Tin tức tổng hợp', '/javavn/cms/vi/news/general_news/index.html', '_self', null], 
+[null, 'Computer Expo 2005', '/javavn/cms/vi/news/computerworld_expo2005/index.html', '_self', null]]];
+var myMenu10 = [
+[null, 'Developer of the Year', '/javavn/cms/vi/developer_of_the_year/index.html', '_self', null]];
+var myMenu9 = [
+[null, 'JavaVietnam Training', '/javavn/cms/vi/javavietnam_training_activities/index.html', '_self', null]];
+var myMenu5 = [
+[null, 'Bài học Java', '/javavn/cms/vi/java_tutorials/index.html', '_self', null, 
+[null, 'Java cơ bản', '/javavn/cms/vi/java_tutorials/java_tutorials_basic/index.html', '_self', null], 
+[null, 'Java nâng cao', '/javavn/cms/vi/java_tutorials/java_tutorials_intermediate/index.html', '_self', null]]];
+
+</script>
+
+<script type="text/javascript" language="JavaScript" src="lap_trinh_j2me_co_ban_bai_3_files/JSCookMenu.js"></script>
+<script type="text/javascript" language="JavaScript" src="lap_trinh_j2me_co_ban_bai_3_files/theme_002.js"></script>
+
+<table border="0" cellpadding="0" cellspacing="0" width="990">
+  <tbody><tr>
+    <td align="center" width="990">
+      <table class="bgmenu" style="border-left: 1px solid rgb(178, 178, 178); border-right: 1px solid rgb(178, 178, 178); border-collapse: collapse;" align="center" border="0" cellpadding="3" cellspacing="0" width="990">
+      <tbody><tr>
+
+    <td style="border-left: 1px solid rgb(178, 178, 178); border-right: 1px solid rgb(178, 178, 178);" align="left"><div id="menu11"><table summary="main menu" class="ThemePanelMenu" cellspacing="0"><tbody><tr><td class="ThemePanelMainItem" onmouseover="cmItemMouseOverOpenSub (this,1,null,0,0)" onmousedown="cmItemMouseDown (this,1,null,0,0)" onmouseout="cmItemMouseOut (this,1,null,0,0)" onmouseup="cmItemMouseUp (this,1,null,0,0)"><span class="ThemePanelMainItemLeft"></span><span class="ThemePanelMainItemText">Mobile Labs 2008</span><span class="ThemePanelMainItemRight"></span></td></tr></tbody></table></div></td>
+  
+    <td style="border-left: 1px solid rgb(178, 178, 178); border-right: 1px solid rgb(178, 178, 178);" align="left"><div id="menu2"><table summary="main menu" class="ThemePanelMenu" cellspacing="0"><tbody><tr><td class="ThemePanelMainItem" onmouseover="cmItemMouseOverOpenSub (this,1,'cmSubMenuID1',1,1)" onmousedown="cmItemMouseDown (this,1,'cmSubMenuID1',1,1)" onmouseout="cmItemMouseOut (this,1,'cmSubMenuID1',1,1)" onmouseup="cmItemMouseUp (this,1,'cmSubMenuID1',1,1)"><span class="ThemePanelMainFolderLeft"></span><span class="ThemePanelMainFolderText">Tin Tức</span><span class="ThemePanelMainFolderRight"></span></td></tr></tbody></table><div class="ThemePanelSubMenu" id="cmSubMenuID1" style="z-index: 1000; position: absolute; top: 0px; left: 0px;"><div class="ThemePanelSubMenuShadow"></div><div class="ThemePanelSubMenuBorder"><table summary="sub menu" id="cmSubMenuID1Table" class="ThemePanelSubMenuTable" cellspacing="0"><tbody><tr class="ThemePanelMenuItem" onmouseover="cmItemMouseOverOpenSub (this,0,null,1,2)" onmousedown="cmItemMouseDown (this,0,null,1,2)" onmouseout="cmItemMouseOut (this,0,null,1,2)" onmouseup="cmItemMouseUp (this,0,null,1,2)"><td class="ThemePanelMenuItemLeft"></td><td class="ThemePanelMenuItemText">Tin tức Java</td><td class="ThemePanelMenuItemRight"></td></tr><tr class="ThemePanelMenuItem" onmouseover="cmItemMouseOverOpenSub (this,0,null,1,3)" onmousedown="cmItemMouseDown (this,0,null,1,3)" onmouseout="cmItemMouseOut (this,0,null,1,3)" onmouseup="cmItemMouseUp (this,0,null,1,3)"><td class="ThemePanelMenuItemLeft"></td><td class="ThemePanelMenuItemText">Tin tức tổng hợp</td><td class="ThemePanelMenuItemRight"></td></tr><tr class="ThemePanelMenuItem" onmouseover="cmItemMouseOverOpenSub (this,0,null,1,4)" onmousedown="cmItemMouseDown (this,0,null,1,4)" onmouseout="cmItemMouseOut (this,0,null,1,4)" onmouseup="cmItemMouseUp (this,0,null,1,4)"><td class="ThemePanelMenuItemLeft"></td><td class="ThemePanelMenuItemText">Computer Expo 2005</td><td class="ThemePanelMenuItemRight"></td></tr></tbody></table></div></div></div></td>
+  
+    <td style="border-left: 1px solid rgb(178, 178, 178); border-right: 1px solid rgb(178, 178, 178);" align="left"><div id="menu10"><table summary="main menu" class="ThemePanelMenu" cellspacing="0"><tbody><tr><td class="ThemePanelMainItem" onmouseover="cmItemMouseOverOpenSub (this,1,null,2,5)" onmousedown="cmItemMouseDown (this,1,null,2,5)" onmouseout="cmItemMouseOut (this,1,null,2,5)" onmouseup="cmItemMouseUp (this,1,null,2,5)"><span class="ThemePanelMainItemLeft"></span><span class="ThemePanelMainItemText">Developer of the Year</span><span class="ThemePanelMainItemRight"></span></td></tr></tbody></table></div></td>
+  
+    <td style="border-left: 1px solid rgb(178, 178, 178); border-right: 1px solid rgb(178, 178, 178);" align="left"><div id="menu9"><table summary="main menu" class="ThemePanelMenu" cellspacing="0"><tbody><tr><td class="ThemePanelMainItem" onmouseover="cmItemMouseOverOpenSub (this,1,null,3,6)" onmousedown="cmItemMouseDown (this,1,null,3,6)" onmouseout="cmItemMouseOut (this,1,null,3,6)" onmouseup="cmItemMouseUp (this,1,null,3,6)"><span class="ThemePanelMainItemLeft"></span><span class="ThemePanelMainItemText">JavaVietnam Training</span><span class="ThemePanelMainItemRight"></span></td></tr></tbody></table></div></td>
+  
+    <td style="border-left: 1px solid rgb(178, 178, 178); border-right: 1px solid rgb(178, 178, 178);" align="left"><div id="menu5"><table summary="main menu" class="ThemePanelMenu" cellspacing="0"><tbody><tr><td class="ThemePanelMainItem" onmouseover="cmItemMouseOverOpenSub (this,1,'cmSubMenuID2',4,7)" onmousedown="cmItemMouseDown (this,1,'cmSubMenuID2',4,7)" onmouseout="cmItemMouseOut (this,1,'cmSubMenuID2',4,7)" onmouseup="cmItemMouseUp (this,1,'cmSubMenuID2',4,7)"><span class="ThemePanelMainFolderLeft"></span><span class="ThemePanelMainFolderText">Bài học Java</span><span class="ThemePanelMainFolderRight"></span></td></tr></tbody></table><div class="ThemePanelSubMenu" id="cmSubMenuID2" style="z-index: 1000; position: absolute; top: 0px; left: 0px;"><div class="ThemePanelSubMenuShadow"></div><div class="ThemePanelSubMenuBorder"><table summary="sub menu" id="cmSubMenuID2Table" class="ThemePanelSubMenuTable" cellspacing="0"><tbody><tr class="ThemePanelMenuItem" onmouseover="cmItemMouseOverOpenSub (this,0,null,4,8)" onmousedown="cmItemMouseDown (this,0,null,4,8)" onmouseout="cmItemMouseOut (this,0,null,4,8)" onmouseup="cmItemMouseUp (this,0,null,4,8)"><td class="ThemePanelMenuItemLeft"></td><td class="ThemePanelMenuItemText">Java cơ bản</td><td class="ThemePanelMenuItemRight"></td></tr><tr class="ThemePanelMenuItem" onmouseover="cmItemMouseOverOpenSub (this,0,null,4,9)" onmousedown="cmItemMouseDown (this,0,null,4,9)" onmouseout="cmItemMouseOut (this,0,null,4,9)" onmouseup="cmItemMouseUp (this,0,null,4,9)"><td class="ThemePanelMenuItemLeft"></td><td class="ThemePanelMenuItemText">Java nâng cao</td><td class="ThemePanelMenuItemRight"></td></tr></tbody></table></div></div></div></td>
+  
+      </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+cmDraw ('menu11', myMenu11, 'hbr', cmThemePanel, 'ThemePanel');
+//]]>
+</script>
+
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+cmDraw ('menu2', myMenu2, 'hbr', cmThemePanel, 'ThemePanel');
+//]]>
+</script>
+
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+cmDraw ('menu10', myMenu10, 'hbr', cmThemePanel, 'ThemePanel');
+//]]>
+</script>
+
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+cmDraw ('menu9', myMenu9, 'hbr', cmThemePanel, 'ThemePanel');
+//]]>
+</script>
+
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+cmDraw ('menu5', myMenu5, 'hbr', cmThemePanel, 'ThemePanel');
+//]]>
+</script>
+</td>
+  </tr>
+  <tr>
+    <td width="990">
+
+<script language="JavaScript" type="text/javascript" src="lap_trinh_j2me_co_ban_bai_3_files/avim.js"></script>
+<script language="JavaScript" type="text/javascript" src="lap_trinh_j2me_co_ban_bai_3_files/utils.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+function trim(str) {
+  return str.replace(/(^\s+)([^\s]*)(\s+$)/, '$2');
+}
+function isBlank(field, strBodyHeader) {
+  strTrimmed = trim(field.value);
+  if (strTrimmed.length > 0) return false;
+  alert(strBodyHeader);
+  field.focus();
+  return true;
+}
+function SubmitFormSearchBar() {
+  if (ValidateFormSearchBar() == true ) {
+    document.submitformsearchbar.submit();
+  }
+}
+function ValidateFormSearchBar() {
+  if (isBlank(document.submitformsearchbar.key, 'Từ khóa tìm kiếm chưa được nhập.')) return false;
+  return true;
+}
+//]]>
+</script>
+<table border="0" cellpadding="0" cellspacing="0" width="990">
+  <tbody><tr>
+    <td class="bgred" width="158" height="21"><a href="http://www.javavietnam.org/javavn/mvnforum"><img src="lap_trinh_j2me_co_ban_bai_3_files/bullet.gif" alt="" border="0" width="5" height="5" hspace="3"></a><a href="http://www.javavietnam.org/javavn/mvnforum" class="link_language">Diễn đàn</a></td>
+    <td class="bgblack" align="center" width="264"><a href="http://www.javavietnam.org/javavn/cms" class="link_namewebsite">www.javavietnam.org</a></td>
+
+    <td class="bgblack" align="center" width="344"><span class="link_namewebsite">8h:29 AM - 30/12/2008</span></td>
+    <form action="/javavn/cms/search" method="get" name="submitformsearchbar"></form>
+    <td class="bgblack" align="right" width="124" height="21">
+      <input name="key" class="input_search" value="Tìm kiếm" onfocus="focus_clear(this, 'Tìm kiếm');" type="text">
+    </td>
+    <td class="bgblack" width="21"><a href="javascript:SubmitFormSearchBar()"><img src="lap_trinh_j2me_co_ban_bai_3_files/button_go.gif" alt="" border="0" width="21" height="14"></a></td>
+    
+    <td class="bgblack" align="right" width="10"><img src="lap_trinh_j2me_co_ban_bai_3_files/bullet.gif" alt="" border="0" width="5" height="5" hspace="2"></td>
+    <td class="bgblack" align="left" width="110"><a href="http://www.javavietnam.org/javavn/cms/search" class="link_timkiem">Tìm kiếm nâng cao</a></td>   
+  </tr>
+</tbody></table>
+</td>
+  </tr>
+  <tr>
+    <td width="990">
+
+<table class="bgwhite" align="center" border="0" cellpadding="0" cellspacing="0" width="990">
+  <tbody><tr>
+    <td class="border_lr" valign="top" width="145">
+      <div>
+
+<table class="border_mostread" border="0" cellpadding="0" cellspacing="0" width="145">
+  <tbody><tr>   
+    <td class="bg_mostread" height="18">Đọc nhiều nhất</td>
+  </tr>
+
+  <tr>   
+    <td class="padmostread"><span class="digitalbullet">1.</span><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/javacoban_class_phan1.html" class="linkmostread">Java cơ bản - Khái niệm Class - phần 1</a></td>
+  </tr>
+
+  <tr>   
+    <td class="padmostread"><span class="digitalbullet">2.</span><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_intermediate/java_jdbc_mysql_1.html" class="linkmostread">Nhập môn Java với JDBC và MySQL (phần 1)</a></td>
+  </tr>
+
+  <tr>   
+    <td class="padmostread"><span class="digitalbullet">3.</span><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_intermediate/AJAX_1.html" class="linkmostread">AJAX - Tương lai cho ứng dụng Web (phần 1)</a></td>
+  </tr>
+
+  <tr>   
+    <td class="padmostread"><span class="digitalbullet">4.</span><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/java_co_ban_khai_niem_class_phan_2.html" class="linkmostread">Java cơ bản - Khái niệm Class - phần 2</a></td>
+  </tr>
+
+  <tr>   
+    <td class="padmostread"><span class="digitalbullet">5.</span><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/Tong_quan_ve_J2EE.html" class="linkmostread">Tổng quan về J2EE</a></td>
+  </tr>
+
+</tbody></table></div>
+      <div>
+
+<table class="border_rightad" border="0" cellpadding="0" cellspacing="0" width="145">
+  <tbody><tr>
+    <td class="bg_leftad" width="145" height="18"></td>
+  </tr>
+
+  <tr>
+    <td colspan="2" height="3"><img src="lap_trinh_j2me_co_ban_bai_3_files/square.gif" alt="" width="145" height="3"></td>
+  </tr>
+</tbody></table></div>
+    </td>
+    <td width="2"><img src="lap_trinh_j2me_co_ban_bai_3_files/square.gif" alt="" width="2"></td>
+    <td valign="top" width="644">
+
+<table border="0" cellpadding="0" cellspacing="0" width="644">
+  <tbody><tr>
+    <td>
+
+
+<table class="tblmarquee" border="0" cellpadding="0" cellspacing="0" width="644">
+  <tbody><tr>
+    <td width="546" height="18">
+      <marquee behavior="scroll" direction="left" loop="-1" scrolldelay="0" scrollamount="2" onmouseover="this.stop()" onmouseout="this.start()" width="100%" height="20">
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/thoi_khoa_bieu_moi_cua_truong.html" class="textmarquee">Thời khóa biểu mới của trường</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/news/vi_pham_ban_quyen_phan_mem.html" class="textmarquee">Vi phạm bản quyền phần mềm có thể bị xử lý hình sự</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/news/Google_va_Microsoft.html" class="textmarquee">Google suy nghĩ về động thái mới của Microsoft</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/news/website_no_1.html" class="textmarquee">Google đoạt ngôi website No 1 tại Mỹ</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/news/quang_cao_tuong_tac_la_mo_vang_cho_mang_xa_hoi_vn.html" class="textmarquee">Quảng cáo tương tác là ‘mỏ vàng’ cho mạng xã hội VN</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/lap_trinh_j2me_co_ban_bai_14.html" class="textmarquee">Bài 14: Lập trình giao diện cấp cao với lớp List (phần 3)</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/lap_trinh_j2me_co_ban_bai_13.html" class="textmarquee">Bài 13: Lập trình giao diện cấp cao với lớp List (phần 2)</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/lap_trinh_j2me_co_ban_bai_12.html" class="textmarquee">Bài 12: Lập trình giao diện cấp cao với lớp List</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/lap_trinh_j2me_co_ban_bai_11.html" class="textmarquee">Bài 11: Lập trình giao diện cấp cao với lớp Alert (phần 2)</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/lap_trinh_j2me_co_ban_bai_10.html" class="textmarquee">Bài 10: Lập trình giao diện cấp cao với lớp Alert</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+      </marquee>
+    </td>
+    <td width="22"><img src="lap_trinh_j2me_co_ban_bai_3_files/bullet_marquee.gif" alt="" width="17" height="8"></td>
+    <td align="center" width="40" nowrap="nowrap"><a href="http://www.javavietnam.org/javavn/cms/listevents?id=6" class="linkhoso">Hồ sơ</a></td>
+    <td width="36"><a href="http://www.javavietnam.org/javavn/cms/rss?channelid=6"><img src="lap_trinh_j2me_co_ban_bai_3_files/rss.gif" alt="" border="0"></a></td>
+  </tr>
+</tbody></table></td>
+  </tr>
+  <tr>
+    <td>
+
+<div><script type="text/javascript"><!--
+google_ad_client = "pub-4755965374109189";
+/* 468x15, created 6/15/08 */
+google_ad_slot = "5476698572";
+google_ad_width = 468;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript" src="lap_trinh_j2me_co_ban_bai_3_files/show_ads.js">
+</script><script src="lap_trinh_j2me_co_ban_bai_3_files/test_domain.js"></script><script>window.google_render_ad();</script><iframe name="google_ads_frame" src="lap_trinh_j2me_co_ban_bai_3_files/ads.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" width="468" frameborder="0" height="15"></iframe></div>
+</td>
+  </tr>
+  <tr>
+    <td>
+
+
+
+
+
+<table id="searcharea" class="bgwhite" border="0" cellpadding="0" cellspacing="0" width="644">
+  <tbody><tr>
+    <td width="14"><img src="lap_trinh_j2me_co_ban_bai_3_files/spacer.gif" alt=""></td>
+    <td width="604">
+      <table border="0" cellpadding="0" cellspacing="0" width="604">
+        <tbody><tr>
+          <td nowrap="nowrap"><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/index.html" class="title_tnb">Java cơ bản&nbsp;</a></td>
+          <td class="bghorline" width="100%" height="25">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+          
+            <table class="contentdetail" border="0" cellpadding="0" cellspacing="0">
+              <tbody><tr>
+                <td><img src="lap_trinh_j2me_co_ban_bai_3_files/helloWorld.png" alt="" align="left" border="0" height="150"></td>
+              </tr>
+              <tr>
+                <td class="noteimg"></td>
+              </tr>
+            </tbody></table>
+          
+            <!-- ContentID: 135 -->
+            <div class="titlledetail">Bài 3: Phân tích và tìm hiểu ứng dụng HelloWorld đầu tiên của bạn</div>
+            
+            <div class="datetime" align="right">11:47:11 02-05-2008</div>
+            <div class="contentdetailnext">
+            
+              <br>
+Trong bài trước bạn đã biết cách sử dụng bộ công cụ Wireless Toolkit để
+tạo một dự án mới của riêng bạn, đó là ứng dụng Hello World, tuy nhiên
+các bạn vẫn chưa tìm hiểu về mã nguồn của chương trình đầu tiên này.
+Trong bài này chúng ta sẽ cùng phân tích cấu trúc đơn giản nhất của một
+ứng dụng Java trên điện thoại di động cũng như giải thích một số khái
+niệm cơ bản về công nghệ lập trình thời thượng này.<br> 
+            
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            
+            
+
+
+            
+            
+            <table class="contentdetailadright" border="0" cellpadding="5" cellspacing="0">
+              <tbody><tr>
+                <td>
+
+
+<div align="center"><script type="text/javascript"><!--
+google_ad_client = "pub-4755965374109189";
+/* 336x280, created 6/15/08 */
+google_ad_slot = "6132458784";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript" src="lap_trinh_j2me_co_ban_bai_3_files/show_ads.js">
+</script><script>window.google_render_ad();</script><iframe name="google_ads_frame" src="lap_trinh_j2me_co_ban_bai_3_files/ads_002.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" width="336" frameborder="0" height="280"></iframe></div>
+</td>
+              </tr>
+            </tbody></table> Chắc bạn cũng
+còn nhớ là trong bài trước bạn đã sử dụng chương trình KToolbar để tạo
+một dự án, biên dịch và chạy chúng. Các bạn có thể xem lại bài trước
+một lần nữa trước khi chúng ta bắt đầu vọc mã nguồn của ứng dụng Hello
+World. Tuy nhiên đầu tiên ta cần tìm hiểu những khái niệm cơ bản trước
+đã.<br><h3>Giới thiệu về J2ME</h3><p>Khi
+nghe nói về Java, các bạn hay gặp những thuật ngữ như J2SE, J2EE và
+J2ME. J2SE viết tắt của Java 2 Standard Edition, là bản Java dùng để
+viết các chương trình chạy trên desktop. Còn J2EE là Java 2 Enterprise
+Edition, một phiên bản chuyên dùng để viết các ứng dụng web cũng như
+các dịch vụ web chạy trên các hệ thống máy chủ. Thế còn J2ME là gì?
+J2ME (Java 2 Micro Edition) là công nghệ cũng như nền tảng để viết các
+ứng dụng chạy trên các thiết bị nhỏ như điện thoại di động hay các máy
+trợ giúp cá nhân PDA. Với nền tảng J2ME, các bạn sẽ có được một tập các
+giao diện lập trình ứng dụng (API) được thiết kế đặc thù cho các thiết
+bị nhỏ. Vì các thiết bị nhỏ có khả năng xử lý cũng như bộ nhớ rất hạn
+chế nên các thiết bị này không thể chạy các máy ảo Java (Java Virtual
+Machine) của J2SE được. Và vì lý do này nên một phiên bản máy ảo Java
+nhỏ gọn được định nghĩa ra để có thể chạy được trên các thiết bị di
+động này.<br>Một cách ngắn gọn dễ hiểu thì bạn có thể coi J2ME bao gồm
+một máy ảo Java thu gọn và một tập các thư viện lập trình thiết kế
+riêng cho các thiết bi di động.<br>Các bạn cũng chú ý là các bạn không
+cần cài đặt J2ME lên chiếc điện thoại của bạn, bởi vì các nhà sản xuất
+đã cài đặt sẵn cho bạn rồi. Nếu điện thoại của bạn có ghi là hỗ trợ
+Java thì có nghĩa là nhà sản xuất đã tích hợp sẵn J2ME vào điện thoại.
+Hầu hết các đời điện thoại có giá trên 2 triệu đều có hỗ trợ J2ME. Mặc
+dù để lập trình thì bạn chỉ cần môi trường giả lập thông qua bộ công cụ
+Wireless Toolkit mà ta đã biết, các bạn cũng nên có một chiếc điện
+thoại để thử các sản phẩm của bạn xem chúng chạy ra sao trên điện thoại
+thật. Trong các bài sau tôi sẽ trình bày cách cài đặt các chương trình
+chúng ta viết vào điện thoại thật như thế nào.<br>J2ME được chia thành
+3 thành phần là Cấu Hình (Configuration), Profile và các thư viện tuỳ
+chọn bổ sung. Cấu Hình chứa máy ảo Java thu gọn và một số hàm thư viện
+nền tảng. Profile bổ sung thêm một tập các thư viện nữa nhằm phục vụ
+cho một số dòng thiết bị di động. Còn các thư viện bổ sung cung cấp
+thêm các chức năng mở rộng, ví dụ như khả năng nhắn SMS hoặc điều khiển
+bluetooth.</p><p><img src="lap_trinh_j2me_co_ban_bai_3_files/helloWorld.png" alt="" width="210" height="324"></p><p>Có
+lẽ Cấu Hình và Profile nổi tiếng nhất chính là CLDC (Connected Limited
+Device Configuration) và MIDP (Mobile Information Device Profile). CLDC
+nghĩa là Cấu hình của các thiết bị nhỏ có kết nối, ví dụ như các điện
+thoại có từ 128KB đến 512KB bộ nhớ cho các ứng dụng Java. Vì khả năng
+của các thiết bị này rất hạn chế nên máy ảo Java chạy trên nó rất nhỏ
+và được gọi là KVM (viết tắt của Kilobyte Virtual Machine). Một Cấu
+Hình khác dành cho các thiết bị có ít nhất 2MB bộ nhớ được gọi là CDC
+(Connected Device Configuration), thường có trong các máy trợ giúp số
+cá nhân PDA.<br>Profile MIDP bổ sung cho Cấu Hình CLDC bởi vì nó cung
+cấp thư viện được thiết kế đặc biệt để có thể chạy được trên các thiết
+bị rất nhỏ với tài nguyên CPU và bộ nhớ rất hạn chế. Ví dụ là MIDP có
+gói <em><strong>javax.microedition.lcdui</strong></em> cho phép chúng
+ta lập trình giao diện người dùng (GUI) trên thiết bị có màn hình rất
+nhỏ. Với các thiết bị mạnh hơn và màn hình lớn hơn như PDA thì các
+profile thường gặp trên đó có tên là Foundation và Personal. Trong loạt
+bài viết này tôi sẽ không trình bày về CDC và Foundation/Personal mà
+chỉ tập trung vào CLDC và MIDP, là nền tảng trong các điện thoại di
+động hiện nay.<br>CLDC có 2 phiên bản là 1.0 và 1.1, trong đó phiên bản
+1.0 là phổ biến nhất trong các điện thoại hỗ trợ Java. MIDP cũng có 2
+phiên bản là 1.0 và 2.0. Hầu hết các máy điện thoại đời mới hiện nay
+trên thị trường đã hỗ trợ MIDP 2.0.</p><h3>Tìm hiểu về mã nguồn ứng dụng Hello World</h3><p>Như
+vậy là bạn đã nắm được những khái niệm cơ bản nhất về nền tảng J2ME
+trên các thiết bị di động. Với những kiến thức nền tảng này chúng ta sẽ
+tiếp tục bằng cách phân tích mã nguồn ứng dụng Hello World.<br><br>import javax.microedition.lcdui.*;<br><br>import javax.microedition.midlet.*;<br><br><br>public class HelloMIDlet<br><br>extends MIDlet<br><br>implements CommandListener {<br><br>private Form mMainForm;<br><br>public HelloMIDlet() {<br><br>mMainForm = new Form("HelloMIDlet");<br><br>mMainForm.append(new StringItem(null, "Hello World!"));<br><br>mMainForm.addCommand(new Command("Exit", Command.EXIT, 0));<br><br>mMainForm.setCommandListener(this);<br><br>}<br><br>public void startApp() {<br><br>Display.getDisplay(this).setCurrent(mMainForm);<br><br>}<br><br>public void pauseApp() {}<br><br>public void destroyApp(boolean unconditional) {}<br><br>public void commandAction(Command c, Displayable s) {<br><br>notifyDestroyed();<br><br>}<br><br>}<br><br>Để
+hiểu được ví dụ này, các bạn cần có một ít kiến thức về ngôn ngữ lập
+trình hướng đối tượng nói chung và Java nói riêng. Nếu các bạn chưa
+từng lập trình, các bạn nên tìm xem một vài chương đầu của bất kỳ cuốn
+sách lập trình Java nào.<br>Đầu tiên ứng dụng của chúng ta “import” hay
+tham khảo 2 gói chính của J2ME cho việc lập trình ứng dụng cho điện
+thoại, đó là 2 gói javax.microedition.lcdui (bao gồm các lớp định nghĩa
+các thành phần giao diện đồ hoạ) và javax.microedition.midlet (bao gồm
+lớp MIDlet). Kế đến ta định nghĩa lớp ứng dụng tên HelloMIDlet bằng
+cách mở rộng lớp MIDlet và sử dụng giao tiếp CommandListener để nhận sự
+kiện về các lệnh do người dùng điều kiển thông qua các phím bấm.<br>Ứng
+dụng của chúng ta cần một biểu mẫu (form) để thể hiện giao diện trên
+màn hình, vì vậy ứng dụng của chúng ta khai báo một biến có kiểu là
+Form với tên là mMainForm và biểu mẫu này sẽ dùng để chứa chuỗi ký tự
+“Hello World!”.<br>Kế đến chúng ta định nghĩa phương thức khởi tạo
+(constructor) và trong đó ta tạo mới một đối tượng biểu mẫu, sau đó tạo
+mới đối tượng StringItem và thêm đối tượng StringItem này vào đối tượng
+Form. Kế đến ta định nghĩa một lệnh với kiểu là Command dùng cho việc
+kết thúc chương trình. Một lệnh được đặt vào trong biểu mẫu thông qua
+phương thức addCommand(). Sau đó ta chỉ định chính lớp này sẽ là lớp xử
+lý các lệnh thông qua phương thức setCommandListener().<br>Mỗi ứng dụng
+viết cho điện thoại bằng MIDP đều phải kế thừa lớp trừu tượng MIDlet và
+phải định nghĩa đủ 3 phương thức là startApp(), pauseApp() và
+destroyApp(). Chắc các bạn cũng đoán ra được, startApp() được gọi khi
+khởi tạo ứng dụng, pauseApp() được gọi khi ứng dụng cần được tạm dừng,
+ví dụ như khi cần nhận một cuộc gọi đến. Còn phương thức destroyApp()
+được gọi khi thoát ứng dụng, thường là thông qua một lệnh thoát (Exit).
+Trong ví dụ Hello World này thì ta chỉ sử dụng phương thức startApp()
+để lấy đối tượng Display (màn hình) và đặt biểu mẫu mMainForm thành
+biểu mẫu hiện hành cho màn hình điện thoại. Vì phương thức này được gọi
+nên chúng ta sẽ thấy được chuỗi Hello World hiện trên màn hình điện
+thoại. Các bạn cũng chú ý là mặc dù ta không cần xử lý gì cho 2 phương
+thức còn lại là pauseApp() và destroyApp() nhưng ta vẫn phải khai báo
+thành phương thức rỗng vì đây là yêu cầu bắc buộc của một ứng dụng
+MIDlet.<br>Phương thức cuối cùng, commandAction() sẽ được gọi khi có
+lệnh nhấn từ người dùng. Ở đây ta chỉ đơn giản gọi phương thức
+notifyDestroyed() để kết thúc ứng dụng.<br>Bây giờ các bạn có thể thử
+Việt hoá ứng dụng này bằng cách thay thế 3 chuỗi như sau và thử biên
+dịch, chạy lại ứng dụng của mình.</p><table style="height: 76px;" align="center" border="1" width="541"><tbody><tr><td><strong> Tiếng Anh</strong></td><td> <strong>Tiếng Việt không dấu</strong></td></tr><tr><td> "HelloMIDlet"</td><td> Ung dung Xin chao</td></tr><tr><td> "Hello World!"</td><td> Xin chao cac ban</td></tr><tr><td> Exit"</td><td> Thoat</td></tr></tbody></table><p>&nbsp;</p><h3>Tóm tắt</h3><p>Như
+vậy các bạn đã nắm được những kiến thức cơ bản nhất về J2ME, và vì đây
+là những kiến thức nền tảng nhất nên các bạn sẽ còn tiếp tục sử dụng nó
+trong các bài sau. Các bạn cũng hiểu qua được mã nguồn ứng dụng
+HelloWorld của chúng ta và thử thay đổi một số chữ từ Anh sang Việt và
+chạy kiểm tra bản sửa đổi này. Trong bài sau chúng ta sẽ học cấu trúc
+tổng quát của một ứng dụng MIDlet bất kỳ và làm quen thêm một số thuật
+ngữ mới nữa. Hẹn gặp lại các bạn trong bài tới.</p><p><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/lap_trinh_j2me_co_ban_bai_4.html">[Bài tiếp theo]</a>&nbsp;</p><div align="right"><em><strong>Nguyễn Ngọc Minh</strong></em><br><em><strong>minhnn – <a href="http://www.javavietnam.org/">www.JavaVietnam.org</a></strong></em><br></div>
+            
+            
+
+
+          </td>
+        </tr>
+        <tr>
+          <td class="bghorline" colspan="2" width="100%" height="25">&nbsp;</td>
+        </tr>
+      </tbody></table>
+    </td>
+    <td width="26"><img src="lap_trinh_j2me_co_ban_bai_3_files/spacer.gif" alt=""></td>
+  </tr>
+</tbody></table>
+</td>
+  </tr>
+  <tr>   
+    <td height="3"><img src="lap_trinh_j2me_co_ban_bai_3_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+    <td>
+
+
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function _ShowHide(id1, id2) {
+  if (id1 != "") _toggleview(id1);
+  if (id2 != "") _toggleview(id2);
+}
+function _toggleview(id) {
+  if (!id) return;
+  if (itm = my_getbyid(id)) {
+    if (itm.style.display == "none") _my_show_div(itm);
+    else _my_hide_div(itm);
+  }
+}
+function _my_hide_div(itm) {
+  if (!itm) return;
+  itm.style.display = "none";
+  doLoad(120);
+}
+function _my_show_div(itm) {
+  if (!itm) return;
+  itm.style.display = "";
+  clearTimeout(t);
+}
+//]]>
+</script>
+<table class="bgwhite" border="0" cellpadding="0" cellspacing="0" width="644">
+  <tbody><tr>
+    <td width="14"><img src="lap_trinh_j2me_co_ban_bai_3_files/spacer.gif" alt=""></td>
+    <td width="374">
+      <table align="center" border="0" cellpadding="0" cellspacing="2" width="374">
+        <tbody><tr>
+          <td align="left" width="20"><img src="lap_trinh_j2me_co_ban_bai_3_files/ico_003.gif" alt="" width="20" height="20" hspace="3"></td>
+          <td align="left" width="90"><a href="http://www.javavietnam.org/javavn/cms/print?id=135" class="linkcontentrow2">In</a></td>
+          <td align="left" width="20"><img src="lap_trinh_j2me_co_ban_bai_3_files/ico_002.gif" alt="" width="20" height="20" hspace="3"></td>
+          <td align="left" width="90"><a href="javascript:%20__Open('/javavn/cms/emailtofriends',%20370,%20310)" class="linkcontentrow2">Gửi</a></td>
+          
+        
+          <td align="right" width="20"><img src="lap_trinh_j2me_co_ban_bai_3_files/ico.gif" alt="" width="20" height="20" hspace="3"></td>
+          <td align="left" width="100"><a href="javascript:my_hide_div(my_getbyid('oi_open'));_ShowHide('fb_open','fb_closed');" class="linkcontentrow2">Phản hồi</a></td>
+        
+        
+        </tr>
+      </tbody></table>
+    </td>
+    <td width="26"><img src="lap_trinh_j2me_co_ban_bai_3_files/spacer.gif" alt=""></td>
+  </tr>
+</tbody></table></td>
+  </tr>
+  <tr>
+    <td height="3"><img src="lap_trinh_j2me_co_ban_bai_3_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+    <td>
+      
+      
+
+
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <div id="fb_open" style="display: none; position: relative;">
+        ﻿
+
+<script type="text/javascript">
+//<![CDATA[
+function SubmitForm() {
+  if (ValidateForm() == true ) {
+    document.feedbackForm.submitbutton.disable = true;
+    document.feedbackForm.submit();
+  }
+}
+
+function ValidateForm() {
+  if (document.feedbackForm.FeedbackName.value == "" || document.feedbackForm.FeedbackName.value == "Họ và tên") {
+    alert("Bạn phải nhập tên.");
+    return false;
+  }
+  if (!Validate_Email_Address(document.feedbackForm.FeedbackEmail.value)) {
+    alert("Bạn phải nhập email.");
+    return false;
+  }
+  if (document.feedbackForm.FeedbackContent.value == "" &&
+        document.feedbackForm.file1.value == "" &&
+        document.feedbackForm.file2.value == "" &&
+        document.feedbackForm.file3.value == "") {
+    alert("Bạn phải nhập nội dung phản hồi.");
+    return false;
+  }
+  
+  return true;
+}
+//]]>
+</script>
+
+<form id="feedbackForm" name="feedbackForm" action="/javavn/cms/contentfeedbackprocess" method="post" enctype="multipart/form-data">
+<input id="ContentID" name="ContentID" value="135" type="hidden">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="644">
+  <tbody><tr>
+    <td width="14"><img src="lap_trinh_j2me_co_ban_bai_3_files/spacer.gif" alt=""></td>
+    <td width="604">
+      <table border="0" cellpadding="0" cellspacing="0" width="604">      
+        <tbody><tr>
+          <td class="titlecontentdetail" nowrap="nowrap">Phản hồi, nhận xét bài viết</td>
+          <td class="bghorline" width="75%" height="25">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <table border="0" cellpadding="1" cellspacing="0" width="604">
+              <tbody><tr>
+                <td>
+                  <input name="FeedbackName" id="FeedbackName" value="Họ và tên" class="textboxfb" onfocus="focus_clear(this, 'Họ và tên');" onblur="lostfocus_default(this, 'Họ và tên');" type="text"> <span class="requiredfield">*</span>
+                </td>
+                <td>
+                  <input name="FeedbackEmail" id="FeedbackEmail" value="Địa chỉ email" class="textboxfb" onfocus="focus_clear(this, 'Địa chỉ email');" onblur="lostfocus_default(this, 'Địa chỉ email');" type="text"> <span class="requiredfield">*</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <select id="FeedbackDestination" name="FeedbackDestination">
+                    <option value="" selected="selected">Tòa Soạn</option>
+                    <option value="">Phòng quảng cáo</option>
+                    <option value="">Phòng phát hành</option>
+                  </select>
+                </td>
+                <td><input name="FeedbackSubject" id="FeedbackSubject" value="Tiêu đề" class="textboxfb" onfocus="focus_clear(this, 'Tiêu đề');" onblur="lostfocus_default(this, 'Tiêu đề');" type="text"></td>
+              </tr>
+              <tr>
+                <td colspan="2">Nội dung <span class="requiredfield">*</span></td>
+              </tr>
+              <tr>
+                <td colspan="2"><textarea name="FeedbackContent" cols="55" rows="5"></textarea></td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                
+                  <div align="center"><input name="submitbutton" value="Gửi" onclick="javascript: SubmitForm();" type="button"></div>
+                
+                </td>
+              </tr>
+            </tbody></table>
+          </td>
+        </tr>        
+      </tbody></table>     
+    </td>
+    <td width="26"><img src="lap_trinh_j2me_co_ban_bai_3_files/spacer.gif" alt=""></td>
+  </tr>
+</tbody></table>
+</form>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+
+</td>
+  </tr>
+  
+  <tr>
+    <td>
+</td>
+  </tr>
+
+  <tr>   
+    <td height="15"><img src="lap_trinh_j2me_co_ban_bai_3_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+  
+    <td>
+
+</td>
+  </tr>
+  <tr>   
+    <td height="2"><img src="lap_trinh_j2me_co_ban_bai_3_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+   
+    <td>
+
+</td>
+  </tr>
+  <tr>
+    <td>
+</td>
+  </tr>
+  <tr>   
+    <td height="5"><img src="lap_trinh_j2me_co_ban_bai_3_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+    <td>
+
+<table class="bgmorecontent" border="0" cellpadding="0" cellspacing="0" width="644">
+  <tbody><tr>
+    <td width="28"><img src="lap_trinh_j2me_co_ban_bai_3_files/spacer.gif" alt="" width="28"></td>
+    <td colspan="2" width="588">
+      <table border="0" cellpadding="0" cellspacing="0" width="588">
+        <tbody><tr>
+          <td class="morenews" nowrap="nowrap">Tin đã đưa&nbsp;</td>
+          <td class="linemorenews" width="100%">&nbsp;</td>
+        </tr>
+      </tbody></table>
+    </td>  
+    <td width="20"><img src="lap_trinh_j2me_co_ban_bai_3_files/spacer.gif" alt="" width="20"></td>
+  </tr>
+  <tr>
+    <td width="28"><img src="lap_trinh_j2me_co_ban_bai_3_files/spacer.gif" alt=""></td>
+    <td colspan="2" width="588">
+
+      <div class="padcbs"><img src="lap_trinh_j2me_co_ban_bai_3_files/bullet_red.gif" alt=""><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/lap_trinh_j2me_co_ban_bai_2.html" class="rightlinkcbs2">Bài 2: Sử dụng bộ công cụ J2ME Wireless Toolkit để viết ứng dụng Hello World đầu tiên của bạn</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="datemorenews">(02/05/2008)</span></div>
+
+      <div class="padcbs"><img src="lap_trinh_j2me_co_ban_bai_3_files/bullet_red.gif" alt=""><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/lap_trinh_j2me_co_ban_bai_1.html" class="rightlinkcbs2">Bài 1: Giới thiệu về lập trình cho điện thoại di động và công cụ J2ME Wireless Toolkit</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="datemorenews">(02/05/2008)</span></div>
+
+      <div class="padcbs"><img src="lap_trinh_j2me_co_ban_bai_3_files/bullet_red.gif" alt=""><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/cai_dat_va_cau_hinh_Apache.html" class="rightlinkcbs2">Cài đặt và cấu hình Apache hỗ trợ PHP và JSP</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="datemorenews">(13/06/2005)</span></div>
+
+      <div class="padcbs"><img src="lap_trinh_j2me_co_ban_bai_3_files/bullet_red.gif" alt=""><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/generic_3.html" class="rightlinkcbs2">Kiểu generic (phần ba)</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="datemorenews">(10/06/2005)</span></div>
+
+      <div class="padcbs"><img src="lap_trinh_j2me_co_ban_bai_3_files/bullet_red.gif" alt=""><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/generic_2.html" class="rightlinkcbs2">Kiểu generic (phần hai)</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="datemorenews">(09/06/2005)</span></div>
+
+      <div class="padcbs"><img src="lap_trinh_j2me_co_ban_bai_3_files/bullet_red.gif" alt=""><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/generic_1.html" class="rightlinkcbs2">Kiểu generic (phần một)</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="datemorenews">(09/06/2005)</span></div>
+
+      <div class="padcbs"><img src="lap_trinh_j2me_co_ban_bai_3_files/bullet_red.gif" alt=""><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/java_for_mac.html" class="rightlinkcbs2">Chương trình Java đầu tiên (Sử dụng cho Mac)</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="datemorenews">(07/06/2005)</span></div>
+
+      <div class="padcbs"><img src="lap_trinh_j2me_co_ban_bai_3_files/bullet_red.gif" alt=""><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/java_for_unix.html" class="rightlinkcbs2">Chương trình Java đầu tiên (Sử dụng cho Unix)</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="datemorenews">(07/06/2005)</span></div>
+
+      <div class="padcbs"><img src="lap_trinh_j2me_co_ban_bai_3_files/bullet_red.gif" alt=""><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/chuong_trinh_java_dau_tien.html" class="rightlinkcbs2">Chương trình Java đầu tiên (Sử dụng cho Microsoft Windows)</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="datemorenews">(26/05/2005)</span></div>
+
+      
+      
+
+
+
+      <div align="right"><a href="http://www.javavietnam.org/javavn/cms/vi/java_tutorials/java_tutorials_basic/index.html?time=1209719010000" class="nextpage">Trang sau</a></div><br>
+
+    </td>
+    <td width="20"><img src="lap_trinh_j2me_co_ban_bai_3_files/spacer.gif" alt="">
+    </td>
+  </tr>  
+</tbody></table>
+</td>
+  </tr>
+  <tr>   
+    <td height="15"><img src="lap_trinh_j2me_co_ban_bai_3_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+    <td>
+
+
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function trim(str) {
+  return str.replace(/(^\s+)([^\s]*)(\s+$)/, '$2');
+}
+function isBlank(field, strBodyHeader) {
+  strTrimmed = trim(field.value);
+  if (strTrimmed.length > 0) return false;
+  alert(strBodyHeader);
+  field.focus();
+  return true;
+}
+function validateFormGo() {
+  if (isBlank(document.submitFormGo.bydate, 'Bạn chưa chọn ngày.')) return false;
+  return true;
+}
+function clickFormGo() {
+  var select = document.getElementById('channel');
+  if (select.selectedIndex == 0) {
+    alert('Bạn chưa chọn nhóm tin.');
+    return false;
+  }
+    
+  document.submitFormGo.action = select.options[select.selectedIndex].value;
+  if (validateFormGo()) document.submitFormGo.submit();
+}
+document.write('<link rel="stylesheet" href="/javavn/mvnplugin/mvncms/cds/standard/jvn2/calendar/bluexp.css" />');
+//]]>
+</script><link rel="stylesheet" href="lap_trinh_j2me_co_ban_bai_3_files/bluexp.css">
+<script type="text/javascript" src="lap_trinh_j2me_co_ban_bai_3_files/zapatec.js"></script>
+<script type="text/javascript" src="lap_trinh_j2me_co_ban_bai_3_files/calendar.js"></script>
+<script type="text/javascript" src="lap_trinh_j2me_co_ban_bai_3_files/calendar-vi.js"></script>
+<form name="submitFormGo" action="">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+  <tbody><tr>
+    <td align="right" width="200">
+      <input autocomplete="off" size="12" id="bydate" name="bydate" readonly="readonly" class="allinput" style="width: 100px;" type="text">
+    </td>
+    <td width="5">&nbsp;</td>
+    <td align="center" width="100">
+      <input id="choosebydate" class="allbutton" value="Chọn ngày" type="button">
+    </td>
+    <td width="5">&nbsp;</td>
+    <td width="150">
+      <select class="textbox_off" id="channel">
+        <option value="0" selected="selected">Nhóm tin</option>
+  
+        <option value="/javavn/cms/vi/mbl2007/index.html">-- Mobile Labs 2008</option>
+  
+        <option value="/javavn/cms/vi/news/index.html">-- Tin Tức</option>
+  
+        <option value="/javavn/cms/vi/news/java_news/index.html">---- Tin tức Java</option>
+  
+        <option value="/javavn/cms/vi/news/general_news/index.html">---- Tin tức tổng hợp</option>
+  
+        <option value="/javavn/cms/vi/news/computerworld_expo2005/index.html">---- Computer Expo 2005</option>
+  
+        <option value="/javavn/cms/vi/developer_of_the_year/index.html">-- Developer of the Year</option>
+  
+        <option value="/javavn/cms/vi/javavietnam_training_activities/index.html">-- JavaVietnam Training</option>
+  
+        <option value="/javavn/cms/vi/java_tutorials/index.html">-- Bài học Java</option>
+  
+        <option value="/javavn/cms/vi/java_tutorials/java_tutorials_basic/index.html">---- Java cơ bản</option>
+  
+        <option value="/javavn/cms/vi/java_tutorials/java_tutorials_intermediate/index.html">---- Java nâng cao</option>
+  
+      </select>
+    </td>
+    <td width="5">&nbsp;</td>  
+    <td align="left" width="200"><input onclick="clickFormGo();" value="Xem" class="allbutton" type="button"></td>
+  </tr>
+</tbody></table>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+      Zapatec.Calendar.setup({
+        firstDay          : 1,
+        weekNumbers       : false,
+        electric          : false,
+        inputField        : "bydate",
+        button            : "choosebydate",
+        ifFormat          : "%d/%m/%Y",
+        daFormat          : "%Y/%m/%d"
+      });
+//]]>
+</script></td>
+  </tr>
+</tbody></table></td>
+    <td width="2"><img src="lap_trinh_j2me_co_ban_bai_3_files/square.gif" alt="" width="2"></td>
+    <td class="border_lr" valign="top" width="193">
+      <div>
+
+<table class="border_rightad" border="0" cellpadding="0" cellspacing="0" width="193">
+  <tbody><tr>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td align="center"><script type="text/javascript"><!--
+google_ad_client = "pub-4755965374109189";
+/* 160x600, created 6/15/08 */
+google_ad_slot = "2964634703";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="lap_trinh_j2me_co_ban_bai_3_files/show_ads.js">
+</script><script>window.google_render_ad();</script><iframe name="google_ads_frame" src="lap_trinh_j2me_co_ban_bai_3_files/ads_003.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" width="160" frameborder="0" height="600"></iframe></td>
+  </tr>
+
+</tbody></table></div>
+      <div>
+
+<table border="0" cellpadding="0" cellspacing="0" width="193">
+  <tbody><tr>   
+    <td width="193" height="10"><img src="lap_trinh_j2me_co_ban_bai_3_files/square.gif" alt=""></td>
+  </tr>
+
+</tbody></table></div>
+    </td>
+  </tr>
+</tbody></table>
+</td>
+  </tr>
+  <tr>   
+    <td width="990" height="5"><img src="lap_trinh_j2me_co_ban_bai_3_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+    <td width="990">
+
+
+
+  <!-- bottom ads -->
+  <table align="center" border="0" cellpadding="0" cellspacing="0" width="798">
+    <tbody><tr>
+      <td width="10"><img src="lap_trinh_j2me_co_ban_bai_3_files/square.gif" alt="" width="10"></td>
+      <td align="center" width="760">
+        <!-- SiteSearch Google -->
+<form method="get" action="http://www.google.com/custom" target="_top">
+<table bgcolor="#ffffff" border="0">
+<tbody><tr><td align="left" valign="top" height="32" nowrap="nowrap">
+<a href="http://www.google.com/">
+<img src="lap_trinh_j2me_co_ban_bai_3_files/Logo_25wht.gif" alt="Google" align="middle" border="0"></a>
+</td>
+<td nowrap="nowrap">
+<input name="domains" value="www.javavietnam.org" type="hidden">
+<label for="sbi" style="display: none;">Enter your search terms</label>
+<input name="q" size="31" maxlength="255" value="" id="sbi" type="text">
+<label for="sbb" style="display: none;">Submit search form</label>
+<input name="sa" value="Search" id="sbb" type="submit">
+</td></tr>
+<tr>
+<td> </td>
+<td nowrap="nowrap">
+<table>
+<tbody><tr>
+<td>
+<input class="noborder" name="sitesearch" value="" checked="checked" id="ss0" type="radio">
+<label for="ss0" title="Search the Web"><font color="#000000" size="-1">Web</font></label></td>
+<td>
+<input class="noborder" name="sitesearch" value="www.javavietnam.org" id="ss1" type="radio">
+<label for="ss1" title="Search www.javavietnam.org"><font color="#000000" size="-1">www.javavietnam.org</font></label></td>
+</tr>
+</tbody></table>
+<input name="client" value="pub-4755965374109189" type="hidden">
+<input name="forid" value="1" type="hidden">
+<input name="channel" value="4062821725" type="hidden">
+<input name="ie" value="UTF-8" type="hidden">
+<input name="oe" value="UTF-8" type="hidden">
+<input name="safe" value="active" type="hidden">
+<input name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;LH:50;LW:140;L:http://www.javavietnam.org/javavn/mvnplugin/mvnforum/images/logo.gif;S:http://;FORID:1" type="hidden">
+<input name="hl" value="en" type="hidden">
+</td></tr></tbody></table>
+</form>
+<!-- SiteSearch Google -->
+      </td>
+      <td width="28"><img src="lap_trinh_j2me_co_ban_bai_3_files/square.gif" alt="" width="28"></td>
+    </tr>
+  </tbody></table>
+
+</td>
+  </tr>
+  <tr>     
+    <td width="990" height="2"><img src="lap_trinh_j2me_co_ban_bai_3_files/square.gif" alt=""></td>
+  </tr>
+  <tr>
+    <td width="990">
+
+<table class="bgblack" border="0" cellpadding="0" cellspacing="0" width="990">
+  <tbody><tr>
+    <td class="bgblack" width="18" height="10"><img src="lap_trinh_j2me_co_ban_bai_3_files/spacer.gif" alt="" width="10" height="21"></td>
+    <td class="bgblack" width="23"><a href="http://www.javavietnam.org/javavn/cms"><img src="lap_trinh_j2me_co_ban_bai_3_files/icon_homepage.gif" alt="" border="0"></a></td>
+    <td align="left"><a href="http://www.javavietnam.org/javavn/cms" class="link_namewebsite">www.javavietnam.org</a></td>
+    <td class="bgblack" width="13"><a href="javascript:scroll(0,0);"><img src="lap_trinh_j2me_co_ban_bai_3_files/icon_top.gif" alt="" border="0" width="8" height="21"></a></td>
+    <td width="15"><a href="javascript:scroll(0,0);" class="link_top">Top</a></td>
+    <td class="bgblack" width="28"><img src="lap_trinh_j2me_co_ban_bai_3_files/spacer.gif" alt="" width="28" height="21"></td>
+  </tr>
+</tbody></table>
+</td>
+  </tr>
+  <tr>
+    <td width="990">
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="990">
+  <tbody><tr>
+    <td>
+    </td>
+  </tr>
+</tbody></table>
+</td>
+  </tr>
+</tbody></table>
+
+
+
+ 
+<!-- Alexa button -->
+
+<!-- End Alexa button -->
+ 
+<!-- Google Analytics -->
+<script type="text/javascript">
+//<![CDATA[
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+//]]>
+</script><script src="lap_trinh_j2me_co_ban_bai_3_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+var pageTracker = _gat._getTracker("UA-4030481-2");
+pageTracker._initData();
+pageTracker._trackPageview();
+//]]>
+</script>
+<!-- End Google Analytics -->
+</body></html>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="myapplication">
+</Property><Property Name="Solution File" Value="D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\myapplication\myapplication.sln">
+</Property><Property Name="Date" Value="Monday, November 09, 2009">
+</Property><Property Name="Time" Value="1:36:03 AM">
+</Property></Properties><Event ErrorLevel="0" Project="myapplication" Source="myapplication.csproj" Description="Project file successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\myapplication\Backup\myapplication.csproj">
+</Event><Event ErrorLevel="0" Project="myapplication" Source="Program.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\myapplication\Backup\Program.cs">
+</Event><Event ErrorLevel="0" Project="myapplication" Source="Properties\AssemblyInfo.cs" Description="File successfully backed up as D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\myapplication\Backup\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="myapplication" Source="myapplication.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="myapplication" Source="myapplication.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="myapplication" Source="myapplication.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

@@ -1,0 +1,64 @@
+@import url(/community/css/themes/mainstructure1.css);
+@import url(/community/css/themes/maincolors1.css);
+
+body {
+	background:#ddd url(/community/graphics/themes/bg2.gif);
+	color:#222;
+	}
+
+#wrap0 {
+	background:transparent url(/community/graphics/themes/129/top.gif) center top no-repeat;
+	}
+
+#top {
+	background:#668b16 url(/community/graphics/themes/129/top.jpg);
+	border-bottom:1px solid #ddd;
+	}
+
+#top2 {
+	font-size:12px;
+	padding-left:143px;
+	}
+
+#top2 h1 {
+	padding:30px 0 0 0;
+	font-size:1.9em;
+	color:#fff;
+	}
+
+#subtitle, #top a {
+	color:#fff;
+	}
+
+#menu {
+	background:#f8f8f8 url(/community/graphics/themes/menu1.gif);
+	border-bottom:1px solid #fff;
+	}
+
+#menu a:link, #menu a:visited, #menu a:active {
+	background:#f8f8f8 url(/community/graphics/themes/menu1.gif);
+	color:#000;
+	border-left:1px solid #fff;
+	border-right:1px solid #ddd;
+	}
+
+#menu a:hover, #menu #selected:link, #menu #selected:visited {
+	background-color:#e7e7e7;
+	}
+
+a:link, a:visited, a:active, #side a.username:link, #side a.username:visited, #calendar tbody a:link, #calendar tbody a:visited, .title a:hover {
+	color:#3984c3;
+	}
+
+h1, h2, .title a:link, .title a:visited {
+	color:#8cb014;
+	}
+
+#side h2, #side caption {
+	background:#eee url(/community/graphics/themes/side1.gif) bottom left repeat-x;
+	color:#222;
+	}
+
+#side a:link, #side a:visited, #footer a:link, #footer a:visited, .tags a:link, .tags a:visited {
+	color:#222;
+	}

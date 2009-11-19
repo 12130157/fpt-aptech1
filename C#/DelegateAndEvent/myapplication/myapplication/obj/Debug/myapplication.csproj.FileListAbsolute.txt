@@ -1,0 +1,2 @@
+D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\myapplication\obj\Debug\myapplication.exe
+D:\FPT-Aptech\C#\DelegateAndEvent\myapplication\myapplication\obj\Debug\myapplication.pdb

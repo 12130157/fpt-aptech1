@@ -1,0 +1,5 @@
+D:\FPT-Aptech\C#\Projects\LeaningCs\demo\bin\Debug\demo.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\demo\bin\Debug\demo.pdb
+D:\FPT-Aptech\C#\Projects\LeaningCs\demo\obj\Debug\ResolveAssemblyReference.cache
+D:\FPT-Aptech\C#\Projects\LeaningCs\demo\obj\Debug\demo.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\demo\obj\Debug\demo.pdb

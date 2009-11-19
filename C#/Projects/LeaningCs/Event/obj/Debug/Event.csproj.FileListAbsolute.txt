@@ -1,0 +1,5 @@
+D:\FPT-Aptech\C#\Projects\LeaningCs\Event\obj\Debug\ResolveAssemblyReference.cache
+D:\FPT-Aptech\C#\Projects\LeaningCs\Event\bin\Debug\Event.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\Event\bin\Debug\Event.pdb
+D:\FPT-Aptech\C#\Projects\LeaningCs\Event\obj\Debug\Event.exe
+D:\FPT-Aptech\C#\Projects\LeaningCs\Event\obj\Debug\Event.pdb

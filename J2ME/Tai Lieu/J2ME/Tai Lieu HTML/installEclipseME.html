@@ -1,0 +1,482 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+
+	<title>Installing EclipseME itself</title>
+<link href="installEclipseME_files/web.css" type="text/css" rel="stylesheet">
+</head><body>
+	<table border="0" cellpadding="0" cellspacing="0">
+	<tbody><tr style="height: 103px;">
+		<td colspan="2">
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tbody><tr>
+					<td style="width: 281px;"><img src="installEclipseME_files/logoTop.png" alt="logoTop"></td>
+					<td style="vertical-align: bottom; text-align: right; padding-bottom: 10px; padding-right: 10px;" background="installEclipseME_files/bg.png">
+			<img src="installEclipseME_files/1p-trans.gif" alt="pad" width="400" height="1"><br>
+			<div class="PageHeader">
+			J2ME Development using Eclipse<br>
+			<span style="font-style: italic;">"From zero to mobile in minutes"</span>
+			</div>
+					</td>
+				</tr>
+			</tbody></table>
+		</td>
+	</tr>
+	<tr>
+		<td style="width: 220px; vertical-align: top;">
+			<img src="installEclipseME_files/logoBot.png" alt="logoBottom">
+			<div style="text-align: center;">
+			<table align="center" bgcolor="#cbcbcb" border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr><td>
+			<table align="center" border="0" cellpadding="1" cellspacing="1">
+				<tbody><tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/index.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">Home</a></td></tr>
+				<tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/docs/news.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">History</a></td></tr>
+				<tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/docs/index.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">Table of Contents</a></td></tr>
+				<tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/docs/prereqs.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">Prerequisites</a></td></tr>
+				<tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/docs/installation.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">Installation</a></td></tr>
+				<tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/docs/createProject.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">Creating a new project</a></td></tr>
+				<tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/docs/createMidlet.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">Creating a new MIDlet</a></td></tr>
+				<tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/docs/run.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">Running/Debugging</a></td></tr>
+				<tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/docs/packaging.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">Packaging for deployment</a></td></tr>
+				<tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/docs/advanced.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">Advanced</a></td></tr>
+				<tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/docs/ref.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">Reference</a></td></tr>
+				<tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/docs/faq.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">FAQ</a></td></tr>
+				<tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/docs/troubleshooting.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">Troubleshooting</a></td></tr>
+				<tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/docs/support.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">Support</a></td></tr>
+				<tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/docs/developer/index.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">For EclipseME developers</a></td></tr>
+				<tr><td bgcolor="#ebebeb"><a class="menu" href="http://eclipseme.org/License.html" onmouseover="parentNode.bgColor='#000000';" onmouseout="parentNode.bgColor='#EBEBEB';">License</a></td></tr>
+			</tbody></table>
+			</td></tr>
+			</tbody></table>
+			<br>
+			<script type="text/javascript">
+			<!--
+				google_ad_client = "pub-6209547544666090";
+				google_alternate_ad_url = "http://www.eclipseme.org/blank.html";
+				google_ad_width = 120;
+				google_ad_height = 240;
+				google_ad_format = "120x240_as";
+				google_ad_channel ="";
+				google_color_border = "CCCCCC";
+				google_color_bg = "FFFFFF";
+				google_color_link = "000000";
+				google_color_url = "666666";
+				google_color_text = "333333";
+			//-->
+			</script>
+			<script type="text/javascript" src="installEclipseME_files/show_ads.js"></script><script src="installEclipseME_files/test_domain.js"></script><script>window.google_render_ad();</script><iframe name="google_ads_frame" src="installEclipseME_files/ads.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" width="120" frameborder="0" height="240"></iframe>
+			<br>
+			<a href="http://www.eclipse.org/"><img src="installEclipseME_files/rea_eclipse_pos_logo_fc_sm.gif" alt="Eclipse Ready Logo" border="0"></a>
+			<br>
+			<a href="http://sourceforge.net/"><img src="installEclipseME_files/sflogo.png" alt="SourceForge.net Logo" border="1" width="125" height="37"></a>
+			</div>
+			<img src="installEclipseME_files/1p-trans.gif" alt="spacer" width="1" height="100">
+		</td>
+		<td style="vertical-align: top;">
+			<br>
+			<br>
+<p class="PageTitle">Installing EclipseME itself</p>
+<p>
+This document provides instructions on how to install or upgrade the EclipseME plugin/feature set.
+Before you follow the steps below, please make sure you have followed the prerequisite steps
+<a href="http://eclipseme.org/docs/installation.html">here</a>.
+In addition, once you have finished the installation itself, you will need to configure EclipseME's settings
+(see <a href="http://eclipseme.org/docs/configuring.html">here</a>) as well as some Eclipse settings.
+</p>
+<ol start="1">
+	<li class="TOC"><a class="TOC" href="#step2a">Decide on your approach</a></li>
+	<li class="TOC"><a class="TOC" href="#step2b">Installing via the EclipseME Update site</a></li>
+	<li class="TOC"><a class="TOC" href="#step2c">Installing via a downloaded archive site</a></li>
+	<li class="TOC"><a class="TOC" href="#step2d">Configuring Preprocessor Support</a></li>
+</ol>
+<hr>
+<h1 id="step2">1. Decide on your approach</h1>
+<p>
+Beginning with version 0.5.5, EclipseME is provided as an Eclipse
+"archive site."  With version 0.5.0 and earlier, one simply unzipped
+the distribution file into the Eclipse installation directory or
+plugin directory.
+<span class="bold">This is no longer the installation procedure.</span>
+Please follow the instructions below instead.
+</p>
+<p>
+If you are updating EclipseME, you should also use the procedure below.
+New installations and updates follow the same series of steps.
+</p>
+<p>
+There are two basic ways of installing or updating EclipseME:
+</p>
+<ol>
+<li>
+You can simply to use Eclipse's built-in updates feature to directly install or
+update via EclipseME's update site.
+</li>
+<li>
+You can download an
+archive site file manually, and then install from it.
+</li>
+</ol>
+<h1 id="step2b">2. Installing via the EclipseME Update site</h1>
+<ol>
+<li>
+<p>
+From the Eclipse <span class="keyword">Help</span> menu, select 
+<span class="keyword">Software Updates</span> and then
+<span class="keyword">Find and install...</span>
+</p>
+</li>
+<li>
+<p>
+You will be presented with the following dialog:<br>
+<img src="installEclipseME_files/install1.png" alt="screenshot"><br>
+Select the <span class="bold">Search for new features to install</span>
+radio button.  
+<br>Press <span class="bold">Next</span>.
+</p>
+</li>
+<li>
+<p>
+You will next be presented with the following dialog:<br>
+<img src="installEclipseME_files/install2.png" alt="screenshot"><br>
+Press the <span class="bold">New Remote Site...</span> button.
+</p>
+</li>
+<li>
+<p>
+In the <span class="bold">New Update Site</span>
+dialog that appears, enter a name for the update site and
+the URL <span class="bold">http://www.eclipseme.org/updates/</span>
+and press
+<span class="bold">Open</span>.<br>
+<img src="installEclipseME_files/install2b.png" alt="screenshot">
+</p>
+</li>
+<li>
+<p>
+The update site will now be listed in the
+<span class="bold">Install</span> dialog.<br>
+<img src="installEclipseME_files/install3b.png" alt="screenshot"><br>
+Ensure that there is a check next to the EclipseME update site, then
+press <span class="bold">Next</span>.
+</p>
+</li>
+<li id="resumeUpgrade1">
+<p>
+You will next be presented with the following dialog:<br>
+<img src="installEclipseME_files/install4.png" alt="screenshot"><br>
+Ensure that there is a check next to <span class="bold">EclipseME</span>.
+Other available features can be installed by checking them as well.
+Press <span class="bold">Next</span>.
+</p>
+</li>
+<li>
+<p>
+The installation process will next display the license agreement for
+EclipseME.<br>
+<img src="installEclipseME_files/install5.png" alt="screenshot"><br>
+Select <span class="bold">I accept the terms of the license agreements</span>
+and press <span class="bold">Next</span>.
+</p>
+</li>
+<li>
+<p>
+The next dialog that appears displays the possible locations into which
+you can install EclipseME.  
+<img src="installEclipseME_files/install6.png" alt="screenshot"><br>
+In many cases, the only site that will be listed will be the main
+Eclipse installation directory.  If you have other plugins or features
+installed, however, you may see additional sites.
+</p>
+<p>
+Although you may install EclipseME elsewhere, we recommend that you
+install it in your main Eclipse installation directory.
+</p>
+<p>
+Once you have selected a site, press <span class="bold">Finish</span>.
+</p>
+</li>
+<li>
+<p>
+At present the EclipseME package is not digitally signed.
+(Maintaining the keys required to digitally sign JAR files costs
+$400+/year.  If anyone is interested in funding EclipseME to this
+extent, we'll be happy to sign the JAR files.)
+As a result,
+the following warning dialog will be displayed:<br>
+<img src="installEclipseME_files/install7.png" alt="screenshot"><br>
+Presuming that you are certain that you obtained the EclipseME distribution
+file from a reputable source (such as directly downloading it yourself
+from SourceForge.net), it should be safe to trust the installation
+package.
+</p>
+<p>
+If you choose to continue, press the <span class="bold">Install</span> button.
+</p>
+</li>
+<li>
+<p>
+At this point, Eclipse will begin to install EclipseME from the site
+archive file.  When the installation is complete, you will see one
+of the following two dialogs:
+</p>
+<table>
+<tbody><tr>
+<td class="middle"><span class="bold">New installations</span></td>
+<td class="middle"><img src="installEclipseME_files/install8a.png" alt="screenshot"></td>
+</tr>
+<tr>
+<td class="middle"><span class="bold">Updates</span></td>
+<td class="middle"><img src="installEclipseME_files/install8b.png" alt="screenshot"></td>
+</tr>
+</tbody></table>
+<p>
+Even though the dialog shown during new installations suggests that
+it may be possible to continue without restarting, you should definitely
+restart Eclipse at this point.
+</p>
+<p>
+Once Eclipse restarts, the installation procedure is complete.
+</p>
+<p>
+In the vast majority of the cases, the installation procedure above
+will properly handle updating a previous version of EclipseME.
+</p>
+<p>
+Under some rare circumstances, even after Eclipse restarts,
+EclipseME will not end up properly "registered" inside Eclipse.
+This can generally be corrected by closing Eclipse and then
+restarting Eclipse adding the
+<span class="code">-clean</span> parameter to the other
+parameters you normally use.  
+Using the
+<span class="code">-clean</span> option forces Eclipse to rescan
+and update all its plugin information.
+</p>
+<p>
+If the plug-in is properly installed, there will be a 
+<span class="keyword">J2ME</span> entry in the
+<span class="keyword">Window / Preferences</span> dialog.
+<br><img src="installEclipseME_files/prefsBasic.png" alt="screenshot">
+</p>
+</li>
+</ol>
+<h1 id="step2c">3. Installing via a downloaded archive site</h1>
+<p>
+The process of installing EclipseME via a downloaded archive file is very
+similar to that of installing it via the EclipseME update site.
+</p>
+<ol>
+<li>
+<p>
+Download the latest archive site from the
+<a href="http://sourceforge.net/project/showfiles.php?group_id=86829" target="_blank">EclipseME downloads page</a>.
+</p>
+</li>
+<li>
+<p>
+From the Eclipse <span class="keyword">Help</span> menu, select 
+<span class="keyword">Software Updates</span> and then
+<span class="keyword">Find and install...</span>
+</p>
+</li>
+<li>
+<p>
+You will be presented with the following dialog:<br>
+<img src="installEclipseME_files/install1.png" alt="screenshot"><br>
+Select the <span class="bold">Search for new features to install</span>
+radio button.  You should select this option even if you are updating
+EclipseME.  
+<br>Press <span class="bold">Next</span>.
+</p>
+</li>
+<li>
+<p>
+You will next be presented with the following dialog:<br>
+<img src="installEclipseME_files/install2.png" alt="screenshot"><br>
+Press the <span class="bold">New Archived Site...</span> button.
+</p>
+</li>
+<li>
+<p>
+In the <span class="bold">Select Local Site Archive</span>
+dialog that appears, select the distribution ZIP file and press
+<span class="bold">Open</span>.<br>
+<img src="installEclipseME_files/install2a.png" alt="screenshot">
+</p>
+</li>
+<li>
+<p>
+The site archive file will now be listed in the
+<span class="bold">Install</span> dialog.<br>
+<img src="installEclipseME_files/install3.png" alt="screenshot"><br>
+Ensure that there is a check next to the distribution file, then
+press <span class="bold">Next</span>.
+</p>
+</li>
+<li>
+<p>
+You will next be presented with the following dialog:<br>
+<img src="installEclipseME_files/install4.png" alt="screenshot"><br>
+Ensure that there is a check next to <span class="bold">EclipseME</span>.
+Other available features can be installed by checking them as well.
+Press <span class="bold">Next</span>.
+</p>
+</li>
+<li>
+<p>
+The installation process will next display the license agreement for
+EclipseME.<br>
+<img src="installEclipseME_files/install5.png" alt="screenshot"><br>
+Select <span class="bold">I accept the terms of the license agreements</span>
+and press <span class="bold">Next</span>.
+</p>
+</li>
+<li>
+<p>
+The next dialog that appears displays the possible locations into which
+you can install EclipseME.  
+<img src="installEclipseME_files/install6.png" alt="screenshot"><br>
+In many cases, the only site that will be listed will be the main
+Eclipse installation directory.  If you have other plugins or features
+installed, however, you may see additional sites.
+</p>
+<p>
+Although you may install EclipseME elsewhere, we recommend that you
+install it in your main Eclipse installation directory.
+</p>
+<p>
+Once you have selected a site, press <span class="bold">Finish</span>.
+</p>
+</li>
+<li>
+<p>
+At present the EclipseME package is not digitally signed.
+(Maintaining the keys required to digitally sign JAR files costs
+$400+/year.  If anyone is interested in funding EclipseME to this
+extent, we'll be happy to sign the JAR files.)
+As a result,
+the following warning dialog will be displayed:<br>
+<img src="installEclipseME_files/install7.png" alt="screenshot"><br>
+Presuming that you are certain that you obtained the EclipseME distribution
+file from a reputable source (such as directly downloading it yourself
+from SourceForge.net), it should be safe to trust the installation
+package.
+</p>
+<p>
+If you choose to continue, press the <span class="bold">Install</span> button.
+</p>
+</li>
+<li>
+<p>
+At this point, Eclipse will begin to install EclipseME from the site
+archive file.  When the installation is complete, you will see one
+of the following two dialogs:
+</p>
+<table>
+<tbody><tr>
+<td class="middle"><span class="bold">New installations</span></td>
+<td class="middle"><img src="installEclipseME_files/install8a.png" alt="screenshot"></td>
+</tr>
+<tr>
+<td class="middle"><span class="bold">Updates</span></td>
+<td class="middle"><img src="installEclipseME_files/install8b.png" alt="screenshot"></td>
+</tr>
+</tbody></table>
+<p>
+Even though the dialog shown during new installations suggests that
+it may be possible to continue without restarting, you should definitely
+restart Eclipse at this point.
+</p>
+<p>
+Once Eclipse restarts, the installation procedure is complete.
+</p>
+<p>
+In the vast majority of the cases, the installation procedure above
+will properly handle updating a previous version of EclipseME.
+</p>
+<p>
+Under some rare circumstances, even after Eclipse restarts,
+EclipseME will not end up properly "registered" inside Eclipse.
+This can generally be corrected by closing Eclipse and then
+restarting Eclipse adding the
+<span class="code">-clean</span> parameter to the other
+parameters you normally use.  
+Using the
+<span class="code">-clean</span> option forces Eclipse to rescan
+and update all its plugin information.
+</p>
+<p>
+If the plug-in is properly installed, there will be a 
+<span class="keyword">J2ME</span> entry in the
+<span class="keyword">Window / Preferences</span> dialog.
+<br><img src="installEclipseME_files/prefsBasic.png" alt="screenshot">
+</p>
+</li>
+</ol>
+<h1 id="step2d">4. Configuring Preprocessor Support</h1>
+<p>
+Due to limitations in the extensibility of the Eclipse Java Compiler (see 
+<a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=116143">Bug 116143</a>
+for further information), it is necessary for EclipseME to hook into the
+Eclipse platform at a lower level in order to provide preprocessor support.
+If you would like to take advantage of EclipseME's support for preprocessing, 
+a few extra changes need to be made to your Eclipse installation.
+</p>
+<ol>
+<li>
+When installing the EclipseME feature, it is imperative that it be installed
+into the same directory structure as your base Eclipse installation.  For instance,
+if your base Eclipse installation (not your workspace) is installed to 
+c:\software\eclipse, you will need to make sure that you install EclipseME into
+c:\software\eclipse.  When the installation has completed, the eclipseme.core.hooks_[version].jar file
+must be located in the same directory as the org.eclipse.org_[version].jar.
+</li>
+<li>
+The Eclipse configuration file must be altered to reference the EclipseME framework hooks bundle.  
+<ol>
+<li>Locate the file config.ini.  This file is located in the &lt;eclipse install&gt;/configuration directory.</li>
+<li>Edit the config.ini with your favorite text editor.</li>
+<li>
+Add the property definition <br>
+<code>osgi.framework.extensions=eclipseme.core.hooks</code><br>
+to the configuration
+file.<br>
+If the property already exists, append <code>",eclipseme.core.hooks" </code> to the end
+of the current property definition.<br><br>
+It is very important that the line be added before the end-of-file marker.  Failure to
+properly place the new line before the end-of-file marker could cause your Eclipse
+workbench to fail to start.
+</li>
+<li>Save the configuration file.</li>
+<li>Restart Eclipse.</li>
+</ol>
+</li>
+</ol>
+<p>
+You will be warned if you have projects that are configured for preprocessing, but the necessary
+configuration changes have not been made.  In this case, a warning will be written to the Eclipse
+workspace log file with text similar to <br><i>"Preprocessor invoked, but hook is not installed.  
+Consult the installation instructions for EclipseME."</i><br>
+For more information on viewing the workspace log file see the <a href="http://eclipseme.org/docs/troubleshooting.html">troubleshooting</a>
+section of the EclipseME documentation.
+</p><h1>Next Steps</h1>
+<p>
+Once you have completed the steps above, you are ready to configure EclipseME and Eclipse.
+Click <a href="http://eclipseme.org/docs/configuring.html">here</a> for instructions on how to to that.
+</p>
+
+			<br>
+			<br>
+		</td>
+	</tr>
+	<tr height="31">
+		<td colspan="2" align="center" background="installEclipseME_files/footer.png">
+			<div style="color: white; padding-top: 5px;">
+			Copyright © 2005, http://www.eclipseme.org.
+			All rights reserved.
+			</div>
+		</td>
+	</tr>
+	</tbody></table>
+</body></html>

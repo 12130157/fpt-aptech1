@@ -1,0 +1,448 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+
+<title>LNQK :: Viet game hanh dong 2D voi  MIDP 2.0</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<script language="JavaScript" type="text/JavaScript">
+<!--
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+<link href="Viet_game_voi_MIDP_2_0_files/aqua.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+<!--
+function P7_StyleLoader(tS) { //v1.2 by PVII
+ var tH='',tDoc='',tA='<LIN'+'K REL="stylesheet" HREF=',tB=' TYPE="text/css">';
+ if(document.getElementsByTagName){var bb=document.getElementsByTagName("LINK");
+ if(bb) {for(var k=0;k<bb.length;k++){if(bb[k].rel.toLowerCase()=="stylesheet"){
+ var h=bb[k].href,x=h.lastIndexOf("/");if(x>0){tH=h.substring(0,x+1);}
+ bb[k].disabled=true;tDoc=tA+'"'+ tH + tS + '"' +tB;
+ document.write(tDoc);break;}}}}
+}
+//P7_StyleLoader('aqua.css');
+
+function MM_goToURL() { //v3.0
+  var i, args=MM_goToURL.arguments; document.MM_returnValue = false;
+  for (i=0; i<(args.length-1); i+=2) eval(args[i]+".location='"+args[i+1]+"'");
+}
+//-->
+</script>
+
+
+<style type="text/css">
+<!--
+.style6 {font-size: 24}
+-->
+</style>
+</head><body onload="MM_preloadImages('../../images/m_contact_over.gif','../../images/m_home_over.gif','../../images/m_person_over.gif','../../images/m_work_over.gif','../../images/m_resource_over.gif','../../images/m_album_over.gif')">
+
+<a name="top"></a>
+<table class="tableborder" align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr>
+    <td colspan="7" class="menucell"><img src="Viet_game_voi_MIDP_2_0_files/logo.gif" alt="Le Ngoc Quoc Khanh - Personal Webpage" width="380" height="57"></td>
+</tr>
+<tr>
+<td class="menucell" width="130"><img src="Viet_game_voi_MIDP_2_0_files/spacer.gif" alt="" width="130" height="28"></td>
+<td class="menucell" width="103"><a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/index.htm" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Home','','../../images/m_home_over.gif',1)"><img src="Viet_game_voi_MIDP_2_0_files/m_home.gif" alt="Home" name="Home" border="0" width="103" height="24"></a></td>
+<td class="menucell" width="103"><a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/personal.htm" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Link 1','','../../images/m_person_over.gif',1)"><img src="Viet_game_voi_MIDP_2_0_files/m_person.gif" alt="Personal Information" name="Link 1" border="0" width="103" height="24"></a></td>
+<td class="menucell" width="103"><a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/works.htm" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Link 2','','../../images/m_work_over.gif',1)"><img src="Viet_game_voi_MIDP_2_0_files/m_work.gif" alt="Works" name="Link 2" border="0" width="103" height="24"></a></td>
+<td class="menucell" width="103"><a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/resources/index.htm" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Link 3','','../../images/m_resource_over.gif',1)"><img src="Viet_game_voi_MIDP_2_0_files/m_resource.gif" alt="Resources" name="Link 3" border="0" width="103" height="24"></a></td>
+<td class="menucell" width="103"><a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/album/" target="_blank" onmouseover="MM_swapImage('Link 4','','../../images/m_album_over.gif',1)" onmouseout="MM_swapImgRestore()"><img src="Viet_game_voi_MIDP_2_0_files/m_album.gif" alt="Album" name="Link 4" border="0" width="103" height="24"></a></td>
+<td class="menucell" width="105"><a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/contact.asp" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Contact Us','','../../images/m_contact_over.gif',1)"><img src="Viet_game_voi_MIDP_2_0_files/m_contact.gif" alt="Contact Me" name="Contact Us" border="0" width="103" height="24"></a></td>
+</tr>
+<tr>
+<td colspan="7"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td colspan="2" class="munuborder"><img src="Viet_game_voi_MIDP_2_0_files/spacer.gif" alt="" width="1" height="5"></td>
+</tr>
+<tr>
+          <td class="submenu" valign="top" width="200"> <img src="Viet_game_voi_MIDP_2_0_files/ocean.jpg" alt="The ocean . . ." width="200" height="133"><br>
+            <form action="../../search.asp" method="get" name="formSear" id="formSear">
+              <input name="searWords" class="field" id="searWords" size="20" maxlength="100" type="text">
+              <input name="search" id="search" value="0" type="hidden">
+              <input name="match" id="match" value="0" type="hidden">
+              <br>
+              <input name="imageField" src="Viet_game_voi_MIDP_2_0_files/search.gif" alt="Search" border="0" type="image" width="65" height="20">
+              <br>
+              <input name="Button" onclick="MM_goToURL('parent','../../search.asp');return document.MM_returnValue" value="Advanced Search" type="button">
+              <br>
+            </form>
+            <p class="submenu"><a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/resources/j2me/j2me.htm">L&#297;nh v&#7921;c J2ME</a></p>
+			<p class="submenu"><a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/resources/">Tr&#7903; v&#7873; trang tài nguyên</a></p>
+			<p class="submenu">
+              <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="200" height="100">
+                <param name="movie" value="../../images/maxim.swf">
+                <param name="quality" value="high">
+                <embed src="Viet_game_voi_MIDP_2_0_files/maxim.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="200" height="100"></object>
+            </p>
+          </td>
+          <td class="main" width="550">
+			<h1 class="main style6" align="left">Vi&#7871;t game hành &#273;&#7897;ng 2D v&#7899;i Game API trong MIDP 2.0</h1>
+			<h3 align="right"><strong>(11-2004)</strong></h3>
+			<h1>L&#7901;i gi&#7899;i thi&#7879;u</h1>
+			<p>Phiên
+b&#7843;n MIDP chính th&#7913;c &#273;&#432;&#7907;c s&#7917; d&#7909;ng trong cu&#7897;c thi Samsung Mobile Games
+2004 là MIDP 1.0. Chúng ta có th&#7875; th&#7845;y v&#7899;i MIDP 1.0 còn r&#7845;t nhi&#7873;u &#273;i&#7873;u
+mà l&#7853;p trình viên mu&#7889;n làm nh&#432;ng không th&#7875;. V&#7899;i phiên b&#7843;n MIDP 2.0,
+công vi&#7879;c l&#7853;p trình di &#273;&#7897;ng nói chung và l&#7853;p trình game nói riêng s&#7869; d&#7877;
+dàng h&#417;n r&#7845;t nhi&#7873;u. Và có l&#7869; &#273;i&#7873;u mà các l&#7853;p trình viên game mong &#273;&#7907;i
+và hoan nghênh nh&#7845;t &#273;ó là Game API m&#7899;i trong MIDP 2.0.</p>
+			<p>MIDP 2.0 cung c&#7845;p m&#7897;t Game API &#273;&#7875; &#273;&#417;n gi&#7843;n hóa vi&#7879;c vi&#7871;t game 2D. API này nh&#7887; g&#7885;n, ch&#7881; bao g&#7891;m n&#259;m l&#7899;p trong gói <span>javax.microedition.lcdui.game</span>. N&#259;m l&#7899;p này cung c&#7845;p hai kh&#7843; n&#259;ng quan tr&#7885;ng:<st1:city w:st="on"></st1:city></p>
+			<ul type="disc"><li>
+                <p>L&#7899;p <st1:state w:st="on"><span>Ga</span><span>meCanvas</span>
+m&#7899;i có th&#7875; v&#7869; lên màn hình và &#273;áp &#7913;ng l&#7841;i d&#7919; li&#7879;u nh&#7853;p trong ph&#7847;n thân
+c&#7911;a vòng l&#7863;p game, thay vì d&#7921;a vào các thread v&#7869; và nh&#7853;p li&#7879;u c&#7911;a h&#7879;
+th&#7889;ng.</st1:state></p>
+              </li>
+              <li>
+                <p>M&#7897;t API dùng &#273;&#7875; qu&#7843;n lý layer m&#7841;nh và linh ho&#7841;t giúp vi&#7879;c xây d&#7921;ng các c&#7843;nh game ph&#7913;c t&#7841;p m&#7897;t cách hi&#7879;u qu&#7843; h&#417;n.</p>
+              </li>
+		    </ul>
+			<h1>Xây d&#7921;ng vòng l&#7863;p game v&#7899;i <span>GameCanvas</span></h1>
+			<p><span>GameCanvas</span> là m&#7897;t <span>Canvas</span>
+có thêm m&#7897;t s&#7889; kh&#7843; n&#259;ng; nó cung c&#7845;p các ph&#432;&#417;ng th&#7913;c &#273;&#7875; v&#7869; t&#7913;c th&#7901;i và
+ki&#7875;m tra tr&#7841;ng thái bàn phím thi&#7871;t b&#7883;. Các ph&#432;&#417;ng th&#7913;c m&#7899;i này giúp t&#7853;p
+h&#7907;p t&#7845;t c&#7843; các ch&#7913;c n&#259;ng c&#7911;a game trong m&#7897;t vòng l&#7863;p &#273;&#417;n, d&#432;&#7899;i s&#7921; &#273;i&#7873;u
+khi&#7875;n c&#7911;a m&#7897;t thread &#273;&#417;n. &#272;&#7875; hi&#7875;u t&#7841;i sao vi&#7879;c này l&#7841;i h&#7845;p d&#7851;n, hãy so
+sánh v&#7899;i cách mà b&#7841;n s&#7869; th&#7921;c hi&#7879;n m&#7897;t game m&#7851;u b&#7857;ng <span>Canvas</span>:</p>
+			<pre><strong><span>&nbsp;</span></strong></pre>
+            <pre><strong><span>public</span></strong> <strong><span>void</span></strong> MicroTankCanvas</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>extends</span></strong> Canvas</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>implements</span></strong> Runnable <strong><span>{</span></strong></pre>
+            <pre>&nbsp; <strong><span>public</span></strong> <strong><span>void</span></strong> <span>run</span>() <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>while</span></strong> (<span>true</span>) <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <em><span>// Update the game state.</span></em></pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>repaint</span>();</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <em><span>// Delay one time step.</span></em></pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>}</span></strong></pre>
+            <pre>&nbsp; <strong><span>}</span></strong></pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;<strong><span>public</span></strong> <strong><span>void</span></strong> <span>paint</span>(Graphics g) <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; <em><span>// Painting code goes here.</span></em></pre>
+            <pre>&nbsp; <strong><span>}</span></strong></pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;<strong><span>protected</span></strong> <strong><span>void</span></strong> <span>keyPressed</span>(<strong><span>int</span></strong> keyCode) <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; <em><span>// Respond to key presses here.</span></em></pre>
+            <pre>&nbsp; <strong><span>}</span></strong></pre>
+            <pre><strong><span>}</span></strong></pre>
+            <p>&#272;ây không ph&#7843;i là m&#7897;t cách t&#7889;t. Ph&#432;&#417;ng th&#7913;c <span>run()</span>,
+ch&#7841;y trong m&#7897;t thread c&#7911;a &#7913;ng d&#7909;ng, c&#7853;p nh&#7853;t game theo t&#7915;ng th&#7901;i &#273;i&#7875;m.
+Các tác v&#7909; chính s&#7869; c&#7853;p nh&#7853;t v&#7883; trí c&#7911;a trái banh hay tàu v&#361; tr&#7909; và &#273;&#7875;
+làm c&#7917; &#273;&#7897;ng các nhân v&#7853;t hay ph&#432;&#417;ng ti&#7879;n. Qua m&#7895;i vòng l&#7863;p, <span>repaint()</span> &#273;&#432;&#7907;c g&#7885;i &#273;&#7875; c&#7853;p nh&#7853;t màn hình. H&#7879; th&#7889;ng g&#7903;i s&#7921; ki&#7879;n nh&#7845;n phím cho ph&#432;&#417;ng th&#7913;c <span>keyPressed()</span>, ph&#432;&#417;ng th&#7913;c này s&#7869; c&#7853;p nh&#7853;t tr&#7841;ng thái c&#7911;a game m&#7897;t cách t&#432;&#417;ng &#7913;ng.</p>
+            <p>V&#7845;n
+&#273;&#7873; là m&#7885;i th&#7913; &#273;&#7873;u &#7903; trong m&#7897;t thread khác nhau, và game s&#7869; r&#7845;t khó khi
+ph&#7843;i ch&#7841;y ba ph&#432;&#417;ng th&#7913;c khác nhau. Khi vòng l&#7863;p ho&#7841;t h&#7885;a chính trong <span>run()</span> g&#7885;i <span>repaint()</span>, không có cách nào &#273;&#7875; bi&#7871;t chính xác khi nào h&#7879; th&#7889;ng s&#7869; g&#7885;i hàm <span>paint()</span>. Khi h&#7879; th&#7889;ng g&#7885;i ph&#432;&#417;ng th&#7913;c <span>keyPressed()</span>, không có cách nào &#273;&#7875; bi&#7871;t &#273;i&#7873;u gì &#273;ang x&#7843;y ra v&#7899;i các ph&#7847;n khác c&#7911;a &#7913;ng d&#7909;ng. N&#7871;u &#273;o&#7841;n mã trong <span>keyPressed()</span> &#273;ang c&#7853;p nh&#7853;t tr&#7841;ng thái c&#7911;a game cùng lúc v&#7899;i màn hình &#273;ang &#273;&#432;&#7907;c v&#7869; trong <span>paint()</span>, thì màn hình s&#7869; k&#7871;t thúc không nh&#432; mong &#273;&#7907;i. N&#7871;u vi&#7879;c v&#7869; màn hình lâu h&#417;n m&#7897;t b&#432;&#7899;c th&#7901;i gian trong <span>run()</span>, thì chuy&#7875;n &#273;&#7897;ng c&#7911;a game có th&#7875; b&#7883; gi&#7853;t và không bình th&#432;&#7901;ng.</p>
+            <p><span>GameCanvas</span>
+cho phép b&#7841;n kh&#7855;c ph&#7909;c &#273;&#432;&#7907;c vi&#7879;c v&#7869; hình theo cách thông th&#432;&#7901;ng và c&#417;
+ch&#7871; s&#7921; ki&#7879;n nh&#7845;n phím &#273;&#7875; cho t&#7845;t c&#7843; các logic c&#7911;a game có th&#7875; &#273;&#432;&#7907;c ch&#7913;a
+trong m&#7897;t vòng l&#7863;p &#273;&#417;n. &#272;&#7847;u tiên, <span>GameCanvas</span> cho phép b&#7841;n truy xu&#7845;t tr&#7921;c ti&#7871;p &#273;&#7889;i t&#432;&#7907;ng <span>Graphics</span> c&#7911;a nó s&#7917; d&#7909;ng ph&#432;&#417;ng th&#7913;c <span>getGraphics()</span>. B&#7845;t k&#7923; công vi&#7879;c v&#7869; nào trên &#273;&#7889;i t&#432;&#7907;ng <span>Graphics</span> &#273;&#432;&#7907;c tr&#7843; v&#7873; s&#7869; &#273;&#432;&#7907;c hoàn thành trong b&#7897; &#273;&#7879;m ngoài màn hình (offscreen). Sau &#273;ó b&#7841;n có th&#7875; chép b&#7897; &#273;&#7879;m vào màn hình s&#7917; d&#7909;ng <span>flushGraphics()</span>, không c&#7847;n ph&#7843;i &#273;&#7907;i cho &#273;&#7871;n khi màn hình &#273;&#432;&#7907;c c&#7853;p nh&#7853;t. Cách ti&#7871;p c&#7853;n này cho phép b&#7841;n &#273;i&#7873;u khi&#7875;n t&#7889;t h&#417;n vi&#7879;c g&#7885;i <span>repaint()</span>. Ph&#432;&#417;ng th&#7913;c <span>repaint()</span> tr&#7843; v&#7873; ngay l&#7853;p t&#7913;c và &#7913;ng d&#7909;ng c&#7911;a b&#7841;n không c&#7847;n ph&#7843;i b&#7843;o &#273;&#7843;m chính xác khi nào h&#7879; th&#7889;ng s&#7869; g&#7885;i <span>paint()</span> &#273;&#7875; c&#7853;p nh&#7853;t màn hình.</p>
+            <p><span>GameCanvas</span> &nbsp;c&#361;ng có m&#7897;t ph&#432;&#417;ng th&#7913;c &#273;&#7875; l&#7845;y tr&#7841;ng thái hi&#7879;n th&#7901;i c&#7911;a bàn phím thi&#7871;t b&#7883;, m&#7897;t k&#7929; thu&#7853;t &#273;&#432;&#7907;c g&#7885;i là <i>th&#259;m dò (polling)</i>. Thay vì ch&#7901; cho h&#7879; th&#7889;ng g&#7885;i ph&#432;&#417;ng th&#7913;c <span>keyPressed()</span>, b&#7841;n có th&#7875; xác &#273;&#7883;nh ngay l&#7853;p t&#7913;c các phím nào &#273;&#432;&#7907;c nh&#7845;n b&#7857;ng cách g&#7885;i ph&#432;&#417;ng th&#7913;c <span>getKeyStates()</span> c&#7911;a <span>GameCanvas</span>.</p>
+            <p>M&#7897;t vòng l&#7863;p game m&#7851;u s&#7917; d&#7909;ng <span>GameCanvas</span> s&#7869; gi&#7889;ng nh&#432; th&#7871; này:</p>
+            <pre><strong><span>public</span></strong> <strong><span>void</span></strong> MicroTankCanvas</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>extends</span></strong> GameCanvas</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>implements</span></strong> Runnable <strong><span>{</span></strong></pre>
+            <pre>&nbsp; <strong><span>public</span></strong> <strong><span>void</span></strong> <span>run</span>() <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; Graphics g <strong><span>=</span></strong> <span>getGraphics</span>();</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>while</span></strong> (<span>true</span>) <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <em><span>// Update the game state.</span></em></pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong><span>int</span></strong> keyState <strong><span>=</span></strong> <span>getKeyStates</span>();</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <em><span>// Respond to key presses here.</span></em></pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <em><span>// Painting code goes here.</span></em></pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>flushGraphics</span>();</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <em><span>// Delay one time step.</span></em></pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>}</span></strong></pre>
+            <pre>&nbsp; <strong><span>}</span></strong></pre>
+            <pre><strong><span>}</span></strong></pre>
+            <p>Ví
+d&#7909; sau th&#7875; hi&#7879;n m&#7897;t vòng l&#7863;p game c&#417; b&#7843;n. Nó s&#7869; hi&#7875;n th&#7883; m&#7897;t ch&#7919; X quay
+vòng mà b&#7841;n có th&#7875; di chuy&#7875;n xung quanh màn hình s&#7917; d&#7909;ng các phím m&#361;i
+tên. Ph&#432;&#417;ng th&#7913;c <span>run()</span> c&#7921;c k&#7923; g&#7885;n và rõ ràng, c&#7843;m &#417;n <span>GameCanvas</span>:</p>
+            <pre><strong><span>&nbsp;</span></strong></pre>
+            <pre><strong><span>import</span></strong> javax.microedition.lcdui.*;</pre>
+            <pre><strong><span>import</span></strong> javax.microedition.lcdui.game.*;</pre>
+            <pre>&nbsp;</pre>
+            <pre><strong><span>public</span></strong> <strong><span>class</span></strong> SimpleGameCanvas</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>extends</span></strong> GameCanvas</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>implements</span></strong> Runnable <strong><span>{</span></strong></pre>
+            <pre>&nbsp; <strong><span>private</span></strong> <strong><span>volatile</span></strong> <strong><span>boolean</span></strong> mTrucking;</pre>
+            <pre>&nbsp; <strong><span>private</span></strong> <strong><span>long</span></strong> mFrameDelay;</pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;<strong><span>private</span></strong> <strong><span>int</span></strong> mX, mY;</pre>
+            <pre>&nbsp; <strong><span>private</span></strong> <strong><span>int</span></strong> mState;</pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;<strong><span>public</span></strong> <span>SimpleGameCanvas</span>() <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; <span>super</span>(<span>true</span>);</pre>
+            <pre>&nbsp;&nbsp;&nbsp; mX <strong><span>=</span></strong> <span>getWidth</span>() <strong><span>/</span></strong> <span>2</span>;</pre>
+            <pre>&nbsp;&nbsp;&nbsp; mY <strong><span>=</span></strong> <span>getHeight</span>() <strong><span>/</span></strong> <span>2</span>;</pre>
+            <pre>&nbsp;&nbsp;&nbsp; mState <strong><span>=</span></strong> <span>0</span>;</pre>
+            <pre>&nbsp;&nbsp;&nbsp; mFrameDelay <strong><span>=</span></strong> <span>20</span>;</pre>
+            <pre>&nbsp; <strong><span>}</span></strong></pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;<strong><span>public</span></strong> <strong><span>void</span></strong> <span>start</span>() <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; mTrucking <strong><span>=</span></strong> <span>true</span>;</pre>
+            <pre>&nbsp;&nbsp;&nbsp; Thread t <strong><span>=</span></strong> <strong><span>new</span></strong> <span>Thread</span>(<span>this</span>);</pre>
+            <pre>&nbsp;&nbsp;&nbsp; t.<span>start</span>();</pre>
+            <pre>&nbsp; <strong><span>}</span></strong></pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;<strong><span>public</span></strong> <strong><span>void</span></strong> <span>stop</span>() <strong><span>{</span></strong> mTrucking <strong><span>=</span></strong> <span>false</span>; <strong><span>}</span></strong></pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;<strong><span>public</span></strong> <strong><span>void</span></strong> <span>run</span>() <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; Graphics g <strong><span>=</span></strong> <span>getGraphics</span>();</pre>
+            <pre>&nbsp;&nbsp;&nbsp; </pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;<strong><span>while</span></strong> (mTrucking <strong><span>==</span></strong> <span>true</span>) <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>tick</span>();</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>input</span>();</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>render</span>(g);</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong><span>try</span></strong> <strong><span>{</span></strong> Thread.<span>sleep</span>(mFrameDelay); <strong><span>}</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong><span>catch</span></strong> (InterruptedException ie) <strong><span>{</span></strong><span> stop(); <strong>}</strong></span></pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>}</span></strong></pre>
+            <pre>&nbsp; <strong><span>}</span></strong></pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;<strong><span>private</span></strong> <strong><span>void</span></strong> <span>tick</span>() <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; mState <strong><span>=</span></strong> (mState <strong><span>+</span></strong> <span>1</span>) <strong><span>%</span></strong> <span>20</span>;</pre>
+            <pre>&nbsp; <strong><span>}</span></strong></pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;<strong><span>private</span></strong> <strong><span>void</span></strong> <span>input</span>() <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>int</span></strong> keyStates <strong><span>=</span></strong> <span>getKeyStates</span>();</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>if</span></strong> ((keyStates <strong><span>&amp;</span></strong> LEFT_PRESSED) <strong><span>!=</span></strong> <span>0</span>)</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mX <strong><span>=</span></strong> Math.<span>max</span>(<span>0</span>, mX <strong><span>-</span></strong> <span>1</span>);</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>if</span></strong> ((keyStates <strong><span>&amp;</span></strong> RIGHT_PRESSED) <strong><span>!=</span></strong> <span>0</span>)</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mX <strong><span>=</span></strong> Math.<span>min</span>(<span>getWidth</span>(), mX <strong><span>+</span></strong> <span>1</span>);</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>if</span></strong> ((keyStates <strong><span>&amp;</span></strong> UP_PRESSED) <strong><span>!=</span></strong> <span>0</span>)</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mY <strong><span>=</span></strong> Math.<span>max</span>(<span>0</span>, mY <strong><span>-</span></strong> <span>1</span>);</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>if</span></strong> ((keyStates <strong><span>&amp;</span></strong> DOWN_PRESSED) <strong><span>!=</span></strong> <span>0</span>)</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mY <strong><span>=</span></strong> Math.<span>min</span>(<span>getHeight</span>(), mY <strong><span>+</span></strong> <span>1</span>);</pre>
+            <pre>&nbsp; <strong><span>}</span></strong></pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;<strong><span>private</span></strong> <strong><span>void</span></strong> <span>render</span>(Graphics g) <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; g.<span>setColor</span>(<span>0xffffff</span>);</pre>
+            <pre>&nbsp;&nbsp;&nbsp; g.<span>fillRect</span>(<span>0</span>, <span>0</span>, <span>getWidth</span>(), <span>getHeight</span>());</pre>
+            <pre>&nbsp;&nbsp;&nbsp; </pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;g.<span>setColor</span>(<span>0x0000ff</span>);</pre>
+            <pre>&nbsp;&nbsp;&nbsp; g.<span>drawLine</span>(mX, mY, mX <strong><span>-</span></strong> <span>10</span> <strong><span>+</span></strong> mState, mY <strong><span>-</span></strong> <span>10</span>);</pre>
+            <pre>&nbsp;&nbsp;&nbsp; g.<span>drawLine</span>(mX, mY, mX <strong><span>+</span></strong> <span>10</span>, mY <strong><span>-</span></strong> <span>10</span> <strong><span>+</span></strong> mState);</pre>
+            <pre>&nbsp;&nbsp;&nbsp; g.<span>drawLine</span>(mX, mY, mX <strong><span>+</span></strong> <span>10</span> <strong><span>-</span></strong> mState, mY <strong><span>+</span></strong> <span>10</span>);</pre>
+            <pre>&nbsp;&nbsp;&nbsp; g.<span>drawLine</span>(mX, mY, mX <strong><span>-</span></strong> <span>10</span>, mY <strong><span>+</span></strong> <span>10</span> <strong><span>-</span></strong> mState);</pre>
+            <pre>&nbsp;&nbsp;&nbsp; </pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;<span>flushGraphics</span>();</pre>
+            <pre>&nbsp; <strong><span>}</span></strong></pre>
+            <pre><strong><span>}</span></strong></pre>
+            <p>Sau &#273;ây là &#273;o&#7841;n mã c&#7911;a <span>SimpleGameMIDlet.java</span> &#273;&#7875; s&#7917; d&#7909;ng Canvas này. </p>
+            <pre><strong><span>import</span></strong> javax.microedition.lcdui.*;</pre>
+            <pre><strong><span>import</span></strong> javax.microedition.midlet.MIDlet;</pre>
+            <pre>&nbsp;</pre>
+            <pre><b>public</b> <b>class</b> SimpleGameMIDlet</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <b>extends</b> MIDlet</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <b>implements</b> CommandListener {</pre>
+            <pre>&nbsp; private <strong><span>Display</span></strong> mDisplay;</pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;<b>private</b> <strong><span>SimpleGameCanvas</span></strong> mCanvas;</pre>
+            <pre>&nbsp; <b>private</b> <strong><span>Command</span></strong> mExitCommand;</pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;<b>public</b> <strong><span>void</span></strong> <strong><span>startApp</span></strong>() {</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <b>if</b> (mCanvas <b>==</b> <b>null</b>) {</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mCanvas <b>=</b> <b>new</b> <span>SimpleGameCanvas</span>();</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mCanvas.<span>start</span>();</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mExitCommand = <b>new</b> <span>Command</span>("Exit", Command.EXIT, 0);</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;mCanvas.<span>addCommand</span>(mExitCommand);</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mCanvas.<span>setCommandListener</span>(this);</pre>
+            <pre>&nbsp;&nbsp;&nbsp; }</pre>
+            <pre>&nbsp;&nbsp;&nbsp; </pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;mDisplay = Display.<span>getDisplay</span>(this);</pre>
+            <pre>&nbsp;&nbsp;&nbsp; mDisplay.<span>setCurrent</span>(mCanvas);</pre>
+            <pre>&nbsp; }</pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;<b>public</b> <b>void</b> <span>pauseApp</span>() {}</pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;<b>public</b> <b>void</b> <span>destroyApp</span>(<b>boolean</b> unconditional) {</pre>
+            <pre>&nbsp;&nbsp;&nbsp; mCanvas.<span>stop</span>();</pre>
+            <pre>&nbsp; }</pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;<b>public</b> <b>void</b> <span>commandAction</span>(Command c, Displayable s) {</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <b>if</b> (c.<span>getCommandType</span>() <b>==</b> Command.EXIT) {</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>destroyApp</span>(<b>true</b>);</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>notifyDestroyed</span>();</pre>
+            <pre>&nbsp;&nbsp;&nbsp; }</pre>
+            <pre>&nbsp; }</pre>
+            <pre>}</pre>
+            <p>Th&#7917; ch&#7841;y <span>SimpleGameMIDlet</span> &#273;&#7875; xem nó ho&#7841;t &#273;&#7897;ng nh&#432; th&#7871; nào. B&#7841;n s&#7869; th&#7845;y m&#7897;t con sao bi&#7875;n &#273;ang t&#7853;p th&#7875; d&#7909;c (có l&#7869; &#273;&#7875; bù cho các chân b&#7883; m&#7845;t c&#7911;a nó).</p>
+            <p align="center"><img src="Viet_game_voi_MIDP_2_0_files/game001.png" v:shapes="_x0000_i1025" width="180" height="208"></p>
+            <p align="center"><span>SimpleGameMIDlet Screen Shot</span></p>
+            <h2>Các c&#7843;nh game có th&#7875; xem nh&#432; các l&#7899;p c&#7911;a c&#7911; hành</h2>
+            <p>Các
+game hành &#273;&#7897;ng 2D &#273;i&#7875;n hình bao g&#7891;m m&#7897;t n&#7873;n và nhi&#7873;u nhân v&#7853;t chuy&#7875;n
+&#273;&#7897;ng. M&#7863;c dù b&#7841;n có th&#7875; t&#7921; v&#7869; lo&#7841;i c&#7843;nh này, Game API cho phép b&#7841;n xây
+d&#7921;ng các c&#7843;nh b&#7857;ng cách s&#7917; d&#7909;ng các <i>layer</i>. B&#7841;n có th&#7875; t&#7841;o m&#7897;t
+layer là n&#7873;n thành ph&#7889;, và m&#7897;t layer khác là chi&#7871;c xe h&#417;i. &#272;&#7863;t layer xe
+h&#417;i lên trên hình n&#7873;n s&#7869; t&#7841;o thành m&#7897;t c&#7843;nh hoàn ch&#7881;nh. S&#7917; d&#7909;ng chi&#7871;c
+xe nh&#432; là m&#7897;t layer riêng bi&#7879;t giúp vi&#7879;c thao tác &#273;&#432;&#7907;c d&#7877; dàng và &#273;&#7897;c
+l&#7853;p v&#7899;i hình n&#7873;n, và v&#7899;i b&#7845;t k&#7923; layer nào khác trong c&#7843;nh game.</p>
+            <p>Game API th&#7921;c hi&#7879;n vi&#7879;c h&#7895; tr&#7907; m&#7873;m d&#7867;o cho các layer thông qua b&#7889;n class:</p>
+            <ul type="disc">
+              <li>
+                <p><span>Layer</span>
+là m&#7897;t l&#7899;p cha abstract c&#7911;a t&#7845;t c&#7843; các layer. Nó &#273;&#7883;nh ngh&#297;a các thu&#7897;c
+tính c&#417; b&#7843;n c&#7911;a m&#7897;t layer, bao g&#7891;m v&#7883; trí, kích th&#432;&#7899;c, và vi&#7879;c layer có
+&#273;&#432;&#7907;c hi&#7875;n th&#7883; hay không. M&#7895;i l&#7899;p con c&#7911;a <span>Layer</span> ph&#7843;i &#273;&#7883;nh ngh&#297;a m&#7897;t ph&#432;&#417;ng th&#7913;c <span>paint()</span> &#273;&#7875; hi&#7875;n th&#7883; layer trên b&#7873; m&#7863;t v&#7869; c&#7911;a <span>Graphics</span>. Hai l&#7899;p con c&#7909; th&#7875; là <span>TiledLayer</span> và <span>Sprite</span>, s&#7869; &#273;áp &#7913;ng &#273;&#7847;y &#273;&#7911; yêu c&#7847;u làm game 2D c&#7911;a b&#7841;n.</p>
+              </li>
+              <li>
+                <p><span>TiledLayer</span>
+có ích trong vi&#7879;c t&#7841;o các hình n&#7873;n. B&#7841;n có th&#7875; s&#7917; d&#7909;ng m&#7897;t t&#7853;p nh&#7887; các
+hình &#7843;nh ngu&#7891;n ghép l&#7841;i v&#7899;i nhau &#273;&#7875; t&#7841;o thành các hình &#7843;nh l&#7899;n m&#7897;t cách
+hi&#7879;u qu&#7843;.</p>
+              </li>
+              <li>
+                <p><span>Sprite</span> là m&#7897;t l&#7899;p ho&#7841;t h&#7885;a. B&#7841;n cung c&#7845;p các frame ngu&#7891;n và có toàn quy&#7873;n &#273;i&#7873;u khi&#7875;n vi&#7879;c chuy&#7875;n &#273;&#7897;ng. <span>Sprite</span> c&#361;ng cung c&#7845;p kh&#7843; n&#259;ng &#273;&#7875; l&#7853;t ng&#432;&#7907;c và quay các frame ngu&#7891;n theo b&#7897;i s&#7889; c&#7911;a 90<sup>o</sup>.</p>
+              </li>
+              <li>
+                <p><span>LayerManager</span> là m&#7897;t l&#7899;p ti&#7879;n d&#7909;ng &#273;&#7875; theo dõi t&#7845;t c&#7843; các layer trong c&#7843;nh game c&#7911;a b&#7841;n. Ch&#7881; c&#7847;n m&#7897;t l&#7847;n g&#7885;i ph&#432;&#417;ng th&#7913;c <span>paint()</span> c&#7911;a <span>LayerManger</span> c&#361;ng &#273;&#7911; &#273;&#7875; hi&#7875;n th&#7883; t&#7845;t c&#7843; các layer &#273;&#432;&#7907;c ch&#7913;a trong nó.</p>
+              </li>
+            </ul>
+            <h2>S&#7917; d&#7909;ng <span>TiledLayer</span></h2>
+            <p><span>TiledLayer</span>
+khá &#273;&#417;n gi&#7843;n &#273;&#7875; hi&#7875;u, m&#7863;c dù nó có m&#7897;t s&#7889; tính ch&#7845;t không th&#7875; hi&#7875;u rõ
+ngay t&#7915; &#273;&#7847;u. Ý t&#432;&#7903;ng c&#259;n b&#7843;n là có m&#7897;t hình ngu&#7891;n cung c&#7845;p m&#7897;t t&#7853;p các <i>tile</i>
+(có th&#7875; t&#7841;m d&#7883;ch là viên g&#7841;ch lót) có th&#7875; &#273;&#432;&#7907;c s&#7855;p x&#7871;p &#273;&#7875; t&#7841;o thành m&#7897;t
+c&#7843;nh l&#7899;n. Ví d&#7909;, hình sau &#273;ây có kích th&#432;&#7899;c là 64 x 48 pixels.</p>
+            <p align="center"><img src="Viet_game_voi_MIDP_2_0_files/game002.png" v:shapes="_x0000_i1026" width="64" height="48"></p>
+            <p align="center"><span>Hình ngu&#7891;n</span></p>
+            <p>Hình này có th&#7875; &#273;&#432;&#7907;c chia thành 12 tile, m&#7895;i tile có kích th&#432;&#7899;c 16 x 16 pixels. <span>TiledLayer</span> gán cho m&#7895;i tile m&#7897;t con s&#7889;, b&#7855;t &#273;&#7847;u t&#7915; 1 k&#7875; t&#7915; góc trái trên. Các tile trong hình ngu&#7891;n &#273;&#432;&#7907;c &#273;ánh s&#7889; nh&#432; sau:</p>
+            <p align="center"><img src="Viet_game_voi_MIDP_2_0_files/game003.png" v:shapes="_x0000_i1027" width="161" height="133"></p>
+            <p align="center"><span>&#272;ánh s&#7889; các tile</span></p>
+            <p>T&#7841;o m&#7897;t <span>TiledLayer</span>
+trong ch&#432;&#417;ng trình c&#361;ng khá &#273;&#417;n gi&#7843;n. B&#7841;n c&#7847;n xác &#273;&#7883;nh s&#7889; c&#7897;t và s&#7889;
+hàng, hình ngu&#7891;n, và kích th&#432;&#7899;c theo pixel c&#7911;a các tile trong hình
+ngu&#7891;n. &#272;o&#7841;n ch&#432;&#417;ng trình sau bi&#7875;u di&#7877;n cách n&#7841;p hình và t&#7841;o m&#7897;t <span>TiledLayer</span>.</p>
+            <pre>Image image <strong><span>=</span></strong> Image.<span>createImage</span>(<span>"/board.png"</span>);</pre>
+            <pre>TiledLayer tiledLayer <strong><span>=</span></strong> <strong><span>new</span></strong> <span>TiledLayer</span>(<span>10</span>, <span>10</span>, image, <span>16</span>, <span>16</span>);</pre>
+            <pre>&nbsp;</pre>
+            <p>Trong ví d&#7909; trên, ta &#273;ã t&#7841;o m&#7897;t <span>TiledLayer</span> m&#7899;i có 10 c&#7897;t và 10 hàng. Các tile t&#7841;o thành t&#7915; hình có kích th&#432;&#7899;c vuông 16 pixels.</p>
+            <p>&#272;&#7871;n ph&#7847;n thú v&#7883; là t&#7841;o m&#7897;t c&#7843;nh s&#7917; d&#7909;ng các tile này. &#272;&#7875; gán m&#7897;t tile cho m&#7897;t cell (m&#7897;t ô), g&#7885;i hàm <span>setCell()</span>.
+B&#7841;n c&#7847;n ph&#7843;i cung c&#7845;p s&#7889; c&#7897;t và hàng c&#7911;a cell và s&#7889; c&#7911;a tile. Ví d&#7909;,
+b&#7841;n có th&#7875; gán tile s&#7889; 5 cho cell th&#7913; ba c&#7911;a hàng th&#7913; hai b&#7857;ng cách g&#7885;i
+hàm <span>setCell(2, 1, 5)</span>. N&#7871;u các tham s&#7889; này b&#7883; sai, hãy chú
+ý là ch&#7881; m&#7909;c c&#7911;a tile b&#7855;t &#273;&#7847;u t&#7915; 1, trong khi c&#7897;t và hàng b&#7855;t &#273;&#7847;u t&#7915; 0.
+Theo m&#7863;c &#273;&#7883;nh, t&#7845;t c&#7843; các cell trong <st1:city w:st="on"><span>TiledLayer</span> m&#7899;i có giá tr&#7883; tile là 0, có ngh&#297;a là chúng r&#7895;ng.</st1:city></p>
+            <p>&#272;o&#7841;n ch&#432;&#417;ng trình sau bi&#7875;u di&#7877;n m&#7897;t cách &#273;&#7875; phát sinh m&#7897;t <span>TiledLayer</span>, s&#7917; d&#7909;ng m&#7897;t m&#7843;ng s&#7889; nguyên. Trong trò ch&#417;i th&#7921;c t&#7871;, các <span>TiledLayer</span>
+có th&#7875; &#273;&#432;&#7907;c &#273;&#7883;nh ngh&#297;a t&#7915; các t&#7853;p tin tài nguyên, cho phép vi&#7879;c &#273;&#7883;nh
+ngh&#297;a n&#7873;n game &#273;&#432;&#7907;c linh ho&#7841;t h&#417;n và nâng c&#7845;p game v&#7899;i các bàn m&#7899;i hay
+c&#7845;p &#273;&#7897; m&#7899;i.</p>
+            <pre>&nbsp; <strong><span>private</span></strong> TiledLayer <span>createBoard</span>() <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; Image image <strong><span>=</span></strong> <span>null</span>;</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>try</span></strong> <strong><span>{</span></strong> image <strong><span>=</span></strong> Image.<span>createImage</span>(<span>"/board.png"</span>); <strong><span>}</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>catch</span></strong> (IOException ioe) <strong><span>{</span></strong> <strong><span>return</span></strong> <span>null</span>; <strong><span>}</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; </pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;TiledLayer tiledLayer <strong><span>=</span></strong> <strong><span>new</span></strong> <span>TiledLayer</span>(<span>10</span>, <span>10</span>, image, <span>16</span>, <span>16</span>);</pre>
+            <pre>&nbsp; </pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;<strong><span>int</span></strong>[] map <strong><span>=</span></strong> <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>1</span>,&nbsp; <span>1</span>,&nbsp; <span>1</span>,&nbsp; <span>1</span>, <span>11</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>9</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>1</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>7</span>,&nbsp; <span>1</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>1</span>,&nbsp; <span>1</span>,&nbsp; <span>1</span>,&nbsp; <span>1</span>,&nbsp; <span>6</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>7</span>, <span>11</span>,&nbsp; <span>0</span>,</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>7</span>,&nbsp; <span>6</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,</pre>
+            <pre> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>7</span>,&nbsp; <span>6</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span>,&nbsp; <span>0</span></pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>}</span></strong>;</pre>
+            <pre>&nbsp;&nbsp;&nbsp; </pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;<strong><span>for</span></strong> (<strong><span>int</span></strong> i <strong><span>=</span></strong> <span>0</span>; i <strong><span>&lt;</span></strong> map.length; i<strong><span>++</span></strong>) <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong><span>int</span></strong> column <strong><span>=</span></strong> i <strong><span>%</span></strong> <span>10</span>;</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong><span>int</span></strong> row <strong><span>=</span></strong> (i <strong><span>-</span></strong> column) <strong><span>/</span></strong> <span>10</span>;</pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tiledLayer.<span>setCell</span>(column, row, map[i]);</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>}</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; </pre>
+            <pre>&nbsp;&nbsp;&nbsp;&nbsp;<strong><span>return</span></strong> tiledLayer;</pre>
+            <pre>&nbsp; <strong><span>}</span></strong></pre>
+            <pre>&nbsp;</pre>
+            <p>&#272;&#7875; hi&#7875;n th&#7883; <span>TiledLayer</span> này lên màn hình, b&#7841;n c&#7847;n ph&#7843;i chuy&#7875;n &#273;&#7889;i t&#432;&#7907;ng <span>Graphics</span> cho ph&#432;&#417;ng th&#7913;c <span>paint()</span> c&#7911;a nó.</p>
+            <p><span>TiledLayer</span>
+c&#361;ng h&#7895; tr&#7907; các tile chuy&#7875;n &#273;&#7897;ng (animated tile), làm cho vi&#7879;c di
+chuy&#7875;n m&#7897;t t&#7853;p các cell qua m&#7897;t chu&#7895;i các tile &#273;&#432;&#7907;c d&#7877; dàng h&#417;n. &#272;&#7875;
+bi&#7871;t thêm chi ti&#7871;t, xin xem tài li&#7879;u API c&#7911;a <span>TiledLayer</span>.</p>
+            <h1>S&#7917; d&#7909;ng <span>Sprites</span> cho chuy&#7875;n &#273;&#7897;ng nhân v&#7853;t</h1>
+            <p>M&#7897;t <span>Layer</span> c&#7909; th&#7875; khác &#273;&#432;&#7907;c cung c&#7845;p trong Game API là <span>Sprite</span>. Theo m&#7897;t cách nào &#273;ó, <span>Sprite</span> là khái ni&#7879;m ng&#432;&#7907;c l&#7841;i c&#7911;a <span>TiledLayer</span>. Trong khi <span>TiledLayer</span> s&#7917; d&#7909;ng m&#7897;t b&#7843;ng pallete c&#7911;a các tile t&#7915; hình ngu&#7891;n &#273;&#7875; t&#7841;o thành m&#7897;t c&#7843;nh l&#7899;n, thì <span>Sprite</span> l&#7841;i s&#7917; d&#7909;ng m&#7897;t chu&#7895;i các khung hình ngu&#7891;n &#273;&#7875; t&#7841;o thành chuy&#7875;n &#273;&#7897;ng.</p>
+            <p>T&#7845;t c&#7843; nh&#7919;ng gì b&#7841;n c&#7847;n &#273;&#7875; t&#7841;o thành m&#7897;t <span>Sprite</span> là m&#7897;t hình ngu&#7891;n và kích th&#432;&#7899;c c&#7911;a m&#7895;i <i>frame (khung)</i>. Trong <span>TiledLayer</span>, hình ngu&#7891;n &#273;&#432;&#7907;c chia thành các tile có kích th&#432;&#7899;c b&#7857;ng nhau; còn trong <span>Sprite</span>, các hình con &#273;&#432;&#7907;c g&#7885;i là các frame. Trong ví d&#7909; sau, m&#7897;t hình ngu&#7891;n <i>tank.png</i> &#273;&#432;&#7907;c dùng &#273;&#7875; t&#7841;o thành m&#7897;t <span>Sprite</span> v&#7899;i kích th&#432;&#7899;c frame là 32 x 32 pixels.</p>
+            <pre>&nbsp; <strong><span>private</span></strong> MicroTankSprite <span>createTank</span>() <strong><span>{</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; Image image <strong><span>=</span></strong> <span>null</span>;</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>try</span></strong> <strong><span>{</span></strong> image <strong><span>=</span></strong> Image.<span>createImage</span>(<span>"/tank.png"</span>); <strong><span>}</span></strong></pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>catch</span></strong> (IOException ioe) <strong><span>{</span></strong> <strong><span>return</span></strong> <span>null</span>; <strong><span>}</span></strong></pre>
+            <pre>&nbsp;</pre>
+            <pre>&nbsp;&nbsp;&nbsp; <strong><span>return</span></strong> <strong><span>new</span></strong> <span>MicroTankSprite</span>(image, <span>32</span>, <span>32</span>);</pre>
+            <pre>&nbsp; <strong><span>}</span></strong></pre>
+            <pre>&nbsp;</pre>
+            <p>M&#7895;i
+frame c&#7911;a hình ngu&#7891;n có m&#7897;t con s&#7889;, b&#7855;t &#273;&#7847;u t&#7915; 0 và &#273;&#7871;m lên. (&#272;&#7915;ng nh&#7847;m
+l&#7851;n &#7903; &#273;ây; hãy nh&#7899; là các s&#7889; c&#7911;a tile b&#7855;t &#273;&#7847;u t&#7915; 1.) <span>Sprite</span> có m&#7897;t<i> frame sequence</i> <i>(trình t&#7921; frame)</i> xác &#273;&#7883;nh th&#7913; t&#7921; mà các frame s&#7869; &#273;&#432;&#7907;c hi&#7875;n th&#7883;. Frame sequence m&#7863;c &#273;&#7883;nh cho m&#7897;t <span>Sprite</span> m&#7899;i &#273;&#417;n gi&#7843;n là b&#7855;t &#273;&#7847;u t&#7915; 0 và &#273;&#7871;m lên qua các frame có s&#7861;n.</p>
+            <p>&#272;&#7875; chuy&#7875;n &#273;&#7871;n frame tr&#432;&#7899;c hay k&#7871; ti&#7871;p trong frame sequence, ta s&#7917; d&#7909;ng các ph&#432;&#417;ng th&#7913;c <span>nextFrame()</span> và <span>prevFrame()</span> c&#7911;a <span>Sprite</span>. Các ph&#432;&#417;ng th&#7913;c này cu&#7897;n t&#7915; &#273;&#7847;u cho &#273;&#7871;n cu&#7889;i c&#7911;a frame sequence. Ví d&#7909;, n&#7871;u <span>Sprite</span> &#273;ang hi&#7875;n th&#7883; frame cu&#7889;i trong frame sequence c&#7911;a nó, g&#7885;i ph&#432;&#417;ng th&#7913;c <span>nextFrame()</span> s&#7869; hi&#7875;n th&#7883; frame &#273;&#7847;u tiên trong frame sequence.</p>
+            <p>&#272;&#7875;
+xác &#273;&#7883;nh m&#7897;t frame sequence khác so v&#7899;i m&#7863;c &#273;&#7883;nh, hãy chuy&#7875;n sequence
+(trình t&#7921;), &#273;&#432;&#7907;c bi&#7875;u di&#7877;n d&#432;&#7899;i d&#7841;ng m&#7897;t m&#7843;ng s&#7889; nguyên, cho <span>setFrameSequence()</span>.</p>
+            <p>B&#7841;n có th&#7875; nh&#7843;y &#273;&#7871;n m&#7897;t &#273;i&#7875;m c&#7909; th&#7875; trong frame sequence hi&#7879;n t&#7841;i b&#7857;ng cách g&#7885;i ph&#432;&#417;ng th&#7913;c <span>setFrame()</span>. Không có cách nào &#273;&#7875; nh&#7843;y &#273;&#7871;n m&#7897;t frame có s&#7889; c&#7909; th&#7875;. B&#7841;n ch&#7881; có th&#7875; nh&#7843;y &#273;&#7871;n m&#7897;t &#273;i&#7875;m nào &#273;ó trong frame sequence.</p>
+            <p>Các thay &#273;&#7893;i frame ch&#7881; th&#7845;y &#273;&#432;&#7907;c trong l&#7847;n k&#7871; ti&#7871;p <span>Sprite</span> &#273;&#432;&#7907;c hi&#7875;n th&#7883;, s&#7917; d&#7909;ng ph&#432;&#417;ng th&#7913;c <span>paint()</span> k&#7871; th&#7915;a t&#7915; <span>Layer</span>.</p>
+            <p><span>Sprite</span> c&#361;ng có th&#7875; bi&#7871;n &#273;&#7893;i các frame ngu&#7891;n. Frame có th&#7875; &#273;&#432;&#7907;c quay theo c&#7845;p s&#7889; nhân c&#7911;a 90<sup>o</sup>, l&#7853;t ng&#432;&#7907;c, hay k&#7871;t h&#7907;p c&#7843; hai. Các h&#7857;ng s&#7889; trong l&#7899;p <span>Sprite</span> s&#7869; &#273;&#7883;nh ngh&#297;a các kh&#7843; n&#259;ng bi&#7871;n &#273;&#7893;i. Vi&#7879;c bi&#7871;n &#273;&#7893;i hi&#7879;n th&#7901;i c&#7911;a <span>Sprite</span> có th&#7875; &#273;&#432;&#7907;c thi&#7871;t l&#7853;p b&#7857;ng cách chuy&#7875;n m&#7897;t trong các h&#7857;ng s&#7889; này cho ph&#432;&#417;ng th&#7913;c <span>setTransform()</span>. Ví d&#7909; sau l&#7853;t ng&#432;&#7907;c frame hi&#7879;n t&#7841;i quanh tr&#7909;c &#273;&#7913;ng, và quay nó 90<sup>o</sup>:</p>
+            <pre>&nbsp;</pre>
+            <pre>// Sprite sprite = ...</pre>
+            <pre>sprite.setTransform(Sprite.TRANS_MIRROR_ROT90);</pre>
+            <p>Vi&#7879;c bi&#7871;n &#273;&#7889;i &#273;&#432;&#7907;c áp d&#7909;ng sao cho <i>pixel tham chi&#7871;u (reference pixel) c&#7911;a </i><i><span>Sprite</span></i> không di chuy&#7875;n. Theo m&#7863;c &#273;&#7883;nh, pixel tham chi&#7871;u c&#7911;a <span>Sprite</span>
+&#273;&#432;&#7907;c &#273;&#7863;t t&#7841;i v&#7883; trí 0, 0 trong không gian t&#7885;a &#273;&#7897;, t&#7841;i góc trái trên.
+Khi vi&#7879;c bi&#7871;n &#273;&#7893;i &#273;&#432;&#7907;c áp d&#7909;ng, v&#7883; tr&#7883; c&#7911;a pixel tham chi&#7871;u c&#361;ng &#273;&#432;&#7907;c
+bi&#7871;n &#273;&#7893;i. V&#7883; trí c&#7911;a <span>Sprite</span> &#273;&#432;&#7907;c &#273;i&#7873;u ch&#7881;nh &#273;&#7875; pixel tham chi&#7871;u v&#7851;n &#7903; cùng v&#7883; trí.</p>
+            <p>B&#7841;n có th&#7875; thay &#273;&#7893;i v&#7883; trí c&#7911;a pixel tham chi&#7871;u b&#7857;ng ph&#432;&#417;ng th&#7913;c <span>defineReferencePixel()</span>. &#272;&#7889;i v&#7899;i nhi&#7873;u lo&#7841;i chuy&#7875;n &#273;&#7897;ng, ta th&#432;&#7901;ng &#273;&#7883;nh ngh&#297;a pixel tham chi&#7871;u là &#273;i&#7875;m gi&#7919;a c&#7911;a sprite.</p>
+            <p>Cu&#7889;i cùng, <span>Sprite</span> cung c&#7845;p m&#7897;t vài ph&#432;&#417;ng th&#7913;c <span>collidesWith()</span> &#273;&#7875; phát hi&#7879;n va ch&#7841;m v&#7899;i các <span>Sprite</span>, <span>TiledLayer</span>, hay <span>Images</span>
+khác. B&#7841;n có th&#7875; phát hi&#7879;n va ch&#7841;m s&#7917; d&#7909;ng các hình ch&#7919; nh&#7853;t va ch&#7841;m
+(nhanh nh&#432;ng không chính xác) hay &#7903; m&#7913;c pixel (ch&#7853;m nh&#432;ng chính xác).
+Tính ch&#7845;t c&#7911;a các ph&#432;&#417;ng th&#7913;c này c&#361;ng khá khó n&#7855;m b&#7855;t; hãy xem tài
+li&#7879;u API &#273;&#7875; bi&#7871;t thêm chi ti&#7871;t.</p>
+            <h1>Tóm t&#7855;t</h1>
+            <p>Game API c&#7911;a MIDP 2.0 cung c&#7845;p m&#7897;t framework &#273;&#7875; &#273;&#417;n gi&#7843;n hóa vi&#7879;c phát tri&#7875;n các game hành &#273;&#7897;ng 2D. &#272;&#7847;u tiên, l&#7899;p <span>GameCanvas</span>
+cung c&#7845;p các ph&#432;&#417;ng th&#7913;c v&#7869; và nh&#7853;p li&#7879;u làm cho vòng l&#7863;p game ch&#7863;t ch&#7869;
+h&#417;n. K&#7871; ti&#7871;p, các layer giúp t&#7841;o nên các c&#7843;nh game ph&#7913;c t&#7841;p. <span>TiledLayer</span> t&#7853;p h&#7907;p pallete các tile c&#7911;a &#7843;nh ngu&#7891;n &#273;&#7875; t&#7841;o thành m&#7897;t n&#7873;n hay m&#7897;t c&#7843;nh l&#7899;n. <span>Sprite</span> thích h&#7907;p &#273;&#7875; t&#7841;o các nhân v&#7853;t chuy&#7875;n &#273;&#7897;ng và có th&#7875; phát hi&#7879;n va ch&#7841;m v&#7899;i các &#273;&#7889;i t&#432;&#7907;ng khác trong game. <span>LayerManager</span>
+là ch&#7845;t keo &#273;&#7875; k&#7871;t n&#7889;i các layer l&#7841;i v&#7899;i nhau.. V&#7899;i các c&#7843;i ti&#7871;n và m&#7903;
+r&#7897;ng c&#7911;a Game API trong MIDP 2.0, hi v&#7885;ng các l&#7853;p trình viên game s&#7869;
+cho ra &#273;&#7901;i nhi&#7873;u game xu&#7845;t s&#7855;c cho cu&#7897;c thi l&#7847;n t&#7899;i.</p>
+            <h1>Tài li&#7879;u tham kh&#7843;o</h1>
+            <p align="left">Sun - <b>Creating 2D Action Games with the Game API</b> - (<a href="http://developers.sun.com/techtopics/mobility/midp/articles/game" target="_blank">http://developers.sun.com/techtopics/mobility/midp/articles/game</a>)</p>
+            <p align="left">Sun - <b>Game API Documentation</b></p>
+            <p align="left">Nokia - <b>What's in MIDP 2.0: A Guide for JavaT Developers</b></p>
+            <p>--- Lê Ng&#7885;c Qu&#7889;c Khánh<br>
+              Email: <a href="mailto:khanh.lnq@gmail.com"><img src="Viet_game_voi_MIDP_2_0_files/khanhlnq_gmail.png" border="0" width="200" height="20"></a><br>
+            Homepage: <a href="http://lenqkhanh.2ya.com/">http://lenqkhanh.2ya.com/</a></p>
+          <p><a href="#top">[ Tr&#7903; lên &#273;&#7847;u trang ]</a></p></td>
+</tr>
+</tbody></table></td>
+</tr>
+<tr>
+    <td colspan="7" class="footer"><a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/index.htm">Trang ch&#7911;</a> | <a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/personal.htm">Thông
+      tin cá nhân</a> | <a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/works.htm">Công vi&#7879;c</a> | <a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/resources/index.htm">Tài
+      nguyên</a> | <a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/album/index.htm">Album</a> | <a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/contact.asp">Liên
+      h&#7879;</a> | <a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/sitemap.htm">Sitemap</a>
+      | <a href="http://www23.brinkster.com/lenqkhanh/%5Fbackup/admin/">Webmaster</a></td>
+</tr>
+</tbody></table>
+<p class="fix" align="center"> © Lê Ng&#7885;c Qu&#7889;c Khánh 2003</p>
+<noembed></noembed></body></html>
