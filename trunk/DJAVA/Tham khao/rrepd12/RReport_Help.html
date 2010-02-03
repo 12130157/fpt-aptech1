@@ -1,0 +1,1203 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>RReport</TITLE>
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080" background="back.gif">
+<B><FONT FACE="Arial" SIZE=4> 
+<h1>RReport (com.java4less.rreport)</h1>
+</font></B> 
+<ul>
+  <li><a href="#introduction"><font face="Arial, Helvetica, sans-serif">Introduction 
+    </font></a></li>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#creating">Creating a 
+    Rreport</a></font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#nested">Nested (linked) 
+    Areas</a></font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#group">Groups of areas</a></font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#printing">Printing a 
+    report</a></font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#preview">The preview 
+    Window</a></font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#datasources">Data sources 
+    (Rsource)</a></font> 
+    <ul>
+      <li><font face="Arial, Helvetica, sans-serif"><a href="#database">Reading 
+        from database (RJDBCSource) </a></font></li>
+      <li><font face="Arial, Helvetica, sans-serif"><a href="#xml">Reading from 
+        Xml files</a></font></li>
+    </ul>
+  </li>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#JTable">Printing a JTable</a></font></li>
+  <li><font face="Arial, Helvetica, sans-serif">Exporting reports </font>
+    <ul>
+      <li><font face="Arial, Helvetica, sans-serif"><a href="#ExportLayer">ExportLayer 
+        interface </a> </font></li>
+    </ul>
+  </li>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif"><a href="#DHTML">Creating DHTML</a></font></li>
+    <li><font face="Arial, Helvetica, sans-serif"><a href="#PDF">Creating PDF</a></font></li>
+    <li><font face="Arial, Helvetica, sans-serif"><a href="#txt">Creating Text 
+      output </a></font></li>
+    <font face="Arial, Helvetica, sans-serif">
+    <li><font face="Arial, Helvetica, sans-serif"><a href="#csv">Creating Csv</a></font></li>
+    </font> 
+    <li><font face="Arial, Helvetica, sans-serif"><a href="#xml">Creating Xml</a><br>
+      </font></li>
+  </ul>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#textmode">Text Mode 
+    Printing</a></font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#servlet">Web Reports 
+    (Servlets)</a></font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#examples">Examples</a></font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#ownRObject">Creating 
+    your own RObject</a></font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#wrapping">Text wrapping</a></font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#grid">Grid and frames</a></font> 
+    <blockquote> 
+      <h2>&nbsp; </h2>
+    </blockquote>
+  </li>
+</ul>
+<h2><B><FONT FACE="Arial"><b><a name="introduction"></a></b>Introduction</font></B></h2>
+<p><font face="Arial"></font></p>
+<FONT FACE="Arial"> 
+<P>Wellcome to RReport, the package that will allow you to include printing, reporting 
+  and prevewing capablities into your<a href="#sun">Java [TM]</a> or Web applications 
+  (JDK 1.1 or newer) in a few minutes. RReport is located in the package <font face="Arial, Helvetica, sans-serif"><i>com.java4less.rreport</i></font></P>
+</FONT>
+<p>The main features or RReport are:</p>
+<FONT FACE="Arial"> 
+<UL>
+  <LI>Preview of the report using AWT or Swing components.</LI>
+  <LI>Print reports using the Java 1.1 printing API (printJob()) or the Java 2 
+    printing API (printerJob()). </LI>
+  <LI>Possibility to create DHTML and PDF pages. Therefore it can be used as web 
+    reporting tool.</LI>
+  <LI>You can extends and customize the objects you print.</LI>
+  <LI>Graphical design using <a href="RReportVB_Help.html">RReport Visual Builder</a>. 
+  </LI>
+  <LI>Text mode printing for fast and light weighted printing.</LI>
+  <LI>Database and XML data source support.</LI>
+</UL>
+</FONT><FONT SIZE=2> </FONT><FONT SIZE=2> 
+<P>&nbsp;</P>
+</FONT><font face="Arial"><b><a name="creating"></a></b></font><B><FONT FACE="Arial" SIZE=4> 
+<h2>Creating a report</h2>
+</font></B>
+<P><font face="Arial, Helvetica, sans-serif">Before you start reading this section 
+  you must note that there are 2 ways for creating reports:</font></P>
+<ol>
+  <li><font face="Arial, Helvetica, sans-serif"> you can <b>programatically</b> 
+    create all the objects that make a report and link them together.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif">or you can use <a href="RReportVB_Help.html"><b>RReport 
+    Visual Builder</b></a> in order to visually create a report. This will be 
+    exported to a definition file *.rep that you can import in your application. 
+    We recommend this approach.</font></li>
+</ol>
+<P><font face="Arial, Helvetica, sans-serif">You can, of course, also combine 
+  both approaches. For example, you can create a report template (*.rep file) 
+  and modify it at runtime.</font></P>
+<P><font face="Arial, Helvetica, sans-serif">There are 4classes that represent 
+  a report</font></P>
+<ol>
+  <li><b><font face="Arial, Helvetica, sans-serif"><a href="javadoc/com/java4less/rreport/RReport.html">RReport</a></font></b><font face="Arial, Helvetica, sans-serif">: 
+    basic class. It uses Java 1.1 printing API. This version is Java 1.1 compatible.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><b><a href="javadoc/com/java4less/rreport/RReportImp.html">RReportImp</a></b>: 
+    this is a subclass of RReport that will allow you to read a definition file 
+    (*.rep) created with RReport Visual Builder. For this purpose it includes 
+    a <i>importReport()</i> method.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><b><a href="javadoc/com/java4less/rreport/RReportJ2.html">RReportJ2</a></b>: 
+    this is a subclass of RReportImp that uses Java 2 printing API (printerJob). 
+    This version has the following advantages: </font></li>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif">will display a progress window 
+      while preparing and printing the report. </font></li>
+    <li><font face="Arial, Helvetica, sans-serif">it uses Java 2 printing API.</font></li>
+  </ul>
+  <li>RReportJ2X: Subclass of RReport that uses features only available in the 
+    Java platform 1.4 or later. For example, it allows you to select a given printer 
+    by program. </li>
+</ol>
+<p>&nbsp;</p>
+<P><font face="Arial, Helvetica, sans-serif">A <A HREF="javadoc/com/java4less/rreport/RReport.html"><FONT SIZE=2>Rreport</FONT></A> 
+  is made of Rareas. A <A HREF="javadoc/com/java4less/rreport/RArea.html"><FONT SIZE=2>RArea</FONT></A> 
+  is a group of objects (<A HREF="javadoc/com/java4less/rreport/RObject.html"><FONT SIZE=2>RObject</FONT></A>) 
+  that will be printed together (in the same page). Typical examples of areas 
+  in a report are:</font></P>
+<FONT FACE="Arial">
+<UL>
+  <LI><font face="Arial, Helvetica, sans-serif">Page header</font></LI>
+  <LI><font face="Arial, Helvetica, sans-serif">Page footer</font></LI>
+  <LI>Report header</LI>
+  <LI>Report footer</LI>
+  <LI>Detail section</LI>
+  <LI>Group of areas (group detail, group header and group footer)</LI>
+</UL>
+<p>&nbsp;</p>
+<P>The source code to create an area looks like this:</P>
+</FONT> 
+<DIR> 
+  <DIR> <FONT FACE="Arial"> </font><FONT SIZE=2> 
+    <P>// create report<br>
+      Rreport Rep=new RReport(MainWindow);<br>
+      // if you use java 1.2 or later you can use<br>
+      // Rep=new RReportJ2(null); </P>
+    <P><br>
+      RArea HDR_PurchaseOrder= new RArea();<br>
+      HDR_PurchaseOrder.width=16.429;<br>
+      HDR_PurchaseOrder.height=4.074;<br>
+      Rep.addArea(HDR_PurchaseOrder);</P>
+    </FONT></DIR>
+</DIR>
+<P> <FONT FACE="Arial">As already stated, an </font><A HREF="javadoc/com/java4less/rreport/RArea.html"><FONT SIZE=2>RArea</FONT></A><FONT FACE="Arial"> 
+  contains of a set of objects (</FONT><A HREF="javadoc/com/java4less/rreport/RObject.html"><FONT SIZE=2>RObject</FONT></A><FONT FACE="Arial">). 
+  These are the elements that are actually printed. The following Robjects are 
+  currently available:</font></P>
+<UL>
+  <FONT FACE="Arial"> </font> 
+  <LI><FONT SIZE=2></font><A HREF="javadoc/com/java4less/rreport/RField.html"><FONT SIZE=2>RField</FONT></A><FONT FACE="Arial"> 
+    : to print a text.</font></LI>
+  <LI><font size=2></font><FONT SIZE=2></font><A HREF="javadoc/com/java4less/rreport/RCheck.html"><FONT SIZE=2>RCheck</FONT></A><FONT FACE="Arial">: 
+    to print a boolean value.</font></LI>
+  <LI><FONT SIZE=2></font><A HREF="javadoc/com/java4less/rreport/RPicture.html"><FONT SIZE=2>RPicture</FONT></A><FONT FACE="Arial"> 
+    : to print an image.</font></LI>
+  <LI><FONT SIZE=2></font><A HREF="javadoc/com/java4less/rreport/RCombo.html"><FONT SIZE=2>RCombo</FONT></A><FONT FACE="Arial"> 
+    : to print a text or image based on a key value.</font></LI>
+  <LI><FONT SIZE=2></font><A HREF="javadoc/com/java4less/rreport/RLine.html"><FONT SIZE=2>RLine</FONT></A><FONT FACE="Arial"> 
+    : to print a line.</font></LI>
+  <LI><FONT SIZE=2></font><A HREF="javadoc/com/java4less/rreport/RRectangle.html"><FONT SIZE=2>RRectangle</FONT></A><FONT FACE="Arial">: 
+    to print a frame.</font></LI>
+  <LI><FONT SIZE=2></font><A HREF="javadoc/com/java4less/rreport/RPageBreak.html"><FONT SIZE=2>RPageBreak</FONT></A><FONT FACE="Arial"> 
+    : to force a new page.</font></LI>
+  <LI><a href="javadoc/com/java4less/rreport/RUserComponent.html"><font size=2>RUserComponent</font></a><font face="Arial"> 
+    : to print a JComponent object (for example , a JTextArea or a JTable).</font></LI>
+  <li><a href="javadoc/com/java4less/rreport/RGraph.html"><font size=2>RGraph</font></a><font face="Arial"> 
+    : to print charts (requires a separate license of RChart).</font></li>
+  <li><a href="javadoc/com/java4less/rreport/RBarcode.html"><font size=2>RBarcode</font></a><font face="Arial"> 
+    : to print barcodes (requires a separate license of RBarcode).</font><FONT FACE="Arial"> 
+    </FONT></li>
+</UL>
+<FONT FACE="Arial">
+<P>The following example creates the page footer for the Purchase order report:</P>
+</FONT> 
+<DIR> 
+  <DIR> <FONT FACE="Arial"> </font><FONT SIZE=2> 
+    <p>RArea PFOOTER_PurchaseOrder= new RArea();<br>
+      RField TextPageNumber=new RField();<br>
+      TextPageNumber.name="TextPageNUmber";<br>
+      TextPageNumber.setConstant(false);<br>
+      TextPageNumber.setdefaultValue("[Page]");<br>
+      TextPageNumber.x=0.238;<br>
+      TextPageNumber.y=0.185;<br>
+      TextPageNumber.width=3;<br>
+      TextPageNumber.height=0.423;<br>
+      TextPageNumber.Align=RField.ALIGN_LEFT;<br>
+      TextPageNumber.Expand=false;<br>
+      TextPageNumber.Compress=false;<br>
+      TextPageNumber.FontColor=java.awt.Color.black;<br>
+      TextPageNumber.FontType=new java.awt.Font("Arial",java.awt.Font.PLAIN,8);<br>
+      PFOOTER_PurchaseOrder.add(TextPageNumber);</p>
+    <P>rep.setPageFooter(PFOOTER_PurchaseOrder);</P>
+    </FONT></DIR>
+</DIR>
+<FONT FACE="Arial"> 
+<P>The code:</P>
+<UL>
+  <LI>first creates the <I>PFOOTER_PurchaseOrder</I> area, </LI>
+  <LI>then creates a field that prints the page number.</LI>
+  <LI>Adds the field to the area.</LI>
+  <LI>Sets the area as page footer.</LI>
+</UL>
+<P>Actually this would not be necessary. When you create a new RReport it already 
+  contains a default pager footer like this one.</P>
+<P>Note: if you are using <i>RReport Visual Builder</i> you will not do this, 
+  you will read the definition of your report from a file.</P>
+<P>If you want to modify a RField in a report created with the Visual Builder 
+  you can do it like this:</P>
+</FONT>
+<blockquote>
+  <p><FONT FACE="Arial">RField f=(RField) report.getAreaByName(name).getItemByName(elementName);</FONT></p>
+</blockquote>
+<FONT FACE="Arial">
+<P>&nbsp;</P>
+</FONT> 
+<h2><FONT FACE="Arial"><b><a name="nested"></a></b> Nested (linked) Areas </FONT></h2>
+<FONT FACE="Arial"> 
+<P>Areas can be nested by linking them to a superarea (see <a href="javadoc/com/java4less/rreport/RArea.html">RArea.setLinkedArea()</a> 
+  ). After a repetition of an area is printed, all subareas are printed automatically.</P>
+<P>For example:</P>
+</FONT> 
+<blockquote>
+  <p><font size="-1">detailArea.setLinkedArea(headerArea);</font></p>
+</blockquote>
+<FONT FACE="Arial"> 
+<P>will result in <i>detailArea</i> being printed after each repetition of <i>headerArea</i>. 
+  See <a href="javadoc/com/java4less/rreport/RJDBCSource.html">RJDBCSource </a>to 
+  learn how to retrieve the information from a database and define relationships 
+  between tables.</P>
+<P>Let's suppose your report has 2 areas (header and detail). You have 2 options:</P>
+</FONT> 
+<ul>
+  <li>Do not link them. 
+    <p> <font face="Arial, Helvetica, sans-serif" size="-1">report.setHeaderArea(hdr);<br>
+      report.addArea(detail);<br>
+      <br>
+      report.prepare(); // this prints report header<br>
+      report.printArea(detail); // we must now print the detail area<br>
+      report.endReport();</font></p>
+  </li>
+  <li>Link them. The detail area will be printed after the header area. The header 
+    are is printed when the prepare() is called. 
+    <p><FONT FACE="Arial"><font face="Arial, Helvetica, sans-serif" size="-1">report.seHeaderArea(hdr);<br>
+      report.addArea(detail);<br>
+      </font><font size="-1">detail.setLinkedArea(hdr);</font><font face="Arial, Helvetica, sans-serif" size="-1"> 
+      // link detail to header<br>
+      <br>
+      report.prepare(); // this prints header and detail<br>
+      report.endReport();</font></FONT></p>
+  </li>
+</ul>
+<FONT FACE="Arial"> 
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT>
+<h2><font face="Arial"><b><a name="group"></a></b> Groups of Areas </font></h2>
+<p>You can create a group of areas using RReport Visual Builder. <font face="Arial">A 
+  group of areas is made of:</font></p>
+<ul>
+  <li>Group header</li>
+  <li>Group detail</li>
+  <li>Group footer</li>
+</ul>
+<p>The groups of areas will allow you to automatically print a header and/or a 
+  footer based on the values of one or more fields.</p>
+<p>The groups of areas must be used together with a RSource (normally a RJDBCSource) 
+  and you should set a value for the &quot;GroupByFields&quot; property of the 
+  detail area, there is no other special treatment, you can print the group's 
+  detail area as you would print any other area. </p>
+<p>RReport will automatically print the group header and footer areas whenever 
+  the values of the &quot;group by&quot; fields change. Note that the header and 
+  footer area share the same RSource as the detail area.</p>
+<p>For example , if you are printing the following data in you group detail:</p>
+<blockquote> 
+  <p><font face="Arial, Helvetica, sans-serif" size="-1">Article Id =1 , Name=Printer 
+    , Category=Hardware<br>
+    Article Id =2 , Name=Scanner , Category=Hardware<br>
+    Article Id =3 , Name=Antivirus , Category=Software<br>
+    Article Id =4 , Name=Editor , Category=Software<br>
+    Article Id =5 , Name=Linux , Category=Software </font></p>
+</blockquote>
+<p>and you set Group by &quot;Category&quot;. The result will be:</p>
+<ol>
+  <li><font face="Arial, Helvetica, sans-serif" size="-1">Group header is printed</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="-1"> article 1 is printed</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="-1"> article 2 is printed</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="-1"> Group footer is printed 
+    </font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="-1">Group header is printed 
+    </font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="-1">article 3 is printed</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="-1"> article 4 is printed</font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="-1"> article 5 is printed 
+    </font></li>
+  <li><font face="Arial, Helvetica, sans-serif" size="-1">Group footer is printed 
+    <br>
+    </font></li>
+</ol>
+<p>Note that RReport will NOT SORT the values. You must provide the data for the 
+  detail area in the correct order. In the previous example you would use a sql 
+  statement like: &quot;select * from Articles order by Category&quot; to make 
+  sure all articles in the same category come together.</p>
+<p>You can find an example of use of groups in the examples/groups folder.</p>
+<FONT FACE="Arial">
+<P><B><FONT FACE="Arial" SIZE=4> </font></B><B><FONT FACE="Arial" SIZE=4> </font><font face="Arial"><b><a name="printing"></a></b></font><FONT FACE="Arial" SIZE=4> 
+  </font></B></P>
+</FONT><B><FONT FACE="Arial" SIZE=4>
+<h2>Printing a report</h2>
+</font><font face="Arial"></font></B><FONT FACE="Arial"> 
+<P>After you have defined your report (either programatically or with the Visual 
+  Builder) , you will need to print it. First you must decide if you want to print 
+  it directy or you want to preview it.</P>
+<P>If you want to <I>preview</I> the report you need to put the RReport object 
+  on a component. The RReport object is a java.awt.Panel so you can put it on 
+  any java container. Then you must call the report‘s method setPreview(MainWindow).</P>
+<P>You can create your own preview window however we include two preview windows. 
+  One of them is a pure AWT component (RReportWindow) and the second is a Swing 
+  component (RReportJWindow). The code to use the window is:</P>
+</FONT> 
+<DIR> 
+  <DIR> <FONT FACE="Arial"> </font> 
+    <p><font size="-1">Win= new RReportWindow(rep,MainWindow);<br>
+      // if you use SWING: <br>
+      // Win= new RReportJWindow(rep,MainWindow);<br>
+      <br>
+      report.prepare();</font></p>
+    <p><font size="-1"><br>
+      // Print here ....</font></p>
+    <p><font size="-1"><br>
+      report.endReport();<br>
+      Win.show();</font></p>
+  </DIR>
+</DIR>
+<FONT FACE="Arial"> 
+<P>In order to print a report you must follow these steps:</P>
+<OL>
+  <LI>Call prepare(). This will print your report header.</LI>
+  <LI>Print the areas. You can either print the areas by assigning the values 
+    to the elements yourself (programatically) or you can provide a data source 
+    (RSource).</LI>
+  <LI>Call endReport(). This will print your report footer.</LI>
+</OL>
+<P><b>Note</b>: report header anf footer and page header and footers are printed 
+  automatically. If you need to execute your own code before these areas a printed 
+  you must use a <a href="javadoc/com/java4less/rreport/RAreaListener.html">RAreaListener.</a></P>
+<b>Tip</b>: if you make all your areas dependent of the report header using the 
+setLinkedArea(), then all areas will be printed automatically when you call prepare(). 
+(i.e. the header will be printed and all its subareas).
+<P><b>Note</b>: the prepare() method will print one repetition of the report header. 
+  If you assign a RSource (array, table in database ...) to the report header, 
+  several repetitions of the header and all subareas will be printed. For each 
+  new report header repetition a page break and a initialisation of the page number 
+  is automatically performed. In this way you can print more than 1 report at 
+  once. </P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4> </font></B><B><FONT FACE="Arial" SIZE=4> 
+<h2>The preview Window</h2>
+</font><font face="Arial"><b><a name="preview"></a></b></font></B><FONT FACE="Arial"> 
+<P>RReport comes with two implementations of a preview window (RReportWindow and 
+  RReportJWindow ). However if you don‘t like them you can create your own preview 
+  window. RReport is an extension from Panel so you can add it to any of your 
+  windows, panels etc..</P>
+</FONT> 
+<P><FONT FACE="Arial">The following methods in </font><A HREF="javadoc/com/java4less/rreport/RReport.html"><FONT SIZE=2>RReport</FONT></A><FONT FACE="Arial"> 
+  will help you building your own user interface:</font></P>
+<FONT FACE="Arial"> 
+<UL>
+  <LI>To display a page use setPageNumber().</LI>
+  <LI>To get the number of pages use getMaxPages().</LI>
+  <LI>To get the current page use getPageNumber()</LI>
+  <LI>To make zoom use setScale().</LI>
+  <LI>To print use printPreview().</LI>
+  <LI>To display more than one page use setShowPages().</LI>
+</UL>
+<b><a name="DataSources"></a></b>
+<h2>Data sources (Rsource)</h2>
+</FONT><B><FONT FACE="Arial" SIZE=4></font></B><FONT FACE="Arial"> 
+<P>Areas are programatically printed by:</P>
+</FONT> 
+<OL>
+  <LI> <FONT FACE="Arial">Assigning a value to the elements in the area. The following 
+    command assigns the value &quot;Article1&quot; to the element &quot;TextDescription&quot;. 
+    <br>
+    <br>
+    </font><I><FONT FACE="Arial" SIZE=2>DETAIL_PurchaseOrder.getItemByName("TextDescription").setruntimeValue("Article1");<br>
+    <br>
+    </font></i><FONT FACE="Arial">and Calling the report’s printArea() method: 
+    </font><I><FONT FACE="Arial" SIZE=2>rep.printArea(DETAIL_PurchaseOrder);<br>
+    <br>
+    </font></i></LI>
+  <LI><font face="Arial, Helvetica, sans-serif">or if they are linked to a superarea, 
+    after the superarea is printed.</font><i></i></LI>
+</OL>
+
+<FONT FACE="Arial"> 
+<P>However you can also use a Rsource object. In this case the report will <b>automatically 
+  assing the values to the fields and print the area as many times as needed</b>. 
+  There are 4 implemented Rsource classes, but <b>you can implement your own class</b>.</P>
+</FONT>
+<P><font face="Arial">The following example uses the class RArraySource to print 
+  the lines of a Purchase Order:</font></P>
+<DIR> 
+  <DIR> 
+    <p><font size="-1">private static void Example2() {</font></p>
+    <p><font size="-1"><br>
+      // example: array as data source&#9;<br>
+      Win= new RReportWindow(rep,MainWindow);<br>
+      <b> DETAIL_PurchaseOrder.setDataSource(new RArraySource(columnsNames,columnsData));<br>
+      </b>rep.prepare();</font></p>
+    <P><font size="-1">//print here<br>
+      rep.printArea(DETAIL_PurchaseOrder);</font></P>
+    <P><font size="-1">rep.endReport();<br>
+      Win.show();</font></P>
+    <P><font size="-1">}</font></P>
+  </DIR>
+</DIR>
+<P><FONT FACE="Arial">The array columnsNames contains the names of the fields 
+  and the array columnsData contanins the values. S<font face="Arial, Helvetica, sans-serif">ee 
+  </font></font><font face="Arial, Helvetica, sans-serif"><A HREF="#examples">Examples</A> 
+  or <a href="exampleOrder.java">exampl</a></font><FONT FACE="Arial"><a href="exampleOrder.java"></a></font><FONT FACE="Arial"><a href="exampleOrder.java">eOrder.java</a>.</font></P>
+<FONT FACE="Arial"> 
+<P><b>Note</b>: you can use a <a href="javadoc/com/java4less/rreport/RAreaListener.html">RAreaListener</a> 
+  in order to execute your own java code before each repetition of the area is 
+  printed.</P>
+<P><b>Note</b>: objects defined as constant (see<a href="javadoc/com/java4less/rreport/RObject.html"> 
+  RObject.setConstant()</a>) will not be modified by the data source (RSource).</P>
+<P>&nbsp;</P>
+<h2><font face="Arial"><b><a name="xml"></a></b></font><font face="Arial, Helvetica, sans-serif">Reading 
+  from Xml files</font></h2>
+<P><font face="Arial, Helvetica, sans-serif"><b><font size="-1">Note</font></b><font size="-1">: 
+  this feature requires you to copy vesion 2.6.0 of xalan.jar, xml-apis.jar and 
+  xecesImpl.jar to the RReport's directory. These files are part of the <a href="http://xml.apache.org/xalan-j/index.html">Apache 
+  Xalan package.</a></font></font></P>
+</FONT> 
+<p>You can use one or more xml files as data source for your report. The RXMLSource 
+  class can be used for this purpose.</p>
+<FONT FACE="Arial">
+<P> Each area can have its own xml file as data source or they can share files 
+  with other areas. Each area must also be related to a set of nodes in the xml 
+  file (the set of nodes is defined using a xpath expression). RReport will create 
+  a new repetition of the area for each node referenced by the XPath.</P>
+</FONT> 
+<p>The constructor must be used to specify the file and the node associated to 
+  an area.</p>
+<blockquote>
+  <p><FONT FACE="Arial"> RXMLSource(String sFile,String node)</FONT></p>
+</blockquote>
+<FONT FACE="Arial"> 
+<P>If the sFile parameter is null or empty, the file of the superarea will be 
+  used (only if the area has a superarea). In this case the node xpath will be 
+  relative to the current node in the superarea.</P>
+<P>You must use the<i> RObject.xpath</i> property to specify the data source for 
+  the fields in the area. This xpath is relative to the xpath of the area.</P>
+<P>The following report template shows how to configure a XML data source using 
+  RReport Visual Builder <i>examples/XMLSource/xmlorder.rep</i>. The file <i>examples/XMLSource/documents.xml</i> 
+  is used as data source for the report. </P>
+<P>You can also create the data source using java code in the following way:</P>
+</FONT> 
+<blockquote> 
+  <blockquote> 
+    <p><FONT FACE="Arial"><font size="-1">// create data sources <br>
+      report.getReportHeader().setDataSource(new RXMLSource(&quot;documents.xml&quot;,&quot;/documents/purchaseorder&quot;)); 
+      <br>
+      report.getAreaByName(&quot;Detail&quot;).setDataSource(new RXMLSource(&quot;&quot;,&quot;line&quot;)); 
+      // <i>line</i> is relative to </font><font face="Arial"><font size="-1"><i>/documents/purchaseorder</i></font></font></FONT></p>
+    <p><font size="-1">// link areas and data sources , detail to header<br>
+      report.getAreaByName(&quot;Detail&quot;).setLinkedArea(report.getReportHeader()); 
+      <br>
+      report.getAreaByName(&quot;Detail&quot;).getDataSource().setLinkSource(report.getReportHeader().getDataSource()); 
+      </font></p>
+    <p><font size="-1">// set xpaths for header fields, xpaths relative to </font><font face="Arial"><font size="-1"> 
+      </font><font face="Arial"><font size="-1"><i>/documents/purchaseorder</i></font></font></font><font size="-1"><br>
+      report.getReportHeader().getItemByName(&quot;Number&quot;).xPath=&quot;Number/text()&quot;; 
+      <br>
+      report.getReportHeader().getItemByName(&quot;Date&quot;).xPath=&quot;Date/text()&quot;; 
+      <br>
+      report.getReportHeader().getItemByName(&quot;Company&quot;).xPath=&quot;Company/text()&quot;; 
+      <br>
+      report.getReportHeader().getItemByName(&quot;City&quot;).xPath=&quot;City/text()&quot;; 
+      <br>
+      report.getReportHeader().getItemByName(&quot;address&quot;).xPath=&quot;address/text()&quot;; 
+      </font></p>
+    <p><font size="-1">// set xpaths for detail fields, xpaths relative to </font><font face="Arial"><font face="Arial"><font size="-1"><i>line</i></font></font></font><br>
+      <font size="-1">report.getAreaByName(&quot;Detail&quot;).getItemByName(&quot;Article&quot;).xPath=&quot;article/text()&quot;; 
+      <br>
+      report.getAreaByName(&quot;Detail&quot;).getItemByName(&quot;Description&quot;).xPath=&quot;Description/text()&quot;; 
+      <br>
+      report.getAreaByName(&quot;Detail&quot;).getItemByName(&quot;Price&quot;).xPath=&quot;Price/text()&quot;; 
+      <br>
+      report.getAreaByName(&quot;Detail&quot;).getItemByName(&quot;Quantity&quot;).xPath=&quot;Quantity/text()&quot;; 
+      <br>
+      report.getAreaByName(&quot;Detail&quot;).getItemByName(&quot;Priority&quot;).xPath=&quot;Priority/text()&quot;;</font></p>
+    </blockquote>
+</blockquote>
+<FONT FACE="Arial"> 
+<P>&nbsp; </P>
+</FONT> 
+<h2><FONT FACE="Arial"><b><a name="database"></a></b>Reading from database (RJDBCSource) 
+  </FONT></h2>
+<FONT FACE="Arial"> 
+<P>The class RJDBCSource is a subclass of RSouce. It will therefore allow you 
+  to print the contents of a table in a database. Furthermore RJDBCSource supports 
+  nested areas. This means you can print an area that contains subareas.</P>
+<P>Let's suppose you must print 2 Invoices. Invoice number 1 and invoice number 
+  2. You have a database that contains two tables: INVOICES and INVOICESLINES.</P>
+<P>You have defined the following areas for this:</P>
+</FONT>
+<ul>
+  <li>Invoice's header area</li>
+  <li><font face="Arial">Invoice's line area</font></li>
+</ul>
+<FONT FACE="Arial"> 
+<P>in order to programatically print the two invoices you must:</P>
+</FONT> 
+<ol>
+  <li>Retrieve the header's data for invoice 1 (you should query the database 
+    like &quot;SELECT * FROM INVOICES WHERE KEY=1&quot;)</li>
+  <li>print header 1</li>
+  <li>Retrieve the lines for invoice 1 (you should query the database like &quot;SELECT 
+    * FROM INVOICESLINES WHERE KEY=1&quot;)</li>
+  <li><font face="Arial">print all lines for invoice 1</font></li>
+  <li>Retrieve the header's data for invoice 1<font face="Arial"> (you should 
+    query the database like &quot;SELECT * FROM INVOICES WHERE KEY=2&quot;)</font></li>
+  <li>print header 2<font face="Arial"></font></li>
+  <li>Retrieve the lines for invoice 2 (you should query the database like &quot;SELECT 
+    * FROM INVOICESLINES WHERE KEY=2&quot;)</li>
+  <li><font face="Arial">print all lines for invoice 2</font></li>
+</ol>
+<FONT FACE="Arial"> 
+<P>You can easily simplify this process by using RJDBCSource in the following 
+  way.</P>
+</FONT>
+<blockquote> 
+  <p>&nbsp;</p>
+  <p><font size="-1">// create source table<br>
+    RJBCSource headerTable=new RJBCSource(statement,&quot;SELECT * FROM INVOICES&quot;);<br>
+    headerArea.setDataSource(headerTable);</font></p>
+  <p><font size="-1">// create source table<br>
+    RJBCSource linesTable =new RJBCSource(statement,&quot;SELECT * FROM INVOICESLINES&quot;);<br>
+    linesArea.setDataSource(linesTable); </font></p>
+  <p><font size="-1">// link areas <br>
+    linesArea.setLinkArea(headerArea); </font></p>
+  <p><font size="-1">// link fields<br>
+    linesTable.setToFields(&quot;ID&quot;);<br>
+    linesTable.setFromFields(&quot;ID&quot;);</font></p>
+  <p><font size="-1"> </font><font size="-1">// link tables<br>
+    linesTable.setLink(headerTable); </font></p>
+  </blockquote>
+<FONT FACE="Arial"> 
+<P>This means the following:</P>
+</FONT> 
+<ol>
+  <li>Assign the table INVOICES as source for <i>headerArea</i>.</li>
+  <li>Assign the table INVOICESLINES as source for <i>linesArea</i>.</li>
+  <li><font face="Arial">area <i>linesArea</i> (subarea) is linked to <i>headerArea</i> 
+    (superarea). This means, after each <i>headerArea</i>, the <i>linesArea</i> 
+    will be printed.</font></li>
+  <li><font face="Arial">The field TO (KEY) is the name of the field/s in the 
+    subtable (linesTable)</font></li>
+  <li><font face="Arial">The field FROM (KEY)</font> is the name of the field/s 
+    in the supertable (headerTable). You can specifiy several fields separated 
+    by &quot;|&quot;.</li>
+  <li>the RJDBCSource in linesArea must be linked to the RJDBCSource in headerArea.</li>
+</ol>
+<FONT FACE="Arial"> 
+<P>You can also use parameters in your SQL statement. For example:</P>
+<P><font face="Arial"><font size="-1">myJDBCSource</font></font>=new RJDBCSource(statement, 
+  &quot;<font size="-1">SELECT * FROM INVOICES</font><FONT FACE="Arial"> where 
+  IDate&gt;'[%dateParam]'&quot;);</FONT></P>
+</FONT><FONT FACE="Arial"> 
+<P>in this case you must provide a value for the parameter before you run the 
+  report: </P>
+<P><font size="-1">myJDBCSource.setParameter(&quot;</font><font face="Arial"><font face="Arial">dateParam</font></font><font size="-1">&quot;,&quot;01/01/2001&quot;);</font><FONT FACE="Arial"> 
+  </FONT></P>
+</FONT><FONT FACE="Arial"> 
+<P>If you loaded your report from a template file (REP file), the correct way 
+  to set the parameters is:</P>
+<P><font size="-1">((RJDBCSource) myreport.getAreaByName(&quot;areaname&quot;).getDataSource()).setParameter(&quot;</font><font face="Arial" size="-1">dateParam</font><font size="-1">&quot;,&quot;01/01/2001&quot;);</font><font face="Arial" size="-1"> 
+  </font> </P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial"> 
+<P><b><font face="Arial"><b><a name="JTable"></a></b></font></b></P>
+</FONT><B><FONT FACE="Arial" SIZE=4> 
+<h2>Printing a JTable</h2>
+</font><font face="Arial"></font></B><FONT FACE="Arial"> 
+<P>If you want to print a JTable you don‘t have to define the report’s layout 
+  field by field, the RJTable class can do it for you.</P>
+<P>This class performs the following tasks:</P>
+<UL>
+  <LI>Create an area for the header of your table.</LI>
+  <LI>Create an area for the rows of you table.</LI>
+  <LI>Create a RJTableSource and assign it to the detail area.</LI>
+</UL>
+</FONT> 
+<P><font face="Arial">The following example show how to print a Jtable in 5 minutes:</font></P>
+<DIR> 
+  <DIR> 
+    <p><font size="-1">private static void Example5() {</font></p>
+    <p><font size="-1"> // example: printing a JTable&#9;<br>
+      Win= new RReportWindow(rep);<br>
+      Win.show();</font></p>
+    <P> </P>
+    <P><font size="-1">javax.swing.JTable dataTable = new javax.swing.JTable(columnsData, 
+      columnsNames);</font></P>
+    <P><font size="-1"><b><i>RJTable RT=new RJTable(dataTable,0,0,10,2,1.5);<br>
+      RT.createAreas();<br>
+      rep.addArea(RT.getHeaderArea());<br>
+      rep.addArea(RT.getDetailArea());</i></b></font></P>
+    <P><font size="-1">rep.prepare();</font></P>
+    <P><font size="-1">//print here<br>
+      r<b>ep.printArea(RT.getHeaderArea());<br>
+      rep.printArea(RT.getDetailArea());</b></font></P>
+    <P><font size="-1">rep.endReport();<br>
+      Win.refreshPageNumber();</font></P>
+    <P><font size="-1">}</font></P>
+  </DIR>
+</DIR>
+<FONT FACE="Arial"> 
+<P>You first create the RJTable object and provide some information about the 
+  size. Then call the createAreas() method and last you add the new areas to you 
+  report.</P>
+<h2>&nbsp;</h2>
+</FONT>
+<p><font face="Arial"><b><a name="ExportLayer"></a></b></font></p>
+<h2><font face="Arial, Helvetica, sans-serif">ExportLayer interface</font> </h2>
+<p>RReport can export reports to PDF, DHTML, csv and more. All classes used for 
+  exporting a report implement the <i>ExportLayer</i> interface. This interface 
+  has the following methods:</p>
+<ul>
+  <li> <b>newPage</b>(): adds a new page to the reports. </li>
+  <li><b>close</b>(): ends the report.</li>
+  <li> <b>getName</b>(): returns the name of the layer.</li>
+  <li> <b>print</b>(RObject o, double x, double y, Object Value): adds an element 
+    to the report at the given possition (in pixels). </li>
+</ul>
+<p>Although the RReport class includes methods for exporting to pdf, dhtml and 
+  other, you can also use the generic methods in this way:</p>
+<ol>
+  <li>Create the export layer. For example: <br>
+    <br>
+    <i>CsvLayer layer= new CsvLayer();</i><br>
+    <br>
+  </li>
+  <li>run the report as usual (execute the <i>prepare()</i> , <i>endReport()</i> 
+    methods and so on).</li>
+  <li>call the <i>export(layer) </i>method of rreport.</li>
+  <li>depending on the layer you might need to read the result. For example the 
+    CsvLayer has a method called <i>getOutput(</i>), while the PDFLayer writes 
+    the result directly into a file.</li>
+</ol>
+<p><FONT FACE="Arial"> <b><a name="DHTML"></a></b> </FONT><b><font face="Arial" size="4">Creating 
+  DHTML</font></b></p>
+<FONT FACE="Arial"></FONT> 
+<p><font face="Arial, Helvetica, sans-serif">RReport can export your report to 
+  DHTML. This is usefull if you are using rreport in a web environment. We advise 
+  you to use DHTML instead of HTML because it produces better quality output.</font></p>
+<p><font face="Arial, Helvetica, sans-serif">In order to export to DHTML you must 
+  call the following methods:</font></p>
+<blockquote> 
+  <p><font size="-1" face="Arial, Helvetica, sans-serif">rep.setHTMLActive(true); 
+    // active HTML output <br>
+    rep.disablePrinting(true); // do not send output to printer</font></p>
+  <p><font size="-1" face="Arial, Helvetica, sans-serif">/ / print report now<br>
+    rep.prepare();<br>
+    ....<br>
+    rep.endReport(); </font></p>
+  <p><font size="-1" face="Arial, Helvetica, sans-serif">// save DHTML output 
+    to file<br>
+    String htmlString=rep.getHTML(); <br>
+    try {</font></p>
+  <blockquote> 
+    <p><font size="-1" face="Arial, Helvetica, sans-serif"> java.io.OutputStreamWriter 
+      out2= new java.io.OutputStreamWriter(new java.io.FileOutputStream(fileName),System.getProperty("file.encoding")); 
+      <br>
+      out2.write(htmlString,0,htmlString.length());<br>
+      out2.close(); </font></p>
+  </blockquote>
+  <p><font size="-1" face="Arial, Helvetica, sans-serif"> } catch (Exception e) 
+    { e.printStackTrace(); }</font></p>
+</blockquote>
+<p>&nbsp;</p>
+<p><font face="Arial, Helvetica, sans-serif">The class <b>DHTMLLayer</b> is in 
+  charge of converting the reports to DHTML code.</font></p>
+<p>Whenever you export to DHTML you must take into account that the browser requires 
+  all to be stored in files. If you create a chart or a barcode, the resulting 
+  image must be stored in a image file. The following properties are used for 
+  the configuration of this:</p>
+<blockquote>
+  <p><font size="-1" face="Arial, Helvetica, sans-serif">report.exportImagesFormat=&quot;jpg&quot;; 
+    // store the chart or barcode as jpg file<br>
+    report.exportDirectory=&quot;c:\web\images&quot;; // store the file in this 
+    subdirectory<br>
+    report.imagesHTMLPrefix=&quot;images\&quot;; // the resulting DHTML will look 
+    like this: &lt;IMG SRC=&quot;images/XXXXXX.jpg&quot; &gt;</font></p>
+</blockquote>
+<p>If you want to create GIF or PNG file you must include the following packages 
+  in your classpath:</p>
+<ul>
+  <li>gif: download the encoder from <a href="http://www.acme.com/resources/classes/Acme.tar.gz">http://www.acme.com/resources/classes/Acme.tar.gz</a> 
+  </li>
+  <li>png: download the encoder from <a href="http://users.boone.net/wbrameld/pngencoder/">http://users.boone.net/wbrameld/pngencoder/</a> 
+  </li>
+</ul>
+<p>If you are using a RPicture object for printing images, the &quot;ImageHTMLAddress&quot; 
+  property will be used when exporting to DHTML. In RReport Visual Builder the 
+  property is called &quot;HTML image&quot;.</p>
+<p>For example:</p>
+<blockquote>
+  <p><font size="-1" face="Arial, Helvetica, sans-serif">picture.ImageHTMLAddress=&quot;/images/file.jpg&quot;</font></p>
+</blockquote>
+<p>will generatee <font size="-1" face="Arial, Helvetica, sans-serif">&lt;IMG 
+  SRC=&quot;/images/file.jpg&quot; &gt;</font> as part of the DHTML code. In the 
+  case of RPicture you must place the file in the correct directory, RReport will 
+  not create the file.</p>
+<p>&nbsp;</p>
+<P><font face="Arial"><b><a name="PDF"></a></b></font> <b><font face="Arial" size="4">Creating 
+  PDF</font></b></P>
+<P><font face="Arial, Helvetica, sans-serif">RReport can export your report to 
+  PDF. This is usefull if you are using rreport in a web environment.</font> <font face="Arial, Helvetica, sans-serif">In 
+  order to export to PDF you must call the following methods:</font></P>
+<blockquote> 
+  <p><font size="-1" face="Arial, Helvetica, sans-serif"><br>
+    rep.disablePrinting(true); // do not send output to printer</font></p>
+  <p><font size="-1" face="Arial, Helvetica, sans-serif">/ / print report now<br>
+    rep.prepare();<br>
+    ....<br>
+    rep.endReport();</font> <br>
+    <font size="-1" face="Arial, Helvetica, sans-serif">rep.exportPDF(new java.io.FileOutputStream(&quot;rreport.pdf&quot;)); 
+    </font></p>
+</blockquote>
+<P>RReport uses a free Java library called iText that creates PDF files. <a href="http://www.lowagie.com/iText/">Click 
+  here</a> to download the pdf library. You must install the PDF library by including 
+  the iText.jar file in your class path or in the same directory as rreport.</P>
+<P>The class <b>PDFLayer</b> is in charge of converting your report to PDF using 
+  iText.</P>
+<P>&nbsp;</P>
+<h2><font face="Arial"><b><a name="txt"></a></b></font><font face="Arial, Helvetica, sans-serif">Creating 
+  Text Output</font></h2>
+<p>The method <i>report.exportTXT() </i>can be used for exporting reports to text 
+  format. This method returns a java.util.Vector object that contains the pages 
+  of the report. Each page (element of the Vector object) is a String[] object 
+  where each item in the array is a line in the page. The following code shows 
+  how this method con be used:</p>
+<blockquote> 
+  <blockquote> 
+    <p><font size="-1">rep.disablePrinting(true);<br>
+      rep.prepare();<br>
+      .... <br>
+      rep.endReport();</font></p>
+    <p><font size="-1"><br>
+      java.util.Vector pages=rep.exportTXT(); <br>
+      java.io.FileOutputStream os=new java.io.FileOutputStream(&quot;Report.txt&quot;);</font></p>
+    <p><font size="-1">for (int i=0;i&lt;pages.size();i++) {<br>
+      // get page</font><font size="-1"><br>
+      StringBuffer[] page=(StringBuffer[]) pages.elementAt(i);<br>
+      </font></p>
+    <blockquote> 
+      <p><font size="-1">// write lines of the page<br>
+        </font><font size="-1">for (int j=0;j&lt;page.length;j++) os.write(page[j].toString().getBytes());</font></p>
+    </blockquote>
+    <p><font size="-1"><br>
+      }</font></p>
+    <p><font size="-1">os.close();<br>
+      </font></p>
+    </blockquote>
+</blockquote>
+<p>Note: in order to get a better layout of the exported report you should design 
+  and run the report in text mode by setting &quot;Text Mode=Yes&quot; in the 
+  report's properties window of RReport Visual Builder.</p>
+<h2><font face="Arial"><b><a name="csv"></a></b></font>Creating Csv</h2>
+<p>The CsvLayer class implements the ExportLayer interface and can therefore be 
+  used for exporting reports to csv in the following way:</p>
+<blockquote> 
+  <blockquote>
+    <p><font size="-1">CsvLayer layer= new CsvLayer();</font></p>
+    <p><font size="-1">rep.disablePrinting(true);<br>
+      rep.prepare();<br>
+      rep.endReport();<br>
+      rep.export(layer);</font></p>
+    <p><font size="-1">java.io.FileOutputStream os=new java.io.FileOutputStream(&quot;Report.tcsv&quot;);</font></p>
+    <p><font size="-1">os.write(layer.getOutput().getBytes());</font></p>
+    <p><font size="-1">os.close();</font></p>
+  </blockquote>
+</blockquote>
+<p>The following properties of the CsvLayer class allow you to configurate the 
+  output of the csv layer:</p>
+<ul>
+  <li>fieldSeparator (default is ; ): string used to separate fields in the csv 
+    output. </li>
+  <li> escapeSequence (default is \; ): if the separator can be found in the field's 
+    content, it will be replace with this escape sequence.</li>
+  <li> areaSeparator (default is CR LF): string used to separate areas.</li>
+</ul>
+<p>If <i>ignoreArea(String areaname)</i> can be used to define areas that should 
+  not be exported to csv. You can also set the property &quot;Export=No&quot; 
+  in the area's properties window in RReport Visual Builder.</p>
+<p>&nbsp;</p>
+<h2><font face="Arial"><b><a name="xml"></a></b></font>Creating Xml</h2>
+<p>&nbsp;</p>
+<p>The XmlLayer class implements the ExportLayer interface and can therefore be 
+  used for exporting reports to xml in the following way:</p>
+<blockquote> 
+  <blockquote> 
+    <p><font size="-1">XmlLayer layer= new XmlLayer(report.getPageWidthPixels(),report.getPageHeightPixels(),report.getTitle());</font></p>
+    <p><font size="-1">rep.disablePrinting(true);<br>
+      rep.prepare();<br>
+      rep.endReport();<br>
+      rep.export(layer);</font></p>
+    <p><font size="-1"><br>
+      String xmlString= layer.getOutput();<br>
+      java.io.OutputStreamWriter out2= new java.io.OutputStreamWriter(new java.io.FileOutputStream(&quot;report.xml&quot;),System.getProperty(&quot;file.encoding&quot;));<br>
+      out2.write(xmlString,0,xmlString.length());<br>
+      out2.close();</font></p>
+  </blockquote>
+</blockquote>
+<p>If <i>ignoreArea(String areaname)</i> can be used to define areas that should 
+  not be exported to xml. You can also set the property &quot;Export=No&quot; 
+  in the area's properties window in RReport Visual Builder.</p>
+<P><font face="Arial"><b><a name="textmode"></a></b></font> </P>
+<h2><b><font face="Arial" size="4">Text mode printing</font></b></h2>
+<P>RReport normally uses the java printing api for printing your reports. This 
+  will result in a graphical report beeing printed using the operating system 
+  printing services. However in some circumstances you may need to print a report 
+  in text mode. This will result in a much faster printing specially if you a 
+  using an impact printer. Text mode printring does not support graphics. It just 
+  supports texts (including italic and bold fonts) and lines.</P>
+<P>RReport will export your report to text format and will use the TextPrinter 
+  package for sending it directly to the printer.This mean RReport will open the 
+  port and talk directly to the printer instead of using the operating system 
+  services. </P>
+<P>The following properties allows you to configure the text mode printer:</P>
+<ul>
+  <li>Size of the page (number or rows and columns): </li>
+  <li>Printer name: for example PRN: or a network name //computername/printername.</li>
+  <li>Type of printer: this identifies the commands supported by the printer.</li>
+</ul>
+<P>The code for printing in text mode is:</P>
+<blockquote> 
+  <blockquote> 
+    <p><font face="Courier New, Courier, mono" size="2">report.setTextMode(true); 
+      // enabled text mode<br>
+      report.disablePrinting(true); // disable java printing <br>
+      report.setTextModeColumns(80); // page size<br>
+      report.setTextModeRows(60); <br>
+      report.setTextModePrinterType(&quot;HP-PCL3&quot;); // commands supported 
+      by the printer (PCL)<br>
+      report.setTextModePrinter(&quot;PRN:&quot;); // parallel port<br>
+      <br>
+      report.prepare(); // start report</font></p>
+    <p><font face="Courier New, Courier, mono" size="2">.....</font></p>
+    <p><font face="Courier New, Courier, mono" size="2">report.endReport(); // 
+      finish report<br>
+      report.printTexMode(); </font><font face="Courier New, Courier, mono" size="2">// 
+      print now</font></p>
+  </blockquote>
+</blockquote>
+<P><font face="Arial"><b><a name="Servlet"></a></b></font> </P>
+<h2><b><font face="Arial" size="4">Web Reports (Servlets)</font></b></h2>
+<P>If you are developing a web application you can also use RReport to create 
+  your reports. The reports can be created as DHTML pages or PDF files. In both 
+  cases the result can be displayed in the user's browser. </P>
+<P>RReport provides a generic servlet call RReportServlet. The Servlet load a 
+  java class that implements the IWebReport interface. This interface is used 
+  by the servlet to create and run the report.</P>
+<P>The servlet has the following parameters: </P>
+<ul>
+  <li>DEBUG: set it to ON if you want to get trace information in the standard 
+    output. </li>
+  <li>PDFDIR: path where the pdf file must be written. The default is "../webapps/" 
+    (for Tomcat).</li>
+  <li>IMAGESDIR: path where the DHTML images are created. The default is "../webapps/" 
+    (for Tomcat).</li>
+  <li>PDFFILE: name of the pdf file to create. The deault value is &quot;rreport.pdf&quot;;</li>
+  <li>FORMAT: output format (PDF or DHTML).</li>
+  <li>PDFPREFIX: the users browser will be redirected to the pdf file in this 
+    directory, the default is &quot;/&quot;.</li>
+  <li>IMAGESPREFIX (DHTML): this is the images directory from the browser's point 
+    of view.</li>
+  <li>REPORT: name of the class that implements the IWebReport interface. The 
+    default is com.java4less.rreport.WebReportJDBC,</li>
+  <li>REPORTFILE: name of the report file (*.rep) to be loaded. This is used by 
+    WebReportJDBC only.</li>
+</ul>
+<P><b>The IWebReport interface</b></P>
+<P>As already stated the servlet always loads a java class that implements the 
+  IWebReport interface. This interface only has 2 methods:</P>
+<ul>
+  <li><b> public RReport createReport(HttpServletRequest request)</b>; This is 
+    called by the servlet in order to create the report object. It receives the 
+    servlet request object so that you can read any parameters you need.</li>
+  <li><b>public boolean runReport(); </b> This method is called by the servlet 
+    in order to run the report. This method would call the prepare() , printArea 
+    (if needed) and endReport() methods of the report.</li>
+</ul>
+<P>The servlet performs the following steps:</P>
+<ol>
+  <li>load the class specified in the REPORT parameter of the servlet</li>
+  <li>call the createReport() method on the class in order to create the report 
+    object.</li>
+  <li>Activate DHTML or PDF output as needed.</li>
+  <li>call runReport() method of the class.</li>
+  <li>Send report output (DHTML or PDF) to the user's browser.</li>
+</ol>
+<P>RReport provides a ready to use implementation of IWebReport called &quot;WebReportJDBC&quot; 
+  which is used to execute reports whose data is read from a database.</P>
+<P>&nbsp;</P>
+<P><b>The WebReportJDBC class</b></P>
+<P>This class is the defaut implementation of IWebReport. It works the following 
+  way:</P>
+<ol>
+  <li>it loads the report template file (*.rep) specified in the REPORTFILE parameter.</li>
+  <li>All servlet parameters starting with "PAR_" are forwarded to the RSource 
+    objects defined in the template file. </li>
+  <li>It runs the report by calling prepare() and endReport().</li>
+</ol>
+<P>This class is used to load and execute reports that can read data from database. 
+  The SQL statements in the template file can contain parameters. </P>
+<P>For example, suppose you have a report that prints employee's information. 
+  Your template file could use the following SQL statement in order to read the 
+  employee's data:</P>
+<blockquote>
+  <p> <font face="Arial, Helvetica, sans-serif" size="-1">Select * from Employees 
+    where EmployeeId=[%Id]</font></p>
+</blockquote>
+<P>Then the servlet should have a parameter called &quot;PAR_ID&quot; which provides 
+  the value for the %Id% parameter in the SQL. </P>
+<P>You would for example, execute the servlet like this:</P>
+<blockquote>
+  <p> <font face="Arial, Helvetica, sans-serif" size="-1">http://localhost:8080/rreport/servlet/RReportServlet?REPORTFILE=file://employee.rep&PAR_ID=14&amp;FORMAT=PDF</font></p>
+</blockquote>
+<P>in order to print the information of employee 14.</P>
+<P><font face="Arial"><b><a name="Tomcat"></a></b></font></P>
+<h3>Installation on Tomcat</h3>
+<P>In order to install RReportServlet on Tomcat you must follow the following 
+  steps: </P>
+<ul>
+  <li>create a new web application directory "tomcat_home/webapps/rreport"</li>
+  <li>On tomcat 3.2.3 modify the file "tomcat_home/conf/server.xml" and add the 
+    following line 
+    <blockquote> 
+      <p>&lt;Context path=&quot;/rreport&quot; <br>
+        docBase=&quot;webapps/rreport&quot; <br>
+        crossContext=&quot;false&quot;<br>
+        debug=&quot;0&quot; <br>
+        reloadable=&quot;true&quot; &gt; <br>
+        &lt;/Context&gt;<context path="/rchart" 
+docbase="webapps/rchart" 
+crosscontext="false"
+debug="0" 
+reloadable="true" > </context><context path="/rchart" 
+docbase="webapps/rchart" 
+crosscontext="false"
+debug="0" 
+reloadable="true" > </context></p>
+    </blockquote>
+  </li>
+  <li>On tomcat 4.0 you must use: 
+    <blockquote> 
+      <p>&lt;Context path=&quot;/rreport&quot; docBase=&quot;rreport&quot; debug=&quot;0&quot; 
+        reloadable=&quot;true&quot;&gt; </p>
+    </blockquote>
+  </li>
+  <li>unzip rreport.zip in "webapps/rreport/web-inf/classes". After unzipping 
+    the file, the following directories must exists and will contain the java 
+    classes: 
+    <ul>
+      <li>"webapps/rreport/web-inf/classescom/java4less/rreport"</li>
+    </ul>
+  </li>
+  <ul>
+    <li> "webapps/rreport/web-inf/classescom/java4less/images" </li>
+  </ul>
+  <p>&nbsp;</p>
+  <li>if you want to create PDF output you must download the <a href="http://www.lowagie.com/iText/">iText 
+    library</a> and copy iText.jar to "tomcat_home/lib/iText.jar".</li>
+</ul>
+<p>Now you can test the installation</p>
+<ul>
+  <li>Copy order.rep to "tomcat_home/webapps/rreport"</li>
+  <li>start Tomcat</li>
+  <li>start your browser and enter the following url for testing the DHTML output: 
+  </li>
+  <blockquote> 
+    <p><font face="Arial, Helvetica, sans-serif" size="-1">http://localhost:8080/rreport/servlet/RReportServlet?DEBUG=ON&REPORTFILE=file://<b><i>path</i></b>/order.rep&PDFDIR=../webapps&FORMAT=PDF&PDFPREFIX=/rreport/</font></p>
+  </blockquote>
+  <li>start your browser and enter the following url for testing the PDF output: 
+    <blockquote> 
+      <p><font size="-1" face="Arial, Helvetica, sans-serif">http://localhost:8080/rreport/servlet/RReportServlet?DEBUG=ON&REPORTFILE=file://<b><i>path</i></b>/order.rep&IMAGESDIR=../webapps&IMAGESPREFIX=/rreport/</font></p>
+    </blockquote>
+  </li>
+</ul>
+<P>&nbsp;</P>
+<B><FONT FACE="Arial" SIZE=4>
+<h2><A NAME="examples">Examples</A></h2>
+</font></B><FONT FACE="Arial"> 
+<P><FONT FACE="Arial">The following examples are delivered in </font><A HREF="app.java"><FONT SIZE=2>app.java</FONT></A><FONT FACE="Arial"> 
+  :</font></P>
+</FONT><FONT FACE="Arial"> 
+<UL>
+  <LI>Example 1: prints a report programatically. </LI>
+  <LI>Example 2: prints a report using an array as data source.</LI>
+  <LI>Example 3: prints a report using a JTable as data source.</LI>
+  <LI>Example 4: prints a report using JDBC as data source.</LI>
+  <LI>Example 5: prints a JTable.</LI>
+</UL>
+<P>These are examples that<b> programatically define reports</b> that will help 
+  you understand how RReport works, but it is not the best way to create reports. 
+  Read the <a href="RReportVB_Help.html">RReport Visual Builder documentation</a> 
+  in order to see examples of report created with RReport Visual Designer.</P>
+<P>The following example are included in this document: a ne<FONT FACE="Arial">w 
+  Robject to print a </font><A HREF="#OwnRObject"><FONT SIZE=2>triangle</FONT></A><FONT FACE="Arial">.</font><FONT FACE="Arial"> 
+  </FONT></P>
+</FONT><FONT FACE="Arial">
+<P>&nbsp;</P>
+</FONT> 
+<DIR>
+  <DIR>
+    <DIR></DIR>
+  </DIR>
+</DIR>
+
+<B><FONT FACE="Arial" SIZE=4>
+<h2><A NAME="OwnRObject">Creating your own RObject</A></h2>
+</font></B><FONT FACE="Arial"> 
+<P>&nbsp;</P>
+<P>The following source code creates a new Robject class for printing triangles:</P>
+</FONT> 
+<DIR> 
+  <DIR> 
+    <DIR> 
+      <DIR> <FONT FACE="Arial"> </font> 
+        <p><font size="-1">import java.awt.*;<br>
+          <br>
+          public class RTriangle extends RObject { <br>
+          <br>
+          // (x1,y1),(x2,y2) and (x3,y3) make the 3 corners <br>
+          public double x1=0.5; <br>
+          public double y1=0; <br>
+          public double x2=0; <br>
+          public double y2=1; <br>
+          public double x3=1; <br>
+          public double y3=1; <br>
+          <br>
+          public java.awt.Color color=java.awt.Color.black; <br>
+          <br>
+          public RTriangle(){ <br>
+          constant=true; } <br>
+          <br>
+          public void print(Graphics g,double px, double py,Object Value) { <br>
+          <br>
+          int[] X=new int[3]; <br>
+          int[] Y=new int[3];</font></p>
+        <p><font size="-1">// convert from CM to pixels <br>
+          X[0]=(int) (px+(x1*this.resolution)); <br>
+          Y[0]=(int) (py+(y1*this.resolution)); <br>
+          X[1]=(int) (px+(x2*this.resolution)); <br>
+          Y[1]=(int) (py+(y2*this.resolution)); <br>
+          X[2]=(int) (px+(x3*this.resolution)); <br>
+          Y[2]=(int) (py+(y3*this.resolution)); <br>
+          <br>
+          g.setColor(color); <br>
+          g.drawPolygon(X,Y,3); <br>
+          }</font></p>
+        <p><font size="-1">}</font></p>
+      </DIR>
+    </DIR>
+  </DIR>
+</DIR>
+<p><font face="Arial">In order to create you own RObject you must extend the RObject 
+  class and implement the function:</font></p>
+<p><font size=2>public void print(Graphics g,double px, double py,Object Value)</font></p>
+<p>you must then draw your object in the graphics context &quot;g&quot; at the 
+  position (px, py). The parameter &quot;Value&quot; can be any runtime object 
+  you need. For example, in the case of RField, &quot;Value&quot; is the text 
+  that should be printed and in the case of RPicture &quot;Value&quot; is the 
+  Image to be printed. In the case of RTriangle we don't use that parameter.</p>
+<p>See <a href="javadoc/com/java4less/rreport/RObject.html">RObject</a> for more 
+  information about field you may need to use in your object.</p>
+<p>Optionally you can implement the importFile() function if you want your object 
+  to be able to read itself from a report definition file:</p>
+<p>&nbsp;</p>
+<blockquote> 
+  <blockquote> 
+    <blockquote> 
+      <blockquote> 
+        <p><font size="-1">public void importLine(String key,String val) { <br>
+          <br>
+          super.importLine(key,val); <br>
+          <br>
+          if (key.compareTo("COLOR")==0) { <br>
+          this.color=convertColor(val); } <br>
+          <br>
+          if (key.compareTo("X1")==0) this.x1=new Double(val).doubleValue(); <br>
+          if (key.compareTo("Y1")==0) this.y1=new Double(val).doubleValue(); <br>
+          if (key.compareTo("X2")==0) this.x2=new Double(val).doubleValue(); <br>
+          if (key.compareTo("Y2")==0) this.y2=new Double(val).doubleValue(); <br>
+          if (key.compareTo("X3")==0) this.x3=new Double(val).doubleValue(); <br>
+          if (key.compareTo("Y3")==0) this.y3=new Double(val).doubleValue();<br>
+          } </font></p>
+        <p>&nbsp;</p>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p>This function receives a &quot;key&quot; that contains the name of the field 
+  read from the file and the value &quot;val&quot;. See also <font face="Arial, Helvetica, sans-serif"><a href="RReportVB_Help.html#own">Creating 
+  your own objects</a></font> in RReport Visual Builder.</p>
+<p><B><FONT FACE="Arial" SIZE=4> </font></B></p>
+<B><FONT FACE="Arial" SIZE=4><h2><A NAME="wrapping">Text wrapping</A></h2>
+</font></B><FONT FACE="Arial"> 
+<P>You can use the properties <I>expand</I> and <I>compress </I>to specify how the Rfield class will behave if the text is too long or too short:</P>
+
+<UL>
+<LI>Expand: if <I>true</I> the height of the Rfield will grow to  be able to display all the text. Note that the width of the field never changes. Rfield creates new lines as needed to display all text.</LI>
+<LI>Compress: if <I>true</I> the height of the field will schrink as needed.</LI></UL>
+
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4> 
+<h2>Grids and frames</h2>
+</font><font face="Arial"><b><a name="grid"></a></b></font></B><FONT FACE="Arial"> 
+<P>You can very easily draw a frame around the page,an area, or all areas of the same type.</P>
+
+<P>The following example draws a frame around the report’s page:</P>
+</FONT><DIR><DIR>
+<FONT FACE="Arial">
+
+</font><FONT SIZE=2><P>rep.setPageFrameStyle(new RLineStyle(0.2f,java.awt.Color.black,RLineStyle.LINE_NORMAL));</P>
+</FONT></DIR>
+</DIR><FONT FACE="Arial">
+
+<P>The following example draws a frame around the report’s header:</P>
+</FONT><DIR><DIR>
+<FONT FACE="Arial">
+
+</font><FONT SIZE=2><P>PHDR_PurchaseOrder.setFrameType(RArea.FRAME_AREA);</P>
+<P>PHDR_PurchaseOrder.setFrameStyle(new RLineStyle(0.2f,java.awt.Color.black,RLineStyle.LINE_NORMAL));</P>
+</FONT></DIR>
+</DIR><FONT FACE="Arial">
+
+<P>The following example draws a frame around the report’s header</P>
+</FONT><DIR><DIR>
+<FONT FACE="Arial">
+
+</font><FONT SIZE=2><P>DETAIL_PurchaseOrder.setFrameType(RArea.FRAME_PAGE);</P>
+<P>DETAIL_PurchaseOrder.setFrameStyle(new RLineStyle(0.2f,java.awt.Color.black,RLineStyle.LINE_NORMAL));</P>
+</FONT></DIR>
+</DIR><P>
+
+<FONT FACE="Arial">Note that in this example only one frame for all the lines of the &quot;purchase order&quot; will be created. If we use </font><FONT SIZE=2>RArea.FRAME_AREA </FONT><FONT FACE="Arial">instead, a frame for each line is created.</font></P><FONT FACE="Arial">
+
+<P>If you want to print a table you may also want to print a grid to separate rows and columns inside this table.</P>
+</FONT><DIR><DIR>
+<FONT FACE="Arial">
+
+</font><FONT SIZE=2><P>DETAIL_PurchaseOrder.setGrid({8,10,12});</P>
+<P>DETAIL_PurchaseOrder.setHorizontalGrid(true);</P>
+<P>DETAIL_PurchaseOrder.setGridStyle(new RLineStyle(0.2f,java.awt.Color.black,RLineStyle.LINE_NORMAL));</P>
+</FONT></DIR>
+</DIR><FONT FACE="Arial">
+
+<P>This code will:</P>
+
+<UL>
+<LI>Draw a vertical line at columns 8,10,12 (in centimeters).</LI>
+<LI>Draw a horizontal line to separate rows.</LI></UL>
+
+
+<P>If you use the RJTable class to construct your report, you dont have to worry about this. Just call:</P>
+</FONT><DIR><DIR>
+<FONT FACE="Arial">
+
+</font><FONT SIZE=2><P>MyRJTable.SetHRDFrameStyle(new RLineStyle(0.2f,java.awt.Color.black,RLineStyle.LINE_NORMAL));</P>
+
+<P>MyRJTable.SetLINFrameStyle(new RLineStyle(0.2f,java.awt.Color.black,RLineStyle.LINE_NORMAL));</P>
+
+<P>MyRJTable.SetLINGridFrameStyle(new RLineStyle(0.2f,java.awt.Color.black,RLineStyle.LINE_NORMAL));</P>
+</FONT></DIR>
+</DIR>
+<FONT FACE="Arial"> 
+<P>To create frames and grid for the table.</P>
+<P>&nbsp;</P>
+</FONT>
+<p>&nbsp;</p> 
+<p><font face="Arial, Helvetica, sans-serif"><b><font face="Arial"><b><font color="#CC0066"><a name="sun"></a></font></b></font><font size="-1" color="#CC0066">Java 
+  and all Java-based marks are trademarks or registered trademarks of Sun Microsystems, 
+  Inc. in the U.S. and other countries</font></b></font></p>
+<p>&nbsp;</p>
+<p><FONT FACE="Arial"> </FONT></p>
+<FONT FACE="Arial"><P>&nbsp;</P>
+</FONT> 
+</BODY>
+</HTML>

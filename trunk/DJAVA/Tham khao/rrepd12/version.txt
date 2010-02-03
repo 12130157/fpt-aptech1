@@ -1,0 +1,79 @@
+RReport version 2.6
+
+---------------------------------------------------------
+
+History
+
+new to 1.3
+
+- new Sytem variable [Date] for constant fields and RReport.setDateFormat()/getDateFormat() methods.
+
+new 1.4
+
+- Bug fix: when closing RReport Visual Builder Window
+- Bug fix: can change font and color of RField and RCombo at runtime of each instance (in RAreaListener)
+- Bug fix: db user lost when clicking on "refresh button"
+- new feature: RField will support "\n" to create new lines
+- new feature: dateformat for [date] variable
+- able to print in Color. RPrintSetupJDK13
+- new properties of RReport (pageFrameVerticalMargin and pageFrameHorizontalMargin) in order to specify the margin used to draw the page's frame
+
+
+new 1.41
+
+- bug fixed: multiline fields did overwritten next field
+- big fixed: expanded areas because of multiline/expanded fields did not shrink back to original size.
+
+new 2.1
+
+- new preview Swing window.
+- java 2 printing API implemented.
+- "out of memory" preview limitation is solved.
+- default resolution is 72 dpi which is the same default printing resolution.
+- report can be exported to JPG, GIF or PNG
+
+new  2.2
+
+- RObject for printing charts
+- RObject for printing barcodes
+- new property "visible" for RObjects
+- tooltips for objects in the preview window
+- actions for objects when the user clicks on a robject in the preview window
+- multiline text fields supported in DHTML and PDF
+- new property in RPicture "Scale to fit"
+- new buttons for testing DHTML and PDF in Visual Builder
+- new class RReportJ2X that uses jdk 1.4 for printer selection
+
+new 2.3
+
+- areas can be printed in several columns for labels reports.
+- vertical text for printing and PDF (not for DHTML)
+- bug fixed. RReport can now read several tables from SQL Server
+- select groups of objects by dragging cursor
+- RReport Visual Builder will remember the most recently openned reports.
+- group of areas supported (group by property)
+- evaluation of expressions in RFields.
+
+new 2.4
+
+- aggregate function also available in page footer and report footers
+- new aggregate function (count)
+- multiline fields will not write beyond the end of the page, they will create a page break before the area is printed if needed. Rfields must still fit in one page.
+- rchart can now receive parameters from RReport
+- images in pdf files will not need so much space , they are now stored compressed
+
+new 2.5
+
+- export to PDF does now support [pages]
+
+new 2.6
+
+- XMLSource
+- ExportLayer interface
+- Export to text, csv and xml
+- Text mode printing
+
+
+
+
+
