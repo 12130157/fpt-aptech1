@@ -1,0 +1,9 @@
+C:\Users\Thiepnd\Desktop\rrepd12\version.txt
+0.0
+0
+D:\Backup project\PIS\
+D:\Backup project\PIS\ReportRegCaseHistory.rep
+D:\Backup project\PIS\ReportCasehistory.rep
+D:\Backup project\PIS\ReportPayBed.rep
+D:\Backup project\PIS\ReportService.rep
+D:\Backup project\PIS\ReportPatientDischarge.rep

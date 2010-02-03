@@ -1,0 +1,1069 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>RReport VB</TITLE>
+   <META NAME="Author" CONTENT="">
+   <META NAME="GENERATOR" CONTENT="Mozilla/3.04Gold (WinNT; I) [Netscape]">
+</HEAD>
+<BODY BACKGROUND="back.gif">
+
+<H1>RReport Visual Builder (com.java4less.rreportVB)</H1>
+<ul>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#introduction">Introduction</a></font></li>
+  <li> <font face="Arial, Helvetica, sans-serif"><a href="#requirements">Requirements</a></font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#distribution">Distribution 
+    of applications</a></font></li>
+  <li> <font face="Arial, Helvetica, sans-serif"><a href="#start">Starting the 
+    Visual Builder </a></font></li>
+  <li> <font face="Arial, Helvetica, sans-serif"><a href="#screen">Description 
+    of the screen</a> </font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#working">Working with 
+    objects</a></font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><a href="#objects">Description 
+    of the supported objects</a></font></li>
+  <li><a href="#exp"><font face="Arial, Helvetica, sans-serif">Evaluation of expressions</font></a></li>
+  <li> <font face="Arial, Helvetica, sans-serif"><a href="#database">Using a database 
+    </a></font></li>
+  <li><a href="#xml"><font face="Arial, Helvetica, sans-serif">Using a xml file 
+    as data source</font></a></li>
+  <li> <font face="Arial, Helvetica, sans-serif"><a href="#running">Running the 
+    report </a></font></li>
+  <li> <font face="Arial, Helvetica, sans-serif"><a href="#own">Creating your 
+    own RVObjects </a></font></li>
+  <li><a href="#examples"><font face="Arial, Helvetica, sans-serif">Examples</font></a></li>
+</ul>
+<H2>Introduction<font face="Arial, Helvetica, sans-serif" size="-1"><b><a name="introduction"></a></b></font></H2>
+
+<P><i><font face="Arial, Helvetica, sans-serif">RReport </font></i><font face="Arial, Helvetica, sans-serif"> 
+  will assist you in the task of creating reports for you <a href="#sun">Java 
+  [TM]</a> applications. This report can use JDBC to access a <b>database </b>and 
+  retrieve the data to be printed. However this is only one of the possibilities, 
+  you can also <b>programatically</b> print the report and set the values yourself, 
+  or print data from <b>XML file</b>, <b>array</b> or <b>JTable</b>.</font></P>
+<P><font face="Arial, Helvetica, sans-serif">The product is made of:</font></P>
+<ol>
+  <li><font face="Arial, Helvetica, sans-serif"><i>RReport Visual Builder</i>: 
+    this is the environment you will use to design the reports. The classes for 
+    this product are include in the package <i>com.java4less.rreportVB</i>.</font></li>
+  <li><font face="Arial, Helvetica, sans-serif"><i>RReport</i>: this is the runtime 
+    library you will use in your java application in order to print the report 
+    you have previously designed. The classes for this library are included in 
+    the package <i>com.java4less.rreport</i>.</font></li>
+</ol>
+<p><font face="Arial, Helvetica, sans-serif">Note: the present document covers 
+  RReport Visual Builder which uses the RReport library. It is assumed that the 
+  reader has some background about the RReport package. Please read also <a href="RReport_Help.html">RReport 
+  Documentation </a> .</font></p>
+<p>&nbsp;</p>
+<H2><font face="Arial, Helvetica, sans-serif" size="-1"><b><a name="requirements"></a></b></font>Requirements<font face="Arial, Helvetica, sans-serif" size="-1"></font></H2>
+
+<P><font face="Arial, Helvetica, sans-serif" color="#CC0033"><font color="#000000">RReport 
+  Visual Builder</font></font><font color="#000000"><font face="Arial, Helvetica, sans-serif"> 
+  requires Swing. </font></font><font face="Arial, Helvetica, sans-serif">The 
+  runtime version<b><font color="#000000"> </font></b><font color="#000000">(RReport) 
+  however does not require Swing.</font><font color="#000000"> If you are however 
+  developing a Swing application you can use a Swing preview Window (RReportJWindow).</font></font></P>
+<P><font face="Arial, Helvetica, sans-serif"><br>
+  Both, the builder and the runtime version will run with the Java Platform 1.1 
+  or newer.</font></P>
+<h2>&nbsp;</h2>
+<h2><font face="Arial, Helvetica, sans-serif" size="-1"><b><a name="distribution"></a></b></font>Distribution 
+  of applications</h2>
+<p><font face="Arial, Helvetica, sans-serif">In order to distribute your application 
+  that includes reports you must distribute the following package:</font></p>
+<ul>
+  <li><font face="Arial, Helvetica, sans-serif">com.java4less.rreport (in rreport.zip). 
+    The is the runtime library (RReport)</font></li>
+  <li><font face="Arial, Helvetica, sans-serif">com.java4less.images (in rreport.zip)</font></li>
+</ul>
+<p><font face="Arial, Helvetica, sans-serif">You DO NOT need to distribute:</font></p>
+<ul>
+  <li><font face="Arial, Helvetica, sans-serif">com.java4less.rreportVB (in rreportVB.zip). 
+    This is the Visual Builder. In fact the redistribution of this package is 
+    explicitely forbidden in the <a href="http://www.java4less.com/license_e.htm">License 
+    agreement</a>.</font></li>
+</ul>
+<p>&nbsp;</p>
+<h2><font face="Arial, Helvetica, sans-serif" size="-1"><b><a name="start"></a></b></font>Starting 
+  the Visual Builder<font face="Arial, Helvetica, sans-serif" size="-1"></font></h2>
+<P><font face="Arial, Helvetica, sans-serif">In order to run the Builder and start 
+  designing your reports you need to execute the following commands:</font></P>
+<ul>
+  <li><font face="Arial, Helvetica, sans-serif">Sun Java Machine: java -cp ".;swing.jar;rreport.zip;rreportVB.zip;rchart.jar;rbarcode.jar;iText.jar;xalan.jar;xml-apis.jar;xecesImpl.jar;rtextpr.jar" 
+    com.java4less.rreportVB.RVReport</font></li>
+  <li><font face="Arial, Helvetica, sans-serif">Microsoft Java Machine: jview 
+    /p /cp ".;swing.jar;rreport.zip;rreportVB.zip;rchart.jar;rbarcode.jar;iText.jar;xalan.jar;xml-apis.jar;xecesImpl.jar;rtextpr.jar" 
+    com.java4less.rreportVB.RVReport</font></li>
+</ul>
+<p><font face="Arial, Helvetica, sans-serif">or you can just run the batch file 
+  <i><b>runSUN.bat</b></i> respectively.</font></p>
+<p><font face="Arial, Helvetica, sans-serif">If Swing.jar is not available in 
+  your computer, you can download it from the following locations:</font></p>
+<ul>
+  <li> 
+    <p><font face="Arial, Helvetica, sans-serif"><a href="http://java.sun.com/products/jfc/">The 
+      Swing Connection.</a></font></p>
+  </li>
+</ul>
+<p><font face="Arial, Helvetica, sans-serif"><b>Note</b>: JDK 1.3 and later do 
+  not require any additional Swing file since it is included in the Java runtime.</font></p>
+<p>&nbsp;</p>
+<H2><font face="Arial, Helvetica, sans-serif" size="-1"><b><a name="screen"></a></b></font>Description 
+  of the screen<font face="Arial, Helvetica, sans-serif" size="-1"></font></H2>
+<P><font face="Arial, Helvetica, sans-serif">The screen of the builder is very 
+  simple, it has three main parts: </font></P>
+<UL>
+  <LI><font face="Arial, Helvetica, sans-serif">The menu.</font></LI>
+  <LI><font face="Arial, Helvetica, sans-serif">The areas.</font></LI>
+  <LI><font face="Arial, Helvetica, sans-serif">The properties window.</font></LI>
+  <H3>The menu</H3>
+  <P><font face="Arial, Helvetica, sans-serif">The menu allows the following operations:</font></P>
+  <UL>
+    <P> </P>
+    <LI><font face="Arial, Helvetica, sans-serif"><B>File-&gt;New</B>: creates 
+      a new empty report.</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>File-&gt;Load</b>:&nbsp;loads 
+      a previously saved report template . The file must have the extension <I>.rep</I>. 
+      (See <a href="#examples">Examples</a>).</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>File-&gt;Save</b>: saves 
+      the report template in the current file.</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>File-&gt;Save as</b> : saves 
+      the report template into a file. The file must have the extension <i>.rep</i>.</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>File-&gt;Properties</b>: 
+      Displays the properties of the report in the properties window.</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><B>Object-&gt;copy</B>:&nbsp;copy 
+      the selected objects in the current area. </font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Object-&gt;cut</b>:&nbsp;&nbsp;cut 
+      the selected objects in the current area. </font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Object-&gt;paste</b>:&nbsp;&nbsp;paste 
+      the previously copied objects in the current area. </font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Object-&gt;bring to front.</b>&nbsp;&nbsp;objects 
+      in the front will be printed after objects in the back. If your RField object 
+      contains an expression to be evaluated we recommend you to bring it to the 
+      front, so that it is evaluated after all other fields have been assigned 
+      a value.</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Object-&gt;send to back</b>:&nbsp;&nbsp;objects 
+      in the back will be printed before objects in the front.</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Object-&gt;align</b>:&nbsp;&nbsp;align 
+      all selected objects (select several object by pressing &lt;shift&gt; and 
+      clicking on the objects).</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Object-&gt;resize</b>:&nbsp;&nbsp;resize 
+      all selected objects (select several object by pressing &lt;shift&gt; and 
+      clicking on the objects).</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Areas-&gt;insert: </b>add 
+      a new area before the current one.</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Areas-&gt;delete: </b>delete 
+      the current area.</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Areas-&gt;background: </b> 
+      shows or hides the background area.</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Areas-&gt;</b></font> <font face="Arial, Helvetica, sans-serif"><b>insert 
+      group: </b> insert a group of areas made of header, detail and footer. You 
+      should set the &quot;group by&quot; property of the detail area.</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Header, Footer: </b>shows 
+      or hides the corresponding header/footer area.</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Administration -&gt; Settings 
+      -&gt; Browser:</b> sets browser executable used to view help files. For 
+      example: &quot;C:\Programs\Plus!\Microsoft Internet\Iexplore.exe&quot;</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Administration -&gt; Settings 
+      -&gt; Grid: </b>enables the display of the grid and the alignment. The grid 
+      will be displayed also if you select text mode in the report's properties 
+      window.</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Administration -&gt; Printing 
+      API: </b>selects printing api version. The version 1 uses the java.awt.PrintJob 
+      class. The version 2 uses the java.awt.PrinterJob class and is only available 
+      forJDK 1.2 or later (this is the same as using a RReportJ2 object in yourjava 
+      code).</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Administration -&gt; Preview 
+      window: </b>selects preview window version (AWT or Swing).</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><B>Help-&gt; about:</B>&nbsp;displays 
+      program information.</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Help-&gt; Visual Builder:</b>&nbsp;displays 
+      this file.</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Help-&gt; RReport:</b>&nbsp;displays 
+      RReport's user manual.</font></LI>
+    <LI><font face="Arial, Helvetica, sans-serif"><b>Help-&gt; Javadoc:</b>&nbsp;displays 
+      java documentation of the com.java4less.rreport package.</font></LI>
+  </UL>
+  <p>&nbsp;</p>
+</UL>
+<p><font face="Arial, Helvetica, sans-serif">Futhermore the toolbar will allow 
+  you to perform this operations (buttons from left to right): </font> </p>
+<UL>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif">create a new report</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">open a report</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">preview the report and print 
+      it with default values (if not using a database connection)</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">save the report</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">preview report.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">print reports without preview</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">export report to PDF and view 
+      it in Internet Explorer.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">export report to DHTML and view 
+      it in Internet Explorer.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">export report to XML and view 
+      it in Internet Explorer.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">export report to CSV and view 
+      it in Internet Explorer.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">export report to TEXT and view 
+      it in Internet Explorer.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">select the current object. This 
+      will be the object you insert in report when you click on an area.</font></li>
+  </ul>
+</UL>
+
+<CENTER>
+  <P>&nbsp;</P>
+  <P> <img src="RReportVB2.png" width="798" height="600"></P>
+</CENTER>
+
+<CENTER><P><FONT SIZE=-1>screenshot 1</FONT></P></CENTER>
+
+<UL>
+  <H3>The areas</H3>
+  <p><font face="Arial, Helvetica, sans-serif">The report is divided into areas. 
+    An area is a section in a report that contains objects that will always be 
+    printed together. There are several types of areas:</font></p>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif">report header and footer.Printer 
+      once per report.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">page header and footer. Printer 
+      on each page.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">report background. Printed as 
+      background on each page.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">detail areas. Printed programatically 
+      by your program or using a <a href="javadoc/com/java4less/rreport/RSource.html">RSource</a> 
+      object. RReport Visual Builder always displays or prints at least one repetition 
+      of each area. You program however must make sure areas a printer either 
+      <a href="RReport_Help.html#nested">linking the areas</a> to a header area 
+      or by programatically printing the area. For testing purposes you can use 
+      the &quot;test repetitions&quot; property of the area. If you set it to 
+      for example 5 and click on the preview button, you will see how the reports 
+      looks with 5 detail areas.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">group detail areas: these areas 
+      require a RSource (normally a RJDBCSource). They have an associated &quot;group 
+      by&quot; property and a group header/footer. You should use a group of areas 
+      when you need to print a header and footer each time the value of a given 
+      field or fields change.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">group header areas: These areas 
+      are printed automatically when the values of the &quot;group by&quot; change.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">group footer areas: : These 
+      areas are printed automatically when the values of the &quot;group by&quot; 
+      change.</font></li>
+  </ul>
+  <blockquote> 
+    <p>&nbsp;</p>
+  </blockquote>
+</UL>
+<blockquote> 
+  <p><font face="Arial, Helvetica, sans-serif">By clicking on the name of the 
+    Area its properties will be displayed in the properties window. </font></p>
+  <p>&nbsp; </p>
+  <h3>The properties window</h3>
+  <p><font face="Arial, Helvetica, sans-serif">The properties window will display 
+    the properties of the selected object, area or report. Click on <i>refresh</i> 
+    if you want to see the result of the modified properties.</font></p>
+  <p>&nbsp;</p>
+  <h2>Working with objects<font face="Arial, Helvetica, sans-serif" size="-1"><b><a name="working"></a></b></font></h2>
+  <h4><font face="Arial, Helvetica, sans-serif">Adding a new object</font></h4>
+  <blockquote> 
+    <p><font face="Arial, Helvetica, sans-serif">In order to add a new object 
+      you must select the appropiate object in the toolbar and click on the area 
+      you want to add the object. Select the first button in the tool bar (the 
+      one with the pointer) in order the deactivate the current selection.</font></p>
+  </blockquote>
+  <h4><font face="Arial, Helvetica, sans-serif">Selecting one or more objects</font></h4>
+  <blockquote> 
+    <p><font face="Arial, Helvetica, sans-serif">Click on the objects in order 
+      to select them. Selected objects show four black squares on the corners. 
+      In order to select more than 1 object you must press the SHIFT key and click 
+      on the objects.</font></p>
+  </blockquote>
+  <h4><font face="Arial, Helvetica, sans-serif">Deleting objects</font></h4>
+  <blockquote> 
+    <p><font face="Arial, Helvetica, sans-serif">Use the CTRL-X or DEL in order 
+      to delete selected objects</font></p>
+  </blockquote>
+  <h4><font face="Arial, Helvetica, sans-serif">Moving objects</font></h4>
+  <blockquote> 
+    <p><font face="Arial, Helvetica, sans-serif">Move selected objects by dragging 
+      and dropping them.</font></p>
+  </blockquote>
+  <h4><font face="Arial, Helvetica, sans-serif">Resizing objects</font></h4>
+  <blockquote> 
+    <p><font face="Arial, Helvetica, sans-serif">Move the cursor to the right 
+      or the bottom border of the objects in order to resize them. The cursor 
+      will the will change and you can drap the border of the object.</font></p>
+  </blockquote>
+  <h4></h4>
+  <h4><font face="Arial, Helvetica, sans-serif">Copying objects</font></h4>
+  <blockquote> 
+    <p><font face="Arial, Helvetica, sans-serif">Copy selected object with CRTL-C 
+      and paste themin the curret area with CRTL-V. You can also use the menu 
+      items in the <i>Objects</i> menu or in the popup menu.</font></p>
+  </blockquote>
+  <h4><font face="Arial, Helvetica, sans-serif">Aligning objects</font></h4>
+  <blockquote> 
+    <p><font face="Arial, Helvetica, sans-serif">Select the objects you want to 
+      align and click on the right button of the mouse. Select then the alignment 
+      type from the popup menu.</font></p>
+  </blockquote>
+  <h4><font face="Arial, Helvetica, sans-serif">Bringing object to the front or 
+    to the back</font></h4>
+  <blockquote> 
+    <p><font face="Arial, Helvetica, sans-serif">you can determine the order in 
+      which objects are printed by bringing them to the front or the back. Select 
+      the objects you want to move and click on the right button of the mouse. 
+      Select then the action (<i>bring to front</i> or <i>send to back)</i> from 
+      the popup menu.</font></p>
+  </blockquote>
+  <p>&nbsp;</p>
+  <h2>Description of the supported objects<font face="Arial, Helvetica, sans-serif" size="-1"><b><a name="objects"></a></b></font></h2>
+  <h3>Report</h3>
+  <p><font face="Arial, Helvetica, sans-serif">Select File-&gt; Properties to 
+    set the properties of the report. The properties are:</font></p>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif">Background: background color.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">DB Active: when you select YES, 
+      the database will be opened. Make sure you enter the database information 
+      first (user, url, password and driver).</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">DB Driver: (optional) jdbc driver. 
+      if empty the ODBC bridge will be used.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">DB Password. (optional) </font></li>
+    <li><font face="Arial, Helvetica, sans-serif">DB Url: if you use the ODBC-Bridge 
+      you must enter the name of your ODBC entry. If you use another driver you 
+      must read the user manual of the driver.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">DB User. (optional) </font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Frame: if true, the report will 
+      have a frame around the page.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Frame color.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Frame Style.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Frame Width.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Margins: in centimeters.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Orientation. You can set here 
+      that the report should be printed in landscape (horizontal) format. Note 
+      that the user will still need to select the page orientation from the print 
+      dialog, specially if you use jdk 1.1. See <a href="javadoc/com/java4less/rreport/RPrintSetupJDK13.html">RPrintSetupJDK13</a> 
+      if you use jdk 1.2 or jdk 1.3.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Name: name of the report</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">PDF File: file name for pdf 
+      output. <a href="RReport_Help.html#PDF">Click here</a> to learn how to install 
+      the PDF features.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Text Mode: You can use this 
+      field to enable text mode printing. <a href="http://www.java4less.com/textprinter/index.html">Click 
+      here</a> to learn mode about text mode printing.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Text Mode columns: number of 
+      columns in text mode printing.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Text Mode rows: number of lines 
+      in text mode printing.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Text printer: use <b>PRN:</b> 
+      for a local windows printer or the printer name (//server/printename) for 
+      a network printer. If you use Linux you can use /dev/lpr or any other printer 
+      file. </font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Text Printer type: select the 
+      command set supported by your printer.<br>
+      </font></li>
+  </ul>
+  <h3>Area</h3>
+  <p><font face="Arial, Helvetica, sans-serif">Click on the area's name to set 
+    the properties of the area:</font></p>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif">Background: background color.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Columns (default is 1). Set 
+      this value to greater than 1 if you want RReport to print the area in several 
+      columns. </font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Name: name of the area</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Frame: if you select AREA there 
+      will be a border for each repetition of the area, if PAGE there will be 
+      only one border for all areas in the page.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Frame color.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Frame Style.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Frame Width.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Grid: list of positions (CM) 
+      of the columns (vertical lines). This is used to draw a grid in the area. 
+      After each repetition a horizontal Line will be draw.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Grid</font><font face="Arial, Helvetica, sans-serif"> 
+      color.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Grid</font><font face="Arial, Helvetica, sans-serif"> 
+      Style.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Grid</font><font face="Arial, Helvetica, sans-serif"> 
+      Width.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Group by. List of fields of 
+      the data source (normally a database) you want to group by. The fields must 
+      be separated by |. This property is only available in the detail section 
+      of the areas groups. Your data source must provide the data grouped and 
+      sorted (if you use a database you can use the GROUP BY and the ORDER BY 
+      sql statements). RReport will print the group header and footer for each 
+      new value of the &quot;group by&quot; field/s but it will not reorganize 
+      or sort the data in any way.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Header Area: </font><font face="Arial"> 
+      If the current repetition of the area cannot be printed in the current page, 
+      a new page is created. The header area will be printed in the new page before 
+      the current area.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">DB Link from: list of fields 
+      for the link (separated by &quot;|&quot; ) in the super area. This is used 
+      to make a link between two areas/tables in order to have a nested area. 
+      Only needed this area is nested in a superarea.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">DB Link To: list of fields for 
+      the link (separated by &quot;|&quot; ) in this area. This is used to make 
+      a link between two areas/tables in order to have a nested area.Only needed 
+      this area is nested in a superarea.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">DB Super Area: super area. The 
+      current area will be printed for every repetition of the super-area. The 
+      correct registers from tha table will be read using the &quot;link from&quot; 
+      and &quot;link to&quot; fields.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">DB list Tables: list of available 
+      tables in the database. The property &quot;DB Sel Table&quot; will be updated 
+      automatically when you select a table from the list.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">DB sel Table: name of the table 
+      in the database used as RJDBCSource for the area. It can also be a SQL select 
+      statement. The <b>SQL statement may contain parameters</b> like for example: 
+      &quot;select * from Table where ID=[%param1]&quot;. RReport Visual Builder 
+      will ask for the parameter when you run the report. In this case don't forget 
+      to use RJDBCSource.setParameter() when you run the report from your java 
+      application.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Export: you can use this field 
+      to keep this area from beeing exported in xml or csv mode.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Test Repetitions: (only for 
+      testing purposes) number of repetitions of the areas you want to create 
+      when printing or previewing from RReport Visual Builder.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Xml File: If you want to use 
+      a xml file as data source, enter the name here. If the area is linked to 
+      a super area using the &quot;DB Super area&quot; field, you can leave this 
+      field empty. In this case the same xml file used for the super area will 
+      be used as data source for the sub area.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Xml Node: (if using a xml file 
+      as data source) This is the XPath to the Node in the xml file. RReport will 
+      create a repetition of the area for each node in the xml file. If the area 
+      is linked to a super area, the Xpath must be relative to the xpath entered 
+      in the super area.</font></li>
+  </ul>
+  <p>&nbsp;</p>
+</blockquote>
+<ul>
+  <blockquote> 
+    <p><font face="Arial, Helvetica, sans-serif">Note: if you use parameters in 
+      the SQL statement, the &quot;DB List Fields&quot; in the RVObjects will 
+      not be filled. For this reason you should first enter a sql statement or 
+      table name. This will load the list of fields &quot;DB List Fields&quot;, 
+      then you can add the parameters. </font></p>
+    <p>&nbsp;</p>
+  </blockquote>
+</ul>
+<blockquote> 
+  <h3>RVObject</h3>
+  <p><font face="Arial, Helvetica, sans-serif">This object corresponds to the 
+    RObject object used in RReport. Itsproperties are common for all the object 
+    used in report. The properties are:</font></p>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif">X and Y: position in the report 
+      (CM).</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">widht and Height: size of the 
+      object.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Constant: if true the object 
+      is supposed not to modify its content during report printing. For example, 
+      in the case of database access, this object would not be read from the table.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Name: name of the object.</font></li>
+  </ul>
+  <p>&nbsp;</p>
+  <h3>RVField</h3>
+  <p><font face="Arial, Helvetica, sans-serif">This object corresponds to the 
+    <a href="javadoc/com/java4less/rreport/RField.html">RField</a> object used 
+    in RReport. It is used to print texts and its properties are:</font></p>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif">Align: text alignment.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Compress: see <a href="javadoc/com/java4less/rreport/RField.html">text 
+      wrapping</a>.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">DB List Fields: list of field 
+      in the table. When you select on the property &quot;DB sel Field&quot; will 
+      be updates.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">DB sel Field: you can enter 
+      here the name of the field in a database used as data source for this object. 
+      </font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Expand. see <a href="javadoc/com/java4less/rreport/RField.html">text 
+      wrapping</a>.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Evaluate: set it to &quot;No&quot; 
+      if you want to disable the evaluation of expressions (Values starting with 
+      = are assumed to be expressions, for example =3+5 will print 8).</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Font: font of the text.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Font Color: color of the font 
+      of the text.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Format: </font><font face="Arial">Format 
+      string used for dates and numbers.Examples: <b>&quot;</b>dd/MM/yyyy&quot; 
+      for a date or &quot;#####.00&quot; for a number. Dates a formatted using 
+      the java.text. SimpleDateFormat and numbers using the java.text.DecimalFormat.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Multiline: </font><font face="Arial">if 
+      true the words the text will be printed in several lines if needed.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Value: default value.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">XPath: (if using a xml file 
+      as data source) xpath to the data source for this field. The path must be 
+      relative to the XPath of the node in the area's properties.</font></li>
+  </ul>
+  <p>&nbsp;</p>
+  <h3>RVCheck</h3>
+  <p><font face="Arial, Helvetica, sans-serif">This object corresponds to the 
+    <a href="javadoc/com/java4less/rreport/RCheck.html">RCheck</a> object used 
+    in RReport. It is used to boolean values and its properties are:</font></p>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif">DB List Fields: list of field 
+      in the table. When you select on the property &quot;DB sel Field&quot; will 
+      be updates.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">DB sel Field: you can enter 
+      here the name of the field in a database used as data source for this object. 
+      You must select a field of type &quot;boolean&quot;.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Value: default value.</font></li>
+  </ul>
+  <h3>RVCombo</h3>
+  <p><font face="Arial, Helvetica, sans-serif">This object corresponds to the 
+    <a href="javadoc/com/java4less/rreport/RCombo.html">RCombo</a> object used 
+    in RReport. It is used to display values based on the value of a key, its 
+    properties are:</font></p>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif">Align: text alignment.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">DB List Fields: list of field 
+      in the table. When you select on the property &quot;DB sel Field&quot; will 
+      be updates.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">DB sel Field: you can enter 
+      here the name of the field in a database used as data source for this object. 
+      </font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Font: font of the text.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Font Color: color of the font 
+      of the text.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Key: font of the key.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Key Color: color of the font 
+      of the key</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Key List: list of key separated 
+      by &quot;|&quot; .</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Print Key: if true the key and 
+      the value will be printed.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Format: Format string used for 
+      dates and numbers.Examples: <b>&quot;</b>dd/MM/yyyy&quot; for a date or 
+      &quot;#####.00&quot; for a number. Dates a formatted using the java.text. 
+      SimpleDateFormat and numbers using the java.text.DecimalFormat.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Multiline: if true the words 
+      the text will be printed in several lines if needed.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Value: default value.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Values List: list of values 
+      separated by &quot;|&quot;.</font></li>
+  </ul>
+  <p><font face="Arial, Helvetica, sans-serif">RCombo support also a list of images 
+    aqs values to be printed but RVCombo only support a list of strings. If you 
+    want to specify a list of images you should do it programatically when you 
+    run your report. For example:</font></p>
+  <blockquote> 
+    <p><font size="-1">report.importFile(filename);<br>
+      RCombo combo=(RCombo) report.getAreaByName(areaname).getItemByName(comboname);<br>
+      combo.Values=listOfImages;</font><font face="Arial, Helvetica, sans-serif"> 
+      </font></p>
+  </blockquote>
+  <p> <font face="Arial, Helvetica, sans-serif"><a href="#running">See Running 
+    the report </a></font></p>
+  <p>&nbsp;</p>
+  <h3>RVPicture</h3>
+  <p><font face="Arial, Helvetica, sans-serif">This object corresponds to the 
+    <a href="javadoc/com/java4less/rreport/RPicture.html">RPicture</a> object 
+    used in RReport and is used to print images. Its properties are:</font></p>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif">Image: the image file (gif) 
+      must be located at <i>com.java4less.images</i>.</font></li>
+  </ul>
+  <p>&nbsp;</p>
+  <h3>RVLine</h3>
+  <p><font face="Arial, Helvetica, sans-serif">This object corresponds to the 
+    <a href="javadoc/com/java4less/rreport/RLine.html">RLine</a> object used in 
+    RReport. Its properties are:</font></p>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif">Direction: select HORIZONTAL 
+      to draw a horizontal line, VERTICAL to draw a vertical line, USER_DEFINED1 
+      to draw a line from top left corner to the bottom right corner and USER_DEFINED2 
+      to draw a line from bottom left corner to the top right corner.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Line Width.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Style.</font></li>
+  </ul>
+  <p>&nbsp;</p>
+  <h3>RVPageBreak</h3>
+  <blockquote> 
+    <p><font face="Arial, Helvetica, sans-serif">The <a href="javadoc/com/java4less/rreport/RPageBreak.html">RPageBreak</a> 
+      will force that a page break after the area is printed.</font></p>
+    <p>&nbsp;</p>
+  </blockquote>
+  <h3>RVRectangle</h3>
+  <p><font face="Arial, Helvetica, sans-serif">This object corresponds to the 
+    <a href="javadoc/com/java4less/rreport/RRectangle.html">RRectangle</a> object 
+    used in RReport. Its properties are:</font></p>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif">Fill: if false the rectangle 
+      will be transparent. Make sure you send the rectangle to the background 
+      if you select fill=true.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Fill Color.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Style: line style for the border.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Line width: width of the border.</font></li>
+  </ul>
+  <h3>&nbsp;</h3>
+  <h3>RVUserObject</h3>
+  <p><font face="Arial, Helvetica, sans-serif">This object corresponds to the 
+    RUserObject used in RReport. It is used for printing your own RObject.</font></p>
+  <ul>
+    <li> 
+      <p><font face="Arial, Helvetica, sans-serif">Class name: the name of your 
+        own RObject subclass. The class must be in the com.java4less.rreport package.</font></p>
+    </li>
+  </ul>
+  <p>&nbsp;</p>
+  <h3>RVBarcode</h3>
+  <p><font face="Arial, Helvetica, sans-serif">This object will insert a barcode 
+    in your report. Note that a separater license of <a href="http://www.java4less.com/barcodes_e.htm">RBarcode</a> 
+    is required if you want to print barcodes. RReport includes a evaluation version 
+    of RBarcode.</font></p>
+  <p><font face="Arial, Helvetica, sans-serif">The parameters of the barcode are 
+    explained in <a href="http://www.java4less.com/barCodeHelp.htm">RBarcode's 
+    documentation</a>. </font></p>
+  <p>&nbsp; </p>
+  <h3>RVGraph</h3>
+  <p><font face="Arial, Helvetica, sans-serif">This object will insert a chart 
+    in your report. Note that a separate license of <a href="http://www.java4less.com/charts_e.htm">RChart</a> 
+    is required if you want to create charts. RReport includes a evaluation version 
+    of RChart.</font></p>
+  <p><font face="Arial, Helvetica, sans-serif">This object only requires 1 parameter, 
+    the &quot;Data File&quot; that contains the chart parameters. This file is 
+    created using RChart Visual Builder.</font></p>
+  <p>&nbsp;</p>
+  <h3>RVUserComponent</h3>
+  <p><font face="Arial, Helvetica, sans-serif">This object is used to include 
+    a JComponent in your reports. When you insert a RVUserComponent in your report, 
+    a JLabel is displayed. In order to display your own JComponent (for example 
+    JEditorPane) you must set the rusercomponent.setruntimeValue(), for example:</font></p>
+  <blockquote> 
+    <p> <font face="Arial, Helvetica, sans-serif" size="-1">JTextField component=new 
+      JTextField(&quot;Test&quot;); // create own JComponent<br>
+      </font><font face="Arial, Helvetica, sans-serif" size="-1">// set JComponent 
+      in RUserComponent <br>
+      </font><font face="Arial, Helvetica, sans-serif" size="-1">((RUserComponent) 
+      report.getAreaByName(&quot;areaname&quot;).getItemByName(&quot;RUserComponent1&quot;)).setruntimeValue(component);</font></p>
+  </blockquote>
+  <p><font face="Arial, Helvetica, sans-serif">Note that the component must fit 
+    in one page (ie, you can print a large component like JEditorPane but you 
+    must make sure it will not exceeds the limit of the current page).</font></p>
+  <p><font face="Arial, Helvetica, sans-serif" size="-1"><b><a name="exp"></a></b></font></p>
+  <h2>Evaluation of expressions<font face="Arial, Helvetica, sans-serif" size="-1"></font></h2>
+  <p><font face="Arial, Helvetica, sans-serif">RReport can also evaluate expressions 
+    you enter in the &quot;value&quot; property of the RVField objects. Any value 
+    starting with &quot;=&quot; is assumed to be an expression to be evaluated 
+    unless you set the &quot;evaluate&quot; property of the RVField to &quot;No&quot;.</font></p>
+  <p><font face="Arial, Helvetica, sans-serif">Examples of expressions are:</font></p>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif"><b>=5+1+1</b> will be printed 
+      as 7</font></li>
+    <li><b><font face="Arial, Helvetica, sans-serif">=((5+1)*2)</font></b><font face="Arial, Helvetica, sans-serif"> 
+      will be printed as 12</font></li>
+    <li><b><font face="Arial, Helvetica, sans-serif">=[areaname.fieldname] * 2</font></b><font face="Arial, Helvetica, sans-serif"> 
+      will print the value of the referenced field of the referenced area multiplied 
+      by 2.</font></li>
+    <li><b><font face="Arial, Helvetica, sans-serif">=[fieldname] * 2</font></b><font face="Arial, Helvetica, sans-serif"> 
+      will print the value of the referenced field (of the current area) multiplied 
+      by 2.</font></li>
+    <li><b><font face="Arial, Helvetica, sans-serif">=sum(&quot;total&quot;)</font></b><font face="Arial, Helvetica, sans-serif"> 
+      will sum the values of the &quot;total&quot; field in a group. Note that 
+      this function and other (avg, min, max) can only be applied to groups and 
+      therefore can only be used in the group footer.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif"><b>=(trim(&quot; hell &quot;) 
+      &amp; &quot;o&quot;)</b> will print &quot;hello&quot;.</font></li>
+  </ul>
+  <p><font face="Arial, Helvetica, sans-serif">Supported operators are: <b>+</b> 
+    , <b>-</b> , <b>/ </b>, <b>\</b> (integer division), <b>^</b> (power), <b>*</b>, 
+    <b>%</b> (modulo) and <b>&amp;</b> (concatenation of strings).</font></p>
+  <p><font face="Arial, Helvetica, sans-serif">Supported functions are:</font></p>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif">round(double): round decimal 
+      value.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">trunc(double): truncate decimal 
+      value.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">mid(string,init,length). Extract 
+      substring. </font></li>
+    <li><font face="Arial, Helvetica, sans-serif">left(string,len): Extract substring 
+      starting at possition 0.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">right(string,len): Extract substring 
+      starting from the end of the string.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">trim(string): remove leading 
+      and trailing blanks.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">rtrim(string): remove trailing 
+      blanks.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">ltrim(string): remove leading 
+      blanks.</font></li>
+  </ul>
+  <p><font face="Arial, Helvetica, sans-serif">Supported functions for group footers 
+    are:</font></p>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif">sum(&quot;fieldname&quot;)</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">avg(&quot;fieldname&quot;)</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">min(&quot;fieldname&quot;)</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">max(&quot;fieldname&quot;)</font></li>
+  </ul>
+  <p><font face="Arial, Helvetica, sans-serif">You can implement your own functions 
+    using the IUserFunctions interface and setting the Evaluator.userFunctions 
+    property. For example, the following code would implement the &quot;charAt&quot; 
+    function that extracts a given character froma string.</font></p>
+  <p>&nbsp;</p>
+  <blockquote> 
+    <blockquote> 
+      <p>class myFunctions implement IUserFunctions {</p>
+      <blockquote> 
+        <p> public Object executeFunction(String functionName,Object[] parameters) 
+          {</p>
+        <p>// implement charAt function which have 2 parameters: String and possition 
+          of the char to return<br>
+          if (functionName.compareTo(&quot;charAt&quot;)==0) <br>
+          if (parameters.length==2) {</p>
+        <blockquote> 
+          <blockquote> 
+            <blockquote> 
+              <p>String s=parameters[0].toString();<br>
+                String positionStr=parameters[1].toString();<br>
+                int position=Integer.parseInt(positionStr);</p>
+              <p> if (s.length()&gt;position) return &quot;&quot;+s[position];<br>
+                } </p>
+            </blockquote>
+          </blockquote>
+          <p>return new String(&quot;&quot;);</p>
+        </blockquote>
+        <p>}</p>
+      </blockquote>
+      <p>}</p>
+    </blockquote>
+  </blockquote>
+  <p><font face="Arial, Helvetica, sans-serif">Note that user defined functions 
+    are only executed within your java application. When testing the report inside 
+    RReport Visual Builder, user defined functions will be ignored.</font></p>
+  <p>&nbsp;</p>
+  <h2>Using a database<font face="Arial, Helvetica, sans-serif" size="-1"><b><a name="database"></a></b></font></h2>
+  <p><font face="Arial, Helvetica, sans-serif">In order to retrieve data from 
+    a database you must:</font></p>
+  <ol>
+    <li><font face="Arial, Helvetica, sans-serif">Enter the connection data in 
+      the Report's Properties</font></li>
+    <ol>
+      <li><font face="Arial, Helvetica, sans-serif">Database URL: if you use a 
+        ODBC connection just enter the DSN here (see your ODBC administrator). 
+        If you use a JDBC native driver you should read the documentation on the 
+        driver to know the format of the url.</font></li>
+      <li><font face="Arial, Helvetica, sans-serif">Database user. If needed.</font></li>
+      <li><font face="Arial, Helvetica, sans-serif">Database password.If needed.</font></li>
+      <li><font face="Arial, Helvetica, sans-serif">Activate the database connection. 
+        Select <i>YES</i> in the <i>DB Active</i> combo box.</font></li>
+    </ol>
+    <li><font face="Arial, Helvetica, sans-serif">Enter the table name or the 
+      SQL query in the Area's Properties (see <i>DB Sel Table</i> property). Each 
+      area will retrieve data from a table in the database. You can also have 
+      nested areas. In this case you must select a &quot;linked Area&quot; (super 
+      area) and enter the &quot;link from&quot; (fields in the supertable) and 
+      &quot;link to&quot; (fields on the subtable) information<b> in the nested 
+      area (subarea)</b>. The &quot;link from&quot; and &quot;link to&quot; are 
+      list of fields separated by &quot;|&quot; that build the foreign key relationship 
+      between tables/areas.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Enter the field name in the 
+      Object's properties. The following object support database access: RField, 
+      RCheck and RCombo.</font></li>
+  </ol>
+  <p>&nbsp;</p>
+  <h2>Using a xml file as data source<font face="Arial, Helvetica, sans-serif" size="-1"><b><a name="xml"></a></b></font></h2>
+  <p><font face="Arial, Helvetica, sans-serif">In order to retrieve data from 
+    a xml you must:</font></p>
+  <ol>
+    <li><font face="Arial, Helvetica, sans-serif">Enter the file name in the &quot;XML 
+      File&quot; property of the area. All subareas of this area will use the 
+      same data file as source</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Enter the Xpath to the node 
+      in &quot;XML Node&quot; property of the area. The path must be relative 
+      to the XPath of the superarea's node, or to the root node if the area does 
+      not have a superarea.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Enter the XPath in the &quot;XPath&quot; 
+      property of your report's fields. This path must be relative to the XPath 
+      of the area's node.</font></li>
+  </ol>
+  <p><font face="Arial, Helvetica, sans-serif">See example in directory <i>examples/XMLSource/xmlorder.rep</i></font></p>
+  <p><font face="Arial, Helvetica, sans-serif"><b>Note</b>: this feature requires 
+    you to copy xalan.jar, xml-apis.jar and xecesImpl.jar to the RReport's directory. 
+    These files are part of the <a href="http://xml.apache.org/xalan-j/index.html">Apache 
+    Xalan package.</a></font></p>
+  <p>&nbsp;</p>
+  <h2>Running the report<font face="Arial, Helvetica, sans-serif" size="-1"><b><a name="running"></a></b></font></h2>
+  <p>&nbsp;</p>
+  <p><font face="Arial, Helvetica, sans-serif">The following code will run the 
+    report <a href="#examples">DBorder.rep</a>:</font></p>
+  <blockquote> 
+    <blockquote> 
+      <p><font size="-1">import java.awt.*; <br>
+        import com.java4less.rreport.*; <br>
+        public class exampleDBOrder extends Frame implements RAreaListener { <br>
+        int total=0; <br>
+        public static void main(String[] args) { <br>
+        exampleDBOrder f=new exampleDBOrder();<br>
+        f.setVisible(true); <br>
+        f.init(); <br>
+        } </font></p>
+      <p><font size="-1">public void init() <br>
+        {<font color="#CC0033"> // load report from file, this will also open 
+        the database connection to the ODBC Datase Source RReport</font><br>
+        RReportImp report=new RReportImp(this); <br>
+        <br>
+        <font color="#CC0033"> // if you use jdk 1.2 or later you can use the 
+        Java 2 printing api:</font> <br>
+        // RReportJ2 report=new RReportJ2(this); <br>
+        <br>
+        <br>
+        if (!report.importReport("DBorder.rep")) System.exit(0);</font></p>
+      <p><font size="-1"> <font color="#CC0033">// set the images for the combo 
+        box. This can only be done programatically </font><br>
+        java.awt.Image[] comboImages=new Image[3]; <br>
+        comboImages[0]=new RImageFile("ball1.gif").getImage();<br>
+        comboImages[1]=new RImageFile("ball2.gif").getImage(); <br>
+        comboImages[2]=new RImageFile("ball3.gif").getImage(); <br>
+        ((RCombo) report.getAreaByName("Detail").getItemByName("Priority")).Values=comboImages; 
+        </font></p>
+      <p><font size="-1" color="#CC0033">// set listener to calculate amounts 
+        on the fly </font><font size="-1"><br>
+        report.getAreaByName("Detail").setListener(this); <br>
+        report.getReportFooter().setListener(this); </font></p>
+      <p><font size="-1" color="#CC0033">// create preview window </font><font size="-1"><br>
+        RReportWindow Win= new RReportWindow(report,this); <br>
+        <br>
+        </font><font size="-1" color="#CC0033">// you can also use the SWING preview 
+        window</font><font size="-1"><br>
+        //RReportJWindow Win= new RReportJWindow(report,this); <br>
+        <br>
+        <font color="#CC0033">// this will print the Header Area and all dependent 
+        areas </font><br>
+        report.prepare(); <br>
+        report.endReport(); <br>
+        Win.show(); <br>
+        System.exit(0); <br>
+        } </font></p>
+      <p><font size="-1" color="#CC0033">// Area Listener. This will be triggered 
+        for each repetition of detail and page footer</font><font size="-1"><br>
+        public void beforePrintingArea(RArea area) { <br>
+        <font color="#CC0033">// calculate the amount of each line </font><br>
+        if (area.getName().compareTo("Detail")==0) { <br>
+        double price=((Double) area.getItemByName("Price").getruntimeValue()).doubleValue(); 
+        <br>
+        int quantity=((Integer) area.getItemByName("Quantity").getruntimeValue()).intValue(); 
+        <br>
+        total=(int) (total+(quantity*price)); <br>
+        area.getItemByName("Amount").setruntimeValue(new Integer((int) (quantity*price))); 
+        <br>
+        } </font></p>
+      <p><font size="-1" color="#CC0033">// set total amount</font><font size="-1"><br>
+        if (area.getName().compareTo("Footer")==0) { <br>
+        area.getItemByName("Total").setruntimeValue(new Integer(total)); total=0; 
+        <br>
+        } <br>
+        } <br>
+        }</font></p>
+    </blockquote>
+  </blockquote>
+  <p>&nbsp;</p>
+  <p><font face="Arial, Helvetica, sans-serif">The process is:</font></p>
+  <ol>
+    <li><font face="Arial, Helvetica, sans-serif">The report is created by calling 
+      the constructor <i>new ReportImp(frame)</i>. Note that you must use the 
+      class <a href="javadoc/com/java4less/rreport/RReportImp.html">RReportImp</a> 
+      or <a href="javadoc/com/java4less/rreport/RReportJ2.html">RReportJ2</a>.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">load the report using <i>importReport(file). 
+      </i>This will also open the database (this example uses a <b>ODBC data source 
+      called RReport</b> that opens the database RReport2.mdb). <a href="#examples">Here</a> 
+      you will find other examples that do not use database.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">Assigns the images for the <a href="#RVCombo">combo 
+      box </a>. </font></li>
+    <li><font face="Arial, Helvetica, sans-serif">sets the area listen<font color="#000000">ers. 
+      This will be triggered for each repetition of detail and page footer.</font></font></li>
+    <li><font face="Arial, Helvetica, sans-serif" color="#000000">create a preview 
+      window if you need</font><font face="Arial, Helvetica, sans-serif"> it.</font><font face="Arial, Helvetica, sans-serif"></font></li>
+    <li><font face="Arial, Helvetica, sans-serif">call <i>prepare(). </i>This 
+      will print the report header. The detail area will also be printed since 
+      it is a subarea of report header.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">call <i>endReport().</i></font></li>
+  </ol>
+</blockquote>
+<p>&nbsp;</p>
+<blockquote>
+<h4><b><font face="Arial, Helvetica, sans-serif">Accesing loaded fields and 
+    methods:</font></b></h4>
+  <p><font face="Arial, Helvetica, sans-serif">In order to change the properties 
+    of object or area after loading a report from a file you must use the methods:</font></p>
+  <p><font face="Arial, Helvetica, sans-serif"><i>rreport.getAreaByName() </i>and 
+    <i>rarea.geItemByName()</i>.</font></p>
+  <p><font face="Arial, Helvetica, sans-serif">for example. In order to change 
+    the image of a RPicture object you must call: </font></p>
+  <p><font face="Arial, Helvetica, sans-serif"><i>report.getAreaByName(&quot;areaname&quot;).getItemByName(&quot;RPicturename&quot;).setruntimeValue(Image)</i></font></p>
+  <p><font face="Arial, Helvetica, sans-serif">note that if your want to access 
+    the headers, background or footers area you must use the rreport.getPageHeader(), 
+    rreport.getReportHeadert()...</font></p>
+  <h4><b><font face="Arial, Helvetica, sans-serif">Using your own database connection 
+    and statement for database access:</font></b></h4>
+  <p><font face="Arial, Helvetica, sans-serif">If your report uses a database, 
+    it will open the database connection when you execute the importReport() method. 
+    If you already have a database connection you can use your own java.sql.connection 
+    object in this way:</font></p>
+  <p><font size="-1">report.setDBCon(yourConnection);<br>
+    </font><font size="-1">report.importReport(&quot;filename&quot;);</font></p>
+  <p><font face="Arial, Helvetica, sans-serif">The importReport() method will 
+    also create all necesary RAreas and RJDBSource objects. The RJBCSource's constructor 
+    needs a java.sql.Statement object as parameter. This will be created by <i>report.getDBCon().createStatement().</i></font></p>
+  <p><font face="Arial, Helvetica, sans-serif">If you want to specfiy your own 
+    Statement you must call:</font></p>
+  <p><font size="-1">((RJDBCSource) report.getAreaByName(name).getDataSource()).setStatement(yourStatement);</font></p>
+  <p><font face="Arial, Helvetica, sans-serif">This may be necessary if you use 
+    some SQL Server drivers that need a new database connection for each statement. 
+    <b>Note that RReport creates all statement from the same java.sql.Connection</b>. 
+    </font></p>
+  <p><font face="Arial, Helvetica, sans-serif">If you want to change the sql statement 
+    at runtime:</font></p>
+  <p><font size="-1">((RJDBCSource) report.getAreaByName(name).getDataSource()).setSQL(&quot;Select 
+    * from Employees&quot;);</font></p>
+  <p>&nbsp;</p>
+  <h4><font face="Arial, Helvetica, sans-serif">Programatically printing</font></h4>
+  <p>If you do not use any RSource you must print the imported report programatically 
+    ba setting the values of the ovject in the area one by one and printing every 
+    single repetition with rreport.printArea(). Like this:</p>
+  <p><font size="-1">report.importReport(name);<br>
+    myArea=report.getAreaByName(areaname);</font></p>
+  <blockquote> 
+    <p><font size="-1">while (data to print) {<br>
+      </font><font size="-1">// set values for fields<br>
+      </font><font size="-1">myArea.getItemByName(fieldname1).setruntimeValue(value1);<br>
+      myArea.getItemByName(fieldname2).setruntimeValue(value2);<br>
+      ..... </font></p>
+    <p><font size="-1">// print repetition<br>
+      </font><font size="-1">report.printArea(myArea);<br>
+      </font><font size="-1">}</font></p>
+  </blockquote>
+  <p>See also <a href="exampleOrder2.java">exampleOrder2.java</a>.</p>
+  <p>&nbsp;</p>
+  <h4><font face="Arial, Helvetica, sans-serif">Using other RSources</font></h4>
+  <p><font face="Arial, Helvetica, sans-serif">In other to use other RSources 
+    (for example, printing a JTable) ,different from JDBC, you must i</font><font face="Arial, Helvetica, sans-serif">mport 
+    the report and set the new RSource:</font></p>
+  <p><font size="-1">report.importReport(name);<br>
+    report.getAreaByName(areaname).setDataSource(yourRSource);</font></p>
+  <p>See also <a href="exampleOrder.java">exampleOrder.java</a> for an example 
+    with a RArraySource.</p>
+  <p>&nbsp;</p>
+  <h4><font face="Arial, Helvetica, sans-serif">Combining RSources and programatically 
+    printing </font></h4>
+  <p><font face="Arial, Helvetica, sans-serif">If you use a RSource object to 
+    print all repetitions of an area automatically but you still need to set a 
+    field value programatically your must use a <a href="javadoc/com/java4less/rreport/RAreaListener.html">RareaListener</a>. 
+    </font></p>
+  <blockquote> 
+    <blockquote> 
+      <p>&nbsp;</p>
+    </blockquote>
+  </blockquote>
+  <h2><font face="Arial, Helvetica, sans-serif" size="-1"><b><a name="own"></a></b></font>Creating 
+    your own RVObjects<font face="Arial, Helvetica, sans-serif" size="-1"></font></h2>
+  <p>&nbsp;</p>
+  <p><font face="Arial, Helvetica, sans-serif">Once you have <a href="RReport_Help.html#OwnRObject">created 
+    your own RObject</a>, you can create a RVObject for it. RObject are the printable 
+    object while RVObject are the <b>visual objects </b>you see in RReport Visual 
+    Builder.</font></p>
+  <p><font face="Arial, Helvetica, sans-serif">The steps to create your own RVObject 
+    are:</font></p>
+  <ol>
+    <li><font face="Arial, Helvetica, sans-serif">create your own class<b> extending 
+      RVObject</b> . For example, if we take the <a href="RReport_Help.html#OwnRObject">RTriangle</a> 
+      object from RReport user manual we would now create a class called RVTriangle.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">the new class must be located<b> 
+      in the package com.java4less.rreportVB</b>. In our example com.java4less.rreportVB.RTriangle.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">in order for RReport Visual 
+      Builder to load the new class you must <b>create a text file</b> called 
+      <i>RVTriangle.txt </i>and put it in the <i>Objects </i>subdirectory. This 
+      .txt file must contain a short (2-3 words) text that will be used as tip 
+      in the toolbar.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">in order to assign an icon for 
+      the object in the toolbar of RReport Visual Builder you must have a <b>16x16 
+      pixels gif file</b> called <i>RVTriangle.gif</i> and this image file must 
+      be located in the package <i>com.java4less.images</i>.<br>
+      </font></li>
+  </ol>
+  <p><font face="Arial, Helvetica, sans-serif"><a href="com/java4less/rreport/RTriangle.java">Click 
+    here (RVTriangle.java)</a> to see the necesary code to create the RVTriangle 
+    class.</font></p>
+  <p><font face="Arial, Helvetica, sans-serif">After examining the source code 
+    you will note that:</font></p>
+  <ul>
+    <li><font face="Arial, Helvetica, sans-serif">You must create a RTriangle 
+      object in the constructor and assign it to the protected field <i>robject</i>.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif"><b>Properties</b> that should 
+      appear in the properties window of RReport Visual Builder must be named 
+      using the format <i>getPropXXXX()</i> and <i>setPropXXXX()</i>, where XXXX 
+      will be the name of the property. The properties window support the following 
+      data types: int , double, boolean, String, RImageFile, RFile, Color and 
+      Font.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">If you have a int or String 
+      property you may also provide a list of values by creating a method called 
+      &quot; String[] getListXXX()&quot;. This mehtod must return a list of strings 
+      that will be used to create a combo box.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">You can also implement a <b>exportFile() 
+      </b>function that will be called when the report is saved to a file. You 
+      must the save each property of your class in a file, where the format is: 
+      &quot;FIELD =VALUE&quot;, where FIELD must be 8 characters long (you can 
+      use trailing spaces if necesary).</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">You can also implement a the 
+      <b>paint()</b> method to draw the object yourself. You must then call the 
+      super.paint(g) because RVObject is responsible of drawing selected objects. 
+      The protected fields &quot;drawBorder&quot; and &quot;drawName&quot; will 
+      let you specify if RVObject should draw a frame around the object and its 
+      name.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif">You must program a <b>cloneFields()</b> 
+      method that will be called when the user uses CRTL-V in order to copy objects. 
+      The parameter of the function is the new created object whose field you 
+      must set here.</font></li>
+  </ul>
+  <p>&nbsp;</p>
+  <h2><font face="Arial, Helvetica, sans-serif" size="-1"><b><a name="examples"></a></b></font>Examples</h2>
+  <p><font face="Arial, Helvetica, sans-serif">The following examples are delivered 
+    with RReport Visual Builder:</font></p>
+  <ul>
+    <li><i><font face="Arial, Helvetica, sans-serif">examples/jdbcSource/DBorder.rep</font><font face="Arial, Helvetica, sans-serif"></font></i><font face="Arial, Helvetica, sans-serif">. 
+      This example is the design of a purchase order. In order to test the example 
+      <b>you must create a ODBC Data Source called RReport</b> for the MSAccess 
+      database RReport2.mdb.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif"><i>examples/arraySource/Order.rep</i>. 
+      This is the same report as above but it <b>does not use a database</b>.</font></li>
+    <li><i><font face="Arial, Helvetica, sans-serif">examples/labels/labels.rep</font></i><font face="Arial, Helvetica, sans-serif">. 
+      This report prints areas in 3 columns.</font></li>
+    <li><i><font face="Arial, Helvetica, sans-serif">examples/groups/Groups.rep</font></i><font face="Arial, Helvetica, sans-serif">. 
+      Example of use of groups and expressions with database. In order to test 
+      the example <b>you must create a ODBC Data Source called RReport</b> for 
+      the MSAccess database RReport2.mdb.</font></li>
+    <li><i><font face="Arial, Helvetica, sans-serif">examples/Chart/chart.rep: 
+      </font></i><font face="Arial, Helvetica, sans-serif">report with chart.</font></li>
+    <li><i><font face="Arial, Helvetica, sans-serif">examples/PDF_DHTML</font></i><font face="Arial, Helvetica, sans-serif">: 
+      exporting to PDF and DHTML.</font></li>
+    <li><font face="Arial, Helvetica, sans-serif"><i>examples/XMLSource: </i>XML 
+      File as data source.</font></li>
+  </ul>
+  <p><font face="Arial, Helvetica, sans-serif">You can import the the *.rep files 
+    in RReport Visual Designer with File-&gt;load menu.</font></p>
+  <p><font face="Arial, Helvetica, sans-serif">In order to run the examples the 
+    following files a provided:</font></p>
+  <ul>
+    <li><i><font face="Arial, Helvetica, sans-serif">examples/jdbcSource/exampleDBOrder.java</font></i><font face="Arial, Helvetica, sans-serif">. 
+      Uses the report definition file DBorder.rep in order to print the report. 
+      You can run this example by executing runExampleRBOrder.bat.</font></li>
+    <li><i><font face="Arial, Helvetica, sans-serif">examples/arraySource/exampleOrder.java</font></i><font face="Arial, Helvetica, sans-serif">. 
+      Uses the report definition file Order.rep. It uses an array as data source 
+      for the report. runExampleOrder.bat</font></li>
+    <li><i><font face="Arial, Helvetica, sans-serif">examples/printByProgram/exampleOrder2.java</font></i><font face="Arial, Helvetica, sans-serif">. 
+      Uses the report definition file Order.rep. It programatically prints the 
+      report. runExampleOrder2.bat</font><font face="Arial, Helvetica, sans-serif"> 
+      </font></li>
+  </ul>
+  <p>&nbsp;</p>
+  <h2><font face="Arial, Helvetica, sans-serif"><b><font face="Arial"><b><font color="#CC0066"><a name="sun"></a></font></b></font><font size="-1" color="#CC0066">Java 
+    and all Java-based marks are trademarks or registered trademarks of Sun Microsystems, 
+    Inc. in the U.S. and other countries</font></b></font></h2>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+</blockquote>
+</BODY>
+</HTML>

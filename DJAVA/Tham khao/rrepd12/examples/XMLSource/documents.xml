@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<documents>
+<purchaseorder>
+<Number>111</Number>
+<Company>COMPANY PLC</Company>
+<Date>10/10/2003</Date>
+<City>London</City>
+<address>Street 2</address>
+
+<line>
+<article>A0301</article>
+<Description>Printer XXX</Description>
+<Priority>0</Priority>
+<Quantity>300</Quantity>
+<Price>30.9</Price>
+</line>
+
+
+<line>
+<article>B0301</article>
+<Description>CD-ROM writer</Description>
+<Priority>2</Priority>
+<Quantity>200</Quantity>
+<Price>3.0</Price>
+</line>
+
+<line>
+<article>C0405</article>
+<Description>Laptop SP</Description>
+<Priority>1</Priority>
+<Quantity>330</Quantity>
+<Price>4500.9</Price>
+</line>
+<line>
+<article>H6763</article>
+<Description>Laser printer LP300</Description>
+<Priority>0</Priority>
+<Quantity>3</Quantity>
+<Price>3200</Price>
+</line>
+
+
+</purchaseorder>
+
+<purchaseorder>
+<Number>112</Number>
+<Company>COMPANY  2 PLC</Company>
+<Date>10/6/2003</Date>
+<City>Paris</City>
+<address>Street 444</address>
+
+<line>
+<article>E3044</article>
+<Description>Keyboard Ms 250</Description>
+<Priority>0</Priority>
+<Quantity>300</Quantity>
+<Price>233</Price>
+</line>
+
+
+<line>
+<article>F9902</article>
+<Description>Mouse PS2</Description>
+<Priority>1</Priority>
+<Quantity>100</Quantity>
+<Price>23</Price>
+</line>
+
+
+</purchaseorder>
+
+
+
+</documents>
